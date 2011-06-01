@@ -1,0 +1,9 @@
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\GeCo.DAL.dll.config
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\GeCo.DAL.dll
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\GeCo.DAL.pdb
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\EntityFramework.dll
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\EntityFramework.xml
+D:\Progetti\GeCo\Source\GeCo.DAL\obj\Debug\ResolveAssemblyReference.cache
+D:\Progetti\GeCo\Source\GeCo.DAL\obj\Debug\GeCo.DAL.dll
+D:\Progetti\GeCo\Source\GeCo.DAL\obj\Debug\GeCo.DAL.pdb
+D:\Progetti\GeCo\Source\GeCo.DAL\bin\Debug\System.Data.SqlServerCe.dll

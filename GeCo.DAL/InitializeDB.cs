@@ -1,0 +1,260 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using GeCo;
+using GeCo.DAL.Dati;
+
+namespace GeCo.DAL
+{
+    public class InitializeDB
+    {
+        public static void InitalizeAll()
+        {
+            InitializeDB.InsertParametriDefault();
+            InitializeDB.InsertTipologieCompetenze();
+            InitializeDB.InsertCompetenzeTecniche();
+            InitializeDB.InsertCompetenzeComportamentali();
+            InitializeDB.InsertCompetenzeHR();
+            InitializeDB.InsertAltro();
+            FigureDefault.SalvaResponsabileUfficioTecnico();
+            FigureDefault.SalvaResponsabileControlliLaboratorio();
+            DipendentiDefault.SalvaDipendente1();
+        }
+
+        private static void InsertParametriDefault()
+        {
+            var lista = new[]
+                {
+                    new { n=Tipologiche.Parametro.PMAX_HR, v=20},
+                    new { n=Tipologiche.Parametro.PMAX_COMPORTAMENTALI, v=30},
+                    new { n=Tipologiche.Parametro.PMAX_TECN_STRATEGIC, v=20},
+                    new { n=Tipologiche.Parametro.PMAX_TECN_COMPETITIVE, v=30},
+                    new { n=Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL, v=70},
+                };
+
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                foreach (var elemento in lista)
+                {
+                    context.Parametri.Add(new Parametro()
+                    {
+                        Nome = elemento.n,
+                        Valore = elemento.v.ToString()
+                    });
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+
+        public static void InsertTipologieCompetenze()
+        {
+            var lista = new []
+                {
+                    //Tecniche
+                    new { t=Tipologiche.TipologiaCompetenza.FOUNDATIONAL, m=Tipologiche.MG_TECNICO},
+                    new { t=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT, m=Tipologiche.MG_TECNICO},
+                    new { t=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE, m=Tipologiche.MG_TECNICO},
+
+                    //Comportamentali
+                    new { t=Tipologiche.TipologiaCompetenza.MANAGERIALI, m=Tipologiche.MG_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.RELAZIONALI, m=Tipologiche.MG_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.COGNITIVE, m=Tipologiche.MG_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.REALIZZATIVE, m=Tipologiche.MG_COMPORTAMENTALE},
+
+                    //HR
+                    new { t=Tipologiche.TipologiaCompetenza.ASSESSMENT, m=Tipologiche.MG_HR},
+                    new { t=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI, m=Tipologiche.MG_HR},
+                };
+            
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                foreach(var elemento in lista)
+                {
+                    context.TipologieCompetenze.Add(new TipologiaCompetenza()
+                    {
+                        Titolo = elemento.t,
+                        MacroGruppo = elemento.m
+                    });
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        public static void InsertCompetenzeTecniche()
+        {
+            var lista = new[] 
+            {
+                new { t="Normative Tecniche", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Normative Qualità", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Normative di Settore", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Normative Ambientali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Normative di Sicurezza", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Caratteristiche dei Materiali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Macchinari Idonei all'Esecuzione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Contabilità Lavori", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Lettura e Interpretazione del Progetto", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Opere d'arte", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Movimenti terra", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                
+                new { t="Aspetti Contrattualistici", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Normativa Giuslavoristica e Contratti di Lavoro", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Leggi macchine speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Composizione budget macchine", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Predisposizione budget macchine speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Processo realizzazione lavori speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Leggi macchine e codice stradale", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Aspetti tecnici macchine speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                               
+
+                new { t="Planning breve-medio periodo", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Planning medio-lungo periodo", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Planning operativo movimentazione risorse", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Controlling", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Monitoraggio e rilievo dell'opera eseguita", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Elaborazione preventivi ed offerte", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Incidenza dei costi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                
+                new { t="Analisi scostamenti", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Standard di budgeting", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Gestione committente", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Tecniche di misurazioni", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Tecnica di confezionamento dei c.b. e cementizi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Tecniche di esecuzione in presenza di traffico", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Clausole Contrattualistiche", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Negoziazione Offerta Macchine Speciali/Modifiche", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Planning Operativo Movimentazione Macchine", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+            };
+
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                foreach (var elemento in lista)
+                {
+                    context.Competenze.Add(new Competenza()
+                    {
+                        Titolo = elemento.t,
+                        Descrizione = elemento.d,
+                        Peso = elemento.p,
+                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
+                    });
+                }
+                
+                context.SaveChanges();
+            }
+        }
+
+        public static void InsertCompetenzeComportamentali()
+        {
+
+            var lista = new[] 
+            {
+                new { t="Integrazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.MANAGERIALI},
+                new { t="TeamWork", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.MANAGERIALI},
+                new { t="Gestione delle Risorse Umane", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.MANAGERIALI},
+                new { t="Leadership", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.MANAGERIALI},
+
+                new { t="Comunicazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.RELAZIONALI},
+                new { t="Assertività", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.RELAZIONALI},
+                new { t="Negoziazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.RELAZIONALI},
+                new { t="Networking", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.RELAZIONALI},
+
+                new { t="Capacità di Analisi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COGNITIVE},
+                new { t="Problem solving", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COGNITIVE},
+                new { t="Visione d'insieme", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COGNITIVE},
+                new { t="Orientamento al cliente", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COGNITIVE},
+
+                new { t="Orientamento al risultato", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.REALIZZATIVE},
+                new { t="Responsabilità", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.REALIZZATIVE},
+                new { t="Efficienza", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.REALIZZATIVE},
+                new { t="Proattività", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.REALIZZATIVE},
+                
+            };
+
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                foreach (var elemento in lista)
+                {
+                    context.Competenze.Add(new Competenza()
+                    {
+                        Titolo = elemento.t,
+                        Descrizione = elemento.d,
+                        Peso = elemento.p,
+                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
+                    });
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        public static void InsertCompetenzeHR()
+        {
+
+            var lista = new[] 
+            {
+                new { t="Assessment", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.ASSESSMENT},
+                new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI}                
+            };
+
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                foreach (var elemento in lista)
+                {
+                    context.Competenze.Add(new Competenza()
+                    {
+                        Titolo = elemento.t,
+                        Descrizione = elemento.d,
+                        Peso = elemento.p,
+                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
+                    });
+                }
+
+                context.SaveChanges();
+            }
+        }
+        
+        public static void InsertAltro()
+        {
+            using (PavimentalDb context = new PavimentalDb())
+            {
+                context.Aree.Add(new Area() { Titolo = "Area1" });
+
+                context.LivelliConoscenza.Add(new LivelloConoscenza()
+                {
+                    Titolo = Tipologiche.Livello.INSUFFICIENTE,
+                    Valore = 0
+                });
+                context.LivelliConoscenza.Add(new LivelloConoscenza()
+                {
+                    Titolo = Tipologiche.Livello.SUFFICIENTE,
+                    Valore = 1
+                });
+                context.LivelliConoscenza.Add(new LivelloConoscenza()
+                {
+                    Titolo = Tipologiche.Livello.DISCRETO,
+                    Valore = 2
+                });
+                context.LivelliConoscenza.Add(new LivelloConoscenza()
+                {
+                    Titolo = Tipologiche.Livello.BUONO,
+                    Valore = 3
+                });
+                context.LivelliConoscenza.Add(new LivelloConoscenza()
+                {
+                    Titolo = Tipologiche.Livello.OTTIMO,
+                    Valore = 4
+                });
+
+
+                context.SaveChanges();
+            }
+        }
+
+        
+    
+
+    }
+}
