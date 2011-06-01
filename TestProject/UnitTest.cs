@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -139,7 +139,7 @@ namespace TestProject
         }
 
         [TestMethod]
-        public void Prova()
+        public void Prova2()
         {
 
         }
