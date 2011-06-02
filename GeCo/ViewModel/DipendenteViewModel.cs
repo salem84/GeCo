@@ -293,13 +293,18 @@ namespace GeCo.ViewModel
 
             dip.Conoscenze = new List<ConoscenzaCompetenza>();
 
+            //Mi scorro tutte le conoscenze
             foreach (var c in Dipendente.Conoscenze)
             {
-                ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
+                //e salvo solo quelle diverse da 0
+                if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
+                {
+                    ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
 
-                conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
-                conoscenza.CompetenzaId = c.CompetenzaId;
-                dip.Conoscenze.Add(conoscenza);
+                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+                    conoscenza.CompetenzaId = c.CompetenzaId;
+                    dip.Conoscenze.Add(conoscenza);
+                }
             }
 
             using (PavimentalDb context = new PavimentalDb())
@@ -354,16 +359,16 @@ namespace GeCo.ViewModel
                 var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
                 var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
 
-                var knowHowVuoto = (from c in allCompetenze
+                /*var knowHowVuoto = (from c in allCompetenze
                                     select new ConoscenzaCompetenza()
                                     {
                                         Competenza = c,
                                         //LivelloConoscenza = livelloNullo
                                         CompetenzaId = c.Id,
                                         LivelloConoscenzaId = livelloNullo.Id
-                                    }).ToList();
+                                    }).ToList();*/
 
-                Dipendente = new Dipendente() { Conoscenze = knowHowVuoto };
+                Dipendente = new Dipendente();// { Conoscenze = knowHowVuoto };
 
                 
             }
@@ -402,6 +407,7 @@ namespace GeCo.ViewModel
                     });
 
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
+                UpdateConoscenzeGroup();
             }
         }
 

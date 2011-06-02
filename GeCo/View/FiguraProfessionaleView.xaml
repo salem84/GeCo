@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:GeCo.Converters"
-             xmlns:my="clr-namespace:GeCo.Controls"
              xml:lang="it-IT"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" >
@@ -60,11 +59,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*"/>
-                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Width="200" Text="{Binding Path=Competenza.Titolo}"/>
+
+                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}" HorizontalAlignment="Stretch"/>
                         <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Path=LivelliConoscenzaValori2}"/>-->
 
                         <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">

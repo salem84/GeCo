@@ -36,7 +36,7 @@
                   SelectedItem="{Binding SelectedItem}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
-                    <GridViewColumn DisplayMemberBinding="{Binding Titolo}" Header="Titolo" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Titolo}" Header="Titolo" Width="300" />
                     <GridViewColumn DisplayMemberBinding="{Binding Descrizione}" Header="Descrizione" Width="200"/>
                 </GridView>
             </ListView.View>

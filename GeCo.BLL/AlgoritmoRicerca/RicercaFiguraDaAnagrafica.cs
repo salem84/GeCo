@@ -116,7 +116,6 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
                     risultati.Add(risultato);
 
-                    System.Threading.Thread.Sleep(3000);
                     //Lancio l'evento di aggiornamento
                     progressAction();
                 }

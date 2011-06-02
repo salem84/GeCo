@@ -32,11 +32,11 @@
                 <TextBlock Text="{Binding Cognome, StringFormat='Cognome: {0}'}"/>
                 <TextBlock Text="{Binding DataNascita, StringFormat='Data di nascita: {0:dd/MM/yyyy}'}"/>
             </UniformGrid>
-            <TextBlock Text="Parametri" FontWeight="DemiBold" Padding="10,4"/>
+            <TextBlock Text="Parametri" FontWeight="DemiBold" />
             <UniformGrid Rows="1" Columns="1" DataContext="{Binding Path=ParametriConfronto}">
-                <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Tecn. Foundational {0:0.0} %'}" />
+                <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Tecn. Foundational {0:0.0} %'}" Padding="10,4" />
             </UniformGrid>
-            <TextBlock Text="Punteggi Massimi" FontWeight="DemiBold" Padding="10,4"/>
+            <TextBlock Text="Punteggi Massimi" FontWeight="DemiBold"/>
             <UniformGrid Rows="1" Columns="4" DataContext="{Binding Path=ParametriConfronto}">
                 <TextBlock Text="{Binding PMAX_Hr, StringFormat='PMax[HR]: {0}'}"/>
                 <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='PMax[Comp]: {0}'}"/>

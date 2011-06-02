@@ -31,7 +31,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 foreach (var dipendente in dipendenti)
                 {
                     RisultatoRicerca risultato = new RisultatoRicerca();
-                    risultato.Nome = figura.Titolo;
+                    risultato.Nome = string.Format("{0} - {1}", dipendente.Cognome, dipendente.Nome);
                     risultato.PMAX_Hr = PMAX_Hr;
                     risultato.PMAX_Comportamentali = PMAX_Comportamentali;
                     risultato.PMAX_TecnStrategicSupport = PMAX_TecnStrategicSupport;

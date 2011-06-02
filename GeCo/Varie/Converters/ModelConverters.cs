@@ -45,7 +45,7 @@ namespace GeCo.Converters
             Match m = _isNumber.Match(value.ToString());
             return m.Success;*/
             string input = value as string;
-            string[] validi = { "0", "1", "2", "3" };
+            string[] validi = { "0", "1", "2", "3", "4" };
             if (string.IsNullOrEmpty(input))
             {
                 return new ValidationResult(false, "Vuoto");

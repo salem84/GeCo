@@ -72,14 +72,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GeCo.exe" size="375808">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GeCo.exe" size="375296">
       <assemblyIdentity name="GeCo" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>DWYw2NN95qYkT6RqPmxK3El8fmU=</dsig:DigestValue>
+        <dsig:DigestValue>EzCZGknXODADo72I5+7nA4eb67s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,7 +91,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xDC2JTeaPlkJCu7HHGEua3ulQG8=</dsig:DigestValue>
+        <dsig:DigestValue>L6Ytv0C3xdNTQ/0rl173I0x83lU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,7 +103,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Oaw9QdalAE0Ta1tJ5Ewd7Y4GtlY=</dsig:DigestValue>
+        <dsig:DigestValue>GmxlXzmq4ayPTlpA7UjzDlLLgpw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
