@@ -1,7 +1,0 @@
-D:\Progetti\GeCo\Source\GeCo.BLL\obj\Debug\ResolveAssemblyReference.cache
-D:\Progetti\GeCo\Source\GeCo.BLL\bin\Debug\GeCo.BLL.dll
-D:\Progetti\GeCo\Source\GeCo.BLL\bin\Debug\GeCo.BLL.pdb
-D:\Progetti\GeCo\Source\GeCo.BLL\bin\Debug\GeCo.DAL.dll
-D:\Progetti\GeCo\Source\GeCo.BLL\bin\Debug\GeCo.DAL.pdb
-D:\Progetti\GeCo\Source\GeCo.BLL\obj\Debug\GeCo.BLL.dll
-D:\Progetti\GeCo\Source\GeCo.BLL\obj\Debug\GeCo.BLL.pdb
