@@ -18,7 +18,12 @@ namespace GeCo.DAL
             InitializeDB.InsertCompetenzeHR();
             InitializeDB.InsertAltro();
             FigureDefault.SalvaResponsabileUfficioTecnico();
+            FigureDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
             FigureDefault.SalvaResponsabileControlliLaboratorio();
+            FigureDefault.SalvaCostController();
+            FigureDefault.SalvaContabilizzatoreSenior();
+            FigureDefault.SalvaResponsabileUfficioAcquisti();
+            FigureDefault.SalvaDirettoreCantiereInfrastrutture();
             DipendentiDefault.SalvaDipendente1();
         }
 
@@ -94,12 +99,10 @@ namespace GeCo.DAL
                 new { t="Normative Ambientali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Normative di Sicurezza", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Caratteristiche dei Materiali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
-                new { t="Macchinari Idonei all'Esecuzione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Contabilità Lavori", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Lettura e Interpretazione del Progetto", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Opere d'arte", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Movimenti terra", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
-                
                 new { t="Aspetti Contrattualistici", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Normativa Giuslavoristica e Contratti di Lavoro", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Leggi macchine speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
@@ -108,8 +111,13 @@ namespace GeCo.DAL
                 new { t="Processo realizzazione lavori speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Leggi macchine e codice stradale", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
                 new { t="Aspetti tecnici macchine speciali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
-                               
-
+                new { t="Emissione Ordine", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Emissione Contratto", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Sistemi Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Macchinari idonei all'esecuzione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Lavori in sotterraneo", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                new { t="Impalcati", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.FOUNDATIONAL},
+                                               
                 new { t="Planning breve-medio periodo", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
                 new { t="Planning medio-lungo periodo", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
                 new { t="Planning operativo movimentazione risorse", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
@@ -117,16 +125,31 @@ namespace GeCo.DAL
                 new { t="Monitoraggio e rilievo dell'opera eseguita", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
                 new { t="Elaborazione preventivi ed offerte", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
                 new { t="Incidenza dei costi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
-                
+                new { t="Mercato di riferimento", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Tecniche di Ricerca Mercato specifiche del settore", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Negoziazione dell'offerta", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Procedure acquisti", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Predisposizione budget", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Contrattualistica Fornitori", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+                new { t="Contrattualistica Subappaltatori", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT},
+
                 new { t="Analisi scostamenti", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Standard di budgeting", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Gestione committente", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
-                new { t="Tecniche di misurazioni", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Tecniche di misurazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Tecnica di confezionamento dei c.b. e cementizi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Tecniche di esecuzione in presenza di traffico", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Clausole Contrattualistiche", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Negoziazione Offerta Macchine Speciali/Modifiche", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
                 new { t="Planning Operativo Movimentazione Macchine", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Nuovi Prezzi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Allestimento Cantieri", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Report giornaliero/giornale dei lavori", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Gestione riserve e contenzioso", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+                new { t="Verifica capitolato e norme di contabilizzazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE},
+
+
+
             };
 
             using (PavimentalDb context = new PavimentalDb())

@@ -39,11 +39,11 @@ namespace GeCo.DAL
         /// </summary>
         public class Livello
         {
-            public const string INSUFFICIENTE = "Insufficiente";
-            public const string SUFFICIENTE = "Sufficiente";
-            public const string DISCRETO = "Discreto";
-            public const string BUONO = "Buono";
-            public const string OTTIMO = "Ottimo";
+            public const string INSUFFICIENTE = "Insufficiente"; //0
+            public const string SUFFICIENTE = "Sufficiente"; //1
+            public const string DISCRETO = "Discreto"; //2
+            public const string BUONO = "Buono"; //3
+            public const string OTTIMO = "Ottimo"; //4
         }
 
         /// <summary>
@@ -56,7 +56,6 @@ namespace GeCo.DAL
             public const string PMAX_TECN_STRATEGIC = "PunteggioMaxTecnStrategic";
             public const string PMAX_TECN_COMPETITIVE = "PunteggioMaxTecnCompetitive";
             public const string PERCENTUALE_SOGLIA_FOUNDATIONAL = "PercentualeSogliaFoundational";
-            
         }
         
     }

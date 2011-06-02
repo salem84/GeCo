@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
     <Compile Include="Dati\FigureDefault.cs" />
     <Compile Include="Initalizer.cs" />
