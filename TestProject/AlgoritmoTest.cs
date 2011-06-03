@@ -20,7 +20,7 @@ namespace TestProject
             try
             {
 
-                using (PavimentalDb context = new PavimentalDb())
+                using (PavimentalContext context = new PavimentalContext())
                 {
                     //context.Database.Delete();
                     //context.Database.Create();
@@ -57,7 +57,7 @@ namespace TestProject
             }
         }
 
-        private Dipendente CreaDipendenteTest(PavimentalDb context)
+        private Dipendente CreaDipendenteTest(PavimentalContext context)
         {
 
             ConoscenzaCompetenza conoscenza1 = new ConoscenzaCompetenza();

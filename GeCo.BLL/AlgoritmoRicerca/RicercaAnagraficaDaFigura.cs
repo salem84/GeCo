@@ -10,7 +10,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
 {
     public class RicercaAnagraficaDaFigura
     {
-        private PavimentalDb context;
+        private PavimentalContext context;
 
         //Mi prendo i punteggi massimi da configurazione DB
         static int PMAX_Hr = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR);
@@ -23,7 +23,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
         {
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
-            using (context = new PavimentalDb())
+            using (context = new PavimentalContext())
             {
                 IEnumerable<Dipendente> dipendenti = GetDipendenti();
 

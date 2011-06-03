@@ -88,7 +88,7 @@ namespace GeCo.ViewModel
                 () => SalvaTutteCompetenze());
 
             //Carica le competenze
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
 
                 CompetenzeLista = new ObservableCollection<Competenza>(context.Competenze.Include(c => c.TipologiaCompetenza));
@@ -108,7 +108,7 @@ namespace GeCo.ViewModel
         {
             if (CompetenzaSelezionata != null)
             {
-                using (PavimentalDb context = new PavimentalDb())
+                using (PavimentalContext context = new PavimentalContext())
                 {
                     //Sto facendo un update
                     if (CompetenzaSelezionata.Id == 0)
@@ -132,7 +132,7 @@ namespace GeCo.ViewModel
         
         private void SalvaTutteCompetenze()
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach (var competenzaMod in CompetenzeLista)
                 {

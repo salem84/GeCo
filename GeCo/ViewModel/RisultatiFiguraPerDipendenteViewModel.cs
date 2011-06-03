@@ -58,7 +58,7 @@ namespace GeCo.ViewModel
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici
             if (dipendente.Id == 0)
             {
-                using (PavimentalDb context = new PavimentalDb())
+                using (PavimentalContext context = new PavimentalContext())
                 {
                     foreach (var cc in dipendente.Conoscenze)
                     {
@@ -74,7 +74,7 @@ namespace GeCo.ViewModel
             }
 
             //Non faccio l'autoprogress, setto il valore massimo pari al numero di elementi sul db da analizzare
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 FigureProfessionaliTotali = context.FigureProfessionali.Count();
             }

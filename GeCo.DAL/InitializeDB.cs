@@ -38,7 +38,7 @@ namespace GeCo.DAL
                     new { n=Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL, v=70},
                 };
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach (var elemento in lista)
                 {
@@ -74,7 +74,7 @@ namespace GeCo.DAL
                     new { t=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI, m=Tipologiche.MG_HR},
                 };
             
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach(var elemento in lista)
                 {
@@ -152,7 +152,7 @@ namespace GeCo.DAL
 
             };
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach (var elemento in lista)
                 {
@@ -196,7 +196,7 @@ namespace GeCo.DAL
                 
             };
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach (var elemento in lista)
                 {
@@ -222,7 +222,7 @@ namespace GeCo.DAL
                 new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI}                
             };
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 foreach (var elemento in lista)
                 {
@@ -241,7 +241,7 @@ namespace GeCo.DAL
         
         public static void InsertAltro()
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 context.Aree.Add(new Area() { Titolo = "Area1" });
 

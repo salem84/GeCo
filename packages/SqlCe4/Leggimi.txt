@@ -1,0 +1,3 @@
+Non è creato da nuget
+
+Aggiunta copia in postbuild su GeCo

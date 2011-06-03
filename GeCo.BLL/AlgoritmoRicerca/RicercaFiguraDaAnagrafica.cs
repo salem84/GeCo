@@ -10,14 +10,14 @@ namespace GeCo.BLL.AlgoritmoRicerca
 {
     public class RicercaFiguraDaAnagrafica
     {
-        private PavimentalDb context;
+        private PavimentalContext context;
 
         
         //Mi prendo tutte le conoscenze e calcolo i punteggi
         //Che succede se il dipendente ha conoscenze che non sono servono per quel ruolo? Le devo scartare?
         public List<RisultatoRicerca> Cerca_SenzaConfronto1a1(Dipendente dipendente)
         {
-            using (context = new PavimentalDb())
+            using (context = new PavimentalContext())
             {
                 //Mi prendo i punteggi massimi da configurazione DB
                 
@@ -74,7 +74,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
         {
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
-            using (context = new PavimentalDb())
+            using (context = new PavimentalContext())
             {
                 IEnumerable<FiguraProfessionale> figure = GetFigureProfessionali();
 

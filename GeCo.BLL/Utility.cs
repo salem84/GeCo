@@ -10,7 +10,7 @@ namespace GeCo.Utility
     {
         public static string GetParamValueStr(string nome)
         {
-            using(PavimentalDb context = new PavimentalDb())
+            using(PavimentalContext context = new PavimentalContext())
             {
                 Parametro param = context.Parametri.Find(nome);
                 if(param != null)
@@ -22,7 +22,7 @@ namespace GeCo.Utility
 
         public static int GetParamValueInt(string nome)
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 Parametro param = context.Parametri.Find(nome);
                 if (param != null)

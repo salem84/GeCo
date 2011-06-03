@@ -16,7 +16,7 @@ namespace TestProject
         public void InsertAnagrafica()
         {
             var value = ConfigurationManager.ConnectionStrings["PavimentalDb"];
-            PavimentalDb context = new PavimentalDb();
+            PavimentalContext context = new PavimentalContext();
 
             context.Dipendenti.Add(new Dipendente()
             {
@@ -30,7 +30,7 @@ namespace TestProject
         [TestMethod]
         public void GetValue()
         {
-            PavimentalDb context = new PavimentalDb();
+            PavimentalContext context = new PavimentalContext();
             var tutti = context.Competenze.ToList();
             foreach (var p in tutti)
             {
@@ -43,7 +43,7 @@ namespace TestProject
         public void InsertCompetenza()
         {
             
-            PavimentalDb context = new PavimentalDb("PavimentalDb");
+            PavimentalContext context = new PavimentalContext("PavimentalDb");
 
             context.Competenze.Add(new Competenza()
             {
@@ -70,7 +70,7 @@ namespace TestProject
         [TestMethod]
         public void InsertAltro()
         {
-            PavimentalDb context = new PavimentalDb();
+            PavimentalContext context = new PavimentalContext();
             context.Aree.Add(new Area() { Titolo = "Area1" });
             context.LivelliConoscenza.Add(new LivelloConoscenza()
             {
@@ -89,7 +89,7 @@ namespace TestProject
         [TestMethod]
         public void InsertCapo()
         {
-            PavimentalDb context = new PavimentalDb();
+            PavimentalContext context = new PavimentalContext();
 
             ConoscenzaCompetenza conoscenza1 = new ConoscenzaCompetenza();
             conoscenza1.Competenza = context.Competenze.Single(c=> c.Titolo=="Italiano");
@@ -114,7 +114,7 @@ namespace TestProject
         [TestMethod]
         public void Reset()
         {
-            PavimentalDb context = new PavimentalDb();
+            PavimentalContext context = new PavimentalContext();
             context.Database.Delete();
             context.Database.Create();
 
@@ -130,7 +130,7 @@ namespace TestProject
 
 
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 context.Dipendenti.Attach(dip);
                 context.Entry<Dipendente>(dip).State = System.Data.EntityState.Modified;

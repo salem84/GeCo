@@ -136,7 +136,7 @@ namespace GeCo.ViewModel
                     _deleteCommand = new RelayCommand(() =>
                     {
                         Stato = "Cancellazione in corso";
-                        using (PavimentalDb context = new PavimentalDb())
+                        using (PavimentalContext context = new PavimentalContext())
                             CancellaFiguraProfessionale(context, FiguraProfessionale);
                         Stato = "Cancellato";
                     },
@@ -160,25 +160,19 @@ namespace GeCo.ViewModel
             set { ConfrontaCommand = new RelayCommand(() => value(FiguraProfessionale)); }
         }
 
-        public FiguraProfessionaleViewModel() : this(null) { }
+        public FiguraProfessionaleViewModel()
+        {
+            DisplayTabName = "Nuovo";
+            StartBackgroundAutoProgress(CreaNuovaFiguraProfessionale);
+            EditMode = false;
+        }
 
         public FiguraProfessionaleViewModel(FiguraProfessionale figuraProf)
         {
-            if (figuraProf == null)
-            {
-                DisplayTabName = "Nuovo";                
-                StartBackgroundAutoProgress(CreaNuovaFiguraProfessionale);
-                EditMode = false;
-            }
-            else
-            {
-                DisplayTabName = "Modifica";
-                _figuraProfessionaleId = figuraProf.Id;
-                StartBackgroundAutoProgress(LoadFigura);
-                EditMode = true;
-                
-            }
-
+            DisplayTabName = "Modifica";
+            _figuraProfessionaleId = figuraProf.Id;
+            StartBackgroundAutoProgress(LoadFigura);
+            EditMode = true;
         }
 
         //private void LoadDipendente(int dipendenteId)
@@ -186,7 +180,7 @@ namespace GeCo.ViewModel
         {
             //Nella ricerca non carico le proprietà correlate, quindi devo effettuare la query su DB,
             //per ricaricare tutto
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 FiguraProfessionale = context.FigureProfessionali.Include(f => f.Conoscenze.Select(c => c.Competenza))
                     .Include(f => f.Conoscenze.Select(c => c.LivelloConoscenza))
@@ -229,7 +223,7 @@ namespace GeCo.ViewModel
                 fig.Conoscenze.Add(conoscenza);
             }
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 if (EditMode)
                 {
@@ -248,7 +242,7 @@ namespace GeCo.ViewModel
             EditMode = true;
         }
 
-        private void CancellaFiguraProfessionale(PavimentalDb context, FiguraProfessionale figura)
+        private void CancellaFiguraProfessionale(PavimentalContext context, FiguraProfessionale figura)
         {
             /*
             
@@ -279,7 +273,7 @@ namespace GeCo.ViewModel
 
         private void CreaNuovaFiguraProfessionale()
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
                 var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();

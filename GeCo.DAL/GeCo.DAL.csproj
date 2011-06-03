@@ -66,8 +66,11 @@
     <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
     <Compile Include="Dati\FigureDefault.cs" />
-    <Compile Include="Initalizer.cs" />
+    <Compile Include="DbContextAdapter.cs" />
+    <Compile Include="IDbContext.cs" />
     <Compile Include="InitializeDB.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Modello\Dipendente.cs" />
     <Compile Include="Modello\BaseIdentityModel.cs" />
     <Compile Include="Modello\Anagrafica.cs" />
@@ -78,15 +81,16 @@
     <Compile Include="Modello\LivelloConoscenza.cs" />
     <Compile Include="Modello\Parametro.cs" />
     <Compile Include="Modello\TipologiaCompetenza.cs" />
-    <Compile Include="Operazioni.cs" />
-    <Compile Include="PavimentalDb.cs" />
+    <Compile Include="PavimentalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository.cs" />
     <Compile Include="Tipologiche.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

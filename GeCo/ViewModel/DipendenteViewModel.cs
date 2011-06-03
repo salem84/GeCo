@@ -97,7 +97,7 @@ namespace GeCo.ViewModel
             {
                 if (_competenzeTotali == null)
                 {
-                    using (PavimentalDb context = new PavimentalDb())
+                    using (PavimentalContext context = new PavimentalContext())
                     {
                         _competenzeTotali = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
                     }
@@ -181,7 +181,7 @@ namespace GeCo.ViewModel
                     _deleteCommand = new RelayCommand(() =>
                     {
                         Stato = "Cancellazione in corso";
-                        using (PavimentalDb context = new PavimentalDb())
+                        using (PavimentalContext context = new PavimentalContext())
                             CancellaDipendente(context, Dipendente);
                         Stato = "Cancellato";
                     },
@@ -227,7 +227,12 @@ namespace GeCo.ViewModel
         /// <summary>
         /// Costruttore senza parametri per la creazione di un nuovo dipendente
         /// </summary>
-        public DipendenteViewModel() : this(null) { }
+        public DipendenteViewModel()
+        {
+            DisplayTabName = "Nuovo";
+            StartBackgroundAutoProgress(CreaNuovoDipendente);
+            EditMode = false;
+        }
 
         /// <summary>
         /// Costruttore con parametro per la modifica di un dipendente esistente
@@ -235,21 +240,10 @@ namespace GeCo.ViewModel
         /// <param name="dipendente"></param>
         public DipendenteViewModel(Dipendente dipendente)
         {
-            if (dipendente == null)
-            {
-                DisplayTabName = "Nuovo";
-                StartBackgroundAutoProgress(CreaNuovoDipendente);
-                EditMode = false;
-            }
-            else
-            {
-                DisplayTabName = "Modifica";
-                _dipendenteId = dipendente.Id;
-                StartBackgroundAutoProgress(LoadDipendente);
-                EditMode = true;
-        
-            }
-
+            DisplayTabName = "Modifica";
+            _dipendenteId = dipendente.Id;
+            StartBackgroundAutoProgress(LoadDipendente);
+            EditMode = true;
         }
 
         //private void LoadDipendente(int dipendenteId)
@@ -257,7 +251,7 @@ namespace GeCo.ViewModel
         {
             //Nella ricerca non carico le proprietà correlate, quindi devo effettuare la query su DB,
             //per ricaricare tutto
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 Dipendente = context.Dipendenti.Include(a => a.Conoscenze.Select(c => c.Competenza))
                     .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
@@ -307,7 +301,7 @@ namespace GeCo.ViewModel
                 }
             }
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 if (EditMode)
                 {
@@ -326,7 +320,7 @@ namespace GeCo.ViewModel
             EditMode = true;
         }
 
-        private void CancellaDipendente(PavimentalDb context, Dipendente dipendente)
+        private void CancellaDipendente(PavimentalContext context, Dipendente dipendente)
         {
             
                 /*foreach (var c in dipendente.Conoscenze)
@@ -354,7 +348,7 @@ namespace GeCo.ViewModel
 
         private void CreaNuovoDipendente()
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
                 var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
@@ -394,7 +388,7 @@ namespace GeCo.ViewModel
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 

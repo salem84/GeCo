@@ -39,7 +39,7 @@ namespace GeCo.ViewModel
             InizializzaCommands();
 
             //Devo verificare che il DB esiste, in caso contrario lo dove creare
-            string nomeDatabase = ConfigurationManager.ConnectionStrings["PavimentalDb"].ToString();
+            string nomeDatabase = ConfigurationManager.ConnectionStrings["PavimentalContext"].ToString();
             //Sostituisco il path DataDirectory
             //nomeDatabase = nomeDatabase.Replace("|DataDirectory|", AppDomain.CurrentDomain.GetData("DataDirectory").ToString());
             nomeDatabase = nomeDatabase.Substring(nomeDatabase.IndexOf('='));
@@ -113,7 +113,7 @@ namespace GeCo.ViewModel
         private void VerificaDB()
         {
             //string dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory") as string;
-            using (PavimentalDb db = new PavimentalDb())
+            using (PavimentalContext db = new PavimentalContext())
             {
                 
                 //Se esiste verifico che sia compatibile
@@ -211,7 +211,7 @@ namespace GeCo.ViewModel
 
         void InizializzaDB()
         {
-            using (PavimentalDb db = new PavimentalDb())
+            using (PavimentalContext db = new PavimentalContext())
             {
                 db.Database.Delete();
                 db.Database.Create();

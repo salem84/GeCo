@@ -83,7 +83,7 @@ namespace GeCo.ViewModel
             }
 
             //AsExpendable Preso da LinqKit
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 Risultati = context.Dipendenti.AsExpandable().Where(complete).ToList();
             }

@@ -15,7 +15,7 @@ namespace GeCo.DAL.Dati
         
         private static FiguraProfessionale SalvaFigura(F[] lista, string nome)
         {
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
 

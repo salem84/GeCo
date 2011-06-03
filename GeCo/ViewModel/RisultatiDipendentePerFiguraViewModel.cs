@@ -43,7 +43,7 @@ namespace GeCo.ViewModel
             //Non dovrebbe capitare mai
             if (figura.Conoscenze.Count == 0)
             {
-                using (PavimentalDb context = new PavimentalDb())
+                using (PavimentalContext context = new PavimentalContext())
                 {
                     //TODO ricontrollare
                     context.FigureProfessionali.Include(f => f.Conoscenze.Select(c => c.Competenza))
@@ -60,7 +60,7 @@ namespace GeCo.ViewModel
             }
 
             //Non faccio l'autoprogress, setto il valore massimo pari al numero di elementi sul db da analizzare
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
             {
                 DipendentiTotali = context.Dipendenti.Count();
             }

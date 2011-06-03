@@ -17,7 +17,7 @@ namespace GeCo.Converters
         {
             int id = System.Convert.ToInt32(value);
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
                 return context.LivelliConoscenza.Single(lc => lc.Id == id).Valore;
         }
 
@@ -30,7 +30,7 @@ namespace GeCo.Converters
             //LivelloConoscenza livello;
             int livelloId;
 
-            using (PavimentalDb context = new PavimentalDb())
+            using (PavimentalContext context = new PavimentalContext())
                 livelloId = context.LivelliConoscenza.Single(lc => lc.Valore == valore).Id;
 
             return livelloId;
