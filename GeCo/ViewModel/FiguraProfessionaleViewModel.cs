@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using GeCo.BLL.AlgoritmoRicerca;
 using System.Windows.Input;
+using GeCo.Model;
 
 namespace GeCo.ViewModel
 {

@@ -13,6 +13,7 @@ using GeCo.Varie;
 using LinqKit;
 using System.Windows.Data;
 using System.Windows.Input;
+using GeCo.Model;
 
 namespace GeCo.ViewModel
 {

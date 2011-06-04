@@ -69,18 +69,6 @@
     <Compile Include="DbContextAdapter.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="InitializeDB.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Modello\Dipendente.cs" />
-    <Compile Include="Modello\BaseIdentityModel.cs" />
-    <Compile Include="Modello\Anagrafica.cs" />
-    <Compile Include="Modello\FiguraProfessionale.cs" />
-    <Compile Include="Modello\Area.cs" />
-    <Compile Include="Modello\Competenza.cs" />
-    <Compile Include="Modello\ConoscenzaCompetenza.cs" />
-    <Compile Include="Modello\LivelloConoscenza.cs" />
-    <Compile Include="Modello\Parametro.cs" />
-    <Compile Include="Modello\TipologiaCompetenza.cs" />
     <Compile Include="PavimentalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -129,7 +117,19 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modello\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeCo.Infrastructure\GeCo.Infrastructure.csproj">
+      <Project>{40D5418E-DEAF-40D1-9A3B-DA89A3C761F1}</Project>
+      <Name>GeCo.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeCo.Model\GeCo.Model.csproj">
+      <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
+      <Name>GeCo.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

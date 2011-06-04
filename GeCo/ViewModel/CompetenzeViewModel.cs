@@ -6,6 +6,7 @@ using GeCo.DAL;
 using System.Data.Entity;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
+using GeCo.Model;
 
 namespace GeCo.ViewModel
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GeCo;
 using GeCo.DAL.Dati;
+using GeCo.Model;
 
 namespace GeCo.DAL
 {

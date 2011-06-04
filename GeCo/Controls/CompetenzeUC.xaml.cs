@@ -15,6 +15,7 @@ using GeCo;
 using GeCo.DAL;
 using System.Collections;
 using System.Collections.ObjectModel;
+using GeCo.Model;
 
 namespace GeCo.Controls
 {

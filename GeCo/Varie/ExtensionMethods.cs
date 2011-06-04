@@ -5,6 +5,7 @@ using System.Text;
 using GeCo.Controls;
 using GeCo;
 using GeCo.DAL;
+using GeCo.Model;
 
 namespace GeCo.Varie
 {

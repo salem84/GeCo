@@ -6,6 +6,7 @@ using GeCo.BLL.AlgoritmoRicerca;
 using GeCo.DAL;
 using System.Data.Entity;
 using GeCo.Utility;
+using GeCo.Model;
 
 namespace GeCo.ViewModel
 {

@@ -141,8 +141,8 @@
     <Compile Include="View\CompetenzeView.xaml.cs">
       <DependentUpon>CompetenzeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="ShellWindow.xaml.cs">
+      <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RisultatiDipendentePerFiguraView.xaml.cs">
       <DependentUpon>RisultatiDipendentePerFiguraView.xaml</DependentUpon>
@@ -155,7 +155,7 @@
     </Compile>
     <Compile Include="ViewModel\TestViewModel.cs" />
     <Compile Include="ViewModel\WorkspaceViewModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ShellWindowViewModel.cs" />
     <Compile Include="Controls\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
@@ -207,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="ShellWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -276,6 +276,10 @@
       <Project>{32C094BA-7A76-4A2D-AD70-C05562EB29A3}</Project>
       <Name>GeCo.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeCo.Model\GeCo.Model.csproj">
+      <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
+      <Name>GeCo.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\search.png" />
@@ -332,7 +336,9 @@
   <ItemGroup>
     <Resource Include="Images\Edit-icon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\ribbon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"

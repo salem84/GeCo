@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo.DAL;
+using GeCo.Model;
 
 namespace GeCo.Utility
 {

@@ -12,6 +12,7 @@ using Exp = System.Linq.Expressions;
 using GeCo.Varie;
 using LinqKit;
 using System.Windows.Data;
+using GeCo.Model;
 
 namespace GeCo.ViewModel
 {
