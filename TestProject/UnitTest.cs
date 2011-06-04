@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GeCo;
 using GeCo.DAL;
 using System.Configuration;
+using GeCo.Model;
 
 namespace TestProject
 {

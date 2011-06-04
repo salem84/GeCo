@@ -8,6 +8,7 @@ using System.Collections;
 using System.Data.Entity;
 using GeCo.DAL.Dati;
 using GeCo.BLL.AlgoritmoRicerca;
+using GeCo.Model;
 
 namespace TestProject
 {

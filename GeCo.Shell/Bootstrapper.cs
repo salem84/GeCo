@@ -41,8 +41,12 @@ namespace GeCo.Shell
         protected override IModuleCatalog CreateModuleCatalog()
         {
             //Carica tutti i moduli definiti nello XAML
-            return Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
-                new Uri(ModuleCatalogUri, UriKind.Relative));
+            //return Microsoft.Practices.Prism.Modularity.ModuleCatalog.CreateFromXaml(
+            //    new Uri(ModuleCatalogUri, UriKind.Relative));
+
+            var moduleCatalog = new DirectoryModuleCatalog();
+            moduleCatalog.ModulePath = @".\";
+            return moduleCatalog;
         }
 
         /// <summary>

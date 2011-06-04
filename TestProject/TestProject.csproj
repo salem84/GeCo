@@ -63,6 +63,10 @@
       <Project>{32C094BA-7A76-4A2D-AD70-C05562EB29A3}</Project>
       <Name>GeCo.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeCo.Model\GeCo.Model.csproj">
+      <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
+      <Name>GeCo.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeCo\GeCo.csproj">
       <Project>{D23F78E7-5C08-4711-9362-C70E7E77EE72}</Project>
       <Name>GeCo</Name>

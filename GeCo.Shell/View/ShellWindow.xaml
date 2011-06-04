@@ -7,13 +7,28 @@
 		x:Name="RibbonWindow"
 		Width="640" Height="480">
 
+    <!-- Window Resources -->
+    <ribbon:RibbonWindow.Resources>
+        <LinearGradientBrush x:Key="WindowBackgroundBrush">
+            <GradientStop Color="#FFE7E9EB" Offset="0" />
+            <GradientStop Color="#FFC6CACF" Offset="1" />
+        </LinearGradientBrush>
+    </ribbon:RibbonWindow.Resources>
+
+    <ribbon:RibbonWindow.Background>
+        <StaticResource ResourceKey="WindowBackgroundBrush" />
+    </ribbon:RibbonWindow.Background>
+    
 	<Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="RibbonRow" Height="Auto"/>
+            <RowDefinition x:Name="ClientRow" Height="*"/>
         </Grid.RowDefinitions>
-
-        <ribbon:Ribbon x:Name="Ribbon">
+       
+        <!-- Application Ribbon -->
+        <!-- C'è una region all'interno per consentire ai moduli di caricare tab aggiuntivi -->
+        <ribbon:Ribbon x:Name="ApplicationRibbon"
+                       prism:RegionManager.RegionName="RibbonRegion">
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
                     <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
@@ -40,9 +55,44 @@
                                          Label="Button4" />
                     
                 </ribbon:RibbonGroup>
-                
             </ribbon:RibbonTab>
-        </ribbon:Ribbon> 
-        
+        </ribbon:Ribbon>
+
+        <!-- Client Area -->
+        <Grid x:Name="ClientArea" Grid.Row="1">
+
+            <!-- Grid Layout -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="NavigationColumn" Width="0.200*"/>
+                <ColumnDefinition x:Name="WorkspaceColumn" Width="0.600*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1"/>
+
+            <!-- Navigation Pane Grid -->
+            <Grid x:Name="NavigationPane">
+
+                <!-- Grid Layout -->
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="Navigator" Height="*"/>
+                    <RowDefinition x:Name="TaskButtons" Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Navigator Region -->
+                <!--<ContentControl x:Name="NavigatorRegion" Grid.Row="0" prism:RegionManager.RegionName="NavigatorRegion" />-->
+
+                <!-- Task Button Region -->
+                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,5">
+                    <Border Background="{StaticResource WindowBackgroundBrush}" BorderBrush="DarkGray" BorderThickness="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" Margin="5,0,5,5"/>
+                    <ItemsControl x:Name="TaskButtonRegion" prism:RegionManager.RegionName="TaskButtonRegion" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                </StackPanel>
+
+            </Grid>
+
+            <!-- Workspace Region-->
+            <ContentControl x:Name="WorkspaceRegion" Grid.Column="1" prism:RegionManager.RegionName="WorkspaceRegion" />
+
+        </Grid>
+
+
     </Grid>
 </ribbon:RibbonWindow>

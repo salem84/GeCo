@@ -40,6 +40,7 @@ namespace GeCo.Shell
                         foreach (FrameworkElement element in e.NewItems)
                         {
                             regionTarget.Items.Add(element);
+                            regionTarget.SelectedItem = element;
                         }
                         break;
 
