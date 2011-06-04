@@ -115,7 +115,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             // Richiamo NavigationCompleted() callback all'ultima richiesta
 
             // Mostra Workspace
-            var moduleWorkspace = new Uri("DipendentiWorkspace", UriKind.Relative);
+            var moduleWorkspace = new Uri("DipendentiWorkspaceContainer", UriKind.Relative);
             regionManager.RequestNavigate("WorkspaceRegion", moduleWorkspace, NavigationCompleted);
         }
 

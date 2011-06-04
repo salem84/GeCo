@@ -37,6 +37,9 @@
     <Reference Include="GalaSoft.MvvmLight.WPF4, Version=3.0.0.30125, Culture=neutral, PublicKeyToken=6fcde8ddc3781e3e, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.0.2\lib\net40\GalaSoft.MvvmLight.WPF4.dll</HintPath>
     </Reference>
+    <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.0\lib\35\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism">
       <HintPath>..\packages\Prism.4.0.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
@@ -72,15 +75,21 @@
   <ItemGroup>
     <Compile Include="ModuleDipendenti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DipendentiRibbonTabVM.cs" />
     <Compile Include="ViewModels\DipendentiTaskButtonVM.cs" />
+    <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
+    <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
     <Compile Include="Views\DipendentiRibbonTab.xaml.cs">
       <DependentUpon>DipendentiRibbonTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DipendentiTaskButton.xaml.cs">
       <DependentUpon>DipendentiTaskButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DipendentiWorkspace.xaml.cs">
-      <DependentUpon>DipendentiWorkspace.xaml</DependentUpon>
+    <Compile Include="Views\DipendentiWorkspaceContainer.xaml.cs">
+      <DependentUpon>DipendentiWorkspaceContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RicercaDipendentiView.xaml.cs">
+      <DependentUpon>RicercaDipendentiView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -91,8 +100,16 @@
       <Project>{40D5418E-DEAF-40D1-9A3B-DA89A3C761F1}</Project>
       <Name>GeCo.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeCo.Model\GeCo.Model.csproj">
+      <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
+      <Name>GeCo.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\WorkspaceResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\DipendentiRibbonTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,9 +118,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DipendentiWorkspace.xaml">
+    <Page Include="Views\DipendentiWorkspaceContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RicercaDipendentiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +132,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\SmallIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\Actions-contact-new-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\Actions-edit-find-user-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

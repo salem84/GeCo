@@ -7,6 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
 using GeCo.ModuleDipendenti.Views;
+using GeCo.ModuleDipendenti.ViewModels;
 
 namespace GeCo.ModuleDipendenti
 {
@@ -20,8 +21,8 @@ namespace GeCo.ModuleDipendenti
 
             var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
             container.RegisterType<Object, DipendentiRibbonTab>("DipendentiRibbonTab");
-            container.RegisterType<Object, DipendentiWorkspace>("DipendentiWorkspace");
-
+            container.RegisterType<Object, DipendentiWorkspaceContainer>("DipendentiWorkspaceContainer");
+            container.RegisterType<Object, DipendentiWorkspaceContainerVM>(new ContainerControlledLifetimeManager());
         }
     }
 }

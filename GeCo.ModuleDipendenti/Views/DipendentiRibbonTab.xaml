@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              Header="Dipendenti"
              >
-    <ribbon:RibbonGroup Header="Group A1">
-        <ribbon:RibbonButton LargeImageSource="Images\LargeIcon.png" Label="Button A1" />
-        <ribbon:RibbonButton SmallImageSource="Images\SmallIcon.png" Label="Button A2" />
-        <ribbon:RibbonButton SmallImageSource="Images\SmallIcon.png" Label="Button A3" />
-        <ribbon:RibbonButton SmallImageSource="Images\SmallIcon.png" Label="Button A4" />
+    <ribbon:RibbonGroup Header="Anagrafiche">
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Nuovo" Command="{Binding Path=NuovoDipendenteCommand}" />
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-edit-find-user-icon.png"
+										 Label="Cerca" Command="{Binding Path=CercaDipendenteCommand}" />
     </ribbon:RibbonGroup>
 
 </ribbon:RibbonTab>

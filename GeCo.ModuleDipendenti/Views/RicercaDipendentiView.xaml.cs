@@ -11,30 +11,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Windows.Controls.Ribbon;
 using GeCo.ModuleDipendenti.ViewModels;
 
 namespace GeCo.ModuleDipendenti.Views
 {
     /// <summary>
-    /// Interaction logic for DipendentiRibbonTab.xaml
+    /// Interaction logic for RicercaDipendentiView.xaml
     /// </summary>
-    public partial class DipendentiRibbonTab : RibbonTab, IRegionMemberLifetime
+    public partial class RicercaDipendentiView : UserControl
     {
-        public DipendentiRibbonTab(DipendentiRibbonTabVM viewModel)
+        public RicercaDipendentiView()//(RicercaDipendentiViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = viewModel;
+            //this.DataContext = viewModel;
         }
-
-        #region IRegionMemberLifetime Members
-
-        public bool KeepAlive
-        {
-            get { return false; }
-        }
-
-        #endregion
     }
 }

@@ -11,30 +11,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Windows.Controls.Ribbon;
 using GeCo.ModuleDipendenti.ViewModels;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 
 namespace GeCo.ModuleDipendenti.Views
 {
     /// <summary>
-    /// Interaction logic for DipendentiRibbonTab.xaml
+    /// Interaction logic for DipendentiWorkspace.xaml
     /// </summary>
-    public partial class DipendentiRibbonTab : RibbonTab, IRegionMemberLifetime
+    public partial class DipendentiWorkspaceContainer : UserControl
     {
-        public DipendentiRibbonTab(DipendentiRibbonTabVM viewModel)
+        public DipendentiWorkspaceContainer(DipendentiWorkspaceContainerVM viewModel)
         {
             InitializeComponent();
             this.DataContext = viewModel;
         }
 
-        #region IRegionMemberLifetime Members
-
-        public bool KeepAlive
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            get { return false; }
-        }
+            string a = "";
+            var  ba = header.Content;
 
-        #endregion
+            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+            var vm = container.Resolve<DipendentiWorkspaceContainerVM>();
+        }
     }
 }
