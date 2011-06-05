@@ -75,10 +75,15 @@
   <ItemGroup>
     <Compile Include="ModuleDipendenti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Varie\ModelConverters.cs" />
+    <Compile Include="ViewModels\DipendenteViewModel.cs" />
     <Compile Include="ViewModels\DipendentiRibbonTabVM.cs" />
     <Compile Include="ViewModels\DipendentiTaskButtonVM.cs" />
     <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
     <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
+    <Compile Include="Views\DipendenteView.xaml.cs">
+      <DependentUpon>DipendenteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DipendentiRibbonTab.xaml.cs">
       <DependentUpon>DipendentiRibbonTab.xaml</DependentUpon>
     </Compile>
@@ -96,6 +101,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeCo.BLL\GeCo.BLL.csproj">
+      <Project>{AD0266E7-DE03-4AA5-98CA-483E5A055850}</Project>
+      <Name>GeCo.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeCo.DAL\GeCo.DAL.csproj">
+      <Project>{32C094BA-7A76-4A2D-AD70-C05562EB29A3}</Project>
+      <Name>GeCo.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GeCo.Infrastructure\GeCo.Infrastructure.csproj">
       <Project>{40D5418E-DEAF-40D1-9A3B-DA89A3C761F1}</Project>
       <Name>GeCo.Infrastructure</Name>
@@ -107,6 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\WorkspaceResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DipendenteView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -140,6 +157,10 @@
     <Resource Include="Views\Images\Actions-edit-find-user-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

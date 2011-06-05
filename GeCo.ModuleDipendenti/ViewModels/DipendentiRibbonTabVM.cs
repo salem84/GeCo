@@ -32,8 +32,24 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void InitializeCommands()
         {
-            CercaDipendenteCommand = new RelayCommand(
-                () => workspaceContainer.AggiungiPannello(new RicercaDipendentiViewModel()));
+            CercaDipendenteCommand = new RelayCommand(() => CreaTabRicercaDipendenti());
+            NuovoDipendenteCommand = new RelayCommand(() => CreaTabNuovoDipendente());
+        }
+
+        private void CreaTabRicercaDipendenti()
+        {
+            var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaDipendentiViewModel>();
+            
+            workspaceContainer.AggiungiPannello(ricercaVM);
+        }
+
+        private void CreaTabNuovoDipendente()
+        {
+            //var ricercaVM = ServiceLocator.Current.GetInstance<DipendenteViewModel>();
+            //Se lo faccio caricare al IoC mi crea il VM con il costruttore con più parametri
+            var nuovoVM = new DipendenteViewModel();
+
+            workspaceContainer.AggiungiPannello(nuovoVM);
         }
     }
 }

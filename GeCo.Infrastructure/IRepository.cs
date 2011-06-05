@@ -21,6 +21,8 @@ namespace GeCo.Infrastructure
         void Delete(T entity);
         void Add(T entity);
         void Attach(T entity);
+
+        IRepository<T> Include(Expression<Func<T, object>> path);
     }
 
 }

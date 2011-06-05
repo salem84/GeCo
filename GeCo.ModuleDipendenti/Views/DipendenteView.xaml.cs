@@ -11,16 +11,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace GeCo.ModuleDipendenti.Views
 {
     /// <summary>
-    /// Interaction logic for DipendentiWorkspace.xaml
+    /// Interaction logic for NuovoDipendenteView.xaml
     /// </summary>
-    public partial class DipendentiWorkspace : UserControl
+    public partial class DipendenteView : UserControl
     {
-        public DipendentiWorkspace()
+        public DipendenteView()
         {
+            //BindingErrorListener.Listen(m => MessageBox.Show(m));
+            //BindingErrorListener.Listen(m => { Debug.Indent(); Debug.WriteLine(m); Debug.Flush(); });
             InitializeComponent();
         }
     }

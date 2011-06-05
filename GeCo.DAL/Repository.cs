@@ -66,6 +66,12 @@ namespace GeCo.DAL
             _dbSet.Attach(entity);
             _dbContext.ChangeObjectState(entity, System.Data.EntityState.Modified);
         }
+
+        public IRepository<T> Include(Expression<Func<T,object>> path)
+        {
+            _dbSet.Include(path);
+            return this;
+        }
     }
 
 

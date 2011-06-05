@@ -43,5 +43,9 @@
         <vw:RicercaDipendentiView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:DipendenteViewModel}">
+        <vw:DipendenteView />
+    </DataTemplate>
+
 
 </ResourceDictionary>

@@ -8,6 +8,10 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
 using GeCo.ModuleDipendenti.Views;
 using GeCo.ModuleDipendenti.ViewModels;
+using GeCo.BLL.Services;
+using GeCo.DAL;
+using GeCo.Infrastructure;
+using GeCo.Model;
 
 namespace GeCo.ModuleDipendenti
 {
@@ -23,6 +27,17 @@ namespace GeCo.ModuleDipendenti
             container.RegisterType<Object, DipendentiRibbonTab>("DipendentiRibbonTab");
             container.RegisterType<Object, DipendentiWorkspaceContainer>("DipendentiWorkspaceContainer");
             container.RegisterType<Object, DipendentiWorkspaceContainerVM>(new ContainerControlledLifetimeManager());
+
+            //Registro i servizi
+            container.RegisterType<IDipendentiServices, DipendentiServices>("Services");
+
+
+            var cnxString = @"Data Source=.\SQLEXPRESS;Initial Catalog=GeCo.DAL.PavimentalContext;Integrated Security=True";
+            
+            container.AddNewExtension<EFRepositoryExtension>();
+            container.Configure<IEFRepositoryExtension>()
+                .WithConnection(cnxString)
+                .WithContextLifetime(new ContainerControlledLifetimeManager());
         }
     }
 }

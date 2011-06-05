@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Entity;
 using GeCo;
-using GeCo.Controls;
 using GeCo.DAL;
 using GeCo.Utility;
 using System.ComponentModel;
@@ -16,10 +14,13 @@ using System.Text.RegularExpressions;
 using GeCo.BLL.AlgoritmoRicerca;
 using System.Windows.Input;
 using GeCo.Model;
+using GeCo.Infrastructure.Workspace;
+using Microsoft.Practices.ServiceLocation;
+using GeCo.BLL.Services;
 
-namespace GeCo.ViewModel
+namespace GeCo.ModuleDipendenti.ViewModels
 {
-    public class DipendenteViewModel : WorkspaceViewModel, INotifyPropertyChanged
+    public class DipendenteViewModel : Workspace, INotifyPropertyChanged
     {
         #region PROPRIETA'
 
@@ -98,10 +99,12 @@ namespace GeCo.ViewModel
             {
                 if (_competenzeTotali == null)
                 {
-                    using (PavimentalContext context = new PavimentalContext())
-                    {
-                        _competenzeTotali = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
-                    }
+                    //using (PavimentalContext context = new PavimentalContext())
+                    //{
+                    //    _competenzeTotali = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
+                    //}
+                    var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+                    _competenzeTotali = service.GetCompetenze();
                 }
                 return _competenzeTotali;
             }
@@ -182,8 +185,9 @@ namespace GeCo.ViewModel
                     _deleteCommand = new RelayCommand(() =>
                     {
                         Stato = "Cancellazione in corso";
-                        using (PavimentalContext context = new PavimentalContext())
-                            CancellaDipendente(context, Dipendente);
+                        //using (PavimentalContext context = new PavimentalContext())
+                         //   CancellaDipendente(context, Dipendente);
+                        CancellaDipendente(Dipendente);
                         Stato = "Cancellato";
                     },
                         //Abilitato se sto in modifica
@@ -231,6 +235,7 @@ namespace GeCo.ViewModel
         public DipendenteViewModel()
         {
             DisplayTabName = "Nuovo";
+            DisplayTabName += DateTime.Now.ToLongTimeString();
             StartBackgroundAutoProgress(CreaNuovoDipendente);
             EditMode = false;
         }
@@ -242,6 +247,7 @@ namespace GeCo.ViewModel
         public DipendenteViewModel(Dipendente dipendente)
         {
             DisplayTabName = "Modifica";
+            DisplayTabName += DateTime.Now.ToLongTimeString();
             _dipendenteId = dipendente.Id;
             StartBackgroundAutoProgress(LoadDipendente);
             EditMode = true;
@@ -252,13 +258,16 @@ namespace GeCo.ViewModel
         {
             //Nella ricerca non carico le proprietà correlate, quindi devo effettuare la query su DB,
             //per ricaricare tutto
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                Dipendente = context.Dipendenti.Include(a => a.Conoscenze.Select(c => c.Competenza))
-                    .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
-                    .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
-                    .SingleOrDefault(a => a.Id == _dipendenteId);
-            }
+            //using (PavimentalContext context = new PavimentalContext())
+            //{
+            //    Dipendente = context.Dipendenti.Include(a => a.Conoscenze.Select(c => c.Competenza))
+            //        .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
+            //        .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
+            //        .SingleOrDefault(a => a.Id == _dipendenteId);
+            //}
+            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            Dipendente = service.CaricaDipendente(_dipendenteId);
+
 
             //Può essere null magari perchè ho cancellato quell'entità ed è rimasta aperta la scheda
             if (Dipendente == null)
@@ -279,49 +288,20 @@ namespace GeCo.ViewModel
         /// </summary>
         private void SalvaDipendente()
         {
-            //Ricreo l'oggetto
-            Dipendente dip = new Dipendente();
-            dip.Cognome = Dipendente.Cognome;
-            dip.Nome = Dipendente.Nome;
-            dip.DataNascita = Dipendente.DataNascita;
+            //UoW
+
+            //Ricarico
+            //Mi torna dipendente
+            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var result = service.SalvaDipendente(Dipendente);
+
+            Dipendente = result;
 
 
-            dip.Conoscenze = new List<ConoscenzaCompetenza>();
-
-            //Mi scorro tutte le conoscenze
-            foreach (var c in Dipendente.Conoscenze)
-            {
-                //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
-                {
-                    ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
-
-                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
-                    conoscenza.CompetenzaId = c.CompetenzaId;
-                    dip.Conoscenze.Add(conoscenza);
-                }
-            }
-
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                if (EditMode)
-                {
-                    CancellaDipendente(context, Dipendente);    
-                }
-                    
-                    
-                //context.Entry(dip).State = System.Data.EntityState.Modified;
-                context.Dipendenti.Add(dip);
-                context.SaveChanges();
-                
-            }
-
-            _dipendenteId = dip.Id;
-            LoadDipendente();
             EditMode = true;
         }
 
-        private void CancellaDipendente(PavimentalContext context, Dipendente dipendente)
+        private void CancellaDipendente(Dipendente dipendente)
         {
             
                 /*foreach (var c in dipendente.Conoscenze)
@@ -339,34 +319,39 @@ namespace GeCo.ViewModel
                 context.SaveChanges();*/
 
 
-            Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
-            context.Dipendenti.Attach(dipToRemove);
-            context.Dipendenti.Remove(dipToRemove);
+            //Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
+            //context.Dipendenti.Attach(dipToRemove);
+            //context.Dipendenti.Remove(dipToRemove);
 
-            context.SaveChanges();
+            //context.SaveChanges();
+
+            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            service.EliminaDipendente(dipendente.Id);
         }
 
 
         private void CreaNuovoDipendente()
         {
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-                var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
+            //using (PavimentalContext context = new PavimentalContext())
+            //{
+            //    var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+            //    var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
 
-                /*var knowHowVuoto = (from c in allCompetenze
-                                    select new ConoscenzaCompetenza()
-                                    {
-                                        Competenza = c,
-                                        //LivelloConoscenza = livelloNullo
-                                        CompetenzaId = c.Id,
-                                        LivelloConoscenzaId = livelloNullo.Id
-                                    }).ToList();*/
+            //    /*var knowHowVuoto = (from c in allCompetenze
+            //                        select new ConoscenzaCompetenza()
+            //                        {
+            //                            Competenza = c,
+            //                            //LivelloConoscenza = livelloNullo
+            //                            CompetenzaId = c.Id,
+            //                            LivelloConoscenzaId = livelloNullo.Id
+            //                        }).ToList();*/
 
-                Dipendente = new Dipendente();// { Conoscenze = knowHowVuoto };
+            //    Dipendente = new Dipendente();// { Conoscenze = knowHowVuoto };
 
                 
-            }
+            //}
+
+            Dipendente = new Dipendente();
         }
 
         /// <summary>
@@ -389,9 +374,12 @@ namespace GeCo.ViewModel
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+            //using (PavimentalContext context = new PavimentalContext())
+            //{
+
+            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+                //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 
                 Dipendente.Conoscenze.Add(new ConoscenzaCompetenza()
                     {
@@ -403,9 +391,8 @@ namespace GeCo.ViewModel
 
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
                 UpdateConoscenzeGroup();
-            }
+            //}
         }
-
     }
 
 }

@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo.Model;
+using System.Linq.Expressions;
 
 namespace GeCo.BLL.Services
 {
     public interface IDipendentiServices
     {
-        void SalvaDipendente(Dipendente dipendente);
-        void EliminaDipendente(Dipendente dipendente);
+        Dipendente SalvaDipendente(Dipendente dipendente);
+        void EliminaDipendente(int id);
+        Dipendente CaricaDipendente(int id);
+
+
+        void SalvaArea(Area area);
         IQueryable GetDipendenti();
+
+        IList<Dipendente> GetDipendenti(Expression<Func<Dipendente, bool>> where);
+
+        //Gestione competenze
+        IQueryable<LivelloConoscenza> GetLivelliConoscenza();
+        //LivelloConoscenza GetLivelloConoscenza(string titolo);
+        IList<Competenza> GetCompetenze();
     }
 }

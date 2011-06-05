@@ -13,6 +13,8 @@ using LinqKit;
 using System.Windows.Data;
 using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
+using GeCo.BLL.Services;
+using Microsoft.Practices.ServiceLocation;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -40,13 +42,13 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         //Azione che viene lanciata quando faccio click su un elemento della listview
         //Viene settata nella Shell
-        public Action<Dipendente> VisualizzaDipendenteAction
+        /*public Action<Dipendente> VisualizzaDipendenteAction
         {
             set
             {
                 DoubleClickCommand = new RelayCommand(() => value(SelectedItem));
             }
-        }
+        }*/
         //private PavimentalDb context = new PavimentalDb();
 
         #endregion //PROPRIETA'
@@ -54,14 +56,27 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public RelayCommand CercaCommand { get; set; }
         public RelayCommand DoubleClickCommand { get; set; }
 
-        public RicercaDipendentiViewModel()
+        private DipendentiWorkspaceContainerVM workspaceContainer;
+        private IDipendentiServices services;
+
+        public RicercaDipendentiViewModel(DipendentiWorkspaceContainerVM workspaceContainer, IDipendentiServices services)
         {
-            DisplayTabName = "Ricerca Anagrafica";
+            //DisplayTabName = "Ricerca Anagrafica";
+            DisplayTabName = DateTime.Now.ToLongTimeString();
+
+            this.workspaceContainer = workspaceContainer;
+            this.services = services;
+
             CercaCommand = new RelayCommand(
                 () => Cerca(),
                 () => !string.IsNullOrEmpty(RicercaNome) || !string.IsNullOrEmpty(RicercaCognome) || RicercaDataNascita != null
                     );
+
+            DoubleClickCommand = new RelayCommand(
+                () => VisualizzaDettaglioDipendente());
         }
+
+        
 
         protected void Cerca()
         {
@@ -88,6 +103,17 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 Risultati = context.Dipendenti.AsExpandable().Where(complete).ToList();
             }*/
+
+            
+            //Risultati = services.GetDipendenti().Cast<Dipendente>().Where(complete).ToList();
+            Risultati = services.GetDipendenti(complete).ToList();
+        }
+
+
+        private void VisualizzaDettaglioDipendente()
+        {
+            DipendenteViewModel visualizza = new DipendenteViewModel(SelectedItem);
+            workspaceContainer.AggiungiPannello(visualizza);
         }
     }
 
