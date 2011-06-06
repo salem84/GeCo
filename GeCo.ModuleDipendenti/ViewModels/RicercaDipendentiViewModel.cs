@@ -56,16 +56,16 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public RelayCommand CercaCommand { get; set; }
         public RelayCommand DoubleClickCommand { get; set; }
 
-        private DipendentiWorkspaceContainerVM workspaceContainer;
-        private IDipendentiServices services;
+        private DipendentiWorkspaceContainerVM _workspaceContainer;
+        private IDipendentiServices _services;
 
         public RicercaDipendentiViewModel(DipendentiWorkspaceContainerVM workspaceContainer, IDipendentiServices services)
         {
             //DisplayTabName = "Ricerca Anagrafica";
             DisplayTabName = DateTime.Now.ToLongTimeString();
 
-            this.workspaceContainer = workspaceContainer;
-            this.services = services;
+            _workspaceContainer = workspaceContainer;
+            _services = services;
 
             CercaCommand = new RelayCommand(
                 () => Cerca(),
@@ -106,14 +106,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
             
             //Risultati = services.GetDipendenti().Cast<Dipendente>().Where(complete).ToList();
-            Risultati = services.GetDipendenti(complete).ToList();
+            Risultati = _services.GetDipendenti(complete).ToList();
         }
 
 
         private void VisualizzaDettaglioDipendente()
         {
             DipendenteViewModel visualizza = new DipendenteViewModel(SelectedItem);
-            workspaceContainer.AggiungiPannello(visualizza);
+            _workspaceContainer.AggiungiPannello(visualizza);
         }
     }
 

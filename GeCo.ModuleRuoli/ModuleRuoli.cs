@@ -6,30 +6,29 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
-using GeCo.ModuleDipendenti.Views;
-using GeCo.ModuleDipendenti.ViewModels;
 using GeCo.BLL.Services;
-using GeCo.DAL;
 using GeCo.Infrastructure;
 using GeCo.Model;
+using GeCo.ModuleRuoli.Views;
+using GeCo.ModuleRuoli.ViewModels;
 
-namespace GeCo.ModuleDipendenti
+namespace GeCo.ModuleRuoli
 {
-    public class ModuleDipendenti : IModule
+    public class ModuleRuoli : IModule
     {
 
         public void Initialize()
         {
             var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
-            regionManager.RegisterViewWithRegion("TaskButtonRegion", typeof(DipendentiTaskButton));
+            regionManager.RegisterViewWithRegion("TaskButtonRegion", typeof(RuoliTaskButton));
 
             var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            container.RegisterType<Object, DipendentiRibbonTab>("DipendentiRibbonTab");
-            container.RegisterType<Object, DipendentiWorkspaceContainer>("DipendentiWorkspaceContainer");
-            container.RegisterType<Object, DipendentiWorkspaceContainerVM>(new ContainerControlledLifetimeManager());
+            container.RegisterType<Object, RuoliRibbonTab>("RuoliRibbonTab");
+            container.RegisterType<Object, RuoliWorkspaceContainer>("RuoliWorkspaceContainer");
+            container.RegisterType<Object, RuoliWorkspaceContainerVM>(new ContainerControlledLifetimeManager());
 
             //Registro i servizi
-            container.RegisterType<IDipendentiServices, DipendentiServices>("Services");
+            container.RegisterType<IRuoliServices, RuoliServices>("RuoliServices");
 
 
             /*var cnxString = @"Data Source=.\SQLEXPRESS;Initial Catalog=GeCo.DAL.PavimentalContext;Integrated Security=True";

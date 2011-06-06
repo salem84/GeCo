@@ -1,0 +1,17 @@
+﻿<ribbon:RibbonTab x:Class="GeCo.ModuleRuoli.Views.RuoliRibbonTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+             mc:Ignorable="d" 
+             Header="Ruoli"
+             >
+    <ribbon:RibbonGroup Header="Modifica">
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-resource-group-icon.png"
+										 Label="Nuovo" Command="{Binding Path=NuovoRuoloCommand}" />
+        <ribbon:RibbonButton LargeImageSource="Images\search.png"
+										 Label="Cerca" Command="{Binding Path=CercaRuoliCommand}" />
+    </ribbon:RibbonGroup>
+
+</ribbon:RibbonTab>

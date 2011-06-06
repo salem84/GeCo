@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.Shell", "GeCo.Shell\Ge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.ModuleDipendenti", "GeCo.ModuleDipendenti\GeCo.ModuleDipendenti.csproj", "{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.ModuleRuoli", "GeCo.ModuleRuoli\GeCo.ModuleRuoli.csproj", "{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GeCo.vsmdi
@@ -116,6 +118,16 @@ Global
 		{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

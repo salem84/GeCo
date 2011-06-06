@@ -5,6 +5,7 @@ using System.Text;
 using GeCo;
 using GeCo.DAL.Dati;
 using GeCo.Model;
+using GeCo.Infrastructure;
 
 namespace GeCo.DAL
 {

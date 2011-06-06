@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}</ProjectGuid>
+    <ProjectGuid>{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeCo.ModuleDipendenti</RootNamespace>
-    <AssemblyName>GeCo.ModuleDipendenti</AssemblyName>
+    <RootNamespace>GeCo.ModuleRuoli</RootNamespace>
+    <AssemblyName>GeCo.ModuleRuoli</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4, Version=3.0.0.30137, Culture=neutral, PublicKeyToken=e80d33351f9dc0a2, processorArchitecture=MSIL">
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4">
       <HintPath>..\packages\MvvmLight.3.0.2\lib\net40\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.WPF4, Version=3.0.0.30125, Culture=neutral, PublicKeyToken=6fcde8ddc3781e3e, processorArchitecture=MSIL">
+    <Reference Include="GalaSoft.MvvmLight.WPF4">
       <HintPath>..\packages\MvvmLight.3.0.2\lib\net40\GalaSoft.MvvmLight.WPF4.dll</HintPath>
     </Reference>
     <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
@@ -50,17 +53,28 @@
       <HintPath>..\packages\Prism.UnityExtensions.4.0.0.0\lib\NET40\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.0.2\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -70,44 +84,39 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\ModelConverters.cs" />
-    <Compile Include="ModuleDipendenti.cs" />
+    <Compile Include="ModuleRuoli.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\DipendenteViewModel.cs" />
-    <Compile Include="ViewModels\DipendentiRibbonTabVM.cs" />
-    <Compile Include="ViewModels\DipendentiTaskButtonVM.cs" />
-    <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
-    <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
-    <Compile Include="Views\DipendenteView.xaml.cs">
-      <DependentUpon>DipendenteView.xaml</DependentUpon>
+    <Compile Include="ViewModels\RicercaRuoliViewModel.cs" />
+    <Compile Include="ViewModels\RuoloViewModel.cs" />
+    <Compile Include="ViewModels\RuoliWorkspaceContainerVM.cs" />
+    <Compile Include="ViewModels\RuoliRibbonTabVM.cs" />
+    <Compile Include="ViewModels\RuoliTaskButtonVM.cs" />
+    <Compile Include="Views\RuoliRibbonTab.xaml.cs">
+      <DependentUpon>RuoliRibbonTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DipendentiRibbonTab.xaml.cs">
-      <DependentUpon>DipendentiRibbonTab.xaml</DependentUpon>
+    <Compile Include="Views\RuoliTaskButton.xaml.cs">
+      <DependentUpon>RuoliTaskButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DipendentiTaskButton.xaml.cs">
-      <DependentUpon>DipendentiTaskButton.xaml</DependentUpon>
+    <Compile Include="Views\RuoliWorkspaceContainer.xaml.cs">
+      <DependentUpon>RuoliWorkspaceContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DipendentiWorkspaceContainer.xaml.cs">
-      <DependentUpon>DipendentiWorkspaceContainer.xaml</DependentUpon>
+    <Compile Include="Views\RuoloView.xaml.cs">
+      <DependentUpon>RuoloView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RicercaDipendentiView.xaml.cs">
-      <DependentUpon>RicercaDipendentiView.xaml</DependentUpon>
+    <Compile Include="Views\RicercaRuoliView.xaml.cs">
+      <DependentUpon>RicercaRuoliView.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeCo.BLL\GeCo.BLL.csproj">
       <Project>{AD0266E7-DE03-4AA5-98CA-483E5A055850}</Project>
       <Name>GeCo.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GeCo.DAL\GeCo.DAL.csproj">
-      <Project>{32C094BA-7A76-4A2D-AD70-C05562EB29A3}</Project>
-      <Name>GeCo.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\GeCo.Infrastructure\GeCo.Infrastructure.csproj">
       <Project>{40D5418E-DEAF-40D1-9A3B-DA89A3C761F1}</Project>
@@ -119,48 +128,51 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Include="Resources\WorkspaceResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\DipendenteView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DipendentiRibbonTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DipendentiTaskButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DipendentiWorkspaceContainer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RicercaDipendentiView.xaml">
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\RuoloView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\LargeIcon.png" />
+    <Page Include="Views\RicercaRuoliView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\SmallIcon.png" />
+    <Resource Include="Views\Images\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\Actions-contact-new-icon.png" />
+    <Page Include="Views\RuoliWorkspaceContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\Actions-edit-find-user-icon.png" />
+    <Page Include="Views\RuoliRibbonTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\RuoliTaskButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\Actions-resource-group-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
-if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

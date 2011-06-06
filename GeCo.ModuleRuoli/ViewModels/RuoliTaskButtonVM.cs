@@ -10,9 +10,9 @@ using Microsoft.Practices.Prism.Regions;
 using GeCo.Infrastructure.Events;
 using GalaSoft.MvvmLight.Command;
 
-namespace GeCo.ModuleDipendenti.ViewModels
+namespace GeCo.ModuleRuoli.ViewModels
 {
-    public class DipendentiTaskButtonVM : ViewModelBase, INavigationAware
+    public class RuoliTaskButtonVM : ViewModelBase, INavigationAware
     {
         #region Fields and Commands
         
@@ -36,7 +36,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         #region Constructor
 
-        public DipendentiTaskButtonVM()
+        public RuoliTaskButtonVM()
         {
             this.Initialize();
         }
@@ -71,7 +71,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private void OnNavigationCompleted(string publisher)
         {
             // Exit if this module published the event
-            if (publisher == "ModuleDipendenti") return;
+            if (publisher == "ModuleRuoli") return;
 
             // Otherwise, uncheck this button
             this.IsChecked = false;
@@ -84,7 +84,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private void Initialize()
         {
             // Initialize command properties
-            this.ShowModuleView = new RelayCommand(Execute);
+            this.ShowModuleView = new RelayCommand(() => Execute());
 
             // Initialize administrative properties
             this.IsChecked = false;
@@ -108,14 +108,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
             var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
 
             // Show Ribbon Tab
-            var moduleRibbonTab = new Uri("DipendentiRibbonTab", UriKind.Relative);
+            var moduleRibbonTab = new Uri("RuoliRibbonTab", UriKind.Relative);
             regionManager.RequestNavigate("RibbonRegion", moduleRibbonTab);
 
 
             // Richiamo NavigationCompleted() callback all'ultima richiesta
 
             // Mostra Workspace
-            var moduleWorkspace = new Uri("DipendentiWorkspaceContainer", UriKind.Relative);
+            var moduleWorkspace = new Uri("RuoliWorkspaceContainer", UriKind.Relative);
             regionManager.RequestNavigate("WorkspaceRegion", moduleWorkspace, NavigationCompleted);
         }
 
@@ -131,7 +131,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             // Notifico l'evento
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             var navigationCompletedEvent = eventAggregator.GetEvent<NavigationCompletedEvent>();
-            navigationCompletedEvent.Publish("ModuleDipendenti");
+            navigationCompletedEvent.Publish("ModuleRuoli");
         }
 
         #endregion

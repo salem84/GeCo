@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo.Model;
+using GeCo.Infrastructure;
 
 namespace GeCo.DAL.Dati
 {

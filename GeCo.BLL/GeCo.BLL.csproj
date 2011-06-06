@@ -81,6 +81,8 @@
     <Compile Include="Services\DipendentiServices.cs" />
     <Compile Include="Services\IDbAdmin.cs" />
     <Compile Include="Services\IDipendentiServices.cs" />
+    <Compile Include="Services\IRuoliServices.cs" />
+    <Compile Include="Services\RuoliServices.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo;
-using GeCo.DAL;
-using GeCo.Utility;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
@@ -15,19 +13,19 @@ using GeCo.BLL.AlgoritmoRicerca;
 using System.Windows.Input;
 using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
+using GeCo.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.BLL.Services;
-using GeCo.Infrastructure;
+using GeCo.Utility;
 
-namespace GeCo.ModuleDipendenti.ViewModels
+namespace GeCo.ModuleRuoli.ViewModels
 {
-    public class DipendenteViewModel : Workspace, INotifyPropertyChanged
+    public class RuoloViewModel : Workspace, INotifyPropertyChanged
     {
         #region PROPRIETA'
 
-        /// <summary>
-        /// Macrogruppo selezionato nella combobox (Tecniche, Comportamentali, HR)
-        /// </summary>
+        
+
         private string _macroGruppoSelected;
         public string MacroGruppoSelected
         {
@@ -35,32 +33,26 @@ namespace GeCo.ModuleDipendenti.ViewModels
             set
             {
                 _macroGruppoSelected = value;
-                RaisePropertyChanged("MacroGruppoSelected");
+                RaisePropertyChanged("SelectedMacroGruppo");
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
-                //Aggiorno la listview delle competenze del dipendente
                 UpdateConoscenzeGroup();
             }
         }
 
-        /// <summary>
-        /// Istanza del dipendente (in modifica o nuovo)
-        /// </summary>
-        private Dipendente _dipendente;
-        public Dipendente Dipendente 
+        private FiguraProfessionale _figuraProfessionale;
+        public FiguraProfessionale FiguraProfessionale 
         {
-            get { return _dipendente; }
+            get { return _figuraProfessionale; }
             set 
-            { 
-                _dipendente = value;
-                RaisePropertyChanged("Dipendente");
+            {
+                _figuraProfessionale = value;
+                RaisePropertyChanged("FiguraProfessionale");
                 UpdateConoscenzeGroup();    
             }
         }
 
         
-        /// <summary>
-        /// CollectionView delle conoscenze raggruppate per tipologia (e filtrate per macrogruppo)
-        /// </summary>
+
         private ICollectionView _conoscenzePerTipologia;
         public ICollectionView ConoscenzePerTipologia
         {
@@ -73,9 +65,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        /// <summary>
-        /// Indica se la vista è aperta in modalità Edit o Nuovo (creazione di un nuovo dipendente)
-        /// </summary>
         private bool _editMode;
         public bool EditMode
         {
@@ -87,11 +76,10 @@ namespace GeCo.ModuleDipendenti.ViewModels
                     _editMode = value;
                     RaisePropertyChanged("EditMode");
                     //Notifico alla view che è stato cambiata la modalità (così viene ricaricato il nome della scheda)
-                    //RaisePropertyChanged("DisplayTabName");
+                    RaisePropertyChanged("DisplayTabName");
                 }
             }
         }
-
 
         private ICollection<Competenza> _competenzeTotali;
         protected ICollection<Competenza> CompetenzeTotali
@@ -100,10 +88,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 if (_competenzeTotali == null)
                 {
-                    //using (PavimentalContext context = new PavimentalContext())
-                    //{
-                    //    _competenzeTotali = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
-                    //}
                     var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
                     _competenzeTotali = service.GetCompetenze();
                 }
@@ -120,9 +104,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 if (MacroGruppoSelected != null)
                 {
                     IEnumerable<Competenza> tutteMacrogruppo = CompetenzeTotali.Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
-                    IEnumerable<Competenza> competenzePresenti = Dipendente.Conoscenze.Select(c => c.Competenza).Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
+                    IEnumerable<Competenza> competenzePresenti = FiguraProfessionale.Conoscenze.Select(c => c.Competenza).Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
                     IEnumerable<Competenza> rimanenti = tutteMacrogruppo.Except(competenzePresenti, c => c.Id);
-                    
+
                     return rimanenti;
                 }
                 else
@@ -137,17 +121,17 @@ namespace GeCo.ModuleDipendenti.ViewModels
         /// Lista dei macrogruppi
         /// </summary>
         //TODO questa lista dovrebbe essere letta da DB
-        public List<string> MacroGruppi 
-        { 
-            get 
-            { 
+        public List<string> MacroGruppi
+        {
+            get
+            {
                 return new List<string>()  
                 { 
                     Tipologiche.MG_HR, 
                     Tipologiche.MG_COMPORTAMENTALE, 
                     Tipologiche.MG_TECNICO
-                } ;
-            } 
+                };
+            }
         }
 
         #endregion //PROPRIETA'
@@ -158,27 +142,27 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private ICommand _salvaCommand;
         public ICommand SalvaCommand
         {
-            get
+            get 
             {
                 if (_salvaCommand == null)
                 {
                     _salvaCommand = new RelayCommand(() =>
                     {
                         Stato = "Salvataggio in corso";
-                        SalvaDipendente();
+                        SalvaFigura();
                         Stato = "Salvato";
                     },
                         //Abilitato
-                    () => Dipendente != null && !string.IsNullOrEmpty(Dipendente.Nome) && !string.IsNullOrEmpty(Dipendente.Cognome) 
+                    () => FiguraProfessionale != null && !string.IsNullOrEmpty(FiguraProfessionale.Titolo)
                     );
                 }
-                return _salvaCommand;
+                return _salvaCommand; 
             }
         }
 
         private ICommand _deleteCommand;
-        public ICommand DeleteCommand
-        {
+        public ICommand DeleteCommand 
+        { 
             get
             {
                 if (_deleteCommand == null)
@@ -187,19 +171,17 @@ namespace GeCo.ModuleDipendenti.ViewModels
                     {
                         Stato = "Cancellazione in corso";
                         //using (PavimentalContext context = new PavimentalContext())
-                         //   CancellaDipendente(context, Dipendente);
-                        CancellaDipendente(Dipendente);
+                            CancellaFiguraProfessionale(FiguraProfessionale);
                         Stato = "Cancellato";
                     },
-                        //Abilitato se sto in modifica
+                        //Abilitato
                     () => EditMode
                     );
                 }
-                return _deleteCommand;
+                return _deleteCommand; 
             }
         }
 
-        
         public ICommand ConfrontaCommand { get; set; }
 
         //E' legato al button che permette di aggiungere una competenza disponibile alle competenze del dipendente
@@ -222,61 +204,53 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         #endregion
 
-        private int _dipendenteId;
+        private int _figuraProfessionaleId;
 
-        //Inizializzo il comando quando gli configuro l'Action
-        public Action<Dipendente> RicercaFiguraPerDipendente
-        { 
-            set { ConfrontaCommand = new RelayCommand(() => value(Dipendente)); }
+        //Non posso inizializzarlo nel costruttore
+        public Action<FiguraProfessionale> RicercaDipendentePerFigura
+        {
+            set { ConfrontaCommand = new RelayCommand(() => value(FiguraProfessionale)); }
         }
 
-        /// <summary>
-        /// Costruttore senza parametri per la creazione di un nuovo dipendente
-        /// </summary>
-        public DipendenteViewModel()
+        public RuoloViewModel()
         {
             DisplayTabName = "Nuovo";
-            DisplayTabName += DateTime.Now.ToLongTimeString();
-            StartBackgroundAutoProgress(CreaNuovoDipendente);
+            StartBackgroundAutoProgress(CreaNuovaFiguraProfessionale);
             EditMode = false;
         }
 
-        /// <summary>
-        /// Costruttore con parametro per la modifica di un dipendente esistente
-        /// </summary>
-        /// <param name="dipendente"></param>
-        public DipendenteViewModel(Dipendente dipendente)
+        public RuoloViewModel(FiguraProfessionale figuraProf)
         {
             DisplayTabName = "Modifica";
-            DisplayTabName += DateTime.Now.ToLongTimeString();
-            _dipendenteId = dipendente.Id;
-            StartBackgroundAutoProgress(LoadDipendente);
+            _figuraProfessionaleId = figuraProf.Id;
+            StartBackgroundAutoProgress(LoadFigura);
             EditMode = true;
         }
 
         //private void LoadDipendente(int dipendenteId)
-        private void LoadDipendente()
+        private void LoadFigura()
         {
             //Nella ricerca non carico le proprietà correlate, quindi devo effettuare la query su DB,
             //per ricaricare tutto
             //using (PavimentalContext context = new PavimentalContext())
             //{
-            //    Dipendente = context.Dipendenti.Include(a => a.Conoscenze.Select(c => c.Competenza))
-            //        .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
-            //        .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
-            //        .SingleOrDefault(a => a.Id == _dipendenteId);
+            //    FiguraProfessionale = context.FigureProfessionali.Include(f => f.Conoscenze.Select(c => c.Competenza))
+            //        .Include(f => f.Conoscenze.Select(c => c.LivelloConoscenza))
+            //        .Include(f => f.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
+            //        .SingleOrDefault(f => f.Id == _figuraProfessionaleId);
             //}
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-            Dipendente = service.CaricaDipendente(_dipendenteId);
 
+            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            FiguraProfessionale = service.CaricaRuolo(_figuraProfessionaleId);
 
             //Può essere null magari perchè ho cancellato quell'entità ed è rimasta aperta la scheda
-            if (Dipendente == null)
+            if (FiguraProfessionale == null)
             {
                 //TODO
-                Stato = "Utente non trovato";
+                Stato = "Figura professionale non trovata";
             }
             
+
         }
 
 
@@ -284,28 +258,56 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
 
 
-        /// <summary>
-        /// Metodo per il salvataggio del dipendente, per evitare duplicazioni devo leggermi tutte le competenze e ricrearle
-        /// </summary>
-        private void SalvaDipendente()
+
+        private void SalvaFigura()
         {
-            //UoW
+            //Ricreo l'oggetto
+            //FiguraProfessionale fig = new FiguraProfessionale();
+            //fig.Titolo = FiguraProfessionale.Titolo;
+            //fig.Descrizione = FiguraProfessionale.Descrizione;
 
-            //Ricarico
-            //Mi torna dipendente
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-            var result = service.SalvaDipendente(Dipendente);
 
-            Dipendente = result;
+            //fig.Conoscenze = new List<ConoscenzaCompetenza>();
 
+            //foreach (var c in FiguraProfessionale.Conoscenze)
+            //{
+            //    ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
+
+            //    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+            //    conoscenza.CompetenzaId = c.CompetenzaId;
+            //    fig.Conoscenze.Add(conoscenza);
+            //}
+
+            //using (PavimentalContext context = new PavimentalContext())
+            //{
+            //    if (EditMode)
+            //    {
+            //        CancellaFiguraProfessionale(context, FiguraProfessionale);    
+            //    }
+                    
+                    
+            //    //context.Entry(dip).State = System.Data.EntityState.Modified;
+            //    context.FigureProfessionali.Add(fig);
+            //    context.SaveChanges();
+                
+            //}
+
+            //_figuraProfessionaleId = fig.Id;
+            //LoadFigura();
+
+            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            var result = service.SalvaRuolo(FiguraProfessionale);
+
+            FiguraProfessionale = result;
 
             EditMode = true;
         }
 
-        private void CancellaDipendente(Dipendente dipendente)
+        private void CancellaFiguraProfessionale(FiguraProfessionale figura)
         {
+            /*
             
-                /*foreach (var c in dipendente.Conoscenze)
+                foreach (var c in figura.Conoscenze)
                 {
                     ConoscenzaCompetenza con = new ConoscenzaCompetenza() { Id = c.Id };
                     context.ConoscenzaCompetenze.Attach(con);
@@ -313,54 +315,58 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 }
                 context.SaveChanges();
 
-                Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
-                context.Dipendenti.Attach(dipToRemove);
-                context.Dipendenti.Remove(dipToRemove);
+                FiguraProfessionale figToRemove = new FiguraProfessionale() { Id = figura.Id };
+                context.FigureProfessionali.Attach(figToRemove);
+                context.FigureProfessionali.Remove(figToRemove);
 
-                context.SaveChanges();*/
+                context.SaveChanges();
 
+                figura = null;
+            */
 
-            //Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
-            //context.Dipendenti.Attach(dipToRemove);
-            //context.Dipendenti.Remove(dipToRemove);
+            //FiguraProfessionale figToRemove = new FiguraProfessionale() { Id = figura.Id };
+            //context.FigureProfessionali.Attach(figToRemove);
+            //context.FigureProfessionali.Remove(figToRemove);
 
             //context.SaveChanges();
 
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-            service.EliminaDipendente(dipendente.Id);
+            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            service.EliminaRuolo(figura.Id);
+
         }
 
 
-        private void CreaNuovoDipendente()
+        private void CreaNuovaFiguraProfessionale()
         {
-            //using (PavimentalContext context = new PavimentalContext())
-            //{
-            //    var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-            //    var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
+            /*using (PavimentalContext context = new PavimentalContext())
+            {
+                var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+                var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
 
-            //    /*var knowHowVuoto = (from c in allCompetenze
-            //                        select new ConoscenzaCompetenza()
-            //                        {
-            //                            Competenza = c,
-            //                            //LivelloConoscenza = livelloNullo
-            //                            CompetenzaId = c.Id,
-            //                            LivelloConoscenzaId = livelloNullo.Id
-            //                        }).ToList();*/
+                var knowHowVuoto = (from c in allCompetenze
+                                    select new ConoscenzaCompetenza()
+                                    {
+                                        Competenza = c,
+                                        //LivelloConoscenza = livelloNullo
+                                        CompetenzaId = c.Id,
+                                        LivelloConoscenzaId = livelloNullo.Id
+                                    }).ToList();
 
-            //    Dipendente = new Dipendente();// { Conoscenze = knowHowVuoto };
+                FiguraProfessionale = new FiguraProfessionale() { Conoscenze = knowHowVuoto };
 
                 
-            //}
+            }*/
 
-            Dipendente = new Dipendente();
+            FiguraProfessionale = new FiguraProfessionale();
         }
+
 
         /// <summary>
         /// Metodo richiamato quando cambio la selezione del macrogruppo (aggiorno le conoscenze visualizzate)
         /// </summary>
         private void UpdateConoscenzeGroup()
         {
-            var conoscenzeList = Dipendente.Conoscenze.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected).OrderBy(c => c.CompetenzaId);
+            var conoscenzeList = FiguraProfessionale.Conoscenze.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected).OrderBy(c => c.CompetenzaId);
             ConoscenzePerTipologia = CollectionViewSource.GetDefaultView(conoscenzeList);
             ConoscenzePerTipologia.GroupDescriptions.Add(new PropertyGroupDescription()
             {
@@ -371,7 +377,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
 
         /// <summary>
-        /// Legge la competenza selezionata nella combobox e l'aggiunge a quelle del dipendente
+        /// Legge la competenza selezionata nella combobox e l'aggiunge a quelle del ruolo
         /// </summary>
         protected void AggiungiCompetenza()
         {
@@ -380,20 +386,21 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
             var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-                //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+            //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 
-                Dipendente.Conoscenze.Add(new ConoscenzaCompetenza()
-                    {
-                        Competenza = CompetenzaDisponibileSelezionata,
-                        //LivelloConoscenza = livelloNullo
-                        CompetenzaId = CompetenzaDisponibileSelezionata.Id,
-                        LivelloConoscenzaId = livelloNullo.Id
-                    });
+            FiguraProfessionale.Conoscenze.Add(new ConoscenzaCompetenza()
+            {
+                Competenza = CompetenzaDisponibileSelezionata,
+                //LivelloConoscenza = livelloNullo
+                CompetenzaId = CompetenzaDisponibileSelezionata.Id,
+                LivelloConoscenzaId = livelloNullo.Id
+            });
 
-                RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
-                UpdateConoscenzeGroup();
+            RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
+            UpdateConoscenzeGroup();
             //}
         }
     }
+
 
 }
