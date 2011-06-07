@@ -99,10 +99,6 @@
       <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
       <Name>GeCo.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeCo\GeCo.csproj">
-      <Project>{D23F78E7-5C08-4711-9362-C70E7E77EE72}</Project>
-      <Name>GeCo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

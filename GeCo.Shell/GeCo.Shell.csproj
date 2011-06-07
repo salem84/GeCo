@@ -130,6 +130,25 @@
     <Resource Include="View\Images\LargeIcon.png" />
     <Resource Include="View\Images\SmallIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\ribbon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\Log-Out-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\Sign-Info-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeCo.BLL\GeCo.BLL.csproj">
+      <Project>{AD0266E7-DE03-4AA5-98CA-483E5A055850}</Project>
+      <Name>GeCo.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeCo.Model\GeCo.Model.csproj">
+      <Project>{1EB6AC63-8498-4660-8753-96B3E4B36DC7}</Project>
+      <Name>GeCo.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

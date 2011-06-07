@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data;
 using System.Linq.Expressions;
 using GeCo.Infrastructure;
+using System.Data.Objects;
 
 namespace GeCo.DAL
 {
@@ -41,6 +42,11 @@ namespace GeCo.DAL
             return _dbSet.Single(where);
         }
 
+        public T SingleOrDefault(Expression<Func<T, bool>> where)
+        {
+            return _dbSet.SingleOrDefault(where);
+        }
+
         public T First(Expression<Func<T, bool>> where)
         {
             return _dbSet.First(where);
@@ -67,13 +73,28 @@ namespace GeCo.DAL
             _dbContext.ChangeObjectState(entity, System.Data.EntityState.Modified);
         }
 
-        public IRepository<T> Include(Expression<Func<T,object>> path)
+        public IRepository<T> Include(string path)
         {
             _dbSet.Include(path);
             return this;
         }
-    }
 
+        public IQueryable<T> Include(Expression<Func<T,object>> path)
+        {
+            return _dbSet.Include(path);
+        }
+
+    }
+    public static class Extension
+    {
+        public static IQueryable<T> Include<T>(this IQueryable<T> obj, Expression<Func<T, object>> path)
+        {
+            if (obj is ObjectQuery<T>)
+                (obj as ObjectQuery<T>).Include(path);
+
+            return obj;
+        }
+    }
 
     /*public abstract class RepositoryBase<T> : IRepository<T> where T : BaseIdentityModelCore
     {

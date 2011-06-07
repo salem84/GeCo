@@ -17,12 +17,15 @@ namespace GeCo.Infrastructure
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> where);
         T Single(Expression<Func<T, bool>> where);
+        T SingleOrDefault(Expression<Func<T, bool>> where);
         T First(Expression<Func<T, bool>> where);
+        T FirstOrDefault(Expression<Func<T, bool>> where);
         void Delete(T entity);
         void Add(T entity);
         void Attach(T entity);
 
-        IRepository<T> Include(Expression<Func<T, object>> path);
+        IRepository<T> Include(string path);
+        IQueryable<T> Include(Expression<Func<T, object>> path);
     }
 
 }

@@ -30,30 +30,22 @@
         <ribbon:Ribbon x:Name="ApplicationRibbon"
                        prism:RegionManager.RegionName="RibbonRegion">
             <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
-                    <ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
-                                                      x:Name="MenuItem1"
-                                                      ImageSource="Images\LargeIcon.png"/>
+                <ribbon:RibbonApplicationMenu SmallImageSource="Images\ribbon.png">
+                    <ribbon:RibbonApplicationMenuItem Header="About..."
+													  ImageSource="Images\Sign-Info-icon.png"
+                                                      Command="{Binding AboutCommand}"/>
+                    <ribbon:RibbonApplicationMenuItem Header="Esci"
+													  ImageSource="Images\Log-Out-icon.png"
+                                                      Command="{Binding QuitCommand}"/>
                 </ribbon:RibbonApplicationMenu>
             </ribbon:Ribbon.ApplicationMenu>
+
             <ribbon:RibbonTab x:Name="HomeTab" 
                               Header="Home">
-                <ribbon:RibbonGroup x:Name="Group1" 
-                                    Header="Group1">
-                    <ribbon:RibbonButton x:Name="Button1"
+                <ribbon:RibbonGroup Header="Amministrazione">
+                    <ribbon:RibbonButton x:Name="btnInizializza"
                                          LargeImageSource="Images\LargeIcon.png"
-                                         Label="Button1" />
-
-                    <ribbon:RibbonButton x:Name="Button2"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button2" />
-                    <ribbon:RibbonButton x:Name="Button3"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button3" />
-                    <ribbon:RibbonButton x:Name="Button4"
-                                         SmallImageSource="Images\SmallIcon.png"
-                                         Label="Button4" />
-                    
+                                         Label="Inizializza" Click="btnInizializza_Click" /> 
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>

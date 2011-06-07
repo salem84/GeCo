@@ -9,5 +9,10 @@ namespace GeCo.Model
     public abstract class Anagrafica : BaseIdentityModel<Anagrafica>
     {
         public virtual ICollection<ConoscenzaCompetenza> Conoscenze { get; set; }
+
+        public Anagrafica()
+        {
+            Conoscenze = new List<ConoscenzaCompetenza>();
+        }
     }
 }

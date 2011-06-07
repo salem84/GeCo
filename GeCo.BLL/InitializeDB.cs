@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeCo;
-using GeCo.DAL.Dati;
 using GeCo.Model;
 using GeCo.Infrastructure;
+using GeCo.BLL.Dati;
+using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.DAL
+namespace GeCo.BLL
 {
     public class InitializeDB
     {
@@ -40,25 +40,27 @@ namespace GeCo.DAL
                     new { n=Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL, v=70},
                 };
 
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                foreach (var elemento in lista)
-                {
-                    context.Parametri.Add(new Parametro()
-                    {
-                        Nome = elemento.n,
-                        Valore = elemento.v.ToString()
-                    });
-                }
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-                context.SaveChanges();
+
+            foreach (var elemento in lista)
+            {
+                repos.Add(new Parametro()
+                {
+                    Nome = elemento.n,
+                    Valore = elemento.v.ToString()
+                });
             }
+
+            uow.Commit();
+
         }
 
 
         public static void InsertTipologieCompetenze()
         {
-            var lista = new []
+            var lista = new[]
                 {
                     //Tecniche
                     new { t=Tipologiche.TipologiaCompetenza.FOUNDATIONAL, m=Tipologiche.MG_TECNICO},
@@ -75,20 +77,23 @@ namespace GeCo.DAL
                     new { t=Tipologiche.TipologiaCompetenza.ASSESSMENT, m=Tipologiche.MG_HR},
                     new { t=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI, m=Tipologiche.MG_HR},
                 };
-            
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                foreach(var elemento in lista)
-                {
-                    context.TipologieCompetenze.Add(new TipologiaCompetenza()
-                    {
-                        Titolo = elemento.t,
-                        MacroGruppo = elemento.m
-                    });
-                }
 
-                context.SaveChanges();
+            var repos = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+
+
+            foreach (var elemento in lista)
+            {
+                repos.Add(new TipologiaCompetenza()
+                {
+                    Titolo = elemento.t,
+                    MacroGruppo = elemento.m
+                });
             }
+
+            uow.Commit();
+
         }
 
         public static void InsertCompetenzeTecniche()
@@ -154,21 +159,23 @@ namespace GeCo.DAL
 
             };
 
-            using (PavimentalContext context = new PavimentalContext())
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            foreach (var elemento in lista)
             {
-                foreach (var elemento in lista)
+                reposComp.Add(new Competenza()
                 {
-                    context.Competenze.Add(new Competenza()
-                    {
-                        Titolo = elemento.t,
-                        Descrizione = elemento.d,
-                        Peso = elemento.p,
-                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
-                    });
-                }
-                
-                context.SaveChanges();
+                    Titolo = elemento.t,
+                    Descrizione = elemento.d,
+                    Peso = elemento.p,
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                });
             }
+
+            uow.Commit();
+
         }
 
         public static void InsertCompetenzeComportamentali()
@@ -198,21 +205,23 @@ namespace GeCo.DAL
                 
             };
 
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                foreach (var elemento in lista)
-                {
-                    context.Competenze.Add(new Competenza()
-                    {
-                        Titolo = elemento.t,
-                        Descrizione = elemento.d,
-                        Peso = elemento.p,
-                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
-                    });
-                }
 
-                context.SaveChanges();
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            foreach (var elemento in lista)
+            {
+                reposComp.Add(new Competenza()
+                {
+                    Titolo = elemento.t,
+                    Descrizione = elemento.d,
+                    Peso = elemento.p,
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                });
             }
+
+            uow.Commit();
         }
 
         public static void InsertCompetenzeHR()
@@ -224,62 +233,66 @@ namespace GeCo.DAL
                 new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.CONSIDERAZIONI_GESTIONALI}                
             };
 
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                foreach (var elemento in lista)
-                {
-                    context.Competenze.Add(new Competenza()
-                    {
-                        Titolo = elemento.t,
-                        Descrizione = elemento.d,
-                        Peso = elemento.p,
-                        TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo)
-                    });
-                }
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-                context.SaveChanges();
+            foreach (var elemento in lista)
+            {
+                reposComp.Add(new Competenza()
+                {
+                    Titolo = elemento.t,
+                    Descrizione = elemento.d,
+                    Peso = elemento.p,
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                });
             }
+
+            uow.Commit();
         }
-        
+
         public static void InsertAltro()
         {
-            using (PavimentalContext context = new PavimentalContext())
+            var reposAree = ServiceLocator.Current.GetInstance<IRepository<Area>>();
+            var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+
+            reposAree.Add(new Area() { Titolo = "Area1" });
+
+            reposLivelli.Add(new LivelloConoscenza()
             {
-                context.Aree.Add(new Area() { Titolo = "Area1" });
-
-                context.LivelliConoscenza.Add(new LivelloConoscenza()
-                {
-                    Titolo = Tipologiche.Livello.INSUFFICIENTE,
-                    Valore = 0
-                });
-                context.LivelliConoscenza.Add(new LivelloConoscenza()
-                {
-                    Titolo = Tipologiche.Livello.SUFFICIENTE,
-                    Valore = 1
-                });
-                context.LivelliConoscenza.Add(new LivelloConoscenza()
-                {
-                    Titolo = Tipologiche.Livello.DISCRETO,
-                    Valore = 2
-                });
-                context.LivelliConoscenza.Add(new LivelloConoscenza()
-                {
-                    Titolo = Tipologiche.Livello.BUONO,
-                    Valore = 3
-                });
-                context.LivelliConoscenza.Add(new LivelloConoscenza()
-                {
-                    Titolo = Tipologiche.Livello.OTTIMO,
-                    Valore = 4
-                });
+                Titolo = Tipologiche.Livello.INSUFFICIENTE,
+                Valore = 0
+            });
+            reposLivelli.Add(new LivelloConoscenza()
+            {
+                Titolo = Tipologiche.Livello.SUFFICIENTE,
+                Valore = 1
+            });
+            reposLivelli.Add(new LivelloConoscenza()
+            {
+                Titolo = Tipologiche.Livello.DISCRETO,
+                Valore = 2
+            });
+            reposLivelli.Add(new LivelloConoscenza()
+            {
+                Titolo = Tipologiche.Livello.BUONO,
+                Valore = 3
+            });
+            reposLivelli.Add(new LivelloConoscenza()
+            {
+                Titolo = Tipologiche.Livello.OTTIMO,
+                Valore = 4
+            });
 
 
-                context.SaveChanges();
-            }
+            uow.Commit();
+
         }
 
-        
-    
+
+
 
     }
 }

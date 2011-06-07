@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using GeCo.Model;
 using GeCo.Infrastructure;
+using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.DAL.Dati
+namespace GeCo.BLL.Dati
 {
     public class DipendentiDefault
     {
@@ -17,34 +18,40 @@ namespace GeCo.DAL.Dati
 
         private static Dipendente SalvaDipendente(D[] lista, string cognome, string nome)
         {
-            using (PavimentalContext context = new PavimentalContext())
+            var reposDipendenti = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
+
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
+
+            foreach (var elemento in lista)
             {
-                List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
-
-                foreach (var elemento in lista)
-                {
-                    ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
-                    conoscenza.Competenza = context.Competenze.Single(c => c.Titolo == elemento.t);
-                    conoscenza.LivelloConoscenza = context.LivelliConoscenza.Single(lc => lc.Titolo == elemento.v);
-                    conoscenze.Add(conoscenza);
-                }
-
-                var dipendente = new Dipendente()
-                {
-
-                    Cognome = cognome,
-                    Nome = nome,
-                    Conoscenze = conoscenze
-                };
-
-                if (context.Dipendenti.SingleOrDefault(d => d.Cognome == dipendente.Cognome) == null)
-                {
-                    context.Dipendenti.Add(dipendente);
-                    context.SaveChanges();
-                }
-
-                return dipendente;
+                ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
+                conoscenza.Competenza = reposComp.Single(c => c.Titolo == elemento.t);
+                conoscenza.LivelloConoscenza = reposLivelli.Single(lc => lc.Titolo == elemento.v);
+                conoscenze.Add(conoscenza);
             }
+
+            var dipendente = new Dipendente()
+            {
+
+                Cognome = cognome,
+                Nome = nome,
+                Conoscenze = conoscenze
+            };
+
+
+
+            if (reposDipendenti.SingleOrDefault(d => d.Cognome == dipendente.Cognome) == null)
+            {
+                reposDipendenti.Add(dipendente);
+                uow.Commit();
+            }
+
+            return dipendente;
+
         }
 
 

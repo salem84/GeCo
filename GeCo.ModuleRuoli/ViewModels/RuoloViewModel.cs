@@ -33,7 +33,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             set
             {
                 _macroGruppoSelected = value;
-                RaisePropertyChanged("SelectedMacroGruppo");
+                RaisePropertyChanged("MacroGruppoSelected");
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
                 UpdateConoscenzeGroup();
             }

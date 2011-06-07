@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.Model", "GeCo.Model\GeCo.Model.csproj", "{1EB6AC63-8498-4660-8753-96B3E4B36DC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.Shell", "GeCo.Shell\GeCo.Shell.csproj", "{755D31B1-8521-43E4-AE2F-4AED69D2E666}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D} = {A0CA4F01-FACE-41A0-9CF9-F4945E75CC0D}
+		{5230E0D9-DB8D-47E3-A6E8-417EBA950D80} = {5230E0D9-DB8D-47E3-A6E8-417EBA950D80}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.ModuleDipendenti", "GeCo.ModuleDipendenti\GeCo.ModuleDipendenti.csproj", "{5230E0D9-DB8D-47E3-A6E8-417EBA950D80}"
 EndProject

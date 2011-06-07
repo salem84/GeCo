@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using GeCo.Model;
 using GeCo.Infrastructure;
+using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.DAL.Dati
+namespace GeCo.BLL.Dati
 {
     public class FigureDefault
     {
@@ -14,35 +15,42 @@ namespace GeCo.DAL.Dati
             public string t { get; set; }
             public string v { get; set; }
         }
-        
+
         private static FiguraProfessionale SalvaFigura(F[] lista, string nome)
         {
-            using (PavimentalContext context = new PavimentalContext())
+            var reposRuoli = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
+
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
+
+            foreach (var elemento in lista)
             {
-                List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
-
-                foreach (var elemento in lista)
-                {
-                    ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
-                    conoscenza.Competenza = context.Competenze.Single(c => c.Titolo == elemento.t);
-                    conoscenza.LivelloConoscenza = context.LivelliConoscenza.Single(lc => lc.Titolo == elemento.v);
-                    conoscenze.Add(conoscenza);
-                }
-
-                var figura = new FiguraProfessionale()
-                {
-                    Area = new Area() { Id = 1 },
-                    Titolo = nome,
-                    Conoscenze = conoscenze
-                };
-
-                if (context.FigureProfessionali.SingleOrDefault(f => f.Titolo == figura.Titolo) == null)
-                {
-                    context.FigureProfessionali.Add(figura);
-                    context.SaveChanges();
-                }
-                return figura;
+                ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
+                conoscenza.Competenza = reposComp.Single(c => c.Titolo == elemento.t);
+                conoscenza.LivelloConoscenza = reposLivelli.Single(lc => lc.Titolo == elemento.v);
+                conoscenze.Add(conoscenza);
             }
+
+            var ruolo = new FiguraProfessionale()
+            {
+                Area = new Area() { Id = 1 },
+                Titolo = nome,
+                Conoscenze = conoscenze
+            };
+
+
+
+            if (reposRuoli.SingleOrDefault(f => f.Titolo == ruolo.Titolo) == null)
+            {
+                reposRuoli.Add(ruolo);
+                uow.Commit();
+            }
+
+            return ruolo;
+
         }
 
         public static FiguraProfessionale SalvaResponsabileUfficioTecnico()
@@ -111,7 +119,7 @@ namespace GeCo.DAL.Dati
             };
 
             return SalvaFigura(lista, "Responsabile ufficio tecnico");
-            
+
         }
 
         public static FiguraProfessionale SalvaResponsabileControlliLaboratorio()
@@ -746,8 +754,8 @@ namespace GeCo.DAL.Dati
             return SalvaFigura(lista, "Capo Cantiere Infrastrutture");
 
         }
-    
-        
+
+
         public static FiguraProfessionale SalvaBuyerSeniorSede()
         {
             var lista = new[] 
@@ -808,7 +816,7 @@ namespace GeCo.DAL.Dati
 
         }
 
-        
+
         public static FiguraProfessionale SalvaBuyerSeniorCantiere()
         {
             var lista = new[] 

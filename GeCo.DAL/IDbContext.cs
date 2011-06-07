@@ -12,6 +12,7 @@ namespace GeCo.DAL
         DbSet<T> CreateDbSet<T>() where T : class;
         void SaveChanges();
         void ChangeObjectState<T>(T entity, EntityState entityState) where T : class;
-
+        void CreateDb();
+        void DeleteDb();
     }
 }

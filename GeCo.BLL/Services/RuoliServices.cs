@@ -65,14 +65,11 @@ namespace GeCo.BLL.Services
         {
             var repos = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
             var result = repos.Include(r => r.Conoscenze.Select(c => c.Competenza))
-                    .Include(r => r.Conoscenze.Select(c => c.LivelloConoscenza))
-                    .Include(r => r.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
-                    .Find(r => r.Id == id);
+                     .Include(r => r.Conoscenze.Select(c => c.LivelloConoscenza))
+                     .Include(r => r.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
+                     .SingleOrDefault(r => r.Id == id);
 
-            if (result.Count() == 1)
-                return result.Single();
-            else
-                return null;
+            return result;
         }
 
         public IList<FiguraProfessionale> GetRuoli(Expression<Func<FiguraProfessionale, bool>> where)

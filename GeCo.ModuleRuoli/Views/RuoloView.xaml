@@ -107,7 +107,7 @@
             <Button Content="Aggiungi" Command="{Binding AggiungiCompetenzaCommand}" HorizontalAlignment="Right" />
         </StackPanel>
 
-<!-- Lato sinistro alto contenente le informazioni sul ruolo -->
+        <!-- Lato sinistro alto contenente le informazioni sul ruolo (titolo, descrizione) -->
         <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=FiguraProfessionale}">
         	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Titolo" VerticalAlignment="Center"/>
         	<TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Titolo, UpdateSourceTrigger=PropertyChanged}"/>
@@ -117,7 +117,7 @@
         
         <!-- RadioButtonList che visualizza le tipologie di competenze -->
         <ListView Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=SelectedMacroGruppo}" ItemsSource="{Binding Path=MacroGruppi}">
+                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
         </ListView>
         
         <!-- Button Salvataggio, Eliminazione -->

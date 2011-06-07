@@ -96,16 +96,14 @@ namespace GeCo.BLL.Services
 
         public Dipendente CaricaDipendente(int id)
         {
-            var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
+            //TODO attenzione ritorna proxy
+           var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
             var result = repos.Include(a => a.Conoscenze.Select(c => c.Competenza))
                     .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
                     .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
-                    .Find(a => a.Id == id);
+                    .SingleOrDefault(a => a.Id == id);
 
-            if (result.Count() == 1)
-                return result.Single();
-            else
-                return null;
+            return result;
         }
 
         public IQueryable<LivelloConoscenza> GetLivelliConoscenza()
@@ -117,7 +115,7 @@ namespace GeCo.BLL.Services
         public IList<Competenza> GetCompetenze()
         {
             var repos = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
-            var result = repos.Include(c => c.TipologiaCompetenza).AsQueryable().ToList();
+            var result = repos.Include(c => c.TipologiaCompetenza).ToList();
 
             return result;
         }

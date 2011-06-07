@@ -38,6 +38,16 @@ namespace GeCo.DAL
             _dbContext.SaveChanges();
         }
 
+        public void CreateDb()
+        {
+            _dbContext.Database.Create();
+        }
+
+        public void DeleteDb()
+        {
+            _dbContext.Database.Delete();
+        }
+
         protected ObjectContext objectContext
         {
             get { return ((IObjectContextAdapter)_dbContext).ObjectContext; }

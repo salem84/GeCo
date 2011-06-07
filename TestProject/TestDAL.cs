@@ -60,7 +60,7 @@ namespace TestProject
             d.Nome = "ciccio";
 
             var services = container.Resolve<IDipendentiServices>();
-            var result = services.SalvaDipendente(d);
+            var result = services.CaricaDipendente(1);
         }
     }
 }

@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Windows.Controls.Ribbon;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
+using GeCo.BLL.Services;
 
 namespace GeCo.Shell.Views
 {
@@ -25,6 +28,19 @@ namespace GeCo.Shell.Views
             InitializeComponent();
 
             // Insert code required on object creation below this point.
+        }
+
+        private void btnInizializza_Click(object sender, RoutedEventArgs e)
+        {
+            /*var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+            container.RegisterType<IDbAdmin, DbAdmin>();
+            var dbAdmin = container.Resolve<IDbAdmin>();
+            dbAdmin.InizializzaDb();*/
+            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+            container.RegisterType<IDipendentiServices, DipendentiServices>();
+            var dbAdmin = container.Resolve<IDipendentiServices>();
+            var d = dbAdmin.CaricaDipendente(8);
+
         }
     }
 }
