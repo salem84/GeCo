@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <RadioButton Content="Modulo dipendenti"
+        <RadioButton Content="Modulo Dipendenti"
                      Command="{Binding ShowModuleView}" 
                      IsChecked="{Binding IsChecked}"
                      />

@@ -81,6 +81,7 @@
     <Compile Include="ViewModels\DipendentiTaskButtonVM.cs" />
     <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
     <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
+    <Compile Include="ViewModels\ConfrontoDipendenteMasterVM.cs" />
     <Compile Include="Views\DipendenteView.xaml.cs">
       <DependentUpon>DipendenteView.xaml</DependentUpon>
     </Compile>
@@ -95,6 +96,9 @@
     </Compile>
     <Compile Include="Views\RicercaDipendentiView.xaml.cs">
       <DependentUpon>RicercaDipendentiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConfrontoDipendenteMasterView.xaml.cs">
+      <DependentUpon>ConfrontoDipendenteMasterView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RicercaDipendentiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConfrontoDipendenteMasterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

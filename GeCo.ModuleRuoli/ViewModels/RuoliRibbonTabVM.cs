@@ -7,6 +7,9 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using GeCo.Infrastructure.Workspace;
+using GeCo.Infrastructure.Events;
+using Microsoft.Practices.Prism.Events;
 
 namespace GeCo.ModuleRuoli.ViewModels
 {
@@ -18,15 +21,12 @@ namespace GeCo.ModuleRuoli.ViewModels
         public ICommand NuovoRuoloCommand { get; private set; }
         public ICommand CercaRuoliCommand { get; private set; }
 
-        private RuoliWorkspaceContainerVM workspaceContainer;
-
         /// <summary>
         /// Costruttore
         /// </summary>
         /// <param name="workspaceContainer">viene passato dal container (è un singleton definito nell'init del modulo)</param>
-        public RuoliRibbonTabVM(RuoliWorkspaceContainerVM workspaceContainer)
+        public RuoliRibbonTabVM()
         {
-            this.workspaceContainer = workspaceContainer;
             InitializeCommands();
         }
 
@@ -40,8 +40,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         {
             var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaRuoliViewModel>();
             
-            
-            workspaceContainer.AggiungiPannello(ricercaVM);
+            PubblicaEvento(ricercaVM);
         }
 
         private void CreaTabNuovoRuolo()
@@ -50,7 +49,16 @@ namespace GeCo.ModuleRuoli.ViewModels
             //Se lo faccio caricare al IoC mi crea il VM con il costruttore con più parametri
             var nuovoVM = new RuoloViewModel();
 
-            workspaceContainer.AggiungiPannello(nuovoVM);
+            PubblicaEvento(nuovoVM);
+        }
+
+        private void PubblicaEvento(Workspace workspace)
+        {
+            var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
+            addWorkspaceEvent.Workspace = workspace;
+            addWorkspaceEvent.Container = "ModuleDipendenti";
+            addWorkspaceEvent.Publish(addWorkspaceEvent);
         }
     }
 }

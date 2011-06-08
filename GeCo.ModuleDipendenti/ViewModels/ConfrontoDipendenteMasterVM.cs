@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using GeCo.BLL.AlgoritmoRicerca;
 using GeCo.DAL;
-using System.Data.Entity;
 using GeCo.Utility;
 using GeCo.Model;
+using GeCo.Infrastructure.Workspace;
+using GeCo.Infrastructure;
+using GeCo.BLL.Services;
 
 namespace GeCo.ViewModel
 {
     //Agganciato alla vista VisualizzaDipendente per effettuare la ricerca
     //delle figure professionali a partire da un dipendente
-    public class RisultatiFiguraPerDipendenteViewModel : WorkspaceViewModel
+    public class ConfrontoDipendenteMasterVM : Workspace
     {
         private IEnumerable<RisultatoRicerca> _risultati;
         public IEnumerable<RisultatoRicerca> Risultati
@@ -27,8 +29,20 @@ namespace GeCo.ViewModel
                 }
             }
         }
-        
-        public Dipendente Dipendente { get; set; }
+
+        private Dipendente _dipendente;
+        public Dipendente Dipendente 
+        { 
+            get
+            {
+                return _dipendente;
+            }
+            set
+            {
+                _dipendente = value;
+                AvviaAnalisi();
+            }
+        }
 
         public object ParametriConfronto { get; set; }
 
@@ -36,9 +50,15 @@ namespace GeCo.ViewModel
         private int FigureProfessionaliTotali { get; set; }
         private int FigureProfessionaliAnalizzate { get; set; }
 
-        public RisultatiFiguraPerDipendenteViewModel(Dipendente dipendente)
+        private IDipendentiServices _dipendentiService;
+        private IRicercaServices _ricercaServices;
+
+        public ConfrontoDipendenteMasterVM(IDipendentiServices dipServices, IRicercaServices ricercaServices)
         {
-            DisplayTabName = "Sostituti per " + dipendente.Cognome;
+            DisplayTabName = "Sostituti";
+
+            _dipendentiService = dipServices;
+            _ricercaServices = ricercaServices;
 
             /*//Sta arrivando un oggetto con solo l'ID
             if (dipendente.Conoscenze.Count == 0) non mi arriva mai
@@ -56,33 +76,34 @@ namespace GeCo.ViewModel
             LoadParametri();
 
 
+            
+                        
+        }
+
+        private void AvviaAnalisi()
+        {
+            DisplayTabName = "Sostituti per " + Dipendente.Cognome;
+
+            //TODO rivedere
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici
-            if (dipendente.Id == 0)
+            if (Dipendente.Id == 0)
             {
-                using (PavimentalContext context = new PavimentalContext())
+                var livelliConoscenza = _dipendentiService.GetLivelliConoscenza();
+                
+                foreach (var c in Dipendente.Conoscenze)
                 {
-                    foreach (var cc in dipendente.Conoscenze)
-                    {
-                        cc.LivelloConoscenza = context.LivelliConoscenza.Find(cc.LivelloConoscenzaId);
-                    }
-                    Dipendente = dipendente;
-                }
-            }
-            else
-            {
-                //dipendente deve avere tutte le conoscenze caricate
-                Dipendente = dipendente;
+                    c.LivelloConoscenza = livelliConoscenza.Single(lc => lc.Id == c.LivelloConoscenzaId);
+                }   
             }
 
             //Non faccio l'autoprogress, setto il valore massimo pari al numero di elementi sul db da analizzare
-            using (PavimentalContext context = new PavimentalContext())
+            /*using (PavimentalContext context = new PavimentalContext())
             {
                 FigureProfessionaliTotali = context.FigureProfessionali.Count();
-            }
+            }*/
 
             //Faccio partire l'algoritmo in background
-            StartBackground(AvviaAlgoritmo);
-                        
+            StartBackgroundAutoProgress(AvviaAlgoritmoBackground);
         }
 
         private void LoadParametri()
@@ -98,11 +119,11 @@ namespace GeCo.ViewModel
             };
         }
 
-        protected void AvviaAlgoritmo()
+        protected void AvviaAlgoritmoBackground()
         {
-            RicercaRuoloDaAnagrafica algoritmo = new RicercaRuoloDaAnagrafica();
+            
             //Gli passo la funzione per fare l'aggiornamento del progressivo
-            var tempRes = algoritmo.Cerca(Dipendente, AggiornaProgress);
+            var tempRes = _ricercaServices.CercaRuoloDaDipendente(Dipendente);
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
             Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenBy(r => r.PercentualeTotale);
@@ -110,9 +131,9 @@ namespace GeCo.ViewModel
 
         protected void AggiornaProgress()
         {
-            FigureProfessionaliAnalizzate++;
-            ProgressPercent = FigureProfessionaliAnalizzate / FigureProfessionaliTotali * 100;
-            Stato = string.Format("Completato {0} di {1}", FigureProfessionaliAnalizzate, FigureProfessionaliTotali);
+            //FigureProfessionaliAnalizzate++;
+            //ProgressPercent = FigureProfessionaliAnalizzate / FigureProfessionaliTotali * 100;
+            //Stato = string.Format("Completato {0} di {1}", FigureProfessionaliAnalizzate, FigureProfessionaliTotali);
 
         }
     }

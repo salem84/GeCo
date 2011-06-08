@@ -236,7 +236,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public DipendenteViewModel()
         {
             DisplayTabName = "Nuovo";
-            DisplayTabName += DateTime.Now.ToLongTimeString();
             StartBackgroundAutoProgress(CreaNuovoDipendente);
             EditMode = false;
         }
@@ -248,7 +247,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public DipendenteViewModel(Dipendente dipendente)
         {
             DisplayTabName = "Modifica";
-            DisplayTabName += DateTime.Now.ToLongTimeString();
             _dipendenteId = dipendente.Id;
             StartBackgroundAutoProgress(LoadDipendente);
             EditMode = true;

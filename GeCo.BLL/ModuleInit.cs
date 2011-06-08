@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using GeCo.BLL.Services;
 using GeCo.DAL;
+using GeCo.BLL.AlgoritmoRicerca;
 
 namespace GeCo.BLL
 {
@@ -22,6 +23,11 @@ namespace GeCo.BLL
         {
             this.container.RegisterType<IDipendentiServices, DipendentiServices>();
             this.container.RegisterType<IRuoliServices, RuoliServices>();
+            this.container.RegisterType<IRicercaServices, RicercaServices>();
+
+            this.container.RegisterType<IAlgoritmoRicerca, RicercaAnagraficaDaFigura>("RicercaDipendenteDaRuolo");
+            this.container.RegisterType<IAlgoritmoRicerca, RicercaRuoloDaAnagrafica>("RicercaRuoloDaDipendente");
+
 
             var cnxString = @"Data Source=.\SQLEXPRESS;Initial Catalog=GeCo.DAL.PavimentalContext;Integrated Security=True";
             

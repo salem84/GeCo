@@ -62,6 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundWorker\BackgroundWorkerHelper.cs" />
+    <Compile Include="Events\AddWorkspaceEvent.cs" />
+    <Compile Include="Events\ExtensionsMethod.cs" />
     <Compile Include="Events\NavigationCompletedEvent.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />

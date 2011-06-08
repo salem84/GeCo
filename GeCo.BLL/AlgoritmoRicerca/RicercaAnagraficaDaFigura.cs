@@ -10,7 +10,7 @@ using GeCo.Infrastructure;
 
 namespace GeCo.BLL.AlgoritmoRicerca
 {
-    public class RicercaAnagraficaDaFigura
+    public class RicercaAnagraficaDaFigura : IAlgoritmoRicerca
     {
         private PavimentalContext context;
 
@@ -21,7 +21,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
         static int PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE);
         static int PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL);
 
-        public List<RisultatoRicerca> Cerca(FiguraProfessionale figura)
+        private List<RisultatoRicerca> Cerca(FiguraProfessionale figura)
         {
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
@@ -83,6 +83,11 @@ namespace GeCo.BLL.AlgoritmoRicerca
                                     .AsEnumerable();
 
             return dipendenti;
+        }
+
+        public List<RisultatoRicerca> Cerca(Anagrafica ruolo)
+        {
+            return Cerca(ruolo as FiguraProfessionale);
         }
     }
 }

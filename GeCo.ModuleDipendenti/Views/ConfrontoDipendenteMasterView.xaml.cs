@@ -11,21 +11,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GeCo.ModuleRuoli.ViewModels;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
 
-namespace GeCo.ModuleRuoli.Views
+namespace GeCo.View
 {
     /// <summary>
-    /// Interaction logic for DipendentiWorkspace.xaml
+    /// Interaction logic for RisultatiRicercaView.xaml
     /// </summary>
-    public partial class RuoliWorkspaceContainer : UserControl
+    public partial class ConfrontoDipendenteMaster : UserControl
     {
-        public RuoliWorkspaceContainer(RuoliWorkspaceContainerVM viewModel)
+        public ConfrontoDipendenteMaster()
         {
+            //BindingErrorListener.Listen(m => MessageBox.Show(m));
             InitializeComponent();
-            this.DataContext = viewModel;
         }
     }
 }

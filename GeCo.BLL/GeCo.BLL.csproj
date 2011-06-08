@@ -71,9 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgoritmoRicerca\Common.cs" />
+    <Compile Include="AlgoritmoRicerca\IAlgoritmoRicerca.cs" />
     <Compile Include="AlgoritmoRicerca\Punteggi.cs" />
     <Compile Include="AlgoritmoRicerca\RicercaAnagraficaDaFigura.cs" />
-    <Compile Include="AlgoritmoRicerca\RicercaFiguraDaAnagrafica.cs" />
+    <Compile Include="AlgoritmoRicerca\RicercaRuoloDaAnagrafica.cs" />
     <Compile Include="AlgoritmoRicerca\RisultatoRicerca.cs" />
     <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
@@ -82,12 +83,14 @@
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DbAdmin.cs" />
-    <Compile Include="Services\DipendentiServices.cs" />
+    <Compile Include="Services\Impl\DbAdmin.cs" />
+    <Compile Include="Services\Impl\DipendentiServices.cs" />
     <Compile Include="Services\IDbAdmin.cs" />
     <Compile Include="Services\IDipendentiServices.cs" />
+    <Compile Include="Services\Impl\RicercaServices.cs" />
+    <Compile Include="Services\IRicercaServices.cs" />
     <Compile Include="Services\IRuoliServices.cs" />
-    <Compile Include="Services\RuoliServices.cs" />
+    <Compile Include="Services\Impl\RuoliServices.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

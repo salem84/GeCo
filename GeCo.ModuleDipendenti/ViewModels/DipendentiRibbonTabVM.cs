@@ -7,6 +7,9 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Prism.Events;
+using GeCo.Infrastructure.Events;
+using GeCo.Infrastructure.Workspace;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -18,15 +21,13 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public ICommand NuovoDipendenteCommand { get; private set; }
         public ICommand CercaDipendenteCommand { get; private set; }
 
-        private DipendentiWorkspaceContainerVM workspaceContainer;
-
         /// <summary>
         /// Costruttore
         /// </summary>
         /// <param name="workspaceContainer">viene passato dal container (è un singleton definito nell'init del modulo)</param>
-        public DipendentiRibbonTabVM(DipendentiWorkspaceContainerVM workspaceContainer)
+        public DipendentiRibbonTabVM()
         {
-            this.workspaceContainer = workspaceContainer;
+            //this.workspaceContainer = workspaceContainer;
             InitializeCommands();
         }
 
@@ -39,8 +40,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private void CreaTabRicercaDipendenti()
         {
             var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaDipendentiViewModel>();
-            
-            workspaceContainer.AggiungiPannello(ricercaVM);
+
+            PubblicaEvento(ricercaVM);
         }
 
         private void CreaTabNuovoDipendente()
@@ -49,7 +50,16 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Se lo faccio caricare al IoC mi crea il VM con il costruttore con più parametri
             var nuovoVM = new DipendenteViewModel();
 
-            workspaceContainer.AggiungiPannello(nuovoVM);
+            PubblicaEvento(nuovoVM);
+        }
+
+        private void PubblicaEvento(Workspace workspace)
+        {
+            var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
+            addWorkspaceEvent.Workspace = workspace;
+            addWorkspaceEvent.Container = "ModuleDipendenti";
+            addWorkspaceEvent.Publish(addWorkspaceEvent);
         }
     }
 }
