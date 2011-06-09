@@ -22,6 +22,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         #region PROPRIETA'
 
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         public string RicercaNome { get; set; }
         public string RicercaCognome { get; set; }
         public DateTime? RicercaDataNascita { get; set; }
@@ -67,13 +69,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _workspaceContainer = workspaceContainer;
             _services = services;
 
-            CercaCommand = new RelayCommand(
-                () => Cerca(),
-                () => !string.IsNullOrEmpty(RicercaNome) || !string.IsNullOrEmpty(RicercaCognome) || RicercaDataNascita != null
-                    );
+            CercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaNome) || !string.IsNullOrEmpty(RicercaCognome) || RicercaDataNascita != null);
 
-            DoubleClickCommand = new RelayCommand(
-                () => VisualizzaDettaglioDipendente());
+            DoubleClickCommand = new RelayCommand(VisualizzaDettaglioDipendente);
         }
 
         
@@ -112,8 +110,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void VisualizzaDettaglioDipendente()
         {
-            DipendenteViewModel visualizza = new DipendenteViewModel(SelectedItem);
-            _workspaceContainer.AggiungiPannello(visualizza);
+            DipendenteViewModel dipendenteVM = new DipendenteViewModel(SelectedItem);
+            dipendenteVM.AddToShell();
         }
     }
 

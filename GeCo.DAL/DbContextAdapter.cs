@@ -16,6 +16,8 @@ namespace GeCo.DAL
         public DbContextAdapter(DbContext context)
         {
             _dbContext = context;
+            //_dbContext.Configuration.LazyLoadingEnabled = true;
+            
         }
 
         public void Dispose()

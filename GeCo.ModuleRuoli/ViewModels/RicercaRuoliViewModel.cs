@@ -21,6 +21,8 @@ namespace GeCo.ModuleRuoli.ViewModels
     {
         #region PROPRIETA'
 
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         public string RicercaTitolo { get; set; }
         
         private List<FiguraProfessionale> _risultati;
@@ -61,10 +63,9 @@ namespace GeCo.ModuleRuoli.ViewModels
 
             _services = services;
 
-            CercaCommand = new RelayCommand(
-                () => Cerca(),
-                () => !string.IsNullOrEmpty(RicercaTitolo)
-                    );
+            CercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaTitolo));
+
+            DoubleClickCommand = new RelayCommand(VisualizzaDettaglioRuolo);
         }
 
         protected void Cerca()
@@ -84,6 +85,12 @@ namespace GeCo.ModuleRuoli.ViewModels
             //}
 
             Risultati = _services.GetRuoli(complete).ToList();
+        }
+
+        private void VisualizzaDettaglioRuolo()
+        {
+            RuoloViewModel ruoloVM = new RuoloViewModel(SelectedItem);
+            ruoloVM.AddToShell();
         }
     }
 

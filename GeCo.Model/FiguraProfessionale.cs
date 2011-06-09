@@ -11,7 +11,7 @@ namespace GeCo.Model
     {
         public string Titolo { get; set; }
         public string Descrizione { get; set; }
-        public Area Area { get; set; }
+        public virtual Area Area { get; set; }
         
         //public int IndiceTotale
         //{

@@ -97,11 +97,12 @@ namespace GeCo.BLL.Services
         public Dipendente CaricaDipendente(int id)
         {
             //TODO attenzione ritorna proxy
-           var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
-            var result = repos.Include(a => a.Conoscenze.Select(c => c.Competenza))
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
+            /*var result = repos.Include(a => a.Conoscenze.Select(c => c.Competenza))
                     .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
                     .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
-                    .SingleOrDefault(a => a.Id == id);
+                    .SingleOrDefault(a => a.Id == id);*/
+            var result = repos.SingleOrDefault(a => a.Id == id);
 
             return result;
         }

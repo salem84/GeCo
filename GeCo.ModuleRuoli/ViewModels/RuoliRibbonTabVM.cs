@@ -40,7 +40,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         {
             var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaRuoliViewModel>();
             
-            PubblicaEvento(ricercaVM);
+            ricercaVM.AddToShell();
         }
 
         private void CreaTabNuovoRuolo()
@@ -49,16 +49,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             //Se lo faccio caricare al IoC mi crea il VM con il costruttore con più parametri
             var nuovoVM = new RuoloViewModel();
 
-            PubblicaEvento(nuovoVM);
-        }
-
-        private void PubblicaEvento(Workspace workspace)
-        {
-            var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-            var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
-            addWorkspaceEvent.Workspace = workspace;
-            addWorkspaceEvent.Container = "ModuleDipendenti";
-            addWorkspaceEvent.Publish(addWorkspaceEvent);
+            nuovoVM.AddToShell();
         }
     }
 }

@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Converters\ModelConverters.cs" />
     <Compile Include="ModuleDipendenti.cs" />
+    <Compile Include="Names.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DipendenteViewModel.cs" />
     <Compile Include="ViewModels\DipendentiRibbonTabVM.cs" />
@@ -153,16 +154,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\LargeIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\SmallIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Views\Images\Actions-contact-new-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\Actions-edit-find-user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\16_em_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

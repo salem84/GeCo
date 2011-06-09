@@ -11,6 +11,8 @@ namespace GeCo.ModuleRuoli.ViewModels
 {
     public class RuoliWorkspaceContainerVM : WorkspaceContainer
     {
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         public RuoliWorkspaceContainerVM()
         {
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();

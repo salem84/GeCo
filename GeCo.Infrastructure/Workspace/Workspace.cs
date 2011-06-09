@@ -7,10 +7,13 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using GeCo.Infrastructure.ClientFacade;
 using System.Windows.Threading;
+using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Prism.Events;
+using GeCo.Infrastructure.Events;
 
 namespace GeCo.Infrastructure.Workspace
 {
-    public class Workspace : ViewModelBase
+    public abstract class Workspace : ViewModelBase
     {
         #region Fields
 
@@ -54,7 +57,9 @@ namespace GeCo.Infrastructure.Workspace
                 }
             }
         }
-        
+
+
+        protected abstract string containerName { get; }
 
         #endregion // Fields
 
@@ -225,5 +230,18 @@ namespace GeCo.Infrastructure.Workspace
         }
 
         #endregion
+
+
+        /// <summary>
+        /// Pubblica un evento intercettato dalla shell, per aggiungere un TAB
+        /// </summary>
+        public void AddToShell()
+        {
+            var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
+            var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
+            addWorkspaceEvent.Workspace = this;
+            addWorkspaceEvent.Container = containerName;
+            addWorkspaceEvent.Publish(addWorkspaceEvent);
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace GeCo.ModuleRuoli.ViewModels
     {
         #region PROPRIETA'
 
-        
+        protected override string containerName { get { return Names.MODULE_NAME; } }        
 
         private string _macroGruppoSelected;
         public string MacroGruppoSelected
@@ -39,14 +39,14 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
-        private FiguraProfessionale _figuraProfessionale;
-        public FiguraProfessionale FiguraProfessionale 
+        private FiguraProfessionale _ruolo;
+        public FiguraProfessionale Ruolo 
         {
-            get { return _figuraProfessionale; }
+            get { return _ruolo; }
             set 
             {
-                _figuraProfessionale = value;
-                RaisePropertyChanged("FiguraProfessionale");
+                _ruolo = value;
+                RaisePropertyChanged("Ruolo");
                 UpdateConoscenzeGroup();    
             }
         }
@@ -104,7 +104,7 @@ namespace GeCo.ModuleRuoli.ViewModels
                 if (MacroGruppoSelected != null)
                 {
                     IEnumerable<Competenza> tutteMacrogruppo = CompetenzeTotali.Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
-                    IEnumerable<Competenza> competenzePresenti = FiguraProfessionale.Conoscenze.Select(c => c.Competenza).Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
+                    IEnumerable<Competenza> competenzePresenti = Ruolo.Conoscenze.Select(c => c.Competenza).Where(c => c.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected);
                     IEnumerable<Competenza> rimanenti = tutteMacrogruppo.Except(competenzePresenti, c => c.Id);
 
                     return rimanenti;
@@ -146,14 +146,9 @@ namespace GeCo.ModuleRuoli.ViewModels
             {
                 if (_salvaCommand == null)
                 {
-                    _salvaCommand = new RelayCommand(() =>
-                    {
-                        Stato = "Salvataggio in corso";
-                        SalvaFigura();
-                        Stato = "Salvato";
-                    },
+                    _salvaCommand = new RelayCommand(SalvaRuolo,
                         //Abilitato
-                    () => FiguraProfessionale != null && !string.IsNullOrEmpty(FiguraProfessionale.Titolo)
+                    () => Ruolo != null && !string.IsNullOrEmpty(Ruolo.Titolo)
                     );
                 }
                 return _salvaCommand; 
@@ -167,16 +162,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             {
                 if (_deleteCommand == null)
                 {
-                    _deleteCommand = new RelayCommand(() =>
-                    {
-                        Stato = "Cancellazione in corso";
-                        //using (PavimentalContext context = new PavimentalContext())
-                            CancellaFiguraProfessionale(FiguraProfessionale);
-                        Stato = "Cancellato";
-                    },
-                        //Abilitato
-                    () => EditMode
-                    );
+                    _deleteCommand = new RelayCommand(CancellaRuolo, () => EditMode);
                 }
                 return _deleteCommand; 
             }
@@ -204,31 +190,31 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         #endregion
 
-        private int _figuraProfessionaleId;
+        private int _ruoloId;
 
         //Non posso inizializzarlo nel costruttore
-        public Action<FiguraProfessionale> RicercaDipendentePerFigura
-        {
-            set { ConfrontaCommand = new RelayCommand(() => value(FiguraProfessionale)); }
-        }
+        //public Action<FiguraProfessionale> RicercaDipendentePerFigura
+        //{
+        //    set { ConfrontaCommand = new RelayCommand(() => value(Ruolo)); }
+        //}
 
         public RuoloViewModel()
         {
             DisplayTabName = "Nuovo";
-            StartBackgroundAutoProgress(CreaNuovaFiguraProfessionale);
+            StartBackgroundAutoProgress(CreaNuovoRuolo);
             EditMode = false;
         }
 
         public RuoloViewModel(FiguraProfessionale figuraProf)
         {
             DisplayTabName = "Modifica";
-            _figuraProfessionaleId = figuraProf.Id;
-            StartBackgroundAutoProgress(LoadFigura);
+            _ruoloId = figuraProf.Id;
+            StartBackgroundAutoProgress(LoadRuoloBackground);
             EditMode = true;
         }
 
         //private void LoadDipendente(int dipendenteId)
-        private void LoadFigura()
+        private void LoadRuoloBackground()
         {
             //Nella ricerca non carico le proprietà correlate, quindi devo effettuare la query su DB,
             //per ricaricare tutto
@@ -241,10 +227,10 @@ namespace GeCo.ModuleRuoli.ViewModels
             //}
 
             var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
-            FiguraProfessionale = service.CaricaRuolo(_figuraProfessionaleId);
+            Ruolo = service.CaricaRuolo(_ruoloId);
 
             //Può essere null magari perchè ho cancellato quell'entità ed è rimasta aperta la scheda
-            if (FiguraProfessionale == null)
+            if (Ruolo == null)
             {
                 //TODO
                 Stato = "Figura professionale non trovata";
@@ -259,7 +245,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
 
 
-        private void SalvaFigura()
+        private void SalvaRuolo()
         {
             //Ricreo l'oggetto
             //FiguraProfessionale fig = new FiguraProfessionale();
@@ -295,15 +281,20 @@ namespace GeCo.ModuleRuoli.ViewModels
             //_figuraProfessionaleId = fig.Id;
             //LoadFigura();
 
-            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
-            var result = service.SalvaRuolo(FiguraProfessionale);
+            Stato = "Salvataggio in corso";
 
-            FiguraProfessionale = result;
+            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            var result = service.SalvaRuolo(Ruolo);
+
+            Ruolo = result;
 
             EditMode = true;
+
+            Stato = "Salvato";
+
         }
 
-        private void CancellaFiguraProfessionale(FiguraProfessionale figura)
+        private void CancellaRuolo()
         {
             /*
             
@@ -330,13 +321,16 @@ namespace GeCo.ModuleRuoli.ViewModels
 
             //context.SaveChanges();
 
-            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
-            service.EliminaRuolo(figura.Id);
+            Stato = "Cancellazione in corso";
 
+            var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            service.EliminaRuolo(Ruolo.Id);
+
+            Stato = "Cancellato";
         }
 
 
-        private void CreaNuovaFiguraProfessionale()
+        private void CreaNuovoRuolo()
         {
             /*using (PavimentalContext context = new PavimentalContext())
             {
@@ -357,7 +351,15 @@ namespace GeCo.ModuleRuoli.ViewModels
                 
             }*/
 
-            FiguraProfessionale = new FiguraProfessionale();
+            Ruolo = new FiguraProfessionale();
+        }
+
+        private void AvviaConfronto()
+        {
+            //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
+            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoRuoloVM>();
+            confrontoMaster.Ruolo = Ruolo;
+            confrontoMaster.AddToShell();
         }
 
 
@@ -366,7 +368,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         /// </summary>
         private void UpdateConoscenzeGroup()
         {
-            var conoscenzeList = FiguraProfessionale.Conoscenze.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected).OrderBy(c => c.CompetenzaId);
+            var conoscenzeList = Ruolo.Conoscenze.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == MacroGruppoSelected).OrderBy(c => c.CompetenzaId);
             ConoscenzePerTipologia = CollectionViewSource.GetDefaultView(conoscenzeList);
             ConoscenzePerTipologia.GroupDescriptions.Add(new PropertyGroupDescription()
             {
@@ -388,7 +390,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
             //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 
-            FiguraProfessionale.Conoscenze.Add(new ConoscenzaCompetenza()
+            Ruolo.Conoscenze.Add(new ConoscenzaCompetenza()
             {
                 Competenza = CompetenzaDisponibileSelezionata,
                 //LivelloConoscenza = livelloNullo

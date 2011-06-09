@@ -13,7 +13,7 @@ namespace GeCo.Infrastructure.Workspace
     /// <summary>
     /// ViewModel del contenitore di Workspaces, contiene le operazioni di gestione della collection di Workspace
     /// </summary>
-    public class WorkspaceContainer : Workspace
+    public abstract class WorkspaceContainer : Workspace
     {
         /// <summary>
         /// Returns the collection of available workspaces to display.

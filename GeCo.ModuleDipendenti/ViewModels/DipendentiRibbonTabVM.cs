@@ -41,7 +41,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaDipendentiViewModel>();
 
-            PubblicaEvento(ricercaVM);
+            ricercaVM.AddToShell();
         }
 
         private void CreaTabNuovoDipendente()
@@ -50,16 +50,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Se lo faccio caricare al IoC mi crea il VM con il costruttore con più parametri
             var nuovoVM = new DipendenteViewModel();
 
-            PubblicaEvento(nuovoVM);
+            nuovoVM.AddToShell();
         }
 
-        private void PubblicaEvento(Workspace workspace)
-        {
-            var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-            var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
-            addWorkspaceEvent.Workspace = workspace;
-            addWorkspaceEvent.Container = "ModuleDipendenti";
-            addWorkspaceEvent.Publish(addWorkspaceEvent);
-        }
+        
     }
 }

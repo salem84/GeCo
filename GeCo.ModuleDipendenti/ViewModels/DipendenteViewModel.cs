@@ -25,6 +25,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         #region PROPRIETA'
 
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         /// <summary>
         /// Macrogruppo selezionato nella combobox (Tecniche, Comportamentali, HR)
         /// </summary>
@@ -162,12 +164,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 if (_salvaCommand == null)
                 {
-                    _salvaCommand = new RelayCommand(() =>
-                    {
-                        Stato = "Salvataggio in corso";
-                        SalvaDipendente();
-                        Stato = "Salvato";
-                    },
+                    _salvaCommand = new RelayCommand(SalvaDipendente,
                         //Abilitato
                     () => Dipendente != null && !string.IsNullOrEmpty(Dipendente.Nome) && !string.IsNullOrEmpty(Dipendente.Cognome) 
                     );
@@ -183,24 +180,25 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 if (_deleteCommand == null)
                 {
-                    _deleteCommand = new RelayCommand(() =>
-                    {
-                        Stato = "Cancellazione in corso";
-                        //using (PavimentalContext context = new PavimentalContext())
-                         //   CancellaDipendente(context, Dipendente);
-                        CancellaDipendente(Dipendente);
-                        Stato = "Cancellato";
-                    },
-                        //Abilitato se sto in modifica
-                    () => EditMode
-                    );
+                    //Abilitato se sto in modifica
+                    _deleteCommand = new RelayCommand(CancellaDipendente, () => EditMode);
                 }
                 return _deleteCommand;
             }
         }
 
-        
-        public ICommand ConfrontaCommand { get; set; }
+        private ICommand _confrontaCommand;
+        public ICommand ConfrontaCommand
+        {
+            get
+            {
+                if (_confrontaCommand == null)
+                {
+                    _confrontaCommand = new RelayCommand(AvviaConfronto);
+                }
+                return _confrontaCommand;
+            }
+        }
 
         //E' legato al button che permette di aggiungere una competenza disponibile alle competenze del dipendente
         private ICommand _aggiungiCompetenzaCommand;
@@ -210,11 +208,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 if (_aggiungiCompetenzaCommand == null)
                 {
-                    _aggiungiCompetenzaCommand = new RelayCommand(() =>
-                    {
-                        AggiungiCompetenza();
-                    }
-                    );
+                    _aggiungiCompetenzaCommand = new RelayCommand(AggiungiCompetenza);
                 }
                 return _aggiungiCompetenzaCommand;
             }
@@ -224,12 +218,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private int _dipendenteId;
 
-        //Inizializzo il comando quando gli configuro l'Action
-        public Action<Dipendente> RicercaFiguraPerDipendente
-        { 
-            set { ConfrontaCommand = new RelayCommand(() => value(Dipendente)); }
-        }
-
+        
         /// <summary>
         /// Costruttore senza parametri per la creazione di un nuovo dipendente
         /// </summary>
@@ -287,45 +276,35 @@ namespace GeCo.ModuleDipendenti.ViewModels
         /// </summary>
         private void SalvaDipendente()
         {
-            //UoW
-
-            //Ricarico
-            //Mi torna dipendente
+            Stato = "Salvataggio in corso";
+                        
             var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             var result = service.SalvaDipendente(Dipendente);
 
             Dipendente = result;
 
-
             EditMode = true;
+
+            Stato = "Salvato";
         }
 
-        private void CancellaDipendente(Dipendente dipendente)
+
+        private void AvviaConfronto()
         {
+            //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
+            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoDipendenteMasterVM>();
+            confrontoMaster.Dipendente = Dipendente;
+            confrontoMaster.AddToShell();
+        }
+
+        private void CancellaDipendente()
+        {
+            Stato = "Cancellazione in corso";
             
-                /*foreach (var c in dipendente.Conoscenze)
-                {
-                    ConoscenzaCompetenza con = new ConoscenzaCompetenza() { Id = c.Id };
-                    context.ConoscenzaCompetenze.Attach(con);
-                    context.ConoscenzaCompetenze.Remove(con);
-                }
-                context.SaveChanges();
-
-                Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
-                context.Dipendenti.Attach(dipToRemove);
-                context.Dipendenti.Remove(dipToRemove);
-
-                context.SaveChanges();*/
-
-
-            //Dipendente dipToRemove = new Dipendente() { Id = dipendente.Id };
-            //context.Dipendenti.Attach(dipToRemove);
-            //context.Dipendenti.Remove(dipToRemove);
-
-            //context.SaveChanges();
-
             var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-            service.EliminaDipendente(dipendente.Id);
+            service.EliminaDipendente(Dipendente.Id);
+
+            Stato = "Cancellato";
         }
 
 
@@ -373,9 +352,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            //using (PavimentalContext context = new PavimentalContext())
-            //{
-
             var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
                 //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
@@ -390,8 +366,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
                 UpdateConoscenzeGroup();
-            //}
         }
+
+        
     }
 
 }

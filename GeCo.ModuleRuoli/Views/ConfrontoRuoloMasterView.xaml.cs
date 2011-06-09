@@ -12,16 +12,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GeCo.ModuleDipendenti.Views
+namespace GeCo.ModuleRuoli.Views
 {
     /// <summary>
-    /// Interaction logic for RisultatiRicercaView.xaml
+    /// Interaction logic for RisultatiDipendentePerFiguraView.xaml
     /// </summary>
-    public partial class ConfrontoDipendenteMaster : UserControl
+    public partial class ConfrontoRuoloMasterView : UserControl
     {
-        public ConfrontoDipendenteMaster()
+        public ConfrontoRuoloMasterView()
         {
-            //BindingErrorListener.Listen(m => MessageBox.Show(m));
             InitializeComponent();
         }
     }

@@ -10,12 +10,14 @@ using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
 using GeCo.BLL.Services;
 
-namespace GeCo.ViewModel
+namespace GeCo.ModuleDipendenti.ViewModels
 {
     //Agganciato alla vista VisualizzaDipendente per effettuare la ricerca
     //delle figure professionali a partire da un dipendente
     public class ConfrontoDipendenteMasterVM : Workspace
     {
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         private IEnumerable<RisultatoRicerca> _risultati;
         public IEnumerable<RisultatoRicerca> Risultati
         {
@@ -50,14 +52,14 @@ namespace GeCo.ViewModel
         private int FigureProfessionaliTotali { get; set; }
         private int FigureProfessionaliAnalizzate { get; set; }
 
-        private IDipendentiServices _dipendentiService;
+        private IDipendentiServices _dipendentiServices;
         private IRicercaServices _ricercaServices;
 
         public ConfrontoDipendenteMasterVM(IDipendentiServices dipServices, IRicercaServices ricercaServices)
         {
             DisplayTabName = "Sostituti";
 
-            _dipendentiService = dipServices;
+            _dipendentiServices = dipServices;
             _ricercaServices = ricercaServices;
 
             /*//Sta arrivando un oggetto con solo l'ID
@@ -88,7 +90,7 @@ namespace GeCo.ViewModel
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici
             if (Dipendente.Id == 0)
             {
-                var livelliConoscenza = _dipendentiService.GetLivelliConoscenza();
+                var livelliConoscenza = _dipendentiServices.GetLivelliConoscenza();
                 
                 foreach (var c in Dipendente.Conoscenze)
                 {

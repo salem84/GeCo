@@ -12,6 +12,6 @@ namespace GeCo.Model
         public string Descrizione { get; set; }
         public int Peso { get; set; }
         public int TipologiaCompetenzaId { get; set; }
-        public TipologiaCompetenza TipologiaCompetenza { get; set; }
+        public virtual TipologiaCompetenza TipologiaCompetenza { get; set; }
     }
 }

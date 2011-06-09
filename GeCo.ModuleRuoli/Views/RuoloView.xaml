@@ -108,7 +108,7 @@
         </StackPanel>
 
         <!-- Lato sinistro alto contenente le informazioni sul ruolo (titolo, descrizione) -->
-        <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=FiguraProfessionale}">
+        <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=Ruolo}">
         	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Titolo" VerticalAlignment="Center"/>
         	<TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Titolo, UpdateSourceTrigger=PropertyChanged}"/>
         	<TextBlock TextWrapping="Wrap" Text="Descrizione" VerticalAlignment="Center" HorizontalAlignment="Center"/>

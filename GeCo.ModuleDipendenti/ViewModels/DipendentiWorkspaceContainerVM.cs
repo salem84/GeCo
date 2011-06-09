@@ -11,6 +11,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
 {
     public class DipendentiWorkspaceContainerVM : WorkspaceContainer
     {
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+
         public DipendentiWorkspaceContainerVM()
         {
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
