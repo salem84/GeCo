@@ -85,7 +85,8 @@ namespace GeCo.ModuleRuoli.ViewModels
             //Carico i parametri da visualizzare
             ParametriConfronto = new
             {
-                PMAX_Hr = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR),
+                PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI),
+                PMAX_HrComportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_COMPORTAMENTALI),
                 PMAX_Comportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_COMPORTAMENTALI),
                 PMAX_TecnStrategicSupport = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_STRATEGIC),
                 PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE),
@@ -132,7 +133,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             var tempRes = _ricercaServices.CercaDipendenteDaRuolo(Ruolo);
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
-            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenBy(r => r.PercentualeTotale);
+            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);
         }
 
         protected void AggiornaProgress()

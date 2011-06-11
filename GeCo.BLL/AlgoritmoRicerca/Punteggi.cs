@@ -11,6 +11,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
         public int TecnCompetitiveAdv { get; set; }
         public int TecnFoundational { get; set; }
         public int Comportamentali { get; set; }
-        public int HR { get; set; }
+        public int HrDiscrezionali { get; set; }
+        public int HrComportamentali { get; set; }
     }
 }

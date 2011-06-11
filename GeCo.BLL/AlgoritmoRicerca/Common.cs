@@ -10,30 +10,51 @@ namespace GeCo.BLL.AlgoritmoRicerca
 {
     public class Common
     {
+        /// <summary>
+        /// Funzione generica per il calcolo della conoscenza delle competenze (raggruppo e sommo i punteggi)
+        /// </summary>
+        /// <param name="Conoscenze"></param>
+        /// <returns></returns>
         public static Punteggi CalcolaPunteggi(ICollection<ConoscenzaCompetenza> Conoscenze)
         {
             Punteggi punteggio = new Punteggi();
             IEnumerable<ConoscenzaCompetenza> conoscenzeFiltrate;
 
-            //Calcolo i punteggi osservati per il dipendente in esame
-            conoscenzeFiltrate = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.MG_HR);
-            punteggio.HR = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
+            #region HR
+            IEnumerable<ConoscenzaCompetenza> compHr = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_HR);
+                        
+            conoscenzeFiltrate = compHr.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI);
+            punteggio.HrDiscrezionali = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
-            conoscenzeFiltrate = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.MG_COMPORTAMENTALE);
+            conoscenzeFiltrate = compHr.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.HR_COMPORTAMENTALI);
+            punteggio.HrComportamentali = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
+
+            #endregion
+
+            #region COMPORTAMENTALI
+
+            conoscenzeFiltrate = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_COMPORTAMENTALE);
             punteggio.Comportamentali = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
+            #endregion
+
+            #region TECNICHE
+
             //Prendo le competenze Tecniche
-            IEnumerable<ConoscenzaCompetenza> compTecniche = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.MG_TECNICO);
+            IEnumerable<ConoscenzaCompetenza> compTecniche = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO);
 
             //Calcolo i punteggi osservati delle tre componenti tecniche 
-            conoscenzeFiltrate = compTecniche.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.COMPETITIVE_ADVANTAGE);
+            conoscenzeFiltrate = compTecniche.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.T_COMPETITIVE_ADVANTAGE);
             punteggio.TecnCompetitiveAdv = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
-            conoscenzeFiltrate = compTecniche.Where(c => c.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.STRATEGIC_SUPPORT);
+            conoscenzeFiltrate = compTecniche.Where(c => c.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.T_STRATEGIC_SUPPORT);
             punteggio.TecnStrategicSupport = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
-            conoscenzeFiltrate = compTecniche.Where(c => c.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.FOUNDATIONAL);
+            conoscenzeFiltrate = compTecniche.Where(c => c.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.T_FOUNDATIONAL);
             punteggio.TecnFoundational = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
+
+            #endregion
+
 
             return punteggio;
         }

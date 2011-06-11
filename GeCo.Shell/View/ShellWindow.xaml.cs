@@ -32,14 +32,16 @@ namespace GeCo.Shell.Views
 
         private void btnInizializza_Click(object sender, RoutedEventArgs e)
         {
-            /*var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
             container.RegisterType<IDbAdmin, DbAdmin>();
             var dbAdmin = container.Resolve<IDbAdmin>();
-            dbAdmin.InizializzaDb();*/
-            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+            dbAdmin.InizializzaDb();
+            
+            
+            
             container.RegisterType<IDipendentiServices, DipendentiServices>();
-            var dbAdmin = container.Resolve<IDipendentiServices>();
-            var d = dbAdmin.CaricaDipendente(8);
+            var dipServices = container.Resolve<IDipendentiServices>();
+            var d = dipServices.CaricaDipendente(8);
 
         }
     }

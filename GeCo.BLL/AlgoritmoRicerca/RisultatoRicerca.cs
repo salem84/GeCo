@@ -23,7 +23,8 @@ namespace GeCo.BLL.AlgoritmoRicerca
         public int PMAX_TecnStrategicSupport { get; set; }
         public int PMAX_TecnCompetitiveAdv { get; set; }
         public int PMAX_Comportamentali { get; set; }
-        public int PMAX_Hr { get; set; }
+        public int PMAX_HrDiscrezionali { get; set; }
+        public int PMAX_HrComportamentali { get; set; }
 
         #endregion
 
@@ -52,21 +53,37 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
         #region PERCENTUALI HR - COMPORTAMENTALI - TECNICHE STRATEGIC - TECNICHE COMPETITIVE
         
-        public float PercentualeHR
+        public float PunteggioHrDiscrezionali
         {
             get
             {
                 if (Idoneo || DEBUG)
                 {
-                    if(PunteggioAtteso.HR != 0)
-                        return (float)PunteggioOsservato.HR / PunteggioAtteso.HR * PMAX_Hr;
+                    if(PunteggioAtteso.HrDiscrezionali != 0)
+                        return (float)PunteggioOsservato.HrDiscrezionali / PunteggioAtteso.HrDiscrezionali * PMAX_HrDiscrezionali;
                 }
                 
                 return 0;
             }
         }
 
-        public float PercentualeComportamentali
+
+        public float PunteggioHrComportamentali
+        {
+            get
+            {
+                if (Idoneo || DEBUG)
+                {
+                    if (PunteggioAtteso.HrComportamentali != 0)
+                        return (float)PunteggioOsservato.HrComportamentali / PunteggioAtteso.HrComportamentali * PMAX_HrComportamentali;
+                }
+
+                return 0;
+            }
+        }
+
+
+        public float PunteggioComportamentali
         {
             get
             {
@@ -80,7 +97,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
             }
         }
 
-        public float PercentualeTecnStrategic
+        public float PunteggioTecnStrategic
         {
             get
             {
@@ -94,7 +111,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
             }
         }
 
-        public float PercentualeTecnCompetitiveAdv
+        public float PunteggioTecnCompetitiveAdv
         {
             get
             {
@@ -108,9 +125,9 @@ namespace GeCo.BLL.AlgoritmoRicerca
             }
         }
 
-        public float PercentualeTotale
+        public float PunteggioTotale
         {
-            get { return PercentualeHR + PercentualeComportamentali + PercentualeTecnStrategic + PercentualeTecnCompetitiveAdv; }
+            get { return PunteggioHrDiscrezionali + PunteggioComportamentali + PunteggioTecnStrategic + PunteggioTecnCompetitiveAdv; }
         }
 
         #endregion //PERCENTUALI

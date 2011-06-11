@@ -73,13 +73,13 @@
     <Compile Include="AlgoritmoRicerca\Common.cs" />
     <Compile Include="AlgoritmoRicerca\IAlgoritmoRicerca.cs" />
     <Compile Include="AlgoritmoRicerca\Punteggi.cs" />
-    <Compile Include="AlgoritmoRicerca\RicercaAnagraficaDaFigura.cs" />
-    <Compile Include="AlgoritmoRicerca\RicercaRuoloDaAnagrafica.cs" />
+    <Compile Include="AlgoritmoRicerca\RicercaDipendentiDaRuolo.cs" />
+    <Compile Include="AlgoritmoRicerca\RicercaRuoliDaDipendente.cs" />
     <Compile Include="AlgoritmoRicerca\RisultatoRicerca.cs" />
     <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
     <Compile Include="Dati\FigureDefault.cs" />
-    <Compile Include="InitializeDB.cs" />
+    <Compile Include="Dati\InitializeDB.cs" />
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

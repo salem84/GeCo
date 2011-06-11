@@ -27,14 +27,5 @@ namespace GeCo.ModuleDipendenti.Views
             InitializeComponent();
             this.DataContext = viewModel;
         }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            string a = "";
-            var  ba = header.Content;
-
-            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            var vm = container.Resolve<DipendentiWorkspaceContainerVM>();
-        }
     }
 }

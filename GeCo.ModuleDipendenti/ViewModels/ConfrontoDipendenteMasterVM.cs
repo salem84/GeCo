@@ -9,6 +9,7 @@ using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
 using GeCo.BLL.Services;
+using Microsoft.Practices.ServiceLocation;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -61,6 +62,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
             _dipendentiServices = dipServices;
             _ricercaServices = ricercaServices;
+           // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();
+
 
             /*//Sta arrivando un oggetto con solo l'ID
             if (dipendente.Conoscenze.Count == 0) non mi arriva mai
@@ -113,7 +117,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Carico i parametri da visualizzare
             ParametriConfronto = new
             {
-                PMAX_Hr = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR),
+                PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI),
+                PMAX_HrComportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_COMPORTAMENTALI),
                 PMAX_Comportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_COMPORTAMENTALI),
                 PMAX_TecnStrategicSupport = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_STRATEGIC),
                 PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE),
@@ -128,7 +133,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             var tempRes = _ricercaServices.CercaRuoloDaDipendente(Dipendente);
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
-            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenBy(r => r.PercentualeTotale);
+            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);
         }
 
         protected void AggiornaProgress()

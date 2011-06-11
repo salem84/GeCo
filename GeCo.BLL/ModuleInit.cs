@@ -25,8 +25,8 @@ namespace GeCo.BLL
             this.container.RegisterType<IRuoliServices, RuoliServices>();
             this.container.RegisterType<IRicercaServices, RicercaServices>();
 
-            this.container.RegisterType<IAlgoritmoRicerca, RicercaAnagraficaDaFigura>("RicercaDipendenteDaRuolo");
-            this.container.RegisterType<IAlgoritmoRicerca, RicercaRuoloDaAnagrafica>("RicercaRuoloDaDipendente");
+            this.container.RegisterType<IAlgoritmoRicerca, RicercaDipendentiDaRuolo>("RicercaDipendenteDaRuolo");
+            this.container.RegisterType<IAlgoritmoRicerca, RicercaRuoliDaDipendente>("RicercaRuoloDaDipendente");
 
 
             var cnxString = @"Data Source=.\SQLEXPRESS;Initial Catalog=GeCo.DAL.PavimentalContext;Integrated Security=True";

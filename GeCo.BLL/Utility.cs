@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using GeCo.DAL;
 using GeCo.Model;
+using Microsoft.Practices.ServiceLocation;
+using GeCo.Infrastructure;
 
 namespace GeCo.Utility
 {
@@ -11,26 +13,18 @@ namespace GeCo.Utility
     {
         public static string GetParamValueStr(string nome)
         {
-            using(PavimentalContext context = new PavimentalContext())
-            {
-                Parametro param = context.Parametri.Find(nome);
-                if(param != null)
-                    return param.Valore;
-                else
-                    return null;
-            }
+            var paramRepos = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
+
+            Parametro param = paramRepos.SingleOrDefault(p => p.Nome == nome);
+
+            return param != null ? param.Valore : null;
+            
         }
 
         public static int GetParamValueInt(string nome)
         {
-            using (PavimentalContext context = new PavimentalContext())
-            {
-                Parametro param = context.Parametri.Find(nome);
-                if (param != null)
-                    return Convert.ToInt32(param.Valore);
-                else
-                    return 0;
-            }
+            string value = GetParamValueStr(nome);
+            return value != null ? Convert.ToInt32(value) : 0;
         }
     }
 }

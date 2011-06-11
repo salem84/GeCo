@@ -7,10 +7,15 @@ namespace GeCo.Infrastructure
 {
     public class Tipologiche
     {
-        //Macrogruppi
-        public const string MG_HR = "HR";
-        public const string MG_COMPORTAMENTALE = "COMPORTAMENTALE";
-        public const string MG_TECNICO = "TECNICO";
+        /// <summary>
+        /// Macrogruppi
+        /// </summary>
+        public class Macrogruppi
+        {
+            public const string MG_HR = "HR";
+            public const string MG_COMPORTAMENTALE = "COMPORTAMENTALE";
+            public const string MG_TECNICO = "TECNICO";
+        }
 
         /// <summary>
         /// TIPOLOGIE COMPETENZE
@@ -18,19 +23,19 @@ namespace GeCo.Infrastructure
         public class TipologiaCompetenza
         {
             //Tecniche 
-            public const string FOUNDATIONAL = "Foundational";
-            public const string STRATEGIC_SUPPORT = "Strategic Support";
-            public const string COMPETITIVE_ADVANTAGE = "Competitive Advantage";
+            public const string T_FOUNDATIONAL = "Foundational";
+            public const string T_STRATEGIC_SUPPORT = "Strategic Support";
+            public const string T_COMPETITIVE_ADVANTAGE = "Competitive Advantage";
 
             //Comportamentali
-            public const string MANAGERIALI = "Manageriali";
-            public const string RELAZIONALI = "Relazionali";
-            public const string COGNITIVE = "Cognitive";
-            public const string REALIZZATIVE = "Realizzative";
+            public const string C_MANAGERIALI = "Manageriali";
+            public const string C_RELAZIONALI = "Relazionali";
+            public const string C_COGNITIVE = "Cognitive";
+            public const string C_REALIZZATIVE = "Realizzative";
 
             //HR
-            public const string ASSESSMENT = "Assessment";
-            public const string CONSIDERAZIONI_GESTIONALI = "Considerazioni Gestionali";
+            public const string HR_DISCREZIONALI = "HR Discrezionali";
+            public const string HR_COMPORTAMENTALI = "HR Comportamentali";
         }
         
 
@@ -51,7 +56,8 @@ namespace GeCo.Infrastructure
         /// </summary>
         public class Parametro
         {
-            public const string PMAX_HR = "PunteggioMaxHR";
+            public const string PMAX_HR_DISCREZIONALI = "PunteggioMaxHrDiscrezionali";
+            public const string PMAX_HR_COMPORTAMENTALI = "PunteggioMaxHrComportamentali";
             public const string PMAX_COMPORTAMENTALI = "PunteggioMaxComportamentali";
             public const string PMAX_TECN_STRATEGIC = "PunteggioMaxTecnStrategic";
             public const string PMAX_TECN_COMPETITIVE = "PunteggioMaxTecnCompetitive";

@@ -127,9 +127,9 @@ namespace GeCo.ModuleRuoli.ViewModels
             {
                 return new List<string>()  
                 { 
-                    Tipologiche.MG_HR, 
-                    Tipologiche.MG_COMPORTAMENTALE, 
-                    Tipologiche.MG_TECNICO
+                    Tipologiche.Macrogruppi.MG_HR, 
+                    Tipologiche.Macrogruppi.MG_COMPORTAMENTALE, 
+                    Tipologiche.Macrogruppi.MG_TECNICO
                 };
             }
         }

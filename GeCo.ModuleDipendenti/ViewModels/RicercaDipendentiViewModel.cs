@@ -63,8 +63,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         public RicercaDipendentiViewModel(DipendentiWorkspaceContainerVM workspaceContainer, IDipendentiServices services)
         {
-            //DisplayTabName = "Ricerca Anagrafica";
-            DisplayTabName = DateTime.Now.ToLongTimeString();
+            DisplayTabName = "Ricerca Dipendente";
 
             _workspaceContainer = workspaceContainer;
             _services = services;
