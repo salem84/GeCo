@@ -10,6 +10,7 @@ using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
 using GeCo.BLL.Services;
 using Microsoft.Practices.ServiceLocation;
+using GalaSoft.MvvmLight.Command;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -53,15 +54,74 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private int FigureProfessionaliTotali { get; set; }
         private int FigureProfessionaliAnalizzate { get; set; }
 
+        public RelayCommand DoubleClickCommand { get; set; }
+
+        public RisultatoRicerca RisultatoSelezionato { get; set; }
+
+
+        #region GRAFICO
+        
+        private bool _graficoVisibile;
+        public bool GraficoVisibile
+        {
+            get { return _graficoVisibile; }
+            set
+            {
+                if (_graficoVisibile != value)
+                {
+                    _graficoVisibile = value;
+                    RaisePropertyChanged("GraficoVisibile");
+                }
+            }
+        }
+
+        private List<decimal> _valoriGrafico;
+        public List<decimal> ValoriGrafico
+        {
+            get { return _valoriGrafico; }
+            set
+            {
+                if (_valoriGrafico != value)
+                {
+                    _valoriGrafico = value;
+                    RaisePropertyChanged("ValoriGrafico");
+                }
+            }
+        }
+
+        private List<string> _labelsGrafico;
+        public List<string> LabelsGrafico
+        {
+            get { return _labelsGrafico; }
+            set
+            {
+                if (_labelsGrafico != value)
+                {
+                    _labelsGrafico = value;
+                    RaisePropertyChanged("LabelsGrafico");
+                }
+            }
+        }
+        
+        
+
+        #endregion
+
+
         private IDipendentiServices _dipendentiServices;
         private IRicercaServices _ricercaServices;
+        private IRuoliServices _ruoliServices;
 
-        public ConfrontoDipendenteMasterVM(IDipendentiServices dipServices, IRicercaServices ricercaServices)
+        public ConfrontoDipendenteMasterVM(IDipendentiServices dipServices, IRuoliServices ruoliServices, IRicercaServices ricercaServices)
         {
             DisplayTabName = "Sostituti";
 
             _dipendentiServices = dipServices;
+            _ruoliServices = ruoliServices;
             _ricercaServices = ricercaServices;
+
+            DoubleClickCommand = new RelayCommand(VisualizzaGrafico);
+
            // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();
 
@@ -142,6 +202,23 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //ProgressPercent = FigureProfessionaliAnalizzate / FigureProfessionaliTotali * 100;
             //Stato = string.Format("Completato {0} di {1}", FigureProfessionaliAnalizzate, FigureProfessionaliTotali);
 
+        }
+
+        private void VisualizzaConfrontoDetails()
+        {
+            ConfrontoDipendenteDetailsVM confrontoDetailsVM = new ConfrontoDipendenteDetailsVM();
+
+            FiguraProfessionale ruoloSelezionato = _ruoliServices.CaricaRuolo(RisultatoSelezionato.Id);
+            confrontoDetailsVM.Atteso = ruoloSelezionato;
+            confrontoDetailsVM.Osservato = Dipendente;
+            confrontoDetailsVM.AddToShell();
+        }
+
+        private void VisualizzaGrafico()
+        {
+            LabelsGrafico = new List<string>(new string[] { "A", "B", "C", "D", "E" });
+            ValoriGrafico = new List<decimal>(new decimal[] { 5, 6, 4, 6, 3 });
+            GraficoVisibile = true;
         }
     }
 }

@@ -48,7 +48,11 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ConfrontoDipendenteMasterVM}">
-        <vw:ConfrontoDipendenteMaster />
+        <vw:ConfrontoDipendenteMasterView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ConfrontoDipendenteDetailsVM}">
+        <vw:ConfrontoDipendenteDetailsView />
     </DataTemplate>
 
 </ResourceDictionary>

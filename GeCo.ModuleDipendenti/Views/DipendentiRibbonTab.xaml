@@ -14,4 +14,13 @@
 										 Label="Cerca" Command="{Binding Path=CercaDipendenteCommand}" />
     </ribbon:RibbonGroup>
 
+    <ribbon:RibbonGroup Header="Analisi">
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Confronto" Command="{Binding Path=NuovoDipendenteCommand}" />
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Dettagli" Command="{Binding Path=NuovoDipendenteCommand}" />
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Grafico" Command="{Binding Path=NuovoDipendenteCommand}" />
+    </ribbon:RibbonGroup>
+
 </ribbon:RibbonTab>

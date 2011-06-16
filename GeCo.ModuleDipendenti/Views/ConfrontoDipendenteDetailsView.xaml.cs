@@ -11,17 +11,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace GeCo.ModuleDipendenti.Views
 {
     /// <summary>
-    /// Interaction logic for RisultatiRicercaView.xaml
+    /// Interaction logic for ConfrontoDipendenteDetailsView.xaml
     /// </summary>
-    public partial class ConfrontoDipendenteMasterView : UserControl
+    public partial class ConfrontoDipendenteDetailsView : UserControl
     {
-        public ConfrontoDipendenteMasterView()
+        public ConfrontoDipendenteDetailsView()
         {
             //BindingErrorListener.Listen(m => MessageBox.Show(m));
+            //BindingErrorListener.Listen(m => { Debug.Indent(); Debug.WriteLine(m); Debug.Flush(); });
             InitializeComponent();
         }
     }

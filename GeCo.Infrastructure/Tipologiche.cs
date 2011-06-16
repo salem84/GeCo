@@ -15,6 +15,16 @@ namespace GeCo.Infrastructure
             public const string MG_HR = "HR";
             public const string MG_COMPORTAMENTALE = "COMPORTAMENTALE";
             public const string MG_TECNICO = "TECNICO";
+
+            public static List<string> GetAll()
+            {
+                return new List<string>()  
+                { 
+                    Tipologiche.Macrogruppi.MG_HR, 
+                    Tipologiche.Macrogruppi.MG_COMPORTAMENTALE, 
+                    Tipologiche.Macrogruppi.MG_TECNICO
+                };
+            }
         }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GeCo.Utility
+namespace GeCo.Infrastructure
 {
     public static class KeyEqualityComparerExtension
     {
@@ -15,6 +15,11 @@ namespace GeCo.Utility
         public static IEnumerable<T> Except<T>(this IEnumerable<T> list, IEnumerable<T> second, Func<T, object> keyExtractor)
         {            
             return list.Except(second, new KeyEqualityComparer<T>(keyExtractor));
+        }
+
+        public static IEnumerable<T> Intersect<T>(this IEnumerable<T> list, IEnumerable<T> second, Func<T, object> keyExtractor)
+        {
+            return list.Intersect(second, new KeyEqualityComparer<T>(keyExtractor));
         }
     }
 

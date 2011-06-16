@@ -142,13 +142,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public List<string> MacroGruppi 
         { 
             get 
-            { 
-                return new List<string>()  
-                { 
-                    Tipologiche.Macrogruppi.MG_HR, 
-                    Tipologiche.Macrogruppi.MG_COMPORTAMENTALE, 
-                    Tipologiche.Macrogruppi.MG_TECNICO
-                } ;
+            {
+                return Tipologiche.Macrogruppi.GetAll();
             } 
         }
 

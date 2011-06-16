@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Title="MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Title="Ge.Co. Pavimental S.p.A. V2"
 		x:Name="RibbonWindow"
-		Width="640" Height="480">
+        Width="900" Height="700">
 
     <!-- Window Resources -->
     <ribbon:RibbonWindow.Resources>
@@ -55,8 +56,8 @@
 
             <!-- Grid Layout -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="NavigationColumn" Width="0.200*"/>
-                <ColumnDefinition x:Name="WorkspaceColumn" Width="0.600*"/>
+                <ColumnDefinition x:Name="NavigationColumn" Width="150"/>
+                <ColumnDefinition x:Name="WorkspaceColumn" Width="*"/>
             </Grid.ColumnDefinitions>
             <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1"/>
 

@@ -12,6 +12,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
         #region PARAMETRI
 
+
         /// <summary>
         /// Soglia percentuale di sbarramento per idoneità (da applicare su TECNICHE/FOUNDATIONAL)
         /// </summary>
@@ -29,6 +30,8 @@ namespace GeCo.BLL.AlgoritmoRicerca
         #endregion
 
         public string Nome { get; set; }
+        public int Id { get; set; }
+
         public Punteggi PunteggioAtteso { get; set; }
         public Punteggi PunteggioOsservato { get; set; }
 

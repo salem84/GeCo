@@ -20,6 +20,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         public ICommand NuovoDipendenteCommand { get; private set; }
         public ICommand CercaDipendenteCommand { get; private set; }
+        public ICommand VisualizzaGrafico { get; private set; }
 
         /// <summary>
         /// Costruttore
@@ -33,8 +34,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void InitializeCommands()
         {
-            CercaDipendenteCommand = new RelayCommand(() => CreaTabRicercaDipendenti());
-            NuovoDipendenteCommand = new RelayCommand(() => CreaTabNuovoDipendente());
+            CercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
+            NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
+            VisualizzaGrafico = new RelayCommand(DisegnaGrafico);
         }
 
         private void CreaTabRicercaDipendenti()
@@ -51,6 +53,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
             var nuovoVM = new DipendenteViewModel();
 
             nuovoVM.AddToShell();
+        }
+
+        private void DisegnaGrafico()
+        {
+            //WorkspaceAttivo???
         }
 
         
