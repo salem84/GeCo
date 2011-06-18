@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo.BLL.AlgoritmoRicerca;
-using GeCo.Utility;
 using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
 using GeCo.BLL.Services;
 using GeCo.Infrastructure;
+using GeCo.BLL;
 
 namespace GeCo.ModuleRuoli.ViewModels
 {
@@ -31,7 +31,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         public FiguraProfessionale Ruolo { get; set; }
 
-        public object ParametriConfronto { get; set; }
+        public ParametriConfronto ParametriConfronto { get; set; }
 
         //Variabili utilizzate per la progress e lo status (totali e completate)
         private int DipendentiTotali { get; set; }
@@ -83,15 +83,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         private void LoadParametri()
         {
             //Carico i parametri da visualizzare
-            ParametriConfronto = new
-            {
-                PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI),
-                PMAX_HrComportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_COMPORTAMENTALI),
-                PMAX_Comportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_COMPORTAMENTALI),
-                PMAX_TecnStrategicSupport = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_STRATEGIC),
-                PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE),
-                PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL)
-            };
+            ParametriConfronto = new ParametriConfronto();
         }
 
 
@@ -143,5 +135,9 @@ namespace GeCo.ModuleRuoli.ViewModels
             Stato = string.Format("Completato {0} di {1}", DipendentiAnalizzati, DipendentiTotali);*/
 
         }
+
+
+       
+
     }
 }

@@ -7,7 +7,7 @@ using GeCo.Model;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.Infrastructure;
 
-namespace GeCo.Utility
+namespace GeCo.BLL
 {
     public class ParamsHelper
     {

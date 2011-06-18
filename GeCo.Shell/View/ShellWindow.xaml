@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         Title="Ge.Co. Pavimental S.p.A. V2"
 		x:Name="RibbonWindow"
-        Width="900" Height="700">
+        Width="900" Height="500">
 
     <!-- Window Resources -->
     <ribbon:RibbonWindow.Resources>

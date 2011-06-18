@@ -1,4 +1,5 @@
-﻿<UserControl xmlns:my="clr-namespace:GeCo.ModuleDipendenti.Views"  x:Class="GeCo.ModuleDipendenti.Views.ConfrontoDipendenteMasterView"
+﻿<UserControl xmlns:commons="clr-namespace:GeCo.Infrastructure;assembly=GeCo.Infrastructure"  
+             x:Class="GeCo.ModuleDipendenti.Views.ConfrontoDipendenteMasterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -35,7 +36,7 @@
                 <TextBlock Text="{Binding Cognome, StringFormat='Cognome: {0}'}"/>
                 <TextBlock Text="{Binding DataNascita, StringFormat='Data di nascita: {0:dd/MM/yyyy}'}"/>
             </UniformGrid>
-            <TextBlock Text="Parametri" FontWeight="DemiBold" />
+            <!--<TextBlock Text="Parametri" FontWeight="DemiBold" />
             <UniformGrid Rows="1" Columns="1" DataContext="{Binding Path=ParametriConfronto}">
                 <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Tecn. Foundational {0:0.0} %'}" Padding="10,4" />
             </UniformGrid>
@@ -46,7 +47,8 @@
                 <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='PMax[Comp]: {0}'}"/>
                 <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='PMax[TecnStrategic]: {0}'}"/>
                 <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='PMax[TecnCompetitive]: {0}'}"/>
-            </UniformGrid>
+            </UniformGrid>-->
+            <commons:BarControl Height="70" Margin="50, 0, 50, 50" DataContext="{Binding ParametriConfronto}" />
         </StackPanel>
 
         <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}">
@@ -78,10 +80,10 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <my:ChartGecoControl Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
-                             Valori="{Binding ValoriGrafico}"
+        <commons:ChartGecoControl Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
+                             Values="{Binding ValoriGrafico}"
                              Labels="{Binding LabelsGrafico}"
-                             Width="200"
-                             Height="200" />
+                             Width="400" Height="400" Panel.ZIndex="10"
+                             d:DesignWidth="10" />
     </Grid>
 </UserControl>

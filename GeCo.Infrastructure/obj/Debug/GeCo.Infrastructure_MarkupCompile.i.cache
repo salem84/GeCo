@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-1-1485989957
+3-1733057581
 
-121815138401
-17368478178
-Resources\WorkspaceResources.xaml;
+142063453854
+21-1025902476
+Controls\BarControl.xaml;Controls\ChartGecoControl.xaml;Resources\WorkspaceResources.xaml;
 
 False
 

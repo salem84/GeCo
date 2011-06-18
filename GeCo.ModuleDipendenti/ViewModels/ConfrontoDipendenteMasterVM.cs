@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using GeCo.BLL.AlgoritmoRicerca;
 using GeCo.DAL;
-using GeCo.Utility;
 using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
 using GeCo.BLL.Services;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Command;
+using GeCo.BLL;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -48,7 +48,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        public object ParametriConfronto { get; set; }
+        public ParametriConfronto ParametriConfronto { get; set; }
 
         //Variabili utilizzate per la progress e lo status (totali e completate)
         private int FigureProfessionaliTotali { get; set; }
@@ -175,15 +175,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private void LoadParametri()
         {
             //Carico i parametri da visualizzare
-            ParametriConfronto = new
-            {
-                PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI),
-                PMAX_HrComportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_COMPORTAMENTALI),
-                PMAX_Comportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_COMPORTAMENTALI),
-                PMAX_TecnStrategicSupport = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_STRATEGIC),
-                PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE),
-                PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL)
-            };
+            ParametriConfronto = new ParametriConfronto();
         }
 
         protected void AvviaAlgoritmoBackground()
@@ -216,9 +208,17 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void VisualizzaGrafico()
         {
-            LabelsGrafico = new List<string>(new string[] { "A", "B", "C", "D", "E" });
-            ValoriGrafico = new List<decimal>(new decimal[] { 5, 6, 4, 6, 3 });
+            LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
+
+            var valori = new List<decimal>();
+            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrDiscrezionali));
+            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrComportamentali));
+            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioComportamentali));
+            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnStrategic));
+            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnCompetitiveAdv));
+
+            ValoriGrafico = valori;
             GraficoVisibile = true;
-        }
+        }    
     }
 }

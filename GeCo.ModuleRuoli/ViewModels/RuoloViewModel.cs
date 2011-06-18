@@ -16,7 +16,6 @@ using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.BLL.Services;
-using GeCo.Utility;
 
 namespace GeCo.ModuleRuoli.ViewModels
 {

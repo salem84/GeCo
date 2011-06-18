@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using GeCo;
 using GeCo.DAL;
-using GeCo.Utility;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Data;

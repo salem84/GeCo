@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using GeCo.DAL;
 using System.Data.Entity;
-using GeCo.Utility;
 using GeCo.Model;
 using GeCo.Infrastructure;
 using GeCo.BLL.Services;

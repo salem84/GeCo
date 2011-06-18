@@ -81,6 +81,7 @@
     <Compile Include="Dati\FigureDefault.cs" />
     <Compile Include="Dati\InitializeDB.cs" />
     <Compile Include="ModuleInit.cs" />
+    <Compile Include="ParametriConfronto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Impl\DbAdmin.cs" />
     <Compile Include="Services\Impl\DipendentiServices.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="Services\IRicercaServices.cs" />
     <Compile Include="Services\IRuoliServices.cs" />
     <Compile Include="Services\Impl\RuoliServices.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="ParamsHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeCo.DAL\GeCo.DAL.csproj">

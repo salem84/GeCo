@@ -15,9 +15,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         public DipendentiWorkspaceContainerVM()
         {
+            //Sottoscrivo l'evento per ricevere l'aggiunta di workspace
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
             addWorkspaceEvent.Subscribe(OnAddWorkspace, ThreadOption.UIThread);
+
+            //Aggiungo il workspace di ricerca (per default)
+            //var ricercaVM = ServiceLocator.Current.GetInstance<RicercaDipendentiViewModel>();
+            //ricercaVM.AddToShell();
         }
 
         private void OnAddWorkspace(AddWorkspaceEvent evento)

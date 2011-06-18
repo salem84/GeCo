@@ -89,9 +89,6 @@
     <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
     <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
     <Compile Include="ViewModels\ConfrontoDipendenteMasterVM.cs" />
-    <Compile Include="Views\ChartGecoControl.xaml.cs">
-      <DependentUpon>ChartGecoControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ConfrontoDipendenteDetailsView.xaml.cs">
       <DependentUpon>ConfrontoDipendenteDetailsView.xaml</DependentUpon>
     </Compile>
@@ -139,10 +136,6 @@
     <Page Include="Resources\WorkspaceResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ChartGecoControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConfrontoDipendenteDetailsView.xaml">
       <Generator>MSBuild:Compile</Generator>
