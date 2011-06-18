@@ -9,10 +9,10 @@ namespace GeCo.BLL.Services
 {
     public interface IRuoliServices
     {
-        FiguraProfessionale SalvaRuolo(FiguraProfessionale ruolo);
+        Ruolo SalvaRuolo(Ruolo ruolo);
         void EliminaRuolo(int id);
-        FiguraProfessionale CaricaRuolo(int id);
+        Ruolo CaricaRuolo(int id);
 
-        IList<FiguraProfessionale> GetRuoli(Expression<Func<FiguraProfessionale, bool>> where);
+        IList<Ruolo> GetRuoli(Expression<Func<Ruolo, bool>> where);
     }
 }

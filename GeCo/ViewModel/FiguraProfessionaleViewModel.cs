@@ -48,8 +48,8 @@ namespace GeCo.ViewModel
             }
         }
 
-        private FiguraProfessionale _figuraProfessionale;
-        public FiguraProfessionale FiguraProfessionale 
+        private Ruolo _figuraProfessionale;
+        public Ruolo FiguraProfessionale 
         {
             get { return _figuraProfessionale; }
             set 
@@ -156,7 +156,7 @@ namespace GeCo.ViewModel
         private int _figuraProfessionaleId;
 
         //Non posso inizializzarlo nel costruttore
-        public Action<FiguraProfessionale> RicercaDipendentePerFigura
+        public Action<Ruolo> RicercaDipendentePerFigura
         {
             set { ConfrontaCommand = new RelayCommand(() => value(FiguraProfessionale)); }
         }
@@ -168,7 +168,7 @@ namespace GeCo.ViewModel
             EditMode = false;
         }
 
-        public FiguraProfessionaleViewModel(FiguraProfessionale figuraProf)
+        public FiguraProfessionaleViewModel(Ruolo figuraProf)
         {
             DisplayTabName = "Modifica";
             _figuraProfessionaleId = figuraProf.Id;
@@ -208,8 +208,8 @@ namespace GeCo.ViewModel
         private void SalvaFigura()
         {
             //Ricreo l'oggetto
-            FiguraProfessionale fig = new FiguraProfessionale();
-            fig.Titolo = FiguraProfessionale.Titolo;
+            Ruolo fig = new Ruolo();
+            fig.Nome = FiguraProfessionale.Nome;
             fig.Descrizione = FiguraProfessionale.Descrizione;
 
 
@@ -243,7 +243,7 @@ namespace GeCo.ViewModel
             EditMode = true;
         }
 
-        private void CancellaFiguraProfessionale(PavimentalContext context, FiguraProfessionale figura)
+        private void CancellaFiguraProfessionale(PavimentalContext context, Ruolo figura)
         {
             /*
             
@@ -264,7 +264,7 @@ namespace GeCo.ViewModel
                 figura = null;
             */
 
-            FiguraProfessionale figToRemove = new FiguraProfessionale() { Id = figura.Id };
+            Ruolo figToRemove = new Ruolo() { Id = figura.Id };
             context.FigureProfessionali.Attach(figToRemove);
             context.FigureProfessionali.Remove(figToRemove);
 
@@ -288,7 +288,7 @@ namespace GeCo.ViewModel
                                         LivelloConoscenzaId = livelloNullo.Id
                                     }).ToList();
 
-                FiguraProfessionale = new FiguraProfessionale() { Conoscenze = knowHowVuoto };
+                FiguraProfessionale = new Ruolo() { Conoscenze = knowHowVuoto };
 
                 
             }

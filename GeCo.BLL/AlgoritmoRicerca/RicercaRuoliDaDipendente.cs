@@ -13,7 +13,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
     public class RicercaRuoliDaDipendente : IAlgoritmoRicerca
     {
 
-        #region PUNTEGGI MASSIMI E SOGLIE
+        /*#region PUNTEGGI MASSIMI E SOGLIE
 
         //Mi prendo i punteggi massimi da configurazione DB
         static int PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI);
@@ -23,11 +23,12 @@ namespace GeCo.BLL.AlgoritmoRicerca
         static int PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE);
         static int PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL);
 
-        #endregion
+        #endregion*/
 
-        private IRepository<FiguraProfessionale> _ruoliRepos;
+        ParametriConfronto _parametriConfronto;
+        private IRepository<Ruolo> _ruoliRepos;
 
-        public RicercaRuoliDaDipendente(IRepository<FiguraProfessionale> ruoliRepos)
+        public RicercaRuoliDaDipendente(IRepository<Ruolo> ruoliRepos)
         {
             _ruoliRepos = ruoliRepos;
         }
@@ -88,20 +89,20 @@ namespace GeCo.BLL.AlgoritmoRicerca
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
 
-            IEnumerable<FiguraProfessionale> figure = _ruoliRepos.GetAll();
+            IEnumerable<Ruolo> figure = _ruoliRepos.GetAll();
 
             //Per ogni figura mi calcolo gli indici
             foreach (var figura in figure)
             {
                 RisultatoRicerca risultato = new RisultatoRicerca();
-                risultato.Nome = figura.Titolo;
+                risultato.Nome = figura.Nome;
                 risultato.Id = figura.Id;
-                risultato.PMAX_HrDiscrezionali = PMAX_HrDiscrezionali;
-                risultato.PMAX_HrComportamentali = PMAX_HrComportamentali;
-                risultato.PMAX_Comportamentali = PMAX_Comportamentali;
-                risultato.PMAX_TecnStrategicSupport = PMAX_TecnStrategicSupport;
-                risultato.PMAX_TecnCompetitiveAdv = PMAX_TecnCompetitiveAdv;
-                risultato.PERC_SogliaFoundational = PERC_SogliaFoundational;
+                risultato.PMAX_HrDiscrezionali = _parametriConfronto.PMAX_HrDiscrezionali;
+                risultato.PMAX_HrComportamentali = _parametriConfronto.PMAX_HrComportamentali;
+                risultato.PMAX_Comportamentali = _parametriConfronto.PMAX_Comportamentali;
+                risultato.PMAX_TecnStrategicSupport = _parametriConfronto.PMAX_TecnStrategicSupport;
+                risultato.PMAX_TecnCompetitiveAdv = _parametriConfronto.PMAX_TecnCompetitiveAdv;
+                risultato.PERC_SogliaFoundational = _parametriConfronto.PERC_SogliaFoundational;
 
 
                 //Devo lavorare su un sottoinsieme delle conoscenze del dipendente

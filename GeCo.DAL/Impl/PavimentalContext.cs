@@ -10,7 +10,7 @@ namespace GeCo.DAL
     public class PavimentalContext : DbContext
     {
         public DbSet<Dipendente> Dipendenti { get; set; }
-        public DbSet<FiguraProfessionale> FigureProfessionali { get; set; }
+        public DbSet<Ruolo> FigureProfessionali { get; set; }
         public DbSet<Competenza> Competenze { get; set; }
         public DbSet<Area> Aree { get; set; }
         public DbSet<LivelloConoscenza> LivelliConoscenza { get; set; }
@@ -33,7 +33,7 @@ namespace GeCo.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Anagrafica>()
+            modelBuilder.Entity<Anagrafica>()
                 .Map(m => m.ToTable("Anagrafica"));
 
             modelBuilder.Entity<Area>()
@@ -47,8 +47,8 @@ namespace GeCo.DAL
                 //.HasRequired(m => m.Dotato).WithRequiredPrincipal().WillCascadeOnDelete();
             
 
-            modelBuilder.Entity<FiguraProfessionale>()
-                .Map(m =>m.ToTable("FigureProfessionali"));
+            modelBuilder.Entity<Ruolo>()
+                .Map(m =>m.ToTable("Ruoli"));
             
 
             modelBuilder.Entity<LivelloConoscenza>()
@@ -56,7 +56,7 @@ namespace GeCo.DAL
 
 
             modelBuilder.Entity<TipologiaCompetenza>()
-                .Map(m => m.ToTable("TipologieCompetenza"));*/
+                .Map(m => m.ToTable("TipologieCompetenza"));
             
 
             modelBuilder.Entity<Parametro>()

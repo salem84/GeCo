@@ -24,7 +24,7 @@ namespace GeCo.BLL.Services
             return result;
         }
 
-        public List<RisultatoRicerca> CercaDipendenteDaRuolo(FiguraProfessionale ruolo)
+        public List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo)
         {
             var algoritmo = _container.Resolve<IAlgoritmoRicerca>("RicercaDipendenteDaRuolo");
             var result = algoritmo.Cerca(ruolo);

@@ -25,8 +25,8 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         public string RicercaTitolo { get; set; }
         
-        private List<FiguraProfessionale> _risultati;
-        public List<FiguraProfessionale> Risultati
+        private List<Ruolo> _risultati;
+        public List<Ruolo> Risultati
         {
             get { return _risultati; }
             set
@@ -37,11 +37,11 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
-        public FiguraProfessionale SelectedItem { get; set; }
+        public Ruolo SelectedItem { get; set; }
 
         //Azione che viene lanciata quando faccio click su un elemento della listview
         //Viene settata nella Shell
-        public Action<FiguraProfessionale> VisualizzaFiguraProfAction
+        public Action<Ruolo> VisualizzaFiguraProfAction
         {
             set
             {
@@ -70,8 +70,8 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         protected void Cerca()
         {
-            Expression<Func<FiguraProfessionale, bool>> complete = PredicateBuilder.True<FiguraProfessionale>();
-            Expression<Func<FiguraProfessionale, bool>> exprNome = a => a.Titolo.Contains(RicercaTitolo);
+            Expression<Func<Ruolo, bool>> complete = PredicateBuilder.True<Ruolo>();
+            Expression<Func<Ruolo, bool>> exprNome = a => a.Nome.Contains(RicercaTitolo);
 
             if (!string.IsNullOrEmpty(RicercaTitolo))
             {

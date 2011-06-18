@@ -1,91 +1,106 @@
 ﻿<ribbon:RibbonWindow x:Class="GeCo.Shell.Views.ShellWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://www.codeplex.com/prism"
-        xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        Title="Ge.Co. Pavimental S.p.A. V2"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:prism="http://www.codeplex.com/prism"
+		xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		Title="Ge.Co. Pavimental S.p.A. V2"
 		x:Name="RibbonWindow"
-        Width="900" Height="500">
+		Width="900" Height="500">
 
-    <!-- Window Resources -->
-    <ribbon:RibbonWindow.Resources>
-        <LinearGradientBrush x:Key="WindowBackgroundBrush">
-            <GradientStop Color="#FFE7E9EB" Offset="0" />
-            <GradientStop Color="#FFC6CACF" Offset="1" />
-        </LinearGradientBrush>
-    </ribbon:RibbonWindow.Resources>
+	<!-- Window Resources -->
+	<ribbon:RibbonWindow.Resources>
+		<LinearGradientBrush x:Key="WindowBackgroundBrush">
+			<GradientStop Color="#FFA3A3A3" Offset="0" />
+            <GradientStop Color="#FFE7E9EB" Offset="1" />
+		</LinearGradientBrush>
+	</ribbon:RibbonWindow.Resources>
 
-    <ribbon:RibbonWindow.Background>
-        <StaticResource ResourceKey="WindowBackgroundBrush" />
-    </ribbon:RibbonWindow.Background>
-    
+	<ribbon:RibbonWindow.Background>
+		<StaticResource ResourceKey="WindowBackgroundBrush" />
+	</ribbon:RibbonWindow.Background>
+	
 	<Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition x:Name="RibbonRow" Height="Auto"/>
-            <RowDefinition x:Name="ClientRow" Height="*"/>
-        </Grid.RowDefinitions>
-       
-        <!-- Application Ribbon -->
-        <!-- C'è una region all'interno per consentire ai moduli di caricare tab aggiuntivi -->
-        <ribbon:Ribbon x:Name="ApplicationRibbon"
-                       prism:RegionManager.RegionName="RibbonRegion">
-            <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu SmallImageSource="Images\ribbon.png">
-                    <ribbon:RibbonApplicationMenuItem Header="About..."
+		<Grid.RowDefinitions>
+			<RowDefinition x:Name="RibbonRow" Height="Auto"/>
+			<RowDefinition x:Name="ClientRow" Height="*"/>
+		</Grid.RowDefinitions>
+	   
+		<!-- Application Ribbon -->
+		<!-- C'è una region all'interno per consentire ai moduli di caricare tab aggiuntivi -->
+		<ribbon:Ribbon x:Name="ApplicationRibbon"
+					   prism:RegionManager.RegionName="RibbonRegion">
+			<ribbon:Ribbon.ApplicationMenu>
+				<ribbon:RibbonApplicationMenu SmallImageSource="Images\ribbon.png">
+					<ribbon:RibbonApplicationMenuItem Header="About..."
 													  ImageSource="Images\Sign-Info-icon.png"
-                                                      Command="{Binding AboutCommand}"/>
-                    <ribbon:RibbonApplicationMenuItem Header="Esci"
+													  Click="btnAbout_Click"/>
+					<ribbon:RibbonApplicationMenuItem Header="Esci"
 													  ImageSource="Images\Log-Out-icon.png"
-                                                      Command="{Binding QuitCommand}"/>
-                </ribbon:RibbonApplicationMenu>
-            </ribbon:Ribbon.ApplicationMenu>
+													  Click="btnClose_Click"/>
+				</ribbon:RibbonApplicationMenu>
+			</ribbon:Ribbon.ApplicationMenu>
 
-            <ribbon:RibbonTab x:Name="HomeTab" 
-                              Header="Home">
-                <ribbon:RibbonGroup Header="Amministrazione">
-                    <ribbon:RibbonButton x:Name="btnInizializza"
-                                         LargeImageSource="Images\LargeIcon.png"
-                                         Label="Inizializza" Click="btnInizializza_Click" /> 
+			<ribbon:RibbonTab x:Name="HomeTab" 
+							  Header="Home">
+				<ribbon:RibbonGroup>
+					<ribbon:RibbonTwoLineText Text="Per iniziare selezionare"></ribbon:RibbonTwoLineText>
+                    <ribbon:RibbonTwoLineText Text="dal menu a sinistra"></ribbon:RibbonTwoLineText>
+                    <ribbon:RibbonTwoLineText Text="un modulo"></ribbon:RibbonTwoLineText>
                 </ribbon:RibbonGroup>
-            </ribbon:RibbonTab>
-        </ribbon:Ribbon>
+				<ribbon:RibbonGroup Header="Admin">
+					<ribbon:RibbonButton x:Name="btnInizializza"
+										 LargeImageSource="Images\LargeIcon.png"
+										 Label="Resetta DB" Click="btnInizializza_Click" />
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup Header="">
+					<ribbon:RibbonButton Label="About..."
+										 LargeImageSource="Images\Sign-Info-icon.png"
+                                         Click="btnAbout_Click"
+										 />
+					<ribbon:RibbonButton Label="Esci"
+										 LargeImageSource="Images\Log-Out-icon.png"
+                                         Click="btnClose_Click" />
+				</ribbon:RibbonGroup>
+				
+			</ribbon:RibbonTab>
+		</ribbon:Ribbon>
 
-        <!-- Client Area -->
-        <Grid x:Name="ClientArea" Grid.Row="1">
+		<!-- Client Area -->
+		<Grid x:Name="ClientArea" Grid.Row="1">
 
-            <!-- Grid Layout -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="NavigationColumn" Width="150"/>
-                <ColumnDefinition x:Name="WorkspaceColumn" Width="*"/>
-            </Grid.ColumnDefinitions>
-            <GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1"/>
+			<!-- Grid Layout -->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition x:Name="NavigationColumn" Width="180"/>
+				<ColumnDefinition x:Name="WorkspaceColumn" Width="*"/>
+			</Grid.ColumnDefinitions>
+			<GridSplitter HorizontalAlignment="Left" Width="5" Grid.Column="1"/>
 
-            <!-- Navigation Pane Grid -->
-            <Grid x:Name="NavigationPane">
+			<!-- Navigation Pane Grid -->
+			<Grid x:Name="NavigationPane">
 
-                <!-- Grid Layout -->
-                <Grid.RowDefinitions>
-                    <RowDefinition x:Name="Navigator" Height="*"/>
-                    <RowDefinition x:Name="TaskButtons" Height="Auto"/>
-                </Grid.RowDefinitions>
+				<!-- Grid Layout -->
+				<Grid.RowDefinitions>
+					<RowDefinition x:Name="Navigator" Height="*"/>
+					<RowDefinition x:Name="TaskButtons" Height="Auto"/>
+				</Grid.RowDefinitions>
 
-                <!-- Navigator Region -->
-                <!--<ContentControl x:Name="NavigatorRegion" Grid.Row="0" prism:RegionManager.RegionName="NavigatorRegion" />-->
+				<!-- Navigator Region -->
+				<!--<ContentControl x:Name="NavigatorRegion" Grid.Row="0" prism:RegionManager.RegionName="NavigatorRegion" />-->
 
-                <!-- Task Button Region -->
-                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,5">
-                    <Border Background="{StaticResource WindowBackgroundBrush}" BorderBrush="DarkGray" BorderThickness="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" Margin="5,0,5,5"/>
-                    <ItemsControl x:Name="TaskButtonRegion" prism:RegionManager.RegionName="TaskButtonRegion" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                </StackPanel>
+				<!-- Task Button Region -->
+				<StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,5">
+					<Border Background="{StaticResource WindowBackgroundBrush}" BorderBrush="DarkGray" BorderThickness="1" Height="5" Width="Auto" HorizontalAlignment="Stretch" Margin="5,0,5,5"/>
+					<ItemsControl x:Name="TaskButtonRegion" prism:RegionManager.RegionName="TaskButtonRegion" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+				</StackPanel>
 
-            </Grid>
+			</Grid>
 
-            <!-- Workspace Region-->
-            <ContentControl x:Name="WorkspaceRegion" Grid.Column="1" prism:RegionManager.RegionName="WorkspaceRegion" />
+			<!-- Workspace Region-->
+			<ContentControl x:Name="WorkspaceRegion" Grid.Column="1" prism:RegionManager.RegionName="WorkspaceRegion" />
 
-        </Grid>
+		</Grid>
 
 
-    </Grid>
+	</Grid>
 </ribbon:RibbonWindow>

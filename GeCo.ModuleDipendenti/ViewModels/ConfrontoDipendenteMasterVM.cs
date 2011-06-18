@@ -75,6 +75,21 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
+        //Se visualizzo il grafico, disabilito tutto il resto
+        private bool _controlliAbilitati;
+        public bool ControlliAbilitati
+        {
+            get { return _controlliAbilitati; }
+            set
+            {
+                if (_controlliAbilitati != value)
+                {
+                    _controlliAbilitati = value;
+                    RaisePropertyChanged("ControlliAbilitati");
+                }
+            }
+        }
+
         private List<decimal> _valoriGrafico;
         public List<decimal> ValoriGrafico
         {
@@ -120,7 +135,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _ruoliServices = ruoliServices;
             _ricercaServices = ricercaServices;
 
-            DoubleClickCommand = new RelayCommand(VisualizzaGrafico);
+            DoubleClickCommand = new RelayCommand(ToggleGrafico);
+            ParametriConfronto = new ParametriConfronto();
 
            // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();
@@ -139,7 +155,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 }
             }*/
 
-            LoadParametri();
+            //LoadParametri();
 
 
             
@@ -172,11 +188,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
             StartBackgroundAutoProgress(AvviaAlgoritmoBackground);
         }
 
-        private void LoadParametri()
+       /* private void LoadParametri()
         {
             //Carico i parametri da visualizzare
             ParametriConfronto = new ParametriConfronto();
-        }
+        }*/
 
         protected void AvviaAlgoritmoBackground()
         {
@@ -186,6 +202,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
             Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);
+            ControlliAbilitati = true;
         }
 
         protected void AggiornaProgress()
@@ -200,25 +217,38 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             ConfrontoDipendenteDetailsVM confrontoDetailsVM = new ConfrontoDipendenteDetailsVM();
 
-            FiguraProfessionale ruoloSelezionato = _ruoliServices.CaricaRuolo(RisultatoSelezionato.Id);
+            Ruolo ruoloSelezionato = _ruoliServices.CaricaRuolo(RisultatoSelezionato.Id);
             confrontoDetailsVM.Atteso = ruoloSelezionato;
             confrontoDetailsVM.Osservato = Dipendente;
             confrontoDetailsVM.AddToShell();
         }
 
-        private void VisualizzaGrafico()
+        public void ToggleGrafico()
         {
-            LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
+            if (GraficoVisibile == false)
+            {
+                if (RisultatoSelezionato != null)
+                {
+                    LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
 
-            var valori = new List<decimal>();
-            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrDiscrezionali));
-            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrComportamentali));
-            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioComportamentali));
-            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnStrategic));
-            valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnCompetitiveAdv));
+                    var valori = new List<decimal>();
+                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrDiscrezionali));
+                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrComportamentali));
+                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioComportamentali));
+                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnStrategic));
+                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnCompetitiveAdv));
 
-            ValoriGrafico = valori;
-            GraficoVisibile = true;
+                    ValoriGrafico = valori;
+                    GraficoVisibile = true;
+                    ControlliAbilitati = false;
+                }
+            }
+            else
+            {
+                //Se era visibile lo nascondo
+                GraficoVisibile = false;
+                ControlliAbilitati = true;
+            }
         }    
     }
 }

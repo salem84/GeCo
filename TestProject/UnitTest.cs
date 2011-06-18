@@ -72,7 +72,7 @@ namespace TestProject
         public void InsertAltro()
         {
             PavimentalContext context = new PavimentalContext();
-            context.Aree.Add(new Area() { Titolo = "Area1" });
+            context.Aree.Add(new Area() { Nome = "Area1" });
             context.LivelliConoscenza.Add(new LivelloConoscenza()
             {
                 Titolo="Basso",
@@ -103,10 +103,10 @@ namespace TestProject
             List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
             conoscenze.Add(conoscenza1);
             conoscenze.Add(conoscenza2);
-            context.FigureProfessionali.Add(new FiguraProfessionale()
+            context.FigureProfessionali.Add(new Ruolo()
             {
                 Area = new Area() { Id = 1 },
-                Titolo = "Capo",
+                Nome = "Capo",
                 //Conoscenze = conoscenze
             });
 

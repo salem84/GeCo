@@ -38,8 +38,8 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
-        private FiguraProfessionale _ruolo;
-        public FiguraProfessionale Ruolo 
+        private Ruolo _ruolo;
+        public Ruolo Ruolo 
         {
             get { return _ruolo; }
             set 
@@ -124,12 +124,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         {
             get
             {
-                return new List<string>()  
-                { 
-                    Tipologiche.Macrogruppi.MG_HR, 
-                    Tipologiche.Macrogruppi.MG_COMPORTAMENTALE, 
-                    Tipologiche.Macrogruppi.MG_TECNICO
-                };
+                return Tipologiche.Macrogruppi.GetAll();
             }
         }
 
@@ -147,7 +142,7 @@ namespace GeCo.ModuleRuoli.ViewModels
                 {
                     _salvaCommand = new RelayCommand(SalvaRuolo,
                         //Abilitato
-                    () => Ruolo != null && !string.IsNullOrEmpty(Ruolo.Titolo)
+                    () => Ruolo != null && !string.IsNullOrEmpty(Ruolo.Nome)
                     );
                 }
                 return _salvaCommand; 
@@ -204,7 +199,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             EditMode = false;
         }
 
-        public RuoloViewModel(FiguraProfessionale figuraProf)
+        public RuoloViewModel(Ruolo figuraProf)
         {
             DisplayTabName = "Modifica";
             _ruoloId = figuraProf.Id;
@@ -350,7 +345,7 @@ namespace GeCo.ModuleRuoli.ViewModels
                 
             }*/
 
-            Ruolo = new FiguraProfessionale();
+            Ruolo = new Ruolo();
         }
 
         private void AvviaConfronto()

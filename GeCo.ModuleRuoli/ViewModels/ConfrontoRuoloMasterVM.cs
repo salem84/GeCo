@@ -29,7 +29,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
-        public FiguraProfessionale Ruolo { get; set; }
+        public Ruolo Ruolo { get; set; }
 
         public ParametriConfronto ParametriConfronto { get; set; }
 
@@ -89,7 +89,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         private void AvviaAnalisi()
         {
-            DisplayTabName = "Sostituti per " + Ruolo.Titolo;
+            DisplayTabName = "Sostituti per " + Ruolo.Nome;
 
             //TODO rivedere
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici

@@ -13,7 +13,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
     public class RicercaDipendentiDaRuolo : IAlgoritmoRicerca
     {
 
-        #region PUNTEGGI MASSIMI E SOGLIE
+        /*#region PUNTEGGI MASSIMI E SOGLIE
         
         //Mi prendo i punteggi massimi da configurazione DB
         static int PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI);
@@ -23,17 +23,21 @@ namespace GeCo.BLL.AlgoritmoRicerca
         static int PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE);
         static int PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL);
 
-        #endregion
 
+        #endregion*/
+
+
+        ParametriConfronto _parametriConfronto;
         IRepository<Dipendente> _dipendentiRepos;
 
         public RicercaDipendentiDaRuolo(IRepository<Dipendente> dipendentiRepos)
         {
             _dipendentiRepos = dipendentiRepos;
+            _parametriConfronto = new ParametriConfronto();
         }
 
         
-        private List<RisultatoRicerca> Cerca(FiguraProfessionale figura)
+        private List<RisultatoRicerca> Cerca(Ruolo figura)
         {
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
@@ -46,12 +50,12 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 RisultatoRicerca risultato = new RisultatoRicerca();
                 risultato.Nome = string.Format("{0} - {1}", dipendente.Cognome, dipendente.Nome);
                 risultato.Id = dipendente.Id;
-                risultato.PMAX_HrDiscrezionali = PMAX_HrDiscrezionali;
-                risultato.PMAX_HrComportamentali = PMAX_HrComportamentali;
-                risultato.PMAX_Comportamentali = PMAX_Comportamentali;
-                risultato.PMAX_TecnStrategicSupport = PMAX_TecnStrategicSupport;
-                risultato.PMAX_TecnCompetitiveAdv = PMAX_TecnCompetitiveAdv;
-                risultato.PERC_SogliaFoundational = PERC_SogliaFoundational;
+                risultato.PMAX_HrDiscrezionali = _parametriConfronto.PMAX_HrDiscrezionali;
+                risultato.PMAX_HrComportamentali = _parametriConfronto.PMAX_HrComportamentali;
+                risultato.PMAX_Comportamentali = _parametriConfronto.PMAX_Comportamentali;
+                risultato.PMAX_TecnStrategicSupport = _parametriConfronto.PMAX_TecnStrategicSupport;
+                risultato.PMAX_TecnCompetitiveAdv = _parametriConfronto.PMAX_TecnCompetitiveAdv;
+                risultato.PERC_SogliaFoundational = _parametriConfronto.PERC_SogliaFoundational;
 
 
                 //Devo lavorare su un sottoinsieme delle conoscenze del dipendente
@@ -99,7 +103,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
         public List<RisultatoRicerca> Cerca(Anagrafica ruolo)
         {
-            return Cerca(ruolo as FiguraProfessionale);
+            return Cerca(ruolo as Ruolo);
         }
     }
 }

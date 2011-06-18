@@ -20,7 +20,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         public ICommand NuovoDipendenteCommand { get; private set; }
         public ICommand CercaDipendenteCommand { get; private set; }
-        public ICommand VisualizzaGrafico { get; private set; }
+        public ICommand GraficoCommand { get; private set; }
 
         /// <summary>
         /// Costruttore
@@ -36,7 +36,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             CercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
             NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
-            VisualizzaGrafico = new RelayCommand(DisegnaGrafico);
+            GraficoCommand = new RelayCommand(ToggleGrafico);
         }
 
         private void CreaTabRicercaDipendenti()
@@ -55,9 +55,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
             nuovoVM.AddToShell();
         }
 
-        private void DisegnaGrafico()
+        private void ToggleGrafico()
         {
-            //WorkspaceAttivo???
+            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
+            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteMasterVM;
+            if (activeWorkspace != null)
+            {
+                activeWorkspace.ToggleGrafico();
+            }
         }
 
         

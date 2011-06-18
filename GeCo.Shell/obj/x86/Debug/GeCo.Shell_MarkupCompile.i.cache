@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Progetti\GeCo\Source\GeCo.Shell\App.xaml
-2-430511595
+51360710216
 
-8-1545724886
+91852697903
 24464877387
-ModuleCatalog.xaml;View\ShellWindow.xaml;
+ModuleCatalog.xaml;Resources\ExpressionDark.xaml;Resources\ExpressionLight.xaml;View\AboutWindow.xaml;View\ShellWindow.xaml;
 
 False
 

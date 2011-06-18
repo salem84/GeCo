@@ -9,6 +9,6 @@ namespace GeCo.Model
     //Sono le aree per le varie posizioni (professional, entry level, ...) rappresentate nella riga in alto dell'Excel
     public class Area : BaseIdentityModel<Area>
     {
-        public string Titolo { get; set; }
+        public string Nome { get; set; }
     }
 }

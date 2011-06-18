@@ -1,11 +1,11 @@
-﻿<UserControl xmlns:commons="clr-namespace:GeCo.Infrastructure;assembly=GeCo.Infrastructure"  
-             x:Class="GeCo.ModuleDipendenti.Views.ConfrontoDipendenteMasterView"
+﻿<UserControl x:Class="GeCo.ModuleDipendenti.Views.ConfrontoDipendenteMasterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4" 
+             xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"  
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     
@@ -24,8 +24,8 @@
         </Style>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     </UserControl.Resources>
-    
-    <Grid>
+
+    <Grid IsEnabled="{Binding ControlliAbilitati}">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -48,7 +48,7 @@
                 <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='PMax[TecnStrategic]: {0}'}"/>
                 <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='PMax[TecnCompetitive]: {0}'}"/>
             </UniformGrid>-->
-            <commons:BarControl Height="70" Margin="50, 0, 50, 50" DataContext="{Binding ParametriConfronto}" />
+            <controls:BarControl Height="70" Margin="50, 0, 50, 50" DataContext="{Binding ParametriConfronto}" />
         </StackPanel>
 
         <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}">
@@ -71,19 +71,48 @@
                     <GridViewColumn DisplayMemberBinding="{Binding PunteggioComportamentali, StringFormat='{}{0:0.0}'}" Header="Comportamentale" Width="120" />
                     <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnStrategic, StringFormat='{}{0:0.0}'}" Header="Strategic Support" Width="120" />
                     <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnCompetitiveAdv, StringFormat='{}{0:0.0}'}" Header="Competitive Advantage" Width="120" />
+                    <!--<GridViewColumn Header="Grafico" Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Style="{StaticResource BoolToImage_Style}">
+                                        <Image.Triggers>
+                                            <EventTrigger RoutedEvent="Image.MouseEnter">
+                                                <BeginStoryboard Storyboard="{StaticResource expandStoryboard}" />
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="Image.MouseLeave">
+                                                <BeginStoryboard Storyboard="{StaticResource shrinkStoryboard}" />
+                                            </EventTrigger>
+                                        </Image.Triggers>
+                                        <Image.RenderTransform>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <cmd:EventToCommand Command="{Binding DoubleClickCommand}"/>
                 </i:EventTrigger>
+                <!--<i:EventTrigger EventName="MouseEnter">
+                    <cmd:EventToCommand Command="{Binding MouseEnterCommand}"/>
+                </i:EventTrigger>-->
             </i:Interaction.Triggers>
         </ListView>
 
-        <commons:ChartGecoControl Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
+        
+                <controls:ChartGecoControl
                              Values="{Binding ValoriGrafico}"
                              Labels="{Binding LabelsGrafico}"
                              Width="400" Height="400" Panel.ZIndex="10"
-                             d:DesignWidth="10" />
+                             d:DesignWidth="10"
+                             Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
+                    />        
+           
+        
     </Grid>
 </UserControl>

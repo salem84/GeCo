@@ -12,7 +12,8 @@ namespace GeCo.Infrastructure
         /// </summary>
         public class Macrogruppi
         {
-            public const string MG_HR = "HR";
+            public const string MG_HR_DISCREZIONALE = "HR DISCREZIONALE";
+            public const string MG_HR_COMPORTAMENTALE = "HR COMPORTAMENTALE";
             public const string MG_COMPORTAMENTALE = "COMPORTAMENTALE";
             public const string MG_TECNICO = "TECNICO";
 
@@ -20,7 +21,8 @@ namespace GeCo.Infrastructure
             {
                 return new List<string>()  
                 { 
-                    Tipologiche.Macrogruppi.MG_HR, 
+                    Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE, 
+                    Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE,
                     Tipologiche.Macrogruppi.MG_COMPORTAMENTALE, 
                     Tipologiche.Macrogruppi.MG_TECNICO
                 };
@@ -43,9 +45,14 @@ namespace GeCo.Infrastructure
             public const string C_COGNITIVE = "Cognitive";
             public const string C_REALIZZATIVE = "Realizzative";
 
-            //HR
+            //HR Discrezionali
             public const string HR_DISCREZIONALI = "HR Discrezionali";
-            public const string HR_COMPORTAMENTALI = "HR Comportamentali";
+
+            //HR Comportamentali
+            public const string HR_C_MANAGERIALI = "Manageriali";
+            public const string HR_C_RELAZIONALI = "Relazionali";
+            public const string HR_C_COGNITIVE = "Cognitive";
+            public const string HR_C_REALIZZATIVE = "Realizzative";
         }
         
 

@@ -12,7 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
-namespace GeCo.Infrastructure
+namespace GeCo.Infrastructure.Controls
 {
     /// <summary>
     /// Interaction logic for MainControl.xaml

@@ -7,9 +7,9 @@ using System.Collections.ObjectModel;
 namespace GeCo.Model
 {
     //Contiene le posizioni lavorative (capo area, muratore,...)
-    public class FiguraProfessionale : Anagrafica
+    public class Ruolo : Anagrafica
     {
-        public string Titolo { get; set; }
+        public string Nome { get; set; }
         public string Descrizione { get; set; }
         public virtual Area Area { get; set; }
         

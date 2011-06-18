@@ -13,10 +13,10 @@ namespace GeCo.BLL.Services
 {
     public class RuoliServices : IRuoliServices
     {
-        public FiguraProfessionale SalvaRuolo(FiguraProfessionale r)
+        public Ruolo SalvaRuolo(Ruolo r)
         {
-            FiguraProfessionale ruolo = new FiguraProfessionale();
-            ruolo.Titolo = r.Titolo;
+            Ruolo ruolo = new Ruolo();
+            ruolo.Nome = r.Nome;
             ruolo.Descrizione = r.Descrizione;
 
             ruolo.Conoscenze = new List<ConoscenzaCompetenza>();
@@ -35,7 +35,7 @@ namespace GeCo.BLL.Services
                 }
             }
 
-            var repos = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
             if (r.Id != 0)
@@ -51,8 +51,8 @@ namespace GeCo.BLL.Services
 
         public void EliminaRuolo(int id)
         {
-            FiguraProfessionale ruoloToRemove = new FiguraProfessionale() { Id = id };
-            var repos = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
+            Ruolo ruoloToRemove = new Ruolo() { Id = id };
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
             repos.Attach(ruoloToRemove);
@@ -61,9 +61,9 @@ namespace GeCo.BLL.Services
             uow.Commit();
         }
 
-        public FiguraProfessionale CaricaRuolo(int id)
+        public Ruolo CaricaRuolo(int id)
         {
-            var repos = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var result = repos.Include(r => r.Conoscenze.Select(c => c.Competenza))
                      .Include(r => r.Conoscenze.Select(c => c.LivelloConoscenza))
                      .Include(r => r.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza))
@@ -72,9 +72,9 @@ namespace GeCo.BLL.Services
             return result;
         }
 
-        public IList<FiguraProfessionale> GetRuoli(Expression<Func<FiguraProfessionale, bool>> where)
+        public IList<Ruolo> GetRuoli(Expression<Func<Ruolo, bool>> where)
         {
-            var repos = ServiceLocator.Current.GetInstance<IRepository<FiguraProfessionale>>();
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var lista = repos.AsQueryable().AsExpandable().Where(where).ToList();
             return lista;
         }

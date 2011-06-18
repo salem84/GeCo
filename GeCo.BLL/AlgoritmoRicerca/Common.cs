@@ -20,13 +20,16 @@ namespace GeCo.BLL.AlgoritmoRicerca
             Punteggi punteggio = new Punteggi();
             IEnumerable<ConoscenzaCompetenza> conoscenzeFiltrate;
 
-            #region HR
-            IEnumerable<ConoscenzaCompetenza> compHr = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_HR);
+            #region HR DISCREZIONALI
                         
-            conoscenzeFiltrate = compHr.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI);
+            conoscenzeFiltrate = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE);
             punteggio.HrDiscrezionali = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
-            conoscenzeFiltrate = compHr.Where(cc => cc.Competenza.TipologiaCompetenza.Titolo == Tipologiche.TipologiaCompetenza.HR_COMPORTAMENTALI);
+            #endregion
+
+            #region HR COMPORTAMENTALI
+
+            conoscenzeFiltrate = Conoscenze.Where(cc => cc.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE);
             punteggio.HrComportamentali = conoscenzeFiltrate.Sum(c => c.LivelloConoscenza.Valore);
 
             #endregion

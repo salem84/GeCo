@@ -46,7 +46,7 @@ namespace TestProject
                         }
 
 
-                        risultati.Add(new { NomeFigura = figura.Titolo, PAM = punteggioAttesoMinimo, Idoneo = idoneo, Percentuale = percentuale });
+                        risultati.Add(new { NomeFigura = figura.Nome, PAM = punteggioAttesoMinimo, Idoneo = idoneo, Percentuale = percentuale });
                     }
 
                 }

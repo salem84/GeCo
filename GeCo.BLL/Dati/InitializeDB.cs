@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GeCo.Model;
 using GeCo.Infrastructure;
+using GeCo.DAL;
 using GeCo.BLL.Dati;
 using Microsoft.Practices.ServiceLocation;
 
@@ -17,7 +18,8 @@ namespace GeCo.BLL
             InitializeDB.InsertTipologieCompetenze();
             InitializeDB.InsertCompetenzeTecniche();
             InitializeDB.InsertCompetenzeComportamentali();
-            InitializeDB.InsertCompetenzeHR();
+            InitializeDB.InsertCompetenzeHrDiscrezionali();
+            InitializeDB.InsertCompetenzeHrComportamentali();
             InitializeDB.InsertAltro();
             FigureDefault.SalvaResponsabileUfficioTecnico();
             FigureDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
@@ -74,9 +76,14 @@ namespace GeCo.BLL
                     new { t=Tipologiche.TipologiaCompetenza.C_COGNITIVE, m=Tipologiche.Macrogruppi.MG_COMPORTAMENTALE},
                     new { t=Tipologiche.TipologiaCompetenza.C_REALIZZATIVE, m=Tipologiche.Macrogruppi.MG_COMPORTAMENTALE},
 
-                    //HR
-                    new { t=Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI, m=Tipologiche.Macrogruppi.MG_HR},
-                    new { t=Tipologiche.TipologiaCompetenza.HR_COMPORTAMENTALI, m=Tipologiche.Macrogruppi.MG_HR},
+                    //HR Discrezionali
+                    new { t=Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI, m=Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE},
+
+                    //HR Comportamentali
+                    new { t=Tipologiche.TipologiaCompetenza.HR_C_MANAGERIALI, m=Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.HR_C_RELAZIONALI, m=Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.HR_C_COGNITIVE, m=Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE},
+                    new { t=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE, m=Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE}
                 };
 
             var repos = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
@@ -225,13 +232,13 @@ namespace GeCo.BLL
             uow.Commit();
         }
 
-        public static void InsertCompetenzeHR()
+        public static void InsertCompetenzeHrDiscrezionali()
         {
 
             var lista = new[] 
             {
                 new { t="Assessment", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI},
-                new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_COMPORTAMENTALI}                
+                new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI}                
             };
 
             var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
@@ -252,6 +259,54 @@ namespace GeCo.BLL
             uow.Commit();
         }
 
+        public static void InsertCompetenzeHrComportamentali()
+        {
+
+            var lista = new[] 
+            {
+                new { t="Integrazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_MANAGERIALI},
+                new { t="TeamWork", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_MANAGERIALI},
+                new { t="Gestione delle Risorse Umane", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_MANAGERIALI},
+                new { t="Leadership", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_MANAGERIALI},
+
+                new { t="Comunicazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_RELAZIONALI},
+                new { t="Assertività", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_RELAZIONALI},
+                new { t="Negoziazione", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_RELAZIONALI},
+                new { t="Networking", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_RELAZIONALI},
+
+                new { t="Capacità di Analisi", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_COGNITIVE},
+                new { t="Problem solving", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_COGNITIVE},
+                new { t="Visione d'insieme", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_COGNITIVE},
+                new { t="Orientamento al cliente", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_COGNITIVE},
+
+                new { t="Orientamento al risultato", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE},
+                new { t="Responsabilità", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE},
+                new { t="Efficienza", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE},
+                new { t="Proattività", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE},
+                
+            };
+
+
+            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            foreach (var elemento in lista)
+            {
+                reposComp.Add(new Competenza()
+                {
+                    Titolo = elemento.t,
+                    Descrizione = elemento.d,
+                    Peso = elemento.p,
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                });
+            }
+
+            uow.Commit();
+        }
+
+
+
         public static void InsertAltro()
         {
             var reposAree = ServiceLocator.Current.GetInstance<IRepository<Area>>();
@@ -259,7 +314,7 @@ namespace GeCo.BLL
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
 
-            reposAree.Add(new Area() { Titolo = "Area1" });
+            reposAree.Add(new Area() { Nome = "Area1" });
 
             reposLivelli.Add(new LivelloConoscenza()
             {

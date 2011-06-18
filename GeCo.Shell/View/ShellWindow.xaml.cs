@@ -26,23 +26,39 @@ namespace GeCo.Shell.Views
         public ShellWindow()
         {
             InitializeComponent();
-
-            // Insert code required on object creation below this point.
         }
 
         private void btnInizializza_Click(object sender, RoutedEventArgs e)
         {
-            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            container.RegisterType<IDbAdmin, DbAdmin>();
-            var dbAdmin = container.Resolve<IDbAdmin>();
-            dbAdmin.InizializzaDb();
-            
-            
-            
-            container.RegisterType<IDipendentiServices, DipendentiServices>();
-            var dipServices = container.Resolve<IDipendentiServices>();
-            var d = dipServices.CaricaDipendente(8);
+            string message = "L'operazione cancellerà tutte le informazioni sul database. Sei sicuro?";
+            string title = "Conferma";
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxImage images = MessageBoxImage.Warning;
+            if (MessageBox.Show(message, title,buttons, images) == MessageBoxResult.Yes)
+            {
+                var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
+                container.RegisterType<IDbAdmin, DbAdmin>();
+                var dbAdmin = container.Resolve<IDbAdmin>();
+                dbAdmin.InizializzaDb();
 
+
+
+                container.RegisterType<IDipendentiServices, DipendentiServices>();
+                var dipServices = container.Resolve<IDipendentiServices>();
+                var d = dipServices.CaricaDipendente(8);
+            }
+            
+        }
+
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow about = new AboutWindow();
+            about.ShowDialog();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

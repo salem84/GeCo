@@ -72,11 +72,15 @@
     <Compile Include="Controls\ChartGecoControl.xaml.cs">
       <DependentUpon>ChartGecoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DialogOLD\Bubble.cs" />
+    <Compile Include="DialogOLD\CursorPlus.cs" />
+    <Compile Include="DialogOLD\Dialog.cs" />
+    <Compile Include="DialogOLD\DialogBase.cs" />
+    <Compile Include="DialogOLD\MessageBoxPlus.cs" />
+    <Compile Include="DialogOLD\PopupBase.cs" />
     <Compile Include="Events\AddWorkspaceEvent.cs" />
     <Compile Include="Events\ExtensionsMethod.cs" />
     <Compile Include="Events\NavigationCompletedEvent.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tipologiche.cs" />

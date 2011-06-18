@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace GeCo.Infrastructure
+namespace GeCo.Infrastructure.Controls
 {
     /// <summary>
     /// Interaction logic for Chart.xaml

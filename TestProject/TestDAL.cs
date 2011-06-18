@@ -28,7 +28,7 @@ namespace TestProject
             var unitOfWork = new UnitOfWork(contextAdapter);
 
             var teamRepository = new BaseRepository<Area>(contextAdapter);
-            var newArea = new Area { Titolo = "Da Bears" };
+            var newArea = new Area { Nome = "Da Bears" };
 
             teamRepository.Add(newArea);
             unitOfWork.Commit();
