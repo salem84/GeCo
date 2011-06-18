@@ -25,6 +25,7 @@ namespace GeCo.BLL.Services
             
             
             Dipendente dipendente = new Dipendente();
+            dipendente.Matricola = d.Matricola;
             dipendente.Cognome = d.Cognome;
             dipendente.Nome = d.Nome;
             dipendente.DataNascita = d.DataNascita;
@@ -78,14 +79,6 @@ namespace GeCo.BLL.Services
             return repository.AsQueryable();
         }
 
-        public void SalvaArea(Area area)
-        {
-            var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            var reposArea = container.Resolve<IRepository<Area>>();
-            reposArea.Add(area);
-        }
-
-
         public IList<Dipendente> GetDipendenti(Expression<Func<Dipendente, bool>> where)
         {
             var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
@@ -107,18 +100,6 @@ namespace GeCo.BLL.Services
             return result;
         }
 
-        public IQueryable<LivelloConoscenza> GetLivelliConoscenza()
-        {
-            var repos = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
-            return repos.AsQueryable();
-        }
-
-        public IList<Competenza> GetCompetenze()
-        {
-            var repos = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
-            var result = repos.Include(c => c.TipologiaCompetenza).ToList();
-
-            return result;
-        }
+        
     }
 }

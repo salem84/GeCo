@@ -22,19 +22,24 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-            	<ColumnDefinition Width="0.3*"/>
-            	<ColumnDefinition Width="0.3*"/>
-            	<ColumnDefinition Width="0.32*"/>
+                <ColumnDefinition Width="0.25*"/>
+            	<ColumnDefinition Width="0.25*"/>
+            	<ColumnDefinition Width="0.25*"/>
+            	<ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="0">
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Matricola" VerticalAlignment="Center"/>
+                <TextBox TextWrapping="Wrap" Height="25" Width="100" Text="{Binding RicercaMatricola, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Center"/>
                 <TextBox TextWrapping="Wrap" Height="25" Width="100" Text="{Binding RicercaNome, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="2">
                 <TextBlock Text="Cognome" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <TextBox Height="25" Width="100" Margin="10,0,0,0" Text="{Binding RicercaCognome, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="2">
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="3">
                 <TextBlock Text="Data Nascita" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <DatePicker Height="25" Width="110" Margin="10,0,0,0" SelectedDate="{Binding RicercaDataNascita, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>

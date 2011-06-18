@@ -10,9 +10,9 @@ namespace GeCo.DAL
     public class PavimentalContext : DbContext
     {
         public DbSet<Dipendente> Dipendenti { get; set; }
-        public DbSet<Ruolo> FigureProfessionali { get; set; }
+        public DbSet<Ruolo> Ruoli { get; set; }
         public DbSet<Competenza> Competenze { get; set; }
-        public DbSet<Area> Aree { get; set; }
+        //public DbSet<Area> Aree { get; set; }
         public DbSet<LivelloConoscenza> LivelliConoscenza { get; set; }
         public DbSet<TipologiaCompetenza> TipologieCompetenze { get; set; }
         public DbSet<ConoscenzaCompetenza> ConoscenzaCompetenze { get; set; }
@@ -33,11 +33,12 @@ namespace GeCo.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Anagrafica>()
-                .Map(m => m.ToTable("Anagrafica"));
+           /* modelBuilder.Entity<Anagrafica>()
+                .Map(m => m.ToTable("Anagrafica"));*/
 
-            modelBuilder.Entity<Area>()
-                .Map(m => m.ToTable("Area"));
+            /*modelBuilder.Entity<Area>()
+                .Map(m => m.ToTable("Area"));*/
+            modelBuilder.ComplexType<Area>();
 
             modelBuilder.Entity<Competenza>()
                 .Map(m => m.ToTable("Competenze"));
@@ -47,8 +48,8 @@ namespace GeCo.DAL
                 //.HasRequired(m => m.Dotato).WithRequiredPrincipal().WillCascadeOnDelete();
             
 
-            modelBuilder.Entity<Ruolo>()
-                .Map(m =>m.ToTable("Ruoli"));
+            /*modelBuilder.Entity<Ruolo>()
+                .Map(m =>m.ToTable("Ruoli"));*/
             
 
             modelBuilder.Entity<LivelloConoscenza>()

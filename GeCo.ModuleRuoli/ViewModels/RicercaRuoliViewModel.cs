@@ -71,7 +71,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         protected void Cerca()
         {
             Expression<Func<Ruolo, bool>> complete = PredicateBuilder.True<Ruolo>();
-            Expression<Func<Ruolo, bool>> exprNome = a => a.Nome.Contains(RicercaTitolo);
+            Expression<Func<Ruolo, bool>> exprNome = a => a.Titolo.Contains(RicercaTitolo);
 
             if (!string.IsNullOrEmpty(RicercaTitolo))
             {

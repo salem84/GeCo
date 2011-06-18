@@ -123,15 +123,15 @@ namespace GeCo.ModuleDipendenti.ViewModels
         #endregion
 
 
-        private IDipendentiServices _dipendentiServices;
+        private ICompetenzeServices _competenzeServices;
         private IRicercaServices _ricercaServices;
         private IRuoliServices _ruoliServices;
 
-        public ConfrontoDipendenteMasterVM(IDipendentiServices dipServices, IRuoliServices ruoliServices, IRicercaServices ricercaServices)
+        public ConfrontoDipendenteMasterVM(ICompetenzeServices compServices, IRuoliServices ruoliServices, IRicercaServices ricercaServices)
         {
             DisplayTabName = "Sostituti";
 
-            _dipendentiServices = dipServices;
+            _competenzeServices = compServices;
             _ruoliServices = ruoliServices;
             _ricercaServices = ricercaServices;
 
@@ -170,7 +170,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici
             if (Dipendente.Id == 0)
             {
-                var livelliConoscenza = _dipendentiServices.GetLivelliConoscenza();
+                var livelliConoscenza = _competenzeServices.GetLivelliConoscenza();
                 
                 foreach (var c in Dipendente.Conoscenze)
                 {

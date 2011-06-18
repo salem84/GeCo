@@ -12,16 +12,12 @@ namespace GeCo.BLL.Services
         Dipendente SalvaDipendente(Dipendente dipendente);
         void EliminaDipendente(int id);
         Dipendente CaricaDipendente(int id);
-
-
-        void SalvaArea(Area area);
         IQueryable GetDipendenti();
-
         IList<Dipendente> GetDipendenti(Expression<Func<Dipendente, bool>> where);
 
-        //Gestione competenze
-        IQueryable<LivelloConoscenza> GetLivelliConoscenza();
-        //LivelloConoscenza GetLivelloConoscenza(string titolo);
-        IList<Competenza> GetCompetenze();
+        
+        
+        
+                
     }
 }

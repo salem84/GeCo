@@ -16,7 +16,7 @@ namespace GeCo.BLL.Services
         public Ruolo SalvaRuolo(Ruolo r)
         {
             Ruolo ruolo = new Ruolo();
-            ruolo.Nome = r.Nome;
+            ruolo.Titolo = r.Titolo;
             ruolo.Descrizione = r.Descrizione;
 
             ruolo.Conoscenze = new List<ConoscenzaCompetenza>();
@@ -77,6 +77,12 @@ namespace GeCo.BLL.Services
             var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var lista = repos.AsQueryable().AsExpandable().Where(where).ToList();
             return lista;
+        }
+
+        public void SalvaArea(Area area)
+        {
+            var reposArea = ServiceLocator.Current.GetInstance<IRepository<Area>>();
+            reposArea.Add(area);
         }
     }
 }

@@ -21,8 +21,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             addWorkspaceEvent.Subscribe(OnAddWorkspace, ThreadOption.UIThread);
 
             //Aggiungo il workspace di ricerca (per default)
-            //var ricercaVM = ServiceLocator.Current.GetInstance<RicercaDipendentiViewModel>();
-            //ricercaVM.AddToShell();
+            var ricercaVM = ServiceLocator.Current.GetInstance<RicercaDipendentiViewModel>();
+            ricercaVM.AddToShell();
         }
 
         private void OnAddWorkspace(AddWorkspaceEvent evento)

@@ -48,12 +48,12 @@
                     <ribbon:RibbonTwoLineText Text="dal menu a sinistra"></ribbon:RibbonTwoLineText>
                     <ribbon:RibbonTwoLineText Text="un modulo"></ribbon:RibbonTwoLineText>
                 </ribbon:RibbonGroup>
-				<ribbon:RibbonGroup Header="Admin">
+				<ribbon:RibbonGroup>
 					<ribbon:RibbonButton x:Name="btnInizializza"
 										 LargeImageSource="Images\LargeIcon.png"
 										 Label="Resetta DB" Click="btnInizializza_Click" />
 				</ribbon:RibbonGroup>
-				<ribbon:RibbonGroup Header="">
+				<ribbon:RibbonGroup>
 					<ribbon:RibbonButton Label="About..."
 										 LargeImageSource="Images\Sign-Info-icon.png"
                                          Click="btnAbout_Click"

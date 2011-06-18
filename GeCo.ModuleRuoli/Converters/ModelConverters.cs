@@ -20,7 +20,7 @@ namespace GeCo.Converters
 
             //using (PavimentalContext context = new PavimentalContext())
             //    return context.LivelliConoscenza.Single(lc => lc.Id == id).Valore;
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
             int livelloValore = service.GetLivelliConoscenza().Single(lc => lc.Id == id).Valore;
             return livelloValore;
         }
@@ -37,7 +37,7 @@ namespace GeCo.Converters
             //using (PavimentalContext context = new PavimentalContext())
             //    livelloId = context.LivelliConoscenza.Single(lc => lc.Valore == valore).Id;
 
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
             livelloId = service.GetLivelliConoscenza().Single(lc => lc.Valore == valore).Id;
             
 

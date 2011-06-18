@@ -95,7 +95,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
             foreach (var figura in figure)
             {
                 RisultatoRicerca risultato = new RisultatoRicerca();
-                risultato.Nome = figura.Nome;
+                risultato.Nome = figura.Titolo;
                 risultato.Id = figura.Id;
                 risultato.PMAX_HrDiscrezionali = _parametriConfronto.PMAX_HrDiscrezionali;
                 risultato.PMAX_HrComportamentali = _parametriConfronto.PMAX_HrComportamentali;

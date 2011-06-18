@@ -105,7 +105,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
                     //{
                     //    _competenzeTotali = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
                     //}
-                    var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+                    var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
                     _competenzeTotali = service.GetCompetenze();
                 }
                 return _competenzeTotali;
@@ -160,7 +160,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 {
                     _salvaCommand = new RelayCommand(SalvaDipendente,
                         //Abilitato
-                    () => Dipendente != null && !string.IsNullOrEmpty(Dipendente.Nome) && !string.IsNullOrEmpty(Dipendente.Cognome) 
+                    //() => Dipendente != null && !string.IsNullOrEmpty(Dipendente.Nome) && !string.IsNullOrEmpty(Dipendente.Cognome) 
+                    () => Dipendente != null && !string.IsNullOrEmpty(Dipendente.Matricola) 
                     );
                 }
                 return _salvaCommand;
@@ -346,7 +347,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
             var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
                 //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 

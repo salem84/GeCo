@@ -38,10 +38,10 @@ namespace GeCo.ModuleRuoli.ViewModels
         private int DipendentiAnalizzati { get; set; }
 
 
-        private IDipendentiServices _livelliConoscenzaServices;
+        private ICompetenzeServices _livelliConoscenzaServices;
         private IRicercaServices _ricercaServices;
 
-        public ConfrontoRuoloVM(IDipendentiServices livelliConoscenzaServices, IRicercaServices ricercaServices)
+        public ConfrontoRuoloVM(ICompetenzeServices livelliConoscenzaServices, IRicercaServices ricercaServices)
         {
             DisplayTabName = "Sostituti";
 
@@ -89,7 +89,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         private void AvviaAnalisi()
         {
-            DisplayTabName = "Sostituti per " + Ruolo.Nome;
+            DisplayTabName = "Sostituti per " + Ruolo.Titolo;
 
             //TODO rivedere
             //Non ho salvato il dipendente e mi mancano però le conoscenze per calcolare gli indici

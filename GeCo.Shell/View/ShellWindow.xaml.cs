@@ -31,7 +31,7 @@ namespace GeCo.Shell.Views
         private void btnInizializza_Click(object sender, RoutedEventArgs e)
         {
             string message = "L'operazione cancellerà tutte le informazioni sul database. Sei sicuro?";
-            string title = "Conferma";
+            string title = "Ripristino DB";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
             MessageBoxImage images = MessageBoxImage.Warning;
             if (MessageBox.Show(message, title,buttons, images) == MessageBoxResult.Yes)
@@ -47,7 +47,8 @@ namespace GeCo.Shell.Views
                 var dipServices = container.Resolve<IDipendentiServices>();
                 var d = dipServices.CaricaDipendente(8);
             }
-            
+
+            MessageBox.Show("Completato", title, MessageBoxButton.OK);
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)

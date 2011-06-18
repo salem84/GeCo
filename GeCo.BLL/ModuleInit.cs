@@ -23,6 +23,7 @@ namespace GeCo.BLL
         {
             this.container.RegisterType<IDipendentiServices, DipendentiServices>();
             this.container.RegisterType<IRuoliServices, RuoliServices>();
+            this.container.RegisterType<ICompetenzeServices, CompetenzeServices>();
             this.container.RegisterType<IRicercaServices, RicercaServices>();
 
             this.container.RegisterType<IAlgoritmoRicerca, RicercaDipendentiDaRuolo>("RicercaDipendenteDaRuolo");

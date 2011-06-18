@@ -10,9 +10,9 @@ using Microsoft.Practices.Prism.Regions;
 using GeCo.Infrastructure.Events;
 using GalaSoft.MvvmLight.Command;
 
-namespace GeCo.ModuleDipendenti.ViewModels
+namespace GeCo.ModuleCompetenze.ViewModels
 {
-    public class DipendentiTaskButtonVM : ViewModelBase, INavigationAware
+    public class CompetenzeTaskButtonVM : ViewModelBase, INavigationAware
     {
         #region Fields and Commands
         
@@ -36,7 +36,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         #region Constructor
 
-        public DipendentiTaskButtonVM()
+        public CompetenzeTaskButtonVM()
         {
             this.Initialize();
         }
@@ -108,14 +108,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
             var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
 
             // Show Ribbon Tab
-            var moduleRibbonTab = new Uri("DipendentiRibbonTab", UriKind.Relative);
-            regionManager.RequestNavigate("RibbonRegion", moduleRibbonTab);
+            //var moduleRibbonTab = new Uri("DipendentiRibbonTab", UriKind.Relative);
+            //regionManager.RequestNavigate("RibbonRegion", moduleRibbonTab);
 
 
             // Richiamo NavigationCompleted() callback all'ultima richiesta
 
             // Mostra Workspace
-            var moduleWorkspace = new Uri("DipendentiWorkspaceContainer", UriKind.Relative);
+            var moduleWorkspace = new Uri("CompetenzeView", UriKind.Relative);
             regionManager.RequestNavigate("WorkspaceRegion", moduleWorkspace, NavigationCompleted);
         }
 

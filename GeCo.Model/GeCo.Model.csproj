@@ -46,7 +46,7 @@
     <Compile Include="Competenza.cs" />
     <Compile Include="ConoscenzaCompetenza.cs" />
     <Compile Include="Dipendente.cs" />
-    <Compile Include="FiguraProfessionale.cs" />
+    <Compile Include="Ruolo.cs" />
     <Compile Include="LivelloConoscenza.cs" />
     <Compile Include="Parametro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

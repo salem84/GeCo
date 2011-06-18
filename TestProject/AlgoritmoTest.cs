@@ -25,7 +25,7 @@ namespace TestProject
                     //context.Database.Delete();
                     //context.Database.Create();
                     //InitializeDB.InitalizeAll();
-                    var figure = context.FigureProfessionali.Include(f => f.Conoscenze.Select(c => c.Competenza))
+                    var figure = context.Ruoli.Include(f => f.Conoscenze.Select(c => c.Competenza))
                                     .Include(f => f.Conoscenze.Select(c => c.LivelloConoscenza))
                                     .AsEnumerable();
                     Dipendente dip = CreaDipendenteTest(context);
@@ -46,7 +46,7 @@ namespace TestProject
                         }
 
 
-                        risultati.Add(new { NomeFigura = figura.Nome, PAM = punteggioAttesoMinimo, Idoneo = idoneo, Percentuale = percentuale });
+                        risultati.Add(new { NomeFigura = figura.Titolo, PAM = punteggioAttesoMinimo, Idoneo = idoneo, Percentuale = percentuale });
                     }
 
                 }

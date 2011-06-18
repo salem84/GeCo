@@ -87,7 +87,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             {
                 if (_competenzeTotali == null)
                 {
-                    var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+                    var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
                     _competenzeTotali = service.GetCompetenze();
                 }
                 return _competenzeTotali;
@@ -142,7 +142,7 @@ namespace GeCo.ModuleRuoli.ViewModels
                 {
                     _salvaCommand = new RelayCommand(SalvaRuolo,
                         //Abilitato
-                    () => Ruolo != null && !string.IsNullOrEmpty(Ruolo.Nome)
+                    () => Ruolo != null && !string.IsNullOrEmpty(Ruolo.Titolo)
                     );
                 }
                 return _salvaCommand; 
@@ -380,7 +380,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             //using (PavimentalContext context = new PavimentalContext())
             //{
 
-            var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
             var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
             //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 

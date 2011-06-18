@@ -83,6 +83,8 @@
     <Compile Include="ModuleInit.cs" />
     <Compile Include="ParametriConfronto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICompetenzeServices.cs" />
+    <Compile Include="Services\Impl\CompetenzeServices.cs" />
     <Compile Include="Services\Impl\DbAdmin.cs" />
     <Compile Include="Services\Impl\DipendentiServices.cs" />
     <Compile Include="Services\IDbAdmin.cs" />

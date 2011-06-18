@@ -108,8 +108,10 @@
         </StackPanel>
         
         <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
-        <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=Dipendente}">
-        	<TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Center"/>
+        <UniformGrid Margin="0" Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Matricola" VerticalAlignment="Center"/>
+            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Center"/>
         	<TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Nome, UpdateSourceTrigger=PropertyChanged}"/>
         	<TextBlock TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>

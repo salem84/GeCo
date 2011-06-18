@@ -24,6 +24,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         protected override string containerName { get { return Names.MODULE_NAME; } }
 
+        public string RicercaMatricola { get; set; }
         public string RicercaNome { get; set; }
         public string RicercaCognome { get; set; }
         public DateTime? RicercaDataNascita { get; set; }
@@ -58,17 +59,18 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public RelayCommand CercaCommand { get; set; }
         public RelayCommand DoubleClickCommand { get; set; }
 
-        private DipendentiWorkspaceContainerVM _workspaceContainer;
         private IDipendentiServices _services;
 
-        public RicercaDipendentiViewModel(DipendentiWorkspaceContainerVM workspaceContainer, IDipendentiServices services)
+        public RicercaDipendentiViewModel(IDipendentiServices services)
         {
             DisplayTabName = "Ricerca Dipendente";
 
-            _workspaceContainer = workspaceContainer;
             _services = services;
 
-            CercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaNome) || !string.IsNullOrEmpty(RicercaCognome) || RicercaDataNascita != null);
+            CercaCommand = new RelayCommand(Cerca, () => !string.IsNullOrEmpty(RicercaMatricola) ||
+                !string.IsNullOrEmpty(RicercaNome) || 
+                !string.IsNullOrEmpty(RicercaCognome) ||
+                RicercaDataNascita != null);
 
             DoubleClickCommand = new RelayCommand(VisualizzaDettaglioDipendente);
         }
@@ -78,21 +80,29 @@ namespace GeCo.ModuleDipendenti.ViewModels
         protected void Cerca()
         {
             Expression<Func<Dipendente, bool>> complete = PredicateBuilder.True<Dipendente>();
+            Expression<Func<Dipendente, bool>> exprMatricola = a => a.Matricola == RicercaMatricola;
             Expression<Func<Dipendente, bool>> exprNome = a => a.Nome.Contains(RicercaNome);
             Expression<Func<Dipendente, bool>> exprCognome = a => a.Cognome.Contains(RicercaCognome);
             Expression<Func<Dipendente, bool>> exprData = a => a.DataNascita == RicercaDataNascita;
 
-            if (!string.IsNullOrEmpty(RicercaNome))
+            if (!string.IsNullOrEmpty(RicercaMatricola))
             {
-                complete = complete.And(exprNome);
+                complete = complete.And(exprMatricola);
             }
-            if (!string.IsNullOrEmpty(RicercaCognome))
+            else
             {
-                complete = complete.And(exprCognome);
-            }
-            if (RicercaDataNascita != null)
-            {
-                complete = complete.And(exprData);
+                if (!string.IsNullOrEmpty(RicercaNome))
+                {
+                    complete = complete.And(exprNome);
+                }
+                if (!string.IsNullOrEmpty(RicercaCognome))
+                {
+                    complete = complete.And(exprCognome);
+                }
+                if (RicercaDataNascita != null)
+                {
+                    complete = complete.And(exprData);
+                }
             }
 
             //AsExpendable Preso da LinqKit

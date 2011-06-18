@@ -21,13 +21,23 @@ namespace GeCo.BLL
             InitializeDB.InsertCompetenzeHrDiscrezionali();
             InitializeDB.InsertCompetenzeHrComportamentali();
             InitializeDB.InsertAltro();
+            
+            //Key Roles Strategic Support
             FigureDefault.SalvaResponsabileUfficioTecnico();
             FigureDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
             FigureDefault.SalvaResponsabileControlliLaboratorio();
             FigureDefault.SalvaCostController();
             FigureDefault.SalvaContabilizzatoreSenior();
+
+            //Key Roles Competitive Advantage
             FigureDefault.SalvaResponsabileUfficioAcquisti();
+            FigureDefault.SalvaDirettoreCantiereManutenzione();
             FigureDefault.SalvaDirettoreCantiereInfrastrutture();
+            FigureDefault.SalvaCapoCantiereManutenzione();
+            FigureDefault.SalvaCapoCantiereInfrastrutture();
+            FigureDefault.SalvaBuyerSeniorSede();
+            FigureDefault.SalvaBuyerSeniorCantiere();
+
             DipendentiDefault.SalvaDipendente1();
         }
 
@@ -178,7 +188,7 @@ namespace GeCo.BLL
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO)
                 });
             }
 
@@ -225,7 +235,7 @@ namespace GeCo.BLL
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_COMPORTAMENTALE)
                 });
             }
 
@@ -252,7 +262,7 @@ namespace GeCo.BLL
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE)
                 });
             }
 
@@ -298,7 +308,7 @@ namespace GeCo.BLL
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo)
+                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE)
                 });
             }
 
@@ -309,12 +319,12 @@ namespace GeCo.BLL
 
         public static void InsertAltro()
         {
-            var reposAree = ServiceLocator.Current.GetInstance<IRepository<Area>>();
+            //var reposAree = ServiceLocator.Current.GetInstance<IRepository<Area>>();
             var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
 
-            reposAree.Add(new Area() { Nome = "Area1" });
+            //reposAree.Add(new Area() { Nome = "Area1" });
 
             reposLivelli.Add(new LivelloConoscenza()
             {
