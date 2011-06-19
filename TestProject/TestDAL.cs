@@ -12,7 +12,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Prism.UnityExtensions;
 
-namespace TestProject
+namespace GeCo.Test
 {
     [TestClass]
     public class TestDAL

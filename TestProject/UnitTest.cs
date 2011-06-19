@@ -8,7 +8,7 @@ using GeCo.DAL;
 using System.Configuration;
 using GeCo.Model;
 
-namespace TestProject
+namespace GeCo.Test
 {
     [TestClass]
     public class UnitTest

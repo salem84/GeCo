@@ -20,6 +20,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         public ICommand NuovoDipendenteCommand { get; private set; }
         public ICommand CercaDipendenteCommand { get; private set; }
+        public ICommand RicercaRuolo { get; private set; }
+        public ICommand DettagliConfrontoCommand { get; private set; }
+        public ICommand ExcelCommand { get; private set; }
         public ICommand GraficoCommand { get; private set; }
 
         /// <summary>
@@ -36,7 +39,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             CercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
             NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
+            DettagliConfrontoCommand = new RelayCommand(VisualizzaDettagliConfronto);
             GraficoCommand = new RelayCommand(ToggleGrafico);
+            ExcelCommand = new RelayCommand(EsportaExcel);
         }
 
         private void CreaTabRicercaDipendenti()
@@ -55,6 +60,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             nuovoVM.AddToShell();
         }
 
+        //Per il momento visualizzato solo nella master
         private void ToggleGrafico()
         {
             var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
@@ -65,6 +71,26 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        
+        //Deve essere abilitato solo nella Details
+        private void EsportaExcel()
+        {
+            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
+            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteDetailsVM;
+            if (activeWorkspace != null)
+            {
+                activeWorkspace.EsportaExcel();
+            }
+        }
+
+        //Deve essere abilitato solo nella Master
+        private void VisualizzaDettagliConfronto()
+        {
+            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
+            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteMasterVM;
+            if (activeWorkspace != null)
+            {
+                activeWorkspace.VisualizzaConfrontoDetails();
+            }
+        }
     }
 }

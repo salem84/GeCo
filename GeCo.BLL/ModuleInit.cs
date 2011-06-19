@@ -25,6 +25,7 @@ namespace GeCo.BLL
             this.container.RegisterType<IRuoliServices, RuoliServices>();
             this.container.RegisterType<ICompetenzeServices, CompetenzeServices>();
             this.container.RegisterType<IRicercaServices, RicercaServices>();
+            this.container.RegisterType<IExcelServices, ExcelServices>();
 
             this.container.RegisterType<IAlgoritmoRicerca, RicercaDipendentiDaRuolo>("RicercaDipendenteDaRuolo");
             this.container.RegisterType<IAlgoritmoRicerca, RicercaRuoliDaDipendente>("RicercaRuoloDaDipendente");

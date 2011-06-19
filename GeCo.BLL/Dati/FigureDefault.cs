@@ -1112,7 +1112,7 @@ namespace GeCo.BLL.Dati
                 //new F() { t="Planning operativo movimentazione risorse", v=Tipologiche.Livello.SUFFICIENTE, mg=Tipologiche.Macrogruppi.MG_TECNICO }, //DA MOD
                 new F() { t="Tecniche di Ricerca Mercato specifiche del settore", v=Tipologiche.Livello.BUONO, mg=Tipologiche.Macrogruppi.MG_TECNICO },
                 new F() { t="Negoziazione dell'offerta", v=Tipologiche.Livello.BUONO, mg=Tipologiche.Macrogruppi.MG_TECNICO },
-                new F() { t="Procedura acquisti", v=Tipologiche.Livello.BUONO, mg=Tipologiche.Macrogruppi.MG_TECNICO },
+                new F() { t="Procedure acquisti", v=Tipologiche.Livello.BUONO, mg=Tipologiche.Macrogruppi.MG_TECNICO },
                 new F() { t="Predisposizione budget", v=Tipologiche.Livello.DISCRETO, mg=Tipologiche.Macrogruppi.MG_TECNICO },
 
                 //ASSENTI

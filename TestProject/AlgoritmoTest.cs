@@ -9,7 +9,7 @@ using System.Data.Entity;
 using GeCo.BLL.AlgoritmoRicerca;
 using GeCo.Model;
 
-namespace TestProject
+namespace GeCo.Test
 {
     [TestClass]
     public class AlgoritmoTest

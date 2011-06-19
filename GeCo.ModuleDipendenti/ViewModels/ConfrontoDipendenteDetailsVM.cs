@@ -17,6 +17,7 @@ using GeCo.Infrastructure.Workspace;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.BLL.Services;
 using GeCo.Infrastructure;
+using GeCo.BLL;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -126,15 +127,15 @@ namespace GeCo.ModuleDipendenti.ViewModels
         #endregion //PROPRIETA'
 
 
-
+        private IExcelServices _excelServices;
         
-        /// <summary>
-        /// Costruttore senza parametri
-        /// </summary>
-        public ConfrontoDipendenteDetailsVM()
+        
+        public ConfrontoDipendenteDetailsVM(IExcelServices excelServices)
         {
             DisplayTabName = "Dettagli confronto";
             //StartBackgroundAutoProgress(CreaNuovoDipendente);
+
+            _excelServices = excelServices;
 
             Atteso = null;
             Osservato = null;
@@ -157,6 +158,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Non ho settato i valori, non posso fare il confronto
             if (Osservato != null && Atteso != null)
             {
+                var livelloNullo = new LivelloConoscenza() { Titolo = "Nullo", Valore = 0 };
 
                 var confrontoSog = new ConfrontoSoggetti();
                 confrontoSog.Conoscenze = new List<ConfrontoConoscenzaCompetenza>();
@@ -165,12 +167,22 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 {
                     var conoscenzaOsservato = Osservato.Conoscenze.SingleOrDefault(c => c.CompetenzaId == conoscenzaAtteso.CompetenzaId);
 
+                    //Il dipendente possiede quella conoscenza
                     if (conoscenzaOsservato != null)
                     {
                         ConfrontoConoscenzaCompetenza confronto = new ConfrontoConoscenzaCompetenza();
                         confronto.Competenza = conoscenzaAtteso.Competenza;
                         confronto.LivelloConoscenzaAtteso = conoscenzaAtteso.LivelloConoscenza;
                         confronto.LivelloConoscenzaOsservato = conoscenzaOsservato.LivelloConoscenza;
+                        confrontoSog.Conoscenze.Add(confronto);
+                    }
+                    //se non la possiede, devo visualizzare un valore nullo
+                    else
+                    {
+                        ConfrontoConoscenzaCompetenza confronto = new ConfrontoConoscenzaCompetenza();
+                        confronto.Competenza = conoscenzaAtteso.Competenza;
+                        confronto.LivelloConoscenzaAtteso = conoscenzaAtteso.LivelloConoscenza;
+                        confronto.LivelloConoscenzaOsservato = livelloNullo;
                         confrontoSog.Conoscenze.Add(confronto);
                     }
 
@@ -234,6 +246,12 @@ namespace GeCo.ModuleDipendenti.ViewModels
         }
 
         
+        public void EsportaExcel()
+        {
+            string nome = "Confronto con " + Atteso.Id;
+            _excelServices.EsportaExcel(nome, ConfrontoSoggetti.Conoscenze);
+        }
+
     }
 
     public class ConfrontoSoggetti
@@ -241,11 +259,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public List<ConfrontoConoscenzaCompetenza> Conoscenze { get; set; }
     }
 
-    public class ConfrontoConoscenzaCompetenza
-    {
-        public Competenza Competenza { get; set; }
-        public LivelloConoscenza LivelloConoscenzaAtteso { get; set; }
-        public LivelloConoscenza LivelloConoscenzaOsservato { get; set; }
-    }
+   
 
 }

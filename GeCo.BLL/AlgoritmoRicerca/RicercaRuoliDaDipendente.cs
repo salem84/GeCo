@@ -27,10 +27,14 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
         ParametriConfronto _parametriConfronto;
         private IRepository<Ruolo> _ruoliRepos;
+        private ICompetenzeServices _competenzeServices;
 
-        public RicercaRuoliDaDipendente(IRepository<Ruolo> ruoliRepos)
+        public RicercaRuoliDaDipendente(IRepository<Ruolo> ruoliRepos, ICompetenzeServices competenzeServices)
         {
             _ruoliRepos = ruoliRepos;
+            _competenzeServices = competenzeServices;
+            _parametriConfronto = new ParametriConfronto();
+            
         }
         
         //Mi prendo tutte le conoscenze e calcolo i punteggi
@@ -89,14 +93,14 @@ namespace GeCo.BLL.AlgoritmoRicerca
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
 
-            IEnumerable<Ruolo> figure = _ruoliRepos.GetAll();
+            IEnumerable<Ruolo> tuttiRuoli = _ruoliRepos.GetAll();
 
             //Per ogni figura mi calcolo gli indici
-            foreach (var figura in figure)
+            foreach (var ruolo in tuttiRuoli)
             {
                 RisultatoRicerca risultato = new RisultatoRicerca();
-                risultato.Nome = figura.Titolo;
-                risultato.Id = figura.Id;
+                risultato.Nome = ruolo.Titolo;
+                risultato.Id = ruolo.Id;
                 risultato.PMAX_HrDiscrezionali = _parametriConfronto.PMAX_HrDiscrezionali;
                 risultato.PMAX_HrComportamentali = _parametriConfronto.PMAX_HrComportamentali;
                 risultato.PMAX_Comportamentali = _parametriConfronto.PMAX_Comportamentali;
@@ -108,22 +112,44 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 //Devo lavorare su un sottoinsieme delle conoscenze del dipendente
                 List<ConoscenzaCompetenza> competenzeDaConfrontare = new List<ConoscenzaCompetenza>();
                 //Mi scorro tutte le competenze possedute dal dipendente
-                foreach (var competenza in dipendente.Conoscenze)
+                foreach (var conoscenzaDip in dipendente.Conoscenze)
                 {
                     //Se è una delle competenze che servono per il confronto
-                    if (figura.Conoscenze.Contains(competenza, c => c.CompetenzaId))
+                    if (ruolo.Conoscenze.Contains(conoscenzaDip, c => c.CompetenzaId))
                     {
                         //l'aggiungo alla lista su cui calcolerò il Punteggio Osservato
-                        competenzeDaConfrontare.Add(competenza);
+                        competenzeDaConfrontare.Add(conoscenzaDip);
                     }
                     //Se non è presente è come se avessi inserito la competenza con valore 0
                 }
+                
+                //***** CORREZIONEEEE
+                /*
+                LivelloConoscenza nulla = new LivelloConoscenza() { Titolo = "Nulla", Valore = 0};
+
+                //Mi devo scorrere tutte le competenze del ruolo
+                foreach (var conoscenzaRuolo in figura.Conoscenze)
+                {
+                    //Se è una di quelle competenze possedute anche dal dipendente, aggiungo il valore per il confronto
+                    if (dipendente.Conoscenze.Contains(conoscenzaRuolo, c => c.CompetenzaId))
+                    {
+                        //l'aggiungo alla lista su cui calcolerò il Punteggio Osservato
+                        competenzeDaConfrontare.Add(conoscenzaRuolo);
+                    }
+                    else
+                    {
+                        var competenzaNulla = _competenzeServices.GetCompetenze().Single(c => c.Id == conoscenzaRuolo.CompetenzaId);
+
+                        //competenzeDaConfrontare.Add();
+                    }
+                }*/
+
 
                 //Calcolo punteggio osservato (su dipendente)
                 Punteggi po = Common.CalcolaPunteggi(competenzeDaConfrontare);
 
                 //Calcolo punteggio atteso
-                Punteggi pa = Common.CalcolaPunteggi(figura.Conoscenze);
+                Punteggi pa = Common.CalcolaPunteggi(ruolo.Conoscenze);
 
                 //Tutte le percentuali vengono calcolate automaticamente
                 risultato.PunteggioOsservato = po;

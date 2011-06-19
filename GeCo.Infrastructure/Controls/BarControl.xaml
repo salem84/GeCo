@@ -68,7 +68,7 @@
             <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='Strategic ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
         </Border>
         <Border Grid.Column="4" Background="#FFE6B9B8" Margin="0" Grid.Row="2" BorderBrush="Black">
-            <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='Competitive Advantage ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
+            <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='Competitive ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
         </Border>
 
     </Grid>
