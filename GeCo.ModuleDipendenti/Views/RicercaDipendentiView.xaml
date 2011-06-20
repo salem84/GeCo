@@ -49,9 +49,10 @@
                   SelectedItem="{Binding SelectedItem}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
-                    <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Nome"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Cognome}" Header="Cognome"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding DataNascita, StringFormat=d}" Header="Data di Nascita"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Matricola}" Header="Matricola" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Nome" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Cognome}" Header="Cognome" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding DataNascita, StringFormat=d}" Header="Data di Nascita" Width="100"/>
                 </GridView>
             </ListView.View>
         	<i:Interaction.Triggers>

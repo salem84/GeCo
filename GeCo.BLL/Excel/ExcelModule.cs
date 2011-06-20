@@ -431,7 +431,7 @@ namespace GeCo.BLL.Excel
 
         private Row CreaRigaPunteggioAttesoMinimo(UInt32 riga)
         {
-            int percentuale = 70;
+            int percentuale = PunteggiMassimi.PERC_SogliaFoundational;
 
             Row row83 = new Row() { RowIndex = (UInt32Value)riga, Spans = new ListValue<StringValue>() { InnerText = "1:13" } };
 
@@ -664,32 +664,32 @@ namespace GeCo.BLL.Excel
 
             Cell cell60 = new Cell() { CellReference = "A6", StyleIndex = (UInt32Value)27U, DataType = CellValues.SharedString };
             CellValue cellValue9 = new CellValue();
-            cellValue9.Text = "39"; //Punteggio Massimo
+            cellValue9.Text = "39"; //Testo Punteggio Massimo
             cell60.Append(cellValue9);
 
             Cell cell61 = new Cell() { CellReference = "B6", StyleIndex = (UInt32Value)30U };
             CellValue cellValue10 = new CellValue();
-            cellValue10.Text = "20";
+            cellValue10.Text = PunteggiMassimi.PMAX_HrDiscrezionali.ToString();
             cell61.Append(cellValue10);
 
             Cell cell62 = new Cell() { CellReference = "C6", StyleIndex = (UInt32Value)30U };
             CellValue cellValue11 = new CellValue();
-            cellValue11.Text = "30";
+            cellValue11.Text = PunteggiMassimi.PMAX_HrComportamentali.ToString();
             cell62.Append(cellValue11);
 
             Cell cell63 = new Cell() { CellReference = "D6", StyleIndex = (UInt32Value)30U };
             CellValue cellValue12 = new CellValue();
-            cellValue12.Text = "20";
+            cellValue12.Text = PunteggiMassimi.PMAX_Comportamentali.ToString();
             cell63.Append(cellValue12);
 
             Cell cell64 = new Cell() { CellReference = "E6", StyleIndex = (UInt32Value)30U };
             CellValue cellValue13 = new CellValue();
-            cellValue13.Text = "12";
+            cellValue13.Text = PunteggiMassimi.PMAX_TecnStrategicSupport.ToString();
             cell64.Append(cellValue13);
 
             Cell cell65 = new Cell() { CellReference = "F6", StyleIndex = (UInt32Value)30U };
             CellValue cellValue14 = new CellValue();
-            cellValue14.Text = "18";
+            cellValue14.Text = PunteggiMassimi.PMAX_TecnCompetitiveAdv.ToString();
             cell65.Append(cellValue14);
 
             Cell cell66 = new Cell() { CellReference = "G6", StyleIndex = (UInt32Value)45U };
@@ -1781,18 +1781,14 @@ namespace GeCo.BLL.Excel
             cell2.Append(cellValue2);
 
             //SOMMA PUNTEGGI ATTESI
-            Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
-            CellFormula cellFormula1 = new CellFormula();
-            cellFormula1.Text = "C11+C20+C29+C38";
-            CellValue cellValue3 = new CellValue();
-            cellValue3.Text = "26";
-
-            cell3.Append(cellFormula1);
-            cell3.Append(cellValue3);
+            //Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
+            //CellFormula cellFormula1 = new CellFormula();
+            //cellFormula1.Text = "C1";
+            //cell3.Append(cellFormula1);
 
             row1.Append(cell1);
             row1.Append(cell2);
-            row1.Append(cell3);
+            //row1.Append(cell3);
 
             sheetData1.Append(row1);
 
@@ -1809,17 +1805,13 @@ namespace GeCo.BLL.Excel
             cell4.Append(cellValue4);
 
             //SOMMA PUNTEGGI OSSERVATI
-            Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
-            CellFormula cellFormula2 = new CellFormula();
-            cellFormula2.Text = "C12+C21+C30+C39";
-            CellValue cellValue5 = new CellValue();
-            cellValue5.Text = "44";
-
-            cell5.Append(cellFormula2);
-            cell5.Append(cellValue5);
+            //Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
+            //CellFormula cellFormula2 = new CellFormula();
+            //cellFormula2.Text = "C1";
+            //cell5.Append(cellFormula2);
 
             row2.Append(cell4);
-            row2.Append(cell5);
+            //row2.Append(cell5);
 
             sheetData1.Append(row2);
 
@@ -1828,23 +1820,23 @@ namespace GeCo.BLL.Excel
             #region RIGA 3 (RIGA VUOTA)
 
             Row row3 = new Row() { RowIndex = (UInt32Value)3U, Spans = new ListValue<StringValue>() { InnerText = "1:13" } };
-            Cell cell6 = new Cell() { CellReference = "C3", StyleIndex = (UInt32Value)36U };
-            Cell cell7 = new Cell() { CellReference = "D3", StyleIndex = (UInt32Value)36U };
-            Cell cell8 = new Cell() { CellReference = "E3", StyleIndex = (UInt32Value)36U };
-            Cell cell9 = new Cell() { CellReference = "F3", StyleIndex = (UInt32Value)36U };
-            Cell cell10 = new Cell() { CellReference = "I3", StyleIndex = (UInt32Value)36U };
-            Cell cell11 = new Cell() { CellReference = "J3", StyleIndex = (UInt32Value)36U };
-            Cell cell12 = new Cell() { CellReference = "K3", StyleIndex = (UInt32Value)36U };
-            Cell cell13 = new Cell() { CellReference = "L3", StyleIndex = (UInt32Value)36U };
+            //Cell cell6 = new Cell() { CellReference = "C3", StyleIndex = (UInt32Value)36U };
+            //Cell cell7 = new Cell() { CellReference = "D3", StyleIndex = (UInt32Value)36U };
+            //Cell cell8 = new Cell() { CellReference = "E3", StyleIndex = (UInt32Value)36U };
+            //Cell cell9 = new Cell() { CellReference = "F3", StyleIndex = (UInt32Value)36U };
+            //Cell cell10 = new Cell() { CellReference = "I3", StyleIndex = (UInt32Value)36U };
+            //Cell cell11 = new Cell() { CellReference = "J3", StyleIndex = (UInt32Value)36U };
+            //Cell cell12 = new Cell() { CellReference = "K3", StyleIndex = (UInt32Value)36U };
+            //Cell cell13 = new Cell() { CellReference = "L3", StyleIndex = (UInt32Value)36U };
 
-            row3.Append(cell6);
-            row3.Append(cell7);
-            row3.Append(cell8);
-            row3.Append(cell9);
-            row3.Append(cell10);
-            row3.Append(cell11);
-            row3.Append(cell12);
-            row3.Append(cell13);
+            //row3.Append(cell6);
+            //row3.Append(cell7);
+            //row3.Append(cell8);
+            //row3.Append(cell9);
+            //row3.Append(cell10);
+            //row3.Append(cell11);
+            //row3.Append(cell12);
+            //row3.Append(cell13);
 
             sheetData1.Append(row3);
 
@@ -1885,8 +1877,8 @@ namespace GeCo.BLL.Excel
 
             #endregion
 
-            //TODO
             List<UInt32> righePunteggiAttesi = new List<UInt32>();
+            List<UInt32> righePunteggiOsservati = new List<UInt32>();
 
             var comportamentali = Dati.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == macrogruppo);
 
@@ -1935,9 +1927,15 @@ namespace GeCo.BLL.Excel
                 Row rowPunteggioAtteso = CreaRigaPunteggioAtteso(riga);
                 sheetData1.Append(rowPunteggioAtteso);
 
+                //Aggiungo la riga per il calcolo della somma dei punteggi attesi
+                righePunteggiAttesi.Add(riga);
+
                 riga++;
                 Row rowPunteggioOsservato = CreaRigaPunteggioOsservato(riga);
                 sheetData1.Append(rowPunteggioOsservato);
+
+                //Aggiungo la riga per il calcolo della somma dei punteggi osservati
+                righePunteggiOsservati.Add(riga);
 
                 riga++;
 
@@ -1945,6 +1943,23 @@ namespace GeCo.BLL.Excel
                 riga++;
             }
 
+            //Modifico le celle con le somme
+            //SOMMA PUNTEGGI ATTESI
+            Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
+            CellFormula cellFormula1 = new CellFormula();
+            string formulaSommaAttesi = "C" + string.Join("+C", righePunteggiAttesi.ToArray());
+            cellFormula1.Text = formulaSommaAttesi;
+            cell3.Append(cellFormula1);
+            row1.Append(cell3);            
+            
+            //var rigaOsservati = sheetData1.Elements<Row>().Single(r => r.RowIndex == 2);
+            //SOMMA PUNTEGGI OSSERVATI
+            Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
+            CellFormula cellFormula2 = new CellFormula();
+            string formulaSommaOsservati = "C" + string.Join("+C", righePunteggiOsservati.ToArray());
+            cellFormula2.Text = formulaSommaOsservati;
+            cell5.Append(cellFormula2);
+            row2.Append(cell5);
 
 
             //Celle Unite per stringhe allra riga 4
@@ -2019,14 +2034,14 @@ namespace GeCo.BLL.Excel
             cell2.Append(cellValue2);
 
             //SOMMA PUNTEGGI ATTESI
-            Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
-            CellFormula cellFormula1 = new CellFormula();
-            cellFormula1.Text = "C25+C36";//TODO
-            cell3.Append(cellFormula1);
+            //Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
+            //CellFormula cellFormula1 = new CellFormula();
+            //cellFormula1.Text = "C25+C36";//TODO
+            //cell3.Append(cellFormula1);
 
             row1.Append(cell1);
             row1.Append(cell2);
-            row1.Append(cell3);
+            //row1.Append(cell3);
 
             sheetData1.Append(row1);
 
@@ -2043,14 +2058,14 @@ namespace GeCo.BLL.Excel
             cell4.Append(cellValue4);
 
             //SOMMA PUNTEGGI OSSERVATI
-            Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
-            CellFormula cellFormula2 = new CellFormula();
-            cellFormula2.Text = "C24+C35";
-            cell5.Append(cellFormula2);
+            //Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
+            //CellFormula cellFormula2 = new CellFormula();
+            //cellFormula2.Text = "C24+C35";
+            //cell5.Append(cellFormula2);
 
 
             row2.Append(cell4);
-            row2.Append(cell5);
+            //row2.Append(cell5);
 
             sheetData1.Append(row2);
 
@@ -2059,7 +2074,7 @@ namespace GeCo.BLL.Excel
             #region RIGA 3 (RIGA VUOTA)
 
             Row row3 = new Row() { RowIndex = (UInt32Value)3U, Spans = new ListValue<StringValue>() { InnerText = "1:13" } };
-            Cell cell6 = new Cell() { CellReference = "C3", StyleIndex = (UInt32Value)36U };
+            /*Cell cell6 = new Cell() { CellReference = "C3", StyleIndex = (UInt32Value)36U };
             Cell cell7 = new Cell() { CellReference = "D3", StyleIndex = (UInt32Value)36U };
             Cell cell8 = new Cell() { CellReference = "E3", StyleIndex = (UInt32Value)36U };
             Cell cell9 = new Cell() { CellReference = "F3", StyleIndex = (UInt32Value)36U };
@@ -2075,7 +2090,7 @@ namespace GeCo.BLL.Excel
             row3.Append(cell10);
             row3.Append(cell11);
             row3.Append(cell12);
-            row3.Append(cell13);
+            row3.Append(cell13);*/
 
             sheetData1.Append(row3);
 
@@ -2115,9 +2130,6 @@ namespace GeCo.BLL.Excel
             sheetData1.Append(row4);
 
             #endregion
-
-            //TODO
-            List<UInt32> righePunteggiAttesi = new List<UInt32>();
 
             var tecniche = Dati.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO);
 
@@ -2180,6 +2192,11 @@ namespace GeCo.BLL.Excel
             #endregion
 
 
+            #region ALTRE COMPETENZE 
+
+            List<UInt32> righePunteggiAttesi = new List<UInt32>();
+            List<UInt32> righePunteggiOsservati = new List<UInt32>();
+
             var altreTecniche = tecniche.Where(t => t.Competenza.TipologiaCompetenza.Titolo != "Foundational");
 
             var gruppi = from c in altreTecniche
@@ -2193,8 +2210,6 @@ namespace GeCo.BLL.Excel
                 Row rowTitolo = CreaRigaTipoCompetenza(riga, g.tipologia);
                 sheetData1.Append(rowTitolo);
 
-                Console.WriteLine("*** " + g.tipologia);
-
                 riga++;
 
                 uint rigaInizioDati = riga;
@@ -2207,10 +2222,6 @@ namespace GeCo.BLL.Excel
 
                     Row rowCompetenza = CreaRigaCompetenza(riga, titolo, valAtteso, valOsservato);
                     sheetData1.Append(rowCompetenza);
-
-                    Console.WriteLine("Comp: " + competenza.Competenza.Titolo);
-                    Console.WriteLine("PA: " + valAtteso);
-                    Console.WriteLine("PO: " + valOsservato);
 
                     riga++;
                 }
@@ -2233,10 +2244,13 @@ namespace GeCo.BLL.Excel
                 {
                     rowAttesoCompetitive = riga;
                 }
+                righePunteggiAttesi.Add(riga);
 
                 riga++;
                 Row rowPunteggioOsservato = CreaRigaPunteggioOsservato(riga);
                 sheetData1.Append(rowPunteggioOsservato);
+
+                righePunteggiOsservati.Add(riga);
 
                 riga++;
 
@@ -2244,6 +2258,25 @@ namespace GeCo.BLL.Excel
                 riga++;
             }
 
+            #endregion
+
+            //Modifico le celle con le somme
+            //SOMMA PUNTEGGI ATTESI
+            Cell cell3 = new Cell() { CellReference = "H1", StyleIndex = (UInt32Value)30U };
+            CellFormula cellFormula1 = new CellFormula();
+            string formulaSommaAttesi = "C" + string.Join("+C", righePunteggiAttesi.ToArray());
+            cellFormula1.Text = formulaSommaAttesi;
+            cell3.Append(cellFormula1);
+            row1.Append(cell3);
+
+            //var rigaOsservati = sheetData1.Elements<Row>().Single(r => r.RowIndex == 2);
+            //SOMMA PUNTEGGI OSSERVATI
+            Cell cell5 = new Cell() { CellReference = "H2", StyleIndex = (UInt32Value)28U };
+            CellFormula cellFormula2 = new CellFormula();
+            string formulaSommaOsservati = "C" + string.Join("+C", righePunteggiOsservati.ToArray());
+            cellFormula2.Text = formulaSommaOsservati;
+            cell5.Append(cellFormula2);
+            row2.Append(cell5);
 
 
             //Celle Unite per stringhe alla riga 4

@@ -81,13 +81,17 @@
 			<ComboBox ItemsSource="{Binding TipologieCompetenze}" SelectedItem="{Binding CompetenzaSelezionata.TipologiaCompetenza}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>
-						<TextBlock Text="{Binding Titolo}"/>
-					</DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+						    <TextBlock Text="{Binding Titolo}"/>
+                            <TextBlock Text="{Binding MacroGruppo, StringFormat=' ({0})'}"/>
+                        </StackPanel>
+                    </DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>
 
-            <Label Grid.Column="0" Grid.Row="3" Content="Macrogruppo" />
-            <Label Grid.Column="1" Grid.Row="3" Content="{Binding CompetenzaSelezionata.TipologiaCompetenza.MacroGruppo}"/>
+            <!--<Label Grid.Column="0" Grid.Row="3" Content="Macrogruppo" />
+            <Label Grid.Column="1" Grid.Row="3" Content="{Binding CompetenzaSelezionata.TipologiaCompetenza.MacroGruppo}"/>-->
+            
             <!--<ComboBox ItemsSource="{Binding MacroGruppi}" SelectedItem="{Binding CompetenzaSelezionata.TipologiaCompetenza.MacroGruppo}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

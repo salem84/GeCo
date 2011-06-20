@@ -248,8 +248,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
         
         public void EsportaExcel()
         {
-            string nome = "Confronto con " + Atteso.Id;
-            _excelServices.EsportaExcel(nome, ConfrontoSoggetti.Conoscenze);
+            //Atteso dovrebbe essere un Ruolo
+            Ruolo ruolo = Atteso as Ruolo;
+            
+            //Osservato dovrebbe essere un Dipendente
+            Dipendente dipendente = Osservato as Dipendente;
+
+            string titolo = string.Format("Confronto tra dipendente (# {0}) e Ruolo {1}", dipendente.Matricola, ruolo.Titolo);
+            _excelServices.EsportaExcel(titolo, ConfrontoSoggetti.Conoscenze);
         }
 
     }

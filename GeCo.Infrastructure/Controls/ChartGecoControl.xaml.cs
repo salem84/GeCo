@@ -20,9 +20,26 @@ namespace GeCo.Infrastructure.Controls
     /// </summary>
     public partial class ChartGecoControl : UserControl
     {
+
+
+        public List<string> Legends
+        {
+            get { return (List<string>)GetValue(LegendsProperty); }
+            set { SetValue(LegendsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Legends.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LegendsProperty =
+            DependencyProperty.Register("Legends", 
+            typeof(List<string>), 
+            typeof(ChartGecoControl), 
+            new UIPropertyMetadata(null));
+
+        
+
+
+
         //Lista di Label
-
-
         public List<string> Labels
         {
             get { return (List<string>)GetValue(LabelsProperty); }
@@ -39,8 +56,6 @@ namespace GeCo.Infrastructure.Controls
 
 
         //Lista di Valori
-
-
         public List<decimal> Values
         {
             get { return (List<decimal>)GetValue(ValuesProperty); }
@@ -83,12 +98,48 @@ namespace GeCo.Infrastructure.Controls
             // Create a data series
             Series series1 = new Series();
 
-            series1.Points.DataBindXY(Labels, Values);
+            //series1.Points.DataBindXY(Labels, Values);
+            series1.Points.DataBindXY(Labels,Values);
+            series1.IsValueShownAsLabel = false;
+            //series1.Label = "Y = #VALY\nX = #VALX";
+            series1.Label = "#PERCENT{P0}";
             series1.ChartType = SeriesChartType.Pie;
-            series1["PieLabelStyle"] = "Outside";
+            series1["PieLabelStyle"] = "Inside";
+
+            Legend legend1 = new Legend();
+            legend1.Alignment = System.Drawing.StringAlignment.Center;
+            legend1.BackColor = System.Drawing.Color.Transparent;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.LegendStyle = LegendStyle.Table;
+            legend1.Enabled = true;
+            legend1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Default";
+
+            LegendCellColumn firstColumn = new LegendCellColumn();
+            firstColumn.ColumnType = LegendCellColumnType.SeriesSymbol;
+            //firstColumn.HeaderText = "Color";
+            firstColumn.HeaderBackColor = System.Drawing.Color.WhiteSmoke;
+            legend1.CellColumns.Add(firstColumn);
+
+            LegendCellColumn secondColumn = new LegendCellColumn();
+            secondColumn.ColumnType = LegendCellColumnType.Text;
+            //secondColumn.HeaderText = "Name";
+            secondColumn.Text = "#VALX";
+            secondColumn.HeaderBackColor = System.Drawing.Color.WhiteSmoke;
+            legend1.CellColumns.Add(secondColumn);
+
+
+            chart1.Legends.Add(legend1);
 
             // Add series to the chart
             chart1.Series.Add(series1);
+
+            
+            
+
+            
+            
 
             // Set chart control location
             //chart1.Location = new System.Drawing.Point(16, 48);
@@ -110,6 +161,11 @@ namespace GeCo.Infrastructure.Controls
             var control = source as ChartGecoControl;
             if (control.Values != null && control.Labels != null)
                 control.CreateChart();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = System.Windows.Visibility.Hidden;
         }
 
     }

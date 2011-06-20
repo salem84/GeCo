@@ -130,7 +130,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
         public float PunteggioTotale
         {
-            get { return PunteggioHrDiscrezionali + PunteggioComportamentali + PunteggioTecnStrategic + PunteggioTecnCompetitiveAdv; }
+            get { return PunteggioHrDiscrezionali + PunteggioHrComportamentali + PunteggioComportamentali + PunteggioTecnStrategic + PunteggioTecnCompetitiveAdv; }
         }
 
         #endregion //PERCENTUALI

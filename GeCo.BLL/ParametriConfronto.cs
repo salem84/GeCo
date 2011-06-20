@@ -13,7 +13,7 @@ namespace GeCo.BLL
         public int PMAX_HrComportamentali { get; set; }
         public int PMAX_LineaTotali { get { return PMAX_Comportamentali + PMAX_TecnicTotali; } }
         public int PMAX_Comportamentali { get; set; }
-        public int PMAX_TecnicTotali { get { return PMAX_TecnStrategicSupport + PMAX_TecnStrategicSupport; } }
+        public int PMAX_TecnicTotali { get { return PMAX_TecnStrategicSupport + PMAX_TecnCompetitiveAdv; } }
         public int PMAX_TecnStrategicSupport { get; set; }
         public int PMAX_TecnCompetitiveAdv { get; set; }
         public int PERC_SogliaFoundational { get; set; }
