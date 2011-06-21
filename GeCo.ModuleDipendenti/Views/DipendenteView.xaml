@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:GeCo.Converters"
+             xmlns:bot="clr-namespace:PixelLab.Wpf;assembly=PixelLab.Wpf"
              xml:lang="it-IT"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" >
@@ -53,20 +54,35 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </ListView.GroupStyle>
-            
-            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <Border BorderThickness="3" BorderBrush="Green">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}"/>
+                        <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}"/>
                         <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Path=LivelliConoscenzaValori2}"/>-->
 
-                        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">
+                        <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0">
+                            <bot:NumericUpDown.Value>
+                                <Binding Path="LivelloConoscenzaId">
+                                    
+                                    <Binding.Converter>
+                                        <conv:LivelloConoscenzaConverter/>
+                                    </Binding.Converter>
+                                </Binding>
+                            </bot:NumericUpDown.Value>
+                        </bot:NumericUpDown>
+                        <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">
                             <TextBox.Text>
                                 <Binding Path="LivelloConoscenzaId">
                                     <Binding.ValidationRules>
@@ -77,11 +93,11 @@
                                     </Binding.Converter>
                                 </Binding>
                             </TextBox.Text>
-                        </TextBox>
+                        </TextBox>-->
                     </Grid>
-                    
-                        
-                    
+
+
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
@@ -129,8 +145,7 @@
         	<Button Content="Salva" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding SalvaCommand}" d:LayoutOverrides="GridBox" />
             <Button Content="Elimina" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding DeleteCommand}" d:LayoutOverrides="GridBox" />
             <Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>
-            
         </StackPanel>
-        
+        <bot:NumericUpDown Maximum="4" Minimum="0" Grid.ColumnSpan="2" Margin="143,49,348,41" Grid.Row="1" Grid.RowSpan="2" IsEnabled="True" />
     </Grid>
 </UserControl>

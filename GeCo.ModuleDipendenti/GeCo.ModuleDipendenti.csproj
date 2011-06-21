@@ -59,6 +59,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="PixelLab.Common">
+      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Core">
+      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Wpf">
+      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />

@@ -70,13 +70,13 @@
                         <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Path=LivelliConoscenzaValori2}"/>-->
 
                         <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}"/>
+                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" IsReadOnly="True"/>
                             
                         
 
 
                         <TextBox Grid.Column="2" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}"/>
+                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" IsReadOnly="True"/>
                             
                         
                     </Grid>
