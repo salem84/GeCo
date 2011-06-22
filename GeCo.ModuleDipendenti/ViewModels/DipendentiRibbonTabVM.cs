@@ -10,6 +10,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Events;
 using GeCo.Infrastructure.Events;
 using GeCo.Infrastructure.Workspace;
+using GeCo.Infrastructure;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -23,8 +24,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public ICommand CercaDipendenteCommand { get; private set; }
 
         //Group Analisi
-        public ICommand RicercaRuolo { get; private set; }
-        public ICommand DettagliConfrontoCommand { get; private set; }
+        public ICommand VisualizzaConfrontoMasterCommand { get; private set; }
+        public ICommand VisualizzaConfrontoDetailsCommand { get; private set; }
         public ICommand ExcelCommand { get; private set; }
         public ICommand GraficoCommand { get; private set; }
 
@@ -45,15 +46,17 @@ namespace GeCo.ModuleDipendenti.ViewModels
             NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
 
             //Group Analisi
-
-            DettagliConfrontoCommand = new RelayCommand(VisualizzaDettagliConfronto);
-            GraficoCommand = new RelayCommand(ToggleGrafico);
-            ExcelCommand = new RelayCommand(EsportaExcel);
+            VisualizzaConfrontoMasterCommand = new RelayCommand(VisualizzaConfrontoMaster, CanVisualizzaConfrontoMaster);
+            VisualizzaConfrontoDetailsCommand = new RelayCommand(VisualizzaConfrontoDetails, CanVisualizzaConfrontoDetails);
+            GraficoCommand = new RelayCommand(ToggleGrafico, CanToggleGrafico);
+            ExcelCommand = new RelayCommand(EsportaExcel, CanEsportaExcel);
         }
 
+        #region COMMANDS
+        
         private void CreaTabRicercaDipendenti()
         {
-            var ricercaVM = ServiceLocator.Current.GetInstance<IUnityContainer>().Resolve<RicercaDipendentiViewModel>();
+            var ricercaVM = IoC.Get<RicercaDipendentiViewModel>();
 
             ricercaVM.AddToShell();
         }
@@ -67,37 +70,88 @@ namespace GeCo.ModuleDipendenti.ViewModels
             nuovoVM.AddToShell();
         }
 
+        #region VISUALIZZA CONFRONTO COMMAND
+
+        //Per il momento visualizzato solo nella master
+        private void VisualizzaConfrontoMaster()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, DipendenteViewModel>();
+            //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
+            activeWorkspace.AvviaConfronto();
+        }
+
+        /// <summary>
+        /// Definisce quando è abilitato il RibbonToggleButton del Chart
+        /// </summary>
+        /// <returns>false se il workspace attivo non è ConfrontoDipendenteMaster o non è selezionato alcun elemento</returns>
+        private bool CanVisualizzaConfrontoMaster()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, DipendenteViewModel>();
+
+            //Se sto nella schermata di master, l'activeworkspace è diverso da null
+            return activeWorkspace != null;
+        }
+
+        #endregion
+
+        #region TOGGLE GRAFICO COMMAND
+
         //Per il momento visualizzato solo nella master
         private void ToggleGrafico()
         {
-            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteMasterVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.ToggleGrafico();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
+            //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
+            activeWorkspace.ToggleGrafico();
+        }
+
+        /// <summary>
+        /// Definisce quando è abilitato il RibbonToggleButton del Chart
+        /// </summary>
+        /// <returns>false se il workspace attivo non è ConfrontoDipendenteMaster o non è selezionato alcun elemento</returns>
+        private bool CanToggleGrafico()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
+
+            //Se sto nella schermata di master, l'activeworkspace è diverso da null
+            return activeWorkspace != null && activeWorkspace.RisultatoSelezionato != null;
+        }
+
+        #endregion
+
+        #region ESPORTA EXCEL COMMAND
+
+        private void EsportaExcel()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteDetailsVM>();
+            activeWorkspace.EsportaExcel();
         }
 
         //Deve essere abilitato solo nella Details
-        private void EsportaExcel()
+        private bool CanEsportaExcel()
         {
-            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteDetailsVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.EsportaExcel();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteDetailsVM>();
+            return activeWorkspace != null;
         }
 
+        #endregion
+
+        #region VISUALIZZA DETTAGLI COMMAND
+        
         //Deve essere abilitato solo nella Master
-        private void VisualizzaDettagliConfronto()
+        private void VisualizzaConfrontoDetails()
         {
-            var container = ServiceLocator.Current.GetInstance<DipendentiWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoDipendenteMasterVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.VisualizzaConfrontoDetails();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
+            activeWorkspace.VisualizzaConfrontoDetails();
         }
+
+        private bool CanVisualizzaConfrontoDetails()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
+            return activeWorkspace != null;
+        }
+
+        #endregion
+
+        #endregion
     }
 }

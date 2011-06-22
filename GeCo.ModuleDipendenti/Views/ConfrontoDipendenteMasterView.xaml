@@ -15,10 +15,10 @@
             <Setter Property="Height" Value="16"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Idoneo}" Value="False">
-                    <Setter Property="Source" Value="Images/cross.png"/>
+                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/cross.png"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Idoneo}" Value="True">
-                    <Setter Property="Source" Value="Images/16_em_check.png"/>
+                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/16_em_check.png"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>

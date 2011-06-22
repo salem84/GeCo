@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="FsTaskButton">
       <HintPath>..\packages\TaskButton\FsTaskButton.dll</HintPath>
     </Reference>
@@ -178,28 +181,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Actions-contact-new-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Actions-edit-find-user-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\16_em_check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\cross.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\people-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Actions-office-chart-pie-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\arrow-down.png" />
-    <Resource Include="Views\Images\arrow-up.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"

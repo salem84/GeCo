@@ -8,21 +8,24 @@
              Header="Dipendenti"
              >
     <ribbon:RibbonGroup Header="Anagrafiche">
-        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
-										 Label="Nuovo" Command="{Binding Path=NuovoDipendenteCommand}" />
-        <ribbon:RibbonButton LargeImageSource="Images\Actions-edit-find-user-icon.png"
-										 Label="Cerca" Command="{Binding Path=CercaDipendenteCommand}" />
+        <ribbon:RibbonButton Label="Nuovo" Command="{Binding Path=NuovoDipendenteCommand}" 
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+        <ribbon:RibbonButton Label="Cerca" Command="{Binding Path=CercaDipendenteCommand}" 
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-edit-find-user-icon.png"/>
     </ribbon:RibbonGroup>
 
     <ribbon:RibbonGroup Header="Analisi">
-        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
-										 Label="Cerca Ruolo" Command="{Binding Path=RicercaRuolo}" />
-        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
-										 Label="Dettagli Confronto" Command="{Binding Path=DettagliConfrontoCommand}" />
-        <ribbon:RibbonToggleButton LargeImageSource="Images\Actions-office-chart-pie-icon.png"
-										 Label="Grafico" Command="{Binding Path=GraficoCommand}" />
-        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
-										 Label="Esporta Excel" Command="{Binding Path=ExcelCommand}" />
+        <ribbon:RibbonButton Label="Confronta" Command="{Binding Path=VisualizzaConfrontoMasterCommand}" 
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+        
+        <ribbon:RibbonButton Label="Dettagli Confronto" Command="{Binding Path=VisualizzaConfrontoDetailsCommand}" 
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+        
+        <ribbon:RibbonToggleButton Label="Grafico" Command="{Binding Path=GraficoCommand}"
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-office-chart-pie-icon.png" />
+
+        <ribbon:RibbonButton Label="Esporta Excel" Command="{Binding Path=ExcelCommand}" 
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Export-Excel-32.png" />
         
     </ribbon:RibbonGroup>
 

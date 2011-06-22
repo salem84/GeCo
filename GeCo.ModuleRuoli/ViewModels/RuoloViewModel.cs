@@ -329,7 +329,7 @@ namespace GeCo.ModuleRuoli.ViewModels
             Ruolo = new Ruolo();
         }
 
-        private void AvviaConfronto()
+        public void AvviaConfronto()
         {
             //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
             var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoRuoloMasterVM>();

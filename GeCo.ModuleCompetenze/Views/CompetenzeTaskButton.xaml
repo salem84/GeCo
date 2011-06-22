@@ -10,7 +10,7 @@
                     IsChecked="{Binding IsChecked}"
                     MinWidth="150" 
                     Foreground="Red"
-                    Image="Images/Edit-icon.png" 
+                    Image="/GeCo.Infrastructure;component/Images/Edit-icon.png" 
                     Text="Competenze" 
                     Margin="5,2,5,2" 
                     Background="{Binding Path=Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />

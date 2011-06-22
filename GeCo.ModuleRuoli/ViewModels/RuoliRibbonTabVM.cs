@@ -10,6 +10,7 @@ using Microsoft.Practices.Unity;
 using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure.Events;
 using Microsoft.Practices.Prism.Events;
+using GeCo.Infrastructure;
 
 namespace GeCo.ModuleRuoli.ViewModels
 {
@@ -23,8 +24,8 @@ namespace GeCo.ModuleRuoli.ViewModels
         public ICommand CercaRuoliCommand { get; private set; }
 
         //Group Analisi
-        public ICommand RicercaDipendente { get; private set; }
-        public ICommand DettagliConfrontoCommand { get; private set; }
+        public ICommand VisualizzaConfrontoMasterCommand { get; private set; }
+        public ICommand VisualizzaConfrontoDetailsCommand { get; private set; }
         public ICommand ExcelCommand { get; private set; }
         public ICommand GraficoCommand { get; private set; }
 
@@ -44,11 +45,13 @@ namespace GeCo.ModuleRuoli.ViewModels
             NuovoRuoloCommand = new RelayCommand(() => CreaTabNuovoRuolo());
 
             //Group Analisi
-
-            DettagliConfrontoCommand = new RelayCommand(VisualizzaDettagliConfronto);
-            GraficoCommand = new RelayCommand(ToggleGrafico);
-            ExcelCommand = new RelayCommand(EsportaExcel);
+            VisualizzaConfrontoMasterCommand = new RelayCommand(VisualizzaConfrontoMaster, CanVisualizzaConfrontoMaster);
+            VisualizzaConfrontoDetailsCommand = new RelayCommand(VisualizzaConfrontoDetails, CanVisualizzaConfrontoDetails);
+            GraficoCommand = new RelayCommand(ToggleGrafico, CanToggleGrafico);
+            ExcelCommand = new RelayCommand(EsportaExcel, CanEsportaExcel);
         }
+
+        #region COMMANDS
 
         private void CreaTabRicercaRuoli()
         {
@@ -67,37 +70,88 @@ namespace GeCo.ModuleRuoli.ViewModels
         }
 
 
+        #region VISUALIZZA CONFRONTO COMMAND
+
+        //Per il momento visualizzato solo nella master
+        private void VisualizzaConfrontoMaster()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, RuoloViewModel>();
+            //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
+            activeWorkspace.AvviaConfronto();
+        }
+
+        /// <summary>
+        /// Definisce quando è abilitato il RibbonToggleButton del Chart
+        /// </summary>
+        /// <returns>false se il workspace attivo non è ConfrontoDipendenteMaster o non è selezionato alcun elemento</returns>
+        private bool CanVisualizzaConfrontoMaster()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, RuoloViewModel>();
+
+            //Se sto nella schermata di master, l'activeworkspace è diverso da null
+            return activeWorkspace != null;
+        }
+
+        #endregion
+
+        #region TOGGLE GRAFICO COMMAND
+
         //Per il momento visualizzato solo nella master
         private void ToggleGrafico()
         {
-            var container = ServiceLocator.Current.GetInstance<RuoliWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoRuoloMasterVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.ToggleGrafico();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
+            //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
+            activeWorkspace.ToggleGrafico();
+        }
+
+        /// <summary>
+        /// Definisce quando è abilitato il RibbonToggleButton del Chart
+        /// </summary>
+        /// <returns>false se il workspace attivo non è ConfrontoDipendenteMaster o non è selezionato alcun elemento</returns>
+        private bool CanToggleGrafico()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
+
+            //Se sto nella schermata di master, l'activeworkspace è diverso da null
+            return activeWorkspace != null && activeWorkspace.RisultatoSelezionato != null;
+        }
+
+        #endregion
+
+        #region ESPORTA EXCEL COMMAND
+
+        private void EsportaExcel()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloDetailsVM>();
+            activeWorkspace.EsportaExcel();
         }
 
         //Deve essere abilitato solo nella Details
-        private void EsportaExcel()
+        private bool CanEsportaExcel()
         {
-            var container = ServiceLocator.Current.GetInstance<RuoliWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoRuoloDetailsVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.EsportaExcel();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloDetailsVM>();
+            return activeWorkspace != null;
         }
 
+        #endregion
+
+        #region VISUALIZZA DETTAGLI COMMAND
+        
         //Deve essere abilitato solo nella Master
-        private void VisualizzaDettagliConfronto()
+        private void VisualizzaConfrontoDetails()
         {
-            var container = ServiceLocator.Current.GetInstance<RuoliWorkspaceContainerVM>();
-            var activeWorkspace = container.ActiveWorkspace as ConfrontoRuoloMasterVM;
-            if (activeWorkspace != null)
-            {
-                activeWorkspace.VisualizzaConfrontoDetails();
-            }
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
+            activeWorkspace.VisualizzaConfrontoDetails();
         }
+
+        private bool CanVisualizzaConfrontoDetails()
+        {
+            var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
+            return activeWorkspace != null;
+        }
+
+        #endregion
+
+        #endregion
     }
 }

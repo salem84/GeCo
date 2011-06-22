@@ -182,9 +182,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\search.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Views\RuoliWorkspaceContainer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -201,24 +198,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\Actions-resource-group-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\16_em_check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\cross.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\administrator-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\arrow-down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Images\arrow-up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

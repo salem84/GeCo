@@ -31,12 +31,12 @@
 		<ribbon:Ribbon x:Name="ApplicationRibbon"
 					   prism:RegionManager.RegionName="RibbonRegion">
 			<ribbon:Ribbon.ApplicationMenu>
-				<ribbon:RibbonApplicationMenu SmallImageSource="Images\ribbon.png">
+                <ribbon:RibbonApplicationMenu SmallImageSource="/GeCo.Infrastructure;component/Images\ribbon.png">
 					<ribbon:RibbonApplicationMenuItem Header="About..."
-													  ImageSource="Images\Sign-Info-icon.png"
+													  ImageSource="/GeCo.Infrastructure;component/Images\Sign-Info-icon.png"
 													  Click="btnAbout_Click"/>
 					<ribbon:RibbonApplicationMenuItem Header="Esci"
-													  ImageSource="Images\Log-Out-icon.png"
+													  ImageSource="/GeCo.Infrastructure;component/Images\Log-Out-icon.png"
 													  Click="btnClose_Click"/>
 				</ribbon:RibbonApplicationMenu>
 			</ribbon:Ribbon.ApplicationMenu>
@@ -50,16 +50,16 @@
                 </ribbon:RibbonGroup>
 				<ribbon:RibbonGroup>
 					<ribbon:RibbonButton x:Name="btnInizializza"
-										 LargeImageSource="Images\LargeIcon.png"
+										 LargeImageSource="/GeCo.Infrastructure;component/Images\remove-from-database-icon.png"
 										 Label="Resetta DB" Click="btnInizializza_Click" />
 				</ribbon:RibbonGroup>
 				<ribbon:RibbonGroup>
 					<ribbon:RibbonButton Label="About..."
-										 LargeImageSource="Images\Sign-Info-icon.png"
+										 LargeImageSource="/GeCo.Infrastructure;component/Images\Sign-Info-icon.png"
                                          Click="btnAbout_Click"
 										 />
 					<ribbon:RibbonButton Label="Esci"
-										 LargeImageSource="Images\Log-Out-icon.png"
+										 LargeImageSource="/GeCo.Infrastructure;component/Images\Log-Out-icon.png"
                                          Click="btnClose_Click" />
 				</ribbon:RibbonGroup>
 				

@@ -23,10 +23,10 @@
                             <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Border>
                         <RepeatButton Grid.Column="1" Command="bot:NumericUpDown.IncreaseCommand" Grid.Row="0">
-                            <Image Source="/GeCo.ModuleDipendenti;component/Views/Images/arrow-up.png"/>
+                            <Image Source="/GeCo.Infrastructure;component/Images/arrow-up.png"/>
                         </RepeatButton>
                         <RepeatButton Grid.Column="1" Command="bot:NumericUpDown.DecreaseCommand" Grid.Row="1">
-                            <Image Source="/GeCo.ModuleDipendenti;component/Views/Images/arrow-down.png"/>
+                            <Image Source="/GeCo.Infrastructure;component/Images/arrow-down.png"/>
                         </RepeatButton>
                     </Grid>
                 </ControlTemplate>

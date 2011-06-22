@@ -145,19 +145,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Images\LargeIcon.png" />
-    <Resource Include="View\Images\SmallIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Images\ribbon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Images\Log-Out-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Images\Sign-Info-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GeCo.BLL\GeCo.BLL.csproj">
       <Project>{AD0266E7-DE03-4AA5-98CA-483E5A055850}</Project>
       <Name>GeCo.BLL</Name>

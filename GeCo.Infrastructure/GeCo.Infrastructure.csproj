@@ -82,6 +82,7 @@
     <Compile Include="Events\AddWorkspaceEvent.cs" />
     <Compile Include="Events\ExtensionsMethod.cs" />
     <Compile Include="Events\NavigationCompletedEvent.cs" />
+    <Compile Include="IoC.cs" />
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesUI\Impl\DialogService.cs" />
@@ -106,6 +107,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove-from-database-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Log-Out-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ribbon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Sign-Info-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16_em_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions-resource-group-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\administrator-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Export-Excel-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions-contact-new-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions-edit-find-user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions-office-chart-pie-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\people-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Edit-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
