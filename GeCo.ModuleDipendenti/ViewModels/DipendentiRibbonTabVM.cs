@@ -18,8 +18,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
     /// </summary>
     public class DipendentiRibbonTabVM : ViewModelBase
     {
+        //Group Anagrafica
         public ICommand NuovoDipendenteCommand { get; private set; }
         public ICommand CercaDipendenteCommand { get; private set; }
+
+        //Group Analisi
         public ICommand RicercaRuolo { get; private set; }
         public ICommand DettagliConfrontoCommand { get; private set; }
         public ICommand ExcelCommand { get; private set; }
@@ -37,8 +40,12 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void InitializeCommands()
         {
+            //Group Anagrafica
             CercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
             NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
+
+            //Group Analisi
+
             DettagliConfrontoCommand = new RelayCommand(VisualizzaDettagliConfronto);
             GraficoCommand = new RelayCommand(ToggleGrafico);
             ExcelCommand = new RelayCommand(EsportaExcel);

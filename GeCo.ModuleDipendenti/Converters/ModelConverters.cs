@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
-using GeCo.DAL;
 using System.Windows.Controls;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.BLL.Services;
@@ -53,7 +52,7 @@ namespace GeCo.Converters
             /*Regex _isNumber = new Regex(@"^\d+$");
             Match m = _isNumber.Match(value.ToString());
             return m.Success;*/
-            string input = value as string;
+            string input = value.ToString();
             string[] validi = { "0", "1", "2", "3", "4" };
             if (string.IsNullOrEmpty(input))
             {

@@ -15,6 +15,9 @@ namespace GeCo.BLL.Services
     {
         public Ruolo SalvaRuolo(Ruolo r)
         {
+            var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
+
             Ruolo ruolo = new Ruolo();
             ruolo.Titolo = r.Titolo;
             ruolo.Descrizione = r.Descrizione;
@@ -25,7 +28,7 @@ namespace GeCo.BLL.Services
             foreach (var c in r.Conoscenze)
             {
                 //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
+                if (c.LivelloConoscenzaId == idLivelloInsuff)
                 {
                     ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
 

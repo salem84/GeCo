@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"  
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     
@@ -23,27 +24,24 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="70*" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Row="0">
-            <UniformGrid Rows="1" Columns="3" DataContext="{Binding Figura}">
-                <TextBlock Text="{Binding Titolo, StringFormat='Figura: {0}'}"/>
-                <TextBlock Text="{Binding Descrizione, StringFormat='Descrizione: {0}'}"/>
+            <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
+            <UniformGrid Rows="1" Columns="2" DataContext="{Binding Ruolo}" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ruolo: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Titolo}"/>    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Descrizione: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Descrizione}"/>
+                </StackPanel>
             </UniformGrid>
-            <TextBlock Text="Parametri" FontWeight="DemiBold" />
-            <UniformGrid Rows="1" Columns="1" DataContext="{Binding Path=ParametriConfronto}" >
-                <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Tecn. Foundational {0:0.0} %'}" Padding="10,4" />
-            </UniformGrid>
-            <TextBlock Text="Punteggi Massimi" FontWeight="DemiBold" />
-            <UniformGrid Rows="1" Columns="4" DataContext="{Binding Path=ParametriConfronto}" >
-                <TextBlock Text="{Binding PMAX_HrDiscrezionali, StringFormat='PMax[HR_D]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_HrComportamentali, StringFormat='PMax[HR_C]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='PMax[Comp]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='PMax[TecnStrategic]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='PMax[TecnCompetitive]: {0}'}"/>
-            </UniformGrid>
+            
+            
         </StackPanel>
 
 
@@ -71,5 +69,16 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <controls:ChartGecoControl
+                        Values="{Binding ValoriGrafico}"
+                        Labels="{Binding LabelsGrafico}"
+                        Width="400" Height="400" Panel.ZIndex="10"
+                        d:DesignWidth="10"
+                        Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
+            />
+
     </Grid>
+    
+    
 </UserControl>

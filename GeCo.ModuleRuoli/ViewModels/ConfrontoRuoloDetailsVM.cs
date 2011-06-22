@@ -19,9 +19,9 @@ using GeCo.Infrastructure;
 using GeCo.BLL;
 using GeCo.Infrastructure.ServicesUI;
 
-namespace GeCo.ModuleDipendenti.ViewModels
+namespace GeCo.ModuleRuoli.ViewModels
 {
-    public class ConfrontoDipendenteDetailsVM : Workspace
+    public class ConfrontoRuoloDetailsVM : Workspace
     {
         #region PROPRIETA'
 
@@ -130,7 +130,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private IExcelServices _excelServices;
         
         
-        public ConfrontoDipendenteDetailsVM(IExcelServices excelServices)
+        public ConfrontoRuoloDetailsVM(IExcelServices excelServices)
         {
             DisplayTabName = "Dettagli confronto";
             //StartBackgroundAutoProgress(CreaNuovoDipendente);
@@ -194,38 +194,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         }
         
 
-        
-        //private void LoadDipendente()
-        //{
-           
-        //    var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-        //    Osservato = service.CaricaDipendente(_dipendenteId);
-
-
-        //    //Può essere null magari perchè ho cancellato quell'entità ed è rimasta aperta la scheda
-        //    if (Osservato == null)
-        //    {
-        //        //TODO
-        //        Stato = "Utente non trovato";
-        //    }
-            
-        //}
-
-
-
-
-
-
-        
-        //private void AvviaConfronto()
-        //{
-        //    //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
-        //    var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoDipendenteMasterVM>();
-        //    confrontoMaster.Dipendente = Osservato;
-        //    confrontoMaster.AddToShell();
-        //}
-
-        
+       
 
 
        /// <summary>
@@ -252,14 +221,13 @@ namespace GeCo.ModuleDipendenti.ViewModels
             IDialogService dialogService = new DialogService();
             string filename = dialogService.GetSaveFileDialog("Salva Report Excel", "Cartella di lavoro di Excel (*.xlsx) | .xlsx");
 
-
-            //Atteso dovrebbe essere un Ruolo
-            var ruolo = Atteso as Ruolo;
+            //Atteso dovrebbe essere un Dipendente
+            var dipendente = Atteso as Dipendente;
             
-            //Osservato dovrebbe essere un Dipendente
-            var dipendente = Osservato as Dipendente;
+            //Osservato dovrebbe essere un Ruolo
+            var ruolo = Osservato as Ruolo;
 
-            string titolo = string.Format("Confronto tra Dipendente # {0} e Ruolo {1}", dipendente.Matricola, ruolo.Titolo);
+            string titolo = string.Format("Confronto tra Ruolo {0} e Dipendente #{1}", ruolo.Titolo, dipendente.Matricola);
             _excelServices.EsportaExcel(filename, titolo, ConfrontoSoggetti.Conoscenze);
         }
 

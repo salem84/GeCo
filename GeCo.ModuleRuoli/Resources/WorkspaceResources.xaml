@@ -47,7 +47,7 @@
         <vw:RuoloView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ConfrontoRuoloVM}">
+    <DataTemplate DataType="{x:Type vm:ConfrontoRuoloMasterVM}">
         <vw:ConfrontoRuoloMasterView />
     </DataTemplate>
 

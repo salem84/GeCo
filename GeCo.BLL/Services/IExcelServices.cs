@@ -7,6 +7,6 @@ namespace GeCo.BLL.Services
 {
     public interface IExcelServices
     {
-        void EsportaExcel(string nomeRuolo, List<ConfrontoConoscenzaCompetenza> confronti);
+        void EsportaExcel(string filepath, string nomeRuolo, List<ConfrontoConoscenzaCompetenza> confronti);
     }
 }

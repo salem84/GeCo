@@ -9,7 +9,6 @@ using Microsoft.Practices.Prism.Regions;
 using GeCo.ModuleDipendenti.Views;
 using GeCo.ModuleDipendenti.ViewModels;
 using GeCo.BLL.Services;
-using GeCo.DAL;
 using GeCo.Infrastructure;
 using GeCo.Model;
 

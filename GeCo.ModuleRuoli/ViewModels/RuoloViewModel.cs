@@ -326,32 +326,13 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         private void CreaNuovoRuolo()
         {
-            /*using (PavimentalContext context = new PavimentalContext())
-            {
-                var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-                var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
-
-                var knowHowVuoto = (from c in allCompetenze
-                                    select new ConoscenzaCompetenza()
-                                    {
-                                        Competenza = c,
-                                        //LivelloConoscenza = livelloNullo
-                                        CompetenzaId = c.Id,
-                                        LivelloConoscenzaId = livelloNullo.Id
-                                    }).ToList();
-
-                FiguraProfessionale = new FiguraProfessionale() { Conoscenze = knowHowVuoto };
-
-                
-            }*/
-
             Ruolo = new Ruolo();
         }
 
         private void AvviaConfronto()
         {
             //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
-            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoRuoloVM>();
+            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoRuoloMasterVM>();
             confrontoMaster.Ruolo = Ruolo;
             confrontoMaster.AddToShell();
         }
@@ -377,24 +358,22 @@ namespace GeCo.ModuleRuoli.ViewModels
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            //using (PavimentalContext context = new PavimentalContext())
-            //{
-
-            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
-            var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-            //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-
-            Ruolo.Conoscenze.Add(new ConoscenzaCompetenza()
+            if (CompetenzaDisponibileSelezionata != null)
             {
-                Competenza = CompetenzaDisponibileSelezionata,
-                //LivelloConoscenza = livelloNullo
-                CompetenzaId = CompetenzaDisponibileSelezionata.Id,
-                LivelloConoscenzaId = livelloNullo.Id
-            });
+                var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
+                var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
 
-            RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
-            UpdateConoscenzeGroup();
-            //}
+                Ruolo.Conoscenze.Add(new ConoscenzaCompetenza()
+                {
+                    Competenza = CompetenzaDisponibileSelezionata,
+                    //LivelloConoscenza = livelloNullo
+                    CompetenzaId = CompetenzaDisponibileSelezionata.Id,
+                    LivelloConoscenzaId = livelloNullo.Id
+                });
+
+                RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
+                UpdateConoscenzeGroup();
+            }
         }
     }
 

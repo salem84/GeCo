@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo.BLL.AlgoritmoRicerca;
-using GeCo.DAL;
 using GeCo.Model;
 using GeCo.Infrastructure.Workspace;
 using GeCo.Infrastructure;
@@ -11,6 +10,7 @@ using GeCo.BLL.Services;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Command;
 using GeCo.BLL;
+using System.Windows.Input;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -54,7 +54,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private int FigureProfessionaliTotali { get; set; }
         private int FigureProfessionaliAnalizzate { get; set; }
 
-        public RelayCommand DoubleClickCommand { get; set; }
+        public ICommand DoubleClickCommand { get; set; }
 
         public RisultatoRicerca RisultatoSelezionato { get; set; }
 
@@ -135,7 +135,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _ruoliServices = ruoliServices;
             _ricercaServices = ricercaServices;
 
-            DoubleClickCommand = new RelayCommand(ToggleGrafico);
+            DoubleClickCommand = new RelayCommand(VisualizzaConfrontoDetails);
             ParametriConfronto = new ParametriConfronto();
 
            // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();

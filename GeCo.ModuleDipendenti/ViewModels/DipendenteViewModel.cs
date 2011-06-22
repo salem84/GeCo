@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GeCo;
-using GeCo.DAL;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
@@ -234,6 +233,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _dipendenteId = dipendente.Id;
             StartBackgroundAutoProgress(LoadDipendente);
             EditMode = true;
+
+            //DisplayTabName = "Modifica " + Dipendente.Matricola ?? "";
         }
 
         //private void LoadDipendente(int dipendenteId)
@@ -279,6 +280,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             Dipendente = result;
 
             EditMode = true;
+            DisplayTabName = "Modifica " + Dipendente.Matricola;
 
             Stato = "Salvato";
         }
@@ -305,25 +307,6 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void CreaNuovoDipendente()
         {
-            //using (PavimentalContext context = new PavimentalContext())
-            //{
-            //    var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-            //    var allCompetenze = context.Competenze.Include(c => c.TipologiaCompetenza).ToList();
-
-            //    /*var knowHowVuoto = (from c in allCompetenze
-            //                        select new ConoscenzaCompetenza()
-            //                        {
-            //                            Competenza = c,
-            //                            //LivelloConoscenza = livelloNullo
-            //                            CompetenzaId = c.Id,
-            //                            LivelloConoscenzaId = livelloNullo.Id
-            //                        }).ToList();*/
-
-            //    Dipendente = new Dipendente();// { Conoscenze = knowHowVuoto };
-
-                
-            //}
-
             Dipendente = new Dipendente();
         }
 
@@ -347,9 +330,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
         /// </summary>
         protected void AggiungiCompetenza()
         {
-            var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
-            var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
-                //var livelloNullo = context.LivelliConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+            if (CompetenzaDisponibileSelezionata != null)
+            {
+                var service = ServiceLocator.Current.GetInstance<ICompetenzeServices>();
+                var livelloNullo = service.GetLivelliConoscenza().Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE);
+
 
                 Dipendente.Conoscenze.Add(new ConoscenzaCompetenza()
                     {
@@ -361,6 +346,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
                 RaisePropertyChanged("CompetenzeDisponibiliDaAggiungere");
                 UpdateConoscenzeGroup();
+            }
         }
 
         

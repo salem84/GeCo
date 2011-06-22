@@ -36,7 +36,7 @@ namespace GeCo.BLL.Excel
         public ParametriConfronto PunteggiMassimi { get; set; }
 
         
-        public void CreaExcel()
+        public void CreaExcel(string filepath)
         {
             //Validazione dati
             if (string.IsNullOrEmpty(NomeRuolo))
@@ -46,7 +46,7 @@ namespace GeCo.BLL.Excel
                 return;
 
 
-            string filepath = "D:\\" + DateTime.Now.Ticks + ".xlsx";
+            //string filepath = "D:\\" + DateTime.Now.Ticks + ".xlsx";
             using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Create(filepath, SpreadsheetDocumentType.Workbook))
             {
                 GeneraWorkbookPart(spreadsheet);

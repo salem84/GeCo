@@ -20,24 +20,26 @@ namespace GeCo.BLL.Services
         /// <param name="dipendente"></param>
         public Dipendente SalvaDipendente(Dipendente d)
         {
+            var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
+
             //Controllo se l'id è uguale a 0
             //Ricreo l'oggetto
-            
-            
+                        
             Dipendente dipendente = new Dipendente();
             dipendente.Matricola = d.Matricola;
             dipendente.Cognome = d.Cognome;
             dipendente.Nome = d.Nome;
             dipendente.DataNascita = d.DataNascita;
-
-
+            
             dipendente.Conoscenze = new List<ConoscenzaCompetenza>();
 
             //Mi scorro tutte le conoscenze
             foreach (var c in d.Conoscenze)
             {
                 //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
+                //if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
+                if (c.LivelloConoscenzaId == idLivelloInsuff)
                 {
                     ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
 

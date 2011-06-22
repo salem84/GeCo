@@ -131,10 +131,6 @@
       <Project>{AD0266E7-DE03-4AA5-98CA-483E5A055850}</Project>
       <Name>GeCo.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeCo.DAL\GeCo.DAL.csproj">
-      <Project>{32C094BA-7A76-4A2D-AD70-C05562EB29A3}</Project>
-      <Name>GeCo.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GeCo.Infrastructure\GeCo.Infrastructure.csproj">
       <Project>{40D5418E-DEAF-40D1-9A3B-DA89A3C761F1}</Project>
       <Name>GeCo.Infrastructure</Name>
@@ -145,6 +141,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\NumericUpDownStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\WorkspaceResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -195,6 +195,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\Actions-office-chart-pie-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\arrow-down.png" />
+    <Resource Include="Views\Images\arrow-up.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -9,14 +9,14 @@ namespace GeCo.BLL.Services
     public class ExcelServices : IExcelServices
     {
 
-        public void EsportaExcel(string nomeRuolo, List<ConfrontoConoscenzaCompetenza> confronti)
+        public void EsportaExcel(string filepath, string nomeRuolo, List<ConfrontoConoscenzaCompetenza> confronti)
         {
             ExcelModule excel = new ExcelModule();
             excel.NomeRuolo = nomeRuolo;
             excel.Dati = confronti;
             excel.PunteggiMassimi = new ParametriConfronto();
 
-            excel.CreaExcel();
+            excel.CreaExcel(filepath);
         }
     }
 }

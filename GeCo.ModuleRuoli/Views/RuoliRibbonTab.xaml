@@ -14,4 +14,15 @@
 										 Label="Cerca" Command="{Binding Path=CercaRuoliCommand}" />
     </ribbon:RibbonGroup>
 
+    <ribbon:RibbonGroup Header="Analisi">
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Cerca Dipendente" Command="{Binding Path=RicercaDipendente}" />
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Dettagli Confronto" Command="{Binding Path=DettagliConfrontoCommand}" />
+        <ribbon:RibbonToggleButton LargeImageSource="Images\Actions-office-chart-pie-icon.png"
+										 Label="Grafico" Command="{Binding Path=GraficoCommand}" />
+        <ribbon:RibbonButton LargeImageSource="Images\Actions-contact-new-icon.png"
+										 Label="Esporta Excel" Command="{Binding Path=ExcelCommand}" />
+
+    </ribbon:RibbonGroup>
 </ribbon:RibbonTab>

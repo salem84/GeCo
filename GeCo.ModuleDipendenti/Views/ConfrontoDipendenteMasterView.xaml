@@ -27,28 +27,29 @@
 
     <Grid IsEnabled="{Binding ControlliAbilitati}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0">
-            <UniformGrid Rows="1" Columns="3" DataContext="{Binding Dipendente}">
-                <TextBlock Text="{Binding Nome, StringFormat='Nome: {0}'}" />
-                <TextBlock Text="{Binding Cognome, StringFormat='Cognome: {0}'}"/>
-                <TextBlock Text="{Binding DataNascita, StringFormat='Data di nascita: {0:dd/MM/yyyy}'}"/>
+            <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
+            <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Matricola: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Matricola}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nome: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Nome}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Cognome: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Cognome}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Data di Nascita: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding DataNascita, StringFormat='Data di nascita: {0:dd/MM/yyyy}'}"/>
+                </StackPanel>
             </UniformGrid>
-            <!--<TextBlock Text="Parametri" FontWeight="DemiBold" />
-            <UniformGrid Rows="1" Columns="1" DataContext="{Binding Path=ParametriConfronto}">
-                <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Tecn. Foundational {0:0.0} %'}" Padding="10,4" />
-            </UniformGrid>
-            <TextBlock Text="Punteggi Massimi" FontWeight="DemiBold"/>
-            <UniformGrid Rows="1" Columns="4" DataContext="{Binding Path=ParametriConfronto}">
-                <TextBlock Text="{Binding PMAX_HrDiscrezionali, StringFormat='PMax[HR_D]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_HrComportamentali, StringFormat='PMax[HR_C]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='PMax[Comp]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='PMax[TecnStrategic]: {0}'}"/>
-                <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='PMax[TecnCompetitive]: {0}'}"/>
-            </UniformGrid>-->
-            <controls:BarControl Height="70" Margin="50, 0, 50, 50" DataContext="{Binding ParametriConfronto}" />
         </StackPanel>
 
         <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}">
@@ -105,13 +106,13 @@
         </ListView>
 
         
-                <controls:ChartGecoControl
-                             Values="{Binding ValoriGrafico}"
-                             Labels="{Binding LabelsGrafico}"
-                             Width="400" Height="400" Panel.ZIndex="10"
-                             d:DesignWidth="10"
-                             Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
-                    />        
+        <controls:ChartGecoControl
+                        Values="{Binding ValoriGrafico}"
+                        Labels="{Binding LabelsGrafico}"
+                        Width="400" Height="400" Panel.ZIndex="10"
+                        d:DesignWidth="10"
+                        Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
+            />        
            
         
     </Grid>

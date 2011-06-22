@@ -84,6 +84,8 @@
     <Compile Include="Events\NavigationCompletedEvent.cs" />
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesUI\Impl\DialogService.cs" />
+    <Compile Include="ServicesUI\IDialogService.cs" />
     <Compile Include="Tipologiche.cs" />
     <Compile Include="Workspace\WorkspacesContainer.cs" />
     <Compile Include="Workspace\Workspace.cs" />
