@@ -144,10 +144,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\NumericUpDownStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\WorkspaceResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

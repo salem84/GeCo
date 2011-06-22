@@ -5,3 +5,10 @@ D:\GeCo\Source\TestProject\bin\Debug\GeCoDAL.dll
 D:\GeCo\Source\TestProject\bin\Debug\GeCoDAL.pdb
 D:\GeCo\Source\TestProject\obj\Debug\TestProject.dll
 D:\GeCo\Source\TestProject\obj\Debug\TestProject.pdb
+D:\Progetti\GeCo\Source\output\Debug\app.config
+D:\Progetti\GeCo\Source\output\Debug\GeCo.Test.dll.config
+D:\Progetti\GeCo\Source\output\Debug\GeCo.Test.dll
+D:\Progetti\GeCo\Source\output\Debug\GeCo.Test.pdb
+D:\Progetti\GeCo\Source\TestProject\obj\Debug\ResolveAssemblyReference.cache
+D:\Progetti\GeCo\Source\TestProject\obj\Debug\GeCo.Test.dll
+D:\Progetti\GeCo\Source\TestProject\obj\Debug\GeCo.Test.pdb

@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resources/NumericUpDownStyle.xaml" />
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/NumericUpDownStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -156,7 +156,7 @@
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
         	<Button Content="Salva" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding SalvaCommand}" d:LayoutOverrides="GridBox" />
             <Button Content="Elimina" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding DeleteCommand}" d:LayoutOverrides="GridBox" />
-            <Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>
+            <!--<Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>-->
         </StackPanel>
         <!--<bot:NumericUpDown Maximum="4" Minimum="0"  Grid.Row="1" IsEnabled="True" Style="{StaticResource NumericUpDownImageStyle}" Height="30" Width="50" />-->
     </Grid>

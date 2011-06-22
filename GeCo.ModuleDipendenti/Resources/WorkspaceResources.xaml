@@ -2,38 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:GeCo.ModuleDipendenti.ViewModels"
                     xmlns:vw="clr-namespace:GeCo.ModuleDipendenti.Views"
-                    xmlns:bot="clr-namespace:PixelLab.Wpf;assembly=PixelLab.Wpf"
                     >
-
-
-    <Style x:Key="NumericUpDownStyle1" TargetType="{x:Type bot:NumericUpDown}">
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type bot:NumericUpDown}">
-                    <Grid Margin="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" Margin="2" Grid.RowSpan="2" VerticalAlignment="Center">
-                            <TextBlock Padding="5" TextAlignment="Right" Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}" Width="60"/>
-                        </Border>
-                        <RepeatButton Grid.Column="1" Command="bot:NumericUpDown.IncreaseCommand" Grid.Row="0">
-                            <Image Source="/GeCo.ModuleDipendenti;component/Views/Images/arrow-up.png"></Image>
-                        </RepeatButton>
-                        <RepeatButton Content="Down" Grid.Column="1" Command="bot:NumericUpDown.DecreaseCommand" Grid.Row="1"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
+   
 
     <DataTemplate x:Key="ClosableTabItemTemplate">
         <DockPanel Width="120">

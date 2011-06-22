@@ -181,20 +181,21 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        private ICommand _confrontaCommand;
-        public ICommand ConfrontaCommand
-        {
-            get
-            {
-                if (_confrontaCommand == null)
-                {
-                    _confrontaCommand = new RelayCommand(AvviaConfronto);
-                }
-                return _confrontaCommand;
-            }
-        }
+        //private ICommand _confrontaCommand;
+        //public ICommand ConfrontaCommand
+        //{
+        //    get
+        //    {
+        //        if (_confrontaCommand == null)
+        //        {
+        //            _confrontaCommand = new RelayCommand(AvviaConfronto);
+        //        }
+        //        return _confrontaCommand;
+        //    }
+        //}
 
         //E' legato al button che permette di aggiungere una competenza disponibile alle competenze del dipendente
+        //Abilitato quando è selezionata una competenza
         private ICommand _aggiungiCompetenzaCommand;
         public ICommand AggiungiCompetenzaCommand
         {
@@ -202,7 +203,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             {
                 if (_aggiungiCompetenzaCommand == null)
                 {
-                    _aggiungiCompetenzaCommand = new RelayCommand(AggiungiCompetenza);
+                    _aggiungiCompetenzaCommand = new RelayCommand(AggiungiCompetenza,
+                        () => CompetenzaDisponibileSelezionata != null);
                 }
                 return _aggiungiCompetenzaCommand;
             }

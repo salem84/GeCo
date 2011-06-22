@@ -172,11 +172,8 @@ namespace GeCo.ModuleRuoli.ViewModels
             {
                 if (_aggiungiCompetenzaCommand == null)
                 {
-                    _aggiungiCompetenzaCommand = new RelayCommand(() =>
-                    {
-                        AggiungiCompetenza();
-                    }
-                    );
+                    _aggiungiCompetenzaCommand = new RelayCommand(AggiungiCompetenza,
+                        () => CompetenzaDisponibileSelezionata != null);
                 }
                 return _aggiungiCompetenzaCommand;
             }

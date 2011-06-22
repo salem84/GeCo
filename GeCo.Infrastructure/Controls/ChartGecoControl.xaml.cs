@@ -167,6 +167,5 @@ namespace GeCo.Infrastructure.Controls
         {
             Visibility = System.Windows.Visibility.Hidden;
         }
-
     }
 }
