@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\DipendentiRibbonTabVM.cs" />
     <Compile Include="ViewModels\DipendentiTaskButtonVM.cs" />
     <Compile Include="ViewModels\DipendentiWorkspaceContainerVM.cs" />
+    <Compile Include="ViewModels\ModuleHelpVM.cs" />
     <Compile Include="ViewModels\RicercaDipendentiViewModel.cs" />
     <Compile Include="ViewModels\ConfrontoDipendenteMasterVM.cs" />
     <Compile Include="Views\ConfrontoDipendenteDetailsView.xaml.cs">
@@ -118,6 +119,9 @@
     </Compile>
     <Compile Include="Views\DipendentiWorkspaceContainer.xaml.cs">
       <DependentUpon>DipendentiWorkspaceContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModuleHelp.xaml.cs">
+      <DependentUpon>ModuleHelp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RicercaDipendentiView.xaml.cs">
       <DependentUpon>RicercaDipendentiView.xaml</DependentUpon>
@@ -144,7 +148,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\WorkspaceResources.xaml">
+    <CodeAnalysisDictionary Include="Resources\HelpPanelText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
+    <Page Include="Resources\WorkspaceMapping.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DipendentiWorkspaceContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModuleHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

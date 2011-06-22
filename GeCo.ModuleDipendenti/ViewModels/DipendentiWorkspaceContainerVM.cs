@@ -15,7 +15,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         public DipendentiWorkspaceContainerVM()
         {
-            //Sottoscrivo l'evento per ricevere l'aggiunta di workspace
+            //Mi sottoscrivo all'evento per ricevere l'aggiunta di workspace
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             var addWorkspaceEvent = eventAggregator.GetEvent<AddWorkspaceEvent>();
             addWorkspaceEvent.Subscribe(OnAddWorkspace, ThreadOption.UIThread);
@@ -27,10 +27,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void OnAddWorkspace(AddWorkspaceEvent evento)
         {
-            if (evento.Container == "ModuleDipendenti")
+            if (evento.Container == Names.MODULE_NAME)
             {
                 this.AggiungiPannello(evento.Workspace);
             }   
         }
+        
     }
 }

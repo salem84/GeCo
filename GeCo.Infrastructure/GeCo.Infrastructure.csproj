@@ -93,8 +93,10 @@
     <Compile Include="DialogOLD\PopupBase.cs" />
     <Compile Include="Events\AddWorkspaceEvent.cs" />
     <Compile Include="Events\CloseChartEvent.cs" />
+    <Compile Include="Events\ChangeWorkspaceEvent.cs" />
     <Compile Include="Events\ExtensionsMethod.cs" />
     <Compile Include="Events\NavigationCompletedEvent.cs" />
+    <Compile Include="HelpPanel.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="KeyEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,11 +118,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\BoolToImageStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\NumericUpDownStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\WorkspaceResources.xaml">
+    <Page Include="Resources\WorkspaceStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -178,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Actions-window-close-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

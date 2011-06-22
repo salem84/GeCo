@@ -7,6 +7,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Diagnostics;
+using Microsoft.Practices.Prism.Events;
+using GeCo.Infrastructure.Events;
 
 namespace GeCo.Infrastructure.Workspace
 {
@@ -89,5 +91,26 @@ namespace GeCo.Infrastructure.Workspace
             RaisePropertyChanged("ActiveWorkspace");
         }
 
+        /// <summary>
+        /// Fatto il binding al SelectedItem di TabControl, attraverso la proprietà Tag di HeaderedContentControl
+        /// Deve lanciare solo il messaggio.
+        /// TODO ricontrollare binding, va anche in lettura!
+        /// </summary>
+        public object SelectedItem
+        {
+            get { return ActiveWorkspace; }
+            set
+            {
+                var workspace = value as Workspace;
+                if (workspace != null)
+                {
+                    // Notifico l'evento
+                    var eventAggregator = IoC.Get<IEventAggregator>();
+                    var changeWorkspaceEvent = eventAggregator.GetEvent<ChangeWorkspaceEvent>();
+                    changeWorkspaceEvent.Workspace = workspace;
+                    changeWorkspaceEvent.Publish(changeWorkspaceEvent);
+                }
+            }
+        }
     }
 }

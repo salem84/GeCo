@@ -8,5 +8,7 @@ namespace GeCo.ModuleDipendenti
     public class Names
     {
         public static readonly string MODULE_NAME = "ModuleDipendenti";
+
+        public static readonly string VIEW_DIPENDENTE = "DipendenteView";
     }
 }

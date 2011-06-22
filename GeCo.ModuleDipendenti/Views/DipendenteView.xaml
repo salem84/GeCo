@@ -13,22 +13,71 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/NumericUpDownStyle.xaml" />
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     
     <Grid>
     	<Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
     		<RowDefinition Height="150*"/>
     		<RowDefinition Height="80*"/>
-            <RowDefinition Height="50*" />
         </Grid.RowDefinitions>
     	<Grid.ColumnDefinitions>
     		<ColumnDefinition Width="250"/>
     		<ColumnDefinition Width="*"/>
     	</Grid.ColumnDefinitions>
-        
-        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Column="1" Grid.RowSpan="2">
+
+
+        <!-- Parte sotto alla listview principale che permette l'inserimento di nuove competenze -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Height="25" HorizontalAlignment="Stretch" Margin="20,0" >
+            <ComboBox ItemsSource="{Binding CompetenzeDisponibiliDaAggiungere}" 
+                      SelectedItem="{Binding CompetenzaDisponibileSelezionata}"
+                      Width="250">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding TipologiaCompetenza.Titolo}"/>
+                            <TextBlock Text=" - "/>
+                            <TextBlock Text="{Binding Titolo}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Command="{Binding AggiungiCompetenzaCommand}" HorizontalAlignment="Right" Margin="10,0">
+                <Image Source="/GeCo.Infrastructure;component/Images/Add-icon.png"></Image>
+            </Button>
+        </StackPanel>
+
+
+        <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
+        <UniformGrid Grid.Row="1" 
+                     Margin="0" Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
+            <TextBlock Text="Matricola" Style="{StaticResource FieldNameGrid}"/>
+            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Nome" Style="{StaticResource FieldNameGrid}"/>
+            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Nome, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Cognome" Style="{StaticResource FieldNameGrid}"/>
+            <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Data Nascita" Style="{StaticResource FieldNameGrid}"/>
+            <DatePicker Height="25" Margin="0,0,10,0" SelectedDate="{Binding Path=DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
+        </UniformGrid>
+
+        <!-- RadioButtonList che visualizza le tipologie di competenze -->
+        <ListView Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
+        </ListView>
+
+        <!-- Button Salvataggio, Eliminazione -->
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Salva" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding SalvaCommand}" d:LayoutOverrides="GridBox" />
+            <Button Content="Elimina" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding DeleteCommand}" d:LayoutOverrides="GridBox" />
+            <!--<Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>-->
+        </StackPanel>
+
+
+        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -117,47 +166,11 @@
             
         </ListView>
 
-        <!-- Parte sotto alla listview principale che permette l'inserimento di nuove competenze -->
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Height="25" HorizontalAlignment="Stretch" >
-            <ComboBox ItemsSource="{Binding CompetenzeDisponibiliDaAggiungere}" 
-                      SelectedItem="{Binding CompetenzaDisponibileSelezionata}"
-                      Width="250">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding TipologiaCompetenza.Titolo}"/>
-                            <TextBlock Text=" - "/>
-                            <TextBlock Text="{Binding Titolo}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Button Content="Aggiungi" Command="{Binding AggiungiCompetenzaCommand}" HorizontalAlignment="Right" />
-        </StackPanel>
         
-        <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
-        <UniformGrid Margin="0" Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Matricola" VerticalAlignment="Center"/>
-            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Center"/>
-        	<TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Nome, UpdateSourceTrigger=PropertyChanged}"/>
-        	<TextBlock TextWrapping="Wrap" Text="Cognome" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>
-        	<TextBlock TextWrapping="Wrap" Text="Data Nascita" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <DatePicker Height="25" Margin="0,0,10,0" SelectedDate="{Binding Path=DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
-        </UniformGrid>
         
-        <!-- RadioButtonList che visualizza le tipologie di competenze -->
-        <ListView Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
-        </ListView>
-
-        <!-- Button Salvataggio, Eliminazione -->
-        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-        	<Button Content="Salva" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding SalvaCommand}" d:LayoutOverrides="GridBox" />
-            <Button Content="Elimina" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding DeleteCommand}" d:LayoutOverrides="GridBox" />
-            <!--<Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>-->
-        </StackPanel>
+        
+        
+        
         <!--<bot:NumericUpDown Maximum="4" Minimum="0"  Grid.Row="1" IsEnabled="True" Style="{StaticResource NumericUpDownImageStyle}" Height="30" Width="50" />-->
     </Grid>
 </UserControl>

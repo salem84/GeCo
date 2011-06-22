@@ -10,42 +10,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" >
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid Height="Auto" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
         	<RowDefinition Height="50"/>
         	<RowDefinition Height="*"/>
-        	<RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-        	<ColumnDefinition Width="200"/>
-        	<ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.10*"/>
                 <ColumnDefinition Width="0.25*"/>
             	<ColumnDefinition Width="0.25*"/>
             	<ColumnDefinition Width="0.25*"/>
             	<ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="0">
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Matricola" VerticalAlignment="Center"/>
+            <Button Command="{Binding CercaCommand}" x:Name="btnSave" Grid.Column="0" Margin="10">
+                <Image Source="/GeCo.Infrastructure;component/Images/search.png"/>
+            </Button>
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
+                <TextBlock Text="Matricola" Style="{StaticResource FieldNameGrid}"/>
                 <TextBox TextWrapping="Wrap" Height="25" Width="100" Text="{Binding RicercaMatricola, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="2">
+                <TextBlock Text="Nome" Style="{StaticResource FieldNameGrid}"/>
                 <TextBox TextWrapping="Wrap" Height="25" Width="100" Text="{Binding RicercaNome, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="2">
-                <TextBlock Text="Cognome" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="3">
+                <TextBlock Text="Cognome" Style="{StaticResource FieldNameGrid}"/>
                 <TextBox Height="25" Width="100" Margin="10,0,0,0" Text="{Binding RicercaCognome, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="3">
-                <TextBlock Text="Data Nascita" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="4">
+                <TextBlock Text="Data Nascita" Style="{StaticResource FieldNameGrid}"/>
                 <DatePicker Height="25" Width="110" Margin="10,0,0,0" SelectedDate="{Binding RicercaDataNascita, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </Grid>
 
-        <ListView Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" ItemsSource="{Binding Risultati}"
+        <ListView Grid.Row="1" HorizontalAlignment="Stretch" ItemsSource="{Binding Risultati}"
                   SelectedItem="{Binding SelectedItem}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
@@ -61,9 +68,9 @@
         		</i:EventTrigger>
         	</i:Interaction.Triggers>
         </ListView>
+
+
         
-        
-        <Button Command="{Binding CercaCommand}" Content="Cerca" Height="23" HorizontalAlignment="Center" Margin="10,15,115,12" x:Name="btnSave" VerticalAlignment="Center" Width="75" Grid.Row="2" />
     </Grid>
 
 

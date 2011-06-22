@@ -112,6 +112,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
             regionManager.RequestNavigate("RibbonRegion", moduleRibbonTab);
 
 
+            var moduleHelpBar = new Uri("ModuleHelp", UriKind.Relative);
+            regionManager.RequestNavigate("HelpRegion", moduleHelpBar);
+
             // Richiamo NavigationCompleted() callback all'ultima richiesta
 
             // Mostra Workspace

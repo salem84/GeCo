@@ -24,6 +24,7 @@ namespace GeCo.ModuleDipendenti
 
             var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
             container.RegisterType<Object, DipendentiRibbonTab>("DipendentiRibbonTab");
+            container.RegisterType<Object, ModuleHelp>("ModuleHelp");
             container.RegisterType<Object, DipendentiWorkspaceContainer>("DipendentiWorkspaceContainer");
             container.RegisterType<Object, DipendentiWorkspaceContainerVM>(new ContainerControlledLifetimeManager());
 

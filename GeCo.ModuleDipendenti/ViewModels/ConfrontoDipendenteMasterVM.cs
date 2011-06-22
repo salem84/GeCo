@@ -50,7 +50,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        public ParametriConfronto ParametriConfronto { get; set; }
+        //public ParametriConfronto ParametriConfronto { get; set; }
 
         //Variabili utilizzate per la progress e lo status (totali e completate)
         private int FigureProfessionaliTotali { get; set; }
@@ -142,7 +142,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _ricercaServices = ricercaServices;
 
             DoubleClickCommand = new RelayCommand(VisualizzaConfrontoDetails);
-            ParametriConfronto = new ParametriConfronto();
+            //ParametriConfronto = new ParametriConfronto();
 
            // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();

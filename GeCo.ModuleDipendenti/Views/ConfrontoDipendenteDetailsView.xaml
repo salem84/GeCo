@@ -4,21 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:GeCo.Converters"
+             xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"
+             xmlns:bll="clr-namespace:GeCo.BLL;assembly=GeCo.BLL"
              xml:lang="it-IT"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" >
-    
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
     <Grid>
     	<Grid.RowDefinitions>
-    		<RowDefinition Height="160*"/>
-            <RowDefinition Height="140*" />
+            <RowDefinition Height="90"/>
+    		<RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
     	<Grid.ColumnDefinitions>
     		<ColumnDefinition Width="250"/>
     		<ColumnDefinition Width="*"/>
     	</Grid.ColumnDefinitions>
-        
-        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Column="1" Grid.RowSpan="2">
+
+        <!-- Maschera per visualizzare i pesi-->
+        <controls:BarControl Grid.ColumnSpan="2" Height="70" Margin="10,10,10,10">
+            <controls:BarControl.DataContext>
+                <bll:ParametriConfronto/>
+            </controls:BarControl.DataContext>
+        </controls:BarControl> 
+
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
+                   Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="left" Width="200" 
+                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}"/>
+
+
+
+        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,20,0,0" >
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -77,9 +103,6 @@
                         <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
                                  Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" IsReadOnly="True"/>
                             
-                        
-
-
                         <TextBox Grid.Column="2" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
                                  Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" IsReadOnly="True"/>
                             
@@ -91,21 +114,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             
-
-            
         </ListView>
 
-        <!-- Parte sotto alla listview principale che permette l'inserimento di nuove competenze -->
-        <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
-        <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=Dipendente}"></UniformGrid>
-        
-        <!-- RadioButtonList che visualizza le tipologie di competenze -->
-        <ListView Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
-        </ListView>
-
-        <!-- Button Salvataggio, Eliminazione -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="125,112,125,27"></StackPanel>
         
     </Grid>
 </UserControl>

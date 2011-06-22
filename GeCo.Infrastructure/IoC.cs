@@ -34,5 +34,14 @@ namespace GeCo.Infrastructure
 
             return activeWorkspace;
         }
+
+
+        public static Workspace.Workspace GetActiveWorkspace<TWorkspaceContainer>()
+            where TWorkspaceContainer : Workspace.WorkspaceContainer
+        {
+            var container = Get<TWorkspaceContainer>();
+
+            return container.ActiveWorkspace;
+        }
     }
 }

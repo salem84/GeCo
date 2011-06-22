@@ -60,6 +60,7 @@ namespace GeCo.Infrastructure.Workspace
 
 
         protected abstract string containerName { get; }
+        public virtual string IdWorkspace { get { return ""; } }
 
         #endregion // Fields
 

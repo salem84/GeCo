@@ -81,12 +81,12 @@
 
 				<!-- Grid Layout -->
 				<Grid.RowDefinitions>
-					<RowDefinition x:Name="Navigator" Height="*"/>
+					<RowDefinition x:Name="Help" Height="*"/>
 					<RowDefinition x:Name="TaskButtons" Height="Auto"/>
 				</Grid.RowDefinitions>
 
 				<!-- Navigator Region -->
-				<!--<ContentControl x:Name="NavigatorRegion" Grid.Row="0" prism:RegionManager.RegionName="NavigatorRegion" />-->
+				<ContentControl x:Name="HelpRegion" Grid.Row="0" prism:RegionManager.RegionName="HelpRegion" />
 
 				<!-- Task Button Region -->
 				<StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,5">

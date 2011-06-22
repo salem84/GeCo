@@ -6,23 +6,18 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4" 
              xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"
+             xmlns:bll="clr-namespace:GeCo.BLL;assembly=GeCo.BLL"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     
     <UserControl.Resources>
-        <Style TargetType="{x:Type Image}" x:Key="BoolToImage_Style">
-            <Setter Property="Width" Value="16"/>
-            <Setter Property="Height" Value="16"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Idoneo}" Value="False">
-                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/cross.png"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Idoneo}" Value="True">
-                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/16_em_check.png"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/BoolToImageStyle.xaml" />
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <!-- Sarà utilizzato per la visualizzazione del grafico sopra la gridview-->
@@ -42,22 +37,26 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
-                <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
+                <controls:BarControl Height="70" Margin="50,10,50,10" >
+                    <controls:BarControl.DataContext>
+                        <bll:ParametriConfronto/>
+                    </controls:BarControl.DataContext>
+                </controls:BarControl>
                 <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Matricola: " FontWeight="Bold"/>
+                        <TextBlock Text="Matricola: " Style="{StaticResource HeaderBold}"/>
                         <TextBlock Text="{Binding Matricola}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Nome: " FontWeight="Bold"/>
+                        <TextBlock Text="Nome: " Style="{StaticResource HeaderBold}"/>
                         <TextBlock Text="{Binding Nome}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Cognome: " FontWeight="Bold"/>
+                        <TextBlock Text="Cognome: " Style="{StaticResource HeaderBold}"/>
                         <TextBlock Text="{Binding Cognome}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Data di Nascita: " FontWeight="Bold"/>
+                        <TextBlock Text="Data di Nascita: " Style="{StaticResource HeaderBold}"/>
                         <TextBlock Text="{Binding DataNascita, StringFormat='Data di nascita: {0:dd/MM/yyyy}'}"/>
                     </StackPanel>
                 </UniformGrid>

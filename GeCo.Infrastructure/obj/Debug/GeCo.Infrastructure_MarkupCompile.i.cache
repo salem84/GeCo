@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-4-610627830
+6-1888830406
 
-25-1886797692
+271506061523
 25-1478107313
-Controls\BarControl.xaml;Controls\ChartGecoControl.xaml;Resources\NumericUpDownStyle.xaml;Resources\WorkspaceResources.xaml;
+Controls\BarControl.xaml;Controls\ChartGecoControl.xaml;Resources\BoolToImageStyle.xaml;Resources\Fonts.xaml;Resources\NumericUpDownStyle.xaml;Resources\WorkspaceStyles.xaml;
 
 False
 
