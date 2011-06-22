@@ -32,6 +32,7 @@
                         Values="{Binding ValoriGrafico}"
                         Labels="{Binding LabelsGrafico}"
                         Width="400" Height="400"
+                        Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}, Mode=TwoWay}"
                         />
         </controls:AdornedControl.AdornerContent>
 

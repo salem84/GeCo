@@ -11,6 +11,8 @@ using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Command;
 using GeCo.BLL;
 using System.Windows.Input;
+using Microsoft.Practices.Prism.Events;
+using GeCo.Infrastructure.Events;
 
 namespace GeCo.ModuleDipendenti.ViewModels
 {
@@ -70,6 +72,10 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 if (_graficoVisibile != value)
                 {
                     _graficoVisibile = value;
+                    //Disabilito i controlli nel caso in cui sto visualizzando il grafico e viceversa
+                    ControlliAbilitati = !value;
+                    
+                    ShowGrafico(_graficoVisibile);
                     RaisePropertyChanged("GraficoVisibile");
                 }
             }
@@ -90,8 +96,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
             }
         }
 
-        private List<decimal> _valoriGrafico;
-        public List<decimal> ValoriGrafico
+        private List<double> _valoriGrafico;
+        public List<double> ValoriGrafico
         {
             get { return _valoriGrafico; }
             set
@@ -223,32 +229,37 @@ namespace GeCo.ModuleDipendenti.ViewModels
             confrontoDetailsVM.AddToShell();
         }
 
-        public void ToggleGrafico()
+        private void ShowGrafico(bool visible)
         {
-            if (GraficoVisibile == false)
+            if (visible == true)
             {
                 if (RisultatoSelezionato != null)
                 {
+                    int cifreDecimali = 1;
                     LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
 
-                    var valori = new List<decimal>();
-                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrDiscrezionali));
-                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioHrComportamentali));
-                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioComportamentali));
-                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnStrategic));
-                    valori.Add(Convert.ToDecimal(RisultatoSelezionato.PunteggioTecnCompetitiveAdv));
+                    var valori = new List<double>();
+                    valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrDiscrezionali, cifreDecimali));
+                    valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrComportamentali, cifreDecimali));
+                    valori.Add(Math.Round(RisultatoSelezionato.PunteggioComportamentali, cifreDecimali));
+                    valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnStrategic, cifreDecimali));
+                    valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnCompetitiveAdv, cifreDecimali));
 
                     ValoriGrafico = valori;
-                    GraficoVisibile = true;
-                    ControlliAbilitati = false;
+                    //GraficoVisibile = true;
+                    //ControlliAbilitati = false;
                 }
             }
-            else
-            {
+            //else
+            //{
+                
+                
                 //Se era visibile lo nascondo
-                GraficoVisibile = false;
-                ControlliAbilitati = true;
-            }
+                //GraficoVisibile = false;
+                //ControlliAbilitati = true;
+            //}
+
+            //return GraficoVisibile;
         }    
     }
 }

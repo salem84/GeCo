@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms.DataVisualization.Charting;
 
+
 namespace GeCo.Infrastructure.Controls
 {
     /// <summary>
@@ -56,16 +57,16 @@ namespace GeCo.Infrastructure.Controls
 
 
         //Lista di Valori
-        public List<decimal> Values
+        public List<double> Values
         {
-            get { return (List<decimal>)GetValue(ValuesProperty); }
+            get { return (List<double>)GetValue(ValuesProperty); }
             set { SetValue(ValuesProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Valori.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValuesProperty =
             DependencyProperty.Register("Values", 
-            typeof(List<decimal>), 
+            typeof(List<double>), 
             typeof(ChartGecoControl), 
             new UIPropertyMetadata(null, new PropertyChangedCallback(OnValuesChanged)));
 
@@ -98,11 +99,10 @@ namespace GeCo.Infrastructure.Controls
             // Create a data series
             Series series1 = new Series();
 
-            //series1.Points.DataBindXY(Labels, Values);
             series1.Points.DataBindXY(Labels,Values);
             series1.IsValueShownAsLabel = false;
             //series1.Label = "Y = #VALY\nX = #VALX";
-            series1.Label = "#PERCENT{P0}";
+            series1.Label = "#VALY %";
             series1.ChartType = SeriesChartType.Pie;
             series1["PieLabelStyle"] = "Inside";
 

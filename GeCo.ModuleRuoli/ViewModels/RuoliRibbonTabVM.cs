@@ -101,11 +101,11 @@ namespace GeCo.ModuleRuoli.ViewModels
         {
             var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
             //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
-            activeWorkspace.ToggleGrafico();
+            activeWorkspace.GraficoVisibile = !activeWorkspace.GraficoVisibile;
         }
 
         /// <summary>
-        /// Definisce quando è abilitato il RibbonToggleButton del Chart
+        /// Definisce quando è abilitato il RibbonButton del Chart
         /// </summary>
         /// <returns>false se il workspace attivo non è ConfrontoDipendenteMaster o non è selezionato alcun elemento</returns>
         private bool CanToggleGrafico()

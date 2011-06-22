@@ -28,14 +28,14 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public ICommand VisualizzaConfrontoDetailsCommand { get; private set; }
         public ICommand ExcelCommand { get; private set; }
         public ICommand GraficoCommand { get; private set; }
+              
+        
 
         /// <summary>
         /// Costruttore
         /// </summary>
-        /// <param name="workspaceContainer">viene passato dal container (è un singleton definito nell'init del modulo)</param>
         public DipendentiRibbonTabVM()
         {
-            //this.workspaceContainer = workspaceContainer;
             InitializeCommands();
         }
 
@@ -101,7 +101,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
             //L'if non serve visto che il button è disabilitato quando non è attivo il workspace giusto
-            activeWorkspace.ToggleGrafico();
+            
+            //C'è il campo GraficoVisibile del RibbonVM che conserva l'informazione per lo stato del ToggleButton
+            activeWorkspace.GraficoVisibile = !activeWorkspace.GraficoVisibile;
         }
 
         /// <summary>
@@ -153,5 +155,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         #endregion
 
         #endregion
+
+       
     }
 }

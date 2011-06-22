@@ -8,8 +8,8 @@
     <Border CornerRadius="30" BorderThickness="2" BorderBrush="Black" Background="White">
         <DockPanel x:Name="panel" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
             <Button DockPanel.Dock="Bottom" Width="25" Height="25" Click="btnClose_Click">
-            <Image Source="/Images/Actions-window-close-icon.png" />
-        </Button>
+                <Image Source="/GeCo.Infrastructure;component/Images/Actions-window-close-icon.png" />
+            </Button>
         <StackPanel>
             <!--<Button Content="X" Width="24" Height="24" HorizontalAlignment="Right" Margin="15,10" Click="btnClose_Click"></Button>-->
             <WindowsFormsHost Name="windowsFormsHost1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />

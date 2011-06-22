@@ -89,8 +89,11 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         private void VisualizzaDettaglioRuolo()
         {
-            RuoloViewModel ruoloVM = new RuoloViewModel(SelectedItem);
-            ruoloVM.AddToShell();
+            if (SelectedItem != null)
+            {
+                RuoloViewModel ruoloVM = new RuoloViewModel(SelectedItem);
+                ruoloVM.AddToShell();
+            }
         }
     }
 

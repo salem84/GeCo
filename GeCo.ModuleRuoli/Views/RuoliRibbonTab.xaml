@@ -22,7 +22,7 @@
         <ribbon:RibbonButton Label="Dettagli Confronto" Command="{Binding Path=VisualizzaConfrontoDetailsCommand}" 
             LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
 
-        <ribbon:RibbonToggleButton Label="Grafico" Command="{Binding Path=GraficoCommand}" 
+        <ribbon:RibbonButton Label="Grafico" Command="{Binding Path=GraficoCommand}" 
             LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-office-chart-pie-icon.png"/>
 
         <ribbon:RibbonButton Label="Esporta Excel" Command="{Binding Path=ExcelCommand}" 

@@ -119,8 +119,11 @@ namespace GeCo.ModuleDipendenti.ViewModels
 
         private void VisualizzaDettaglioDipendente()
         {
-            DipendenteViewModel dipendenteVM = new DipendenteViewModel(SelectedItem);
-            dipendenteVM.AddToShell();
+            if (SelectedItem != null)
+            {
+                DipendenteViewModel dipendenteVM = new DipendenteViewModel(SelectedItem);
+                dipendenteVM.AddToShell();
+            }
         }
     }
 
