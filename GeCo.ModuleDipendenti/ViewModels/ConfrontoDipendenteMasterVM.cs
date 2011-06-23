@@ -56,6 +56,8 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private int FigureProfessionaliTotali { get; set; }
         private int FigureProfessionaliAnalizzate { get; set; }
 
+        public ParametriConfronto ParametriConfronto { get; private set; }
+
         public ICommand DoubleClickCommand { get; set; }
 
         public RisultatoRicerca RisultatoSelezionato { get; set; }
@@ -123,9 +125,22 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 }
             }
         }
-        
-        
 
+
+        private List<System.Drawing.Color> _paletteColors;
+        public List<System.Drawing.Color> PaletteColors
+        {
+            get { return _paletteColors; }
+            set
+            {
+                if (_paletteColors != value)
+                {
+                    _paletteColors = value;
+                    RaisePropertyChanged("PaletteColors");
+                }
+            }
+        }
+        
         #endregion
 
 
@@ -142,7 +157,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _ricercaServices = ricercaServices;
 
             DoubleClickCommand = new RelayCommand(VisualizzaConfrontoDetails);
-            //ParametriConfronto = new ParametriConfronto();
+            ParametriConfronto = new ParametriConfronto();
 
            // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();
@@ -239,25 +254,31 @@ namespace GeCo.ModuleDipendenti.ViewModels
                     LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
 
                     var valori = new List<double>();
+                    var colors = new List<System.Drawing.Color>();
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrDiscrezionali, cifreDecimali));
+                    colors.Add(Tipologiche.ColoriPalette.HR_DISCREZIONALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrComportamentali, cifreDecimali));
+                    colors.Add(Tipologiche.ColoriPalette.HR_COMPORTAMENTALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioComportamentali, cifreDecimali));
+                    colors.Add(Tipologiche.ColoriPalette.COMPORTAMENTALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnStrategic, cifreDecimali));
+                    colors.Add(Tipologiche.ColoriPalette.TECN_STRATEGIC);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnCompetitiveAdv, cifreDecimali));
+                    colors.Add(Tipologiche.ColoriPalette.TECN_COMPETITIVE);
 
+                    PaletteColors = colors;
                     ValoriGrafico = valori;
+                    
                     //GraficoVisibile = true;
                     //ControlliAbilitati = false;
                 }
             }
-            //else
-            //{
-                
-                
-                //Se era visibile lo nascondo
-                //GraficoVisibile = false;
-                //ControlliAbilitati = true;
-            //}
+            else
+            {
+                ValoriGrafico = null;
+                LabelsGrafico = null;
+
+            }
 
             //return GraficoVisibile;
         }    

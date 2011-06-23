@@ -124,6 +124,9 @@ namespace GeCo.ModuleDipendenti.ViewModels
             } 
         }
 
+
+        public ParametriConfronto ParametriConfronto { get; private set; }
+
         #endregion //PROPRIETA'
 
 
@@ -133,6 +136,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public ConfrontoDipendenteDetailsVM(IExcelServices excelServices)
         {
             DisplayTabName = "Dettagli confronto";
+            ParametriConfronto = new ParametriConfronto();
             //StartBackgroundAutoProgress(CreaNuovoDipendente);
 
             _excelServices = excelServices;

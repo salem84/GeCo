@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace GeCo.Infrastructure
 {
@@ -79,6 +80,19 @@ namespace GeCo.Infrastructure
             public const string PMAX_TECN_STRATEGIC = "PunteggioMaxTecnStrategic";
             public const string PMAX_TECN_COMPETITIVE = "PunteggioMaxTecnCompetitive";
             public const string PERCENTUALE_SOGLIA_FOUNDATIONAL = "PercentualeSogliaFoundational";
+        }
+
+         
+        public class ColoriPalette
+        {
+            public static readonly Color HR = ColorTranslator.FromHtml("#77933C");
+            public static readonly Color LINEA = ColorTranslator.FromHtml("#953735");
+            public static readonly Color HR_DISCREZIONALI = ColorTranslator.FromHtml("#C3D69B");
+            public static readonly Color HR_COMPORTAMENTALI = ColorTranslator.FromHtml("#C3D69B");
+            public static readonly Color COMPORTAMENTALI = ColorTranslator.FromHtml("#D99694");
+            public static readonly Color TECNICHE = ColorTranslator.FromHtml("#D99694");
+            public static readonly Color TECN_STRATEGIC = ColorTranslator.FromHtml("#E6B9B8");
+            public static readonly Color TECN_COMPETITIVE = ColorTranslator.FromHtml("#E6B9B8");
         }
         
     }

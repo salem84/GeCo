@@ -26,6 +26,7 @@
             <controls:ChartGecoControl
                         Values="{Binding ValoriGrafico}"
                         Labels="{Binding LabelsGrafico}"
+                        PaletteCustomColors="{Binding PaletteColors}"
                         Width="400" Height="400"
                         Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}, Mode=TwoWay}"
                         />
@@ -37,11 +38,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
-                <controls:BarControl Height="70" Margin="50,10,50,10" >
-                    <controls:BarControl.DataContext>
-                        <bll:ParametriConfronto/>
-                    </controls:BarControl.DataContext>
-                </controls:BarControl>
+                <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
                 <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Matricola: " Style="{StaticResource HeaderBold}"/>

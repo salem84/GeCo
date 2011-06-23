@@ -16,7 +16,7 @@
 
     <ribbon:RibbonGroup Header="Analisi">
         <ribbon:RibbonButton Label="Confronta" Command="{Binding Path=VisualizzaConfrontoMasterCommand}" 
-            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+            LargeImageSource="/GeCo.Infrastructure;component/Images\impronte32.png"/>
         
         <ribbon:RibbonButton Label="Dettagli Confronto" Command="{Binding Path=VisualizzaConfrontoDetailsCommand}" 
             LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>

@@ -70,7 +70,19 @@ namespace GeCo.Infrastructure.Controls
             typeof(ChartGecoControl), 
             new UIPropertyMetadata(null, new PropertyChangedCallback(OnValuesChanged)));
 
+        
 
+        public List<System.Drawing.Color> PaletteCustomColors
+        {
+            get { return (List<System.Drawing.Color>)GetValue(PaletteCustomColorsProperty); }
+            set { SetValue(PaletteCustomColorsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PaletteColors.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PaletteCustomColorsProperty =
+            DependencyProperty.Register("PaletteCustomColors", typeof(List<System.Drawing.Color>), typeof(ChartGecoControl), new UIPropertyMetadata(null));
+
+        
 
 
         public ChartGecoControl()
@@ -95,6 +107,11 @@ namespace GeCo.Infrastructure.Controls
 
             // Add Chart Area to the Chart
             chart1.ChartAreas.Add(chartArea1);
+            if (PaletteCustomColors != null)
+            {
+                chart1.PaletteCustomColors = PaletteCustomColors.ToArray();
+                chart1.Palette = ChartColorPalette.None;
+            }
 
             // Create a data series
             Series series1 = new Series();
@@ -167,5 +184,7 @@ namespace GeCo.Infrastructure.Controls
         {
             Visibility = System.Windows.Visibility.Hidden;
         }
+
+        
     }
 }
