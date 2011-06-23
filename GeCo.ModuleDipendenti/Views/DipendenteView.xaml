@@ -7,8 +7,8 @@
              xmlns:bot="clr-namespace:PixelLab.Wpf;assembly=PixelLab.Wpf"
              xml:lang="it-IT"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="600" >
-    
+             d:DesignHeight="400" d:DesignWidth="600" >
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,67 +17,86 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <Grid>
-    	<Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-    		<RowDefinition Height="150*"/>
-    		<RowDefinition Height="80*"/>
-        </Grid.RowDefinitions>
-    	<Grid.ColumnDefinitions>
-    		<ColumnDefinition Width="250"/>
-    		<ColumnDefinition Width="*"/>
-    	</Grid.ColumnDefinitions>
 
+    <DockPanel>
 
-        <!-- Parte sotto alla listview principale che permette l'inserimento di nuove competenze -->
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Height="25" HorizontalAlignment="Stretch" Margin="20,0" >
-            <ComboBox ItemsSource="{Binding CompetenzeDisponibiliDaAggiungere}" 
-                      SelectedItem="{Binding CompetenzaDisponibileSelezionata}"
-                      Width="250">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
+        <!-- Pannello per decidere a sx salva elimina -->
+        <DockPanel DockPanel.Dock="Left" Width="250">
+            <!-- Button Salvataggio, Eliminazione -->
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Command="{Binding SalvaCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding TipologiaCompetenza.Titolo}"/>
-                            <TextBlock Text=" - "/>
-                            <TextBlock Text="{Binding Titolo}"/>
+                            <Image Source="/GeCo.Infrastructure;component/Images/Save-icon.png" Margin="0,0,5,0"/>
+                            <AccessText Text="Salva" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Button Command="{Binding AggiungiCompetenzaCommand}" HorizontalAlignment="Right" Margin="10,0">
-                <Image Source="/GeCo.Infrastructure;component/Images/Add-icon.png"></Image>
-            </Button>
-        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding DeleteCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/GeCo.Infrastructure;component/Images/delete.png" Width="16" Margin="0,0,5,0"/>
+                            <AccessText Text="Elimina" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!--<Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>-->
+                </ToolBar>
+            </ToolBarTray>
+
+            <!-- Parte in basso che permette l'inserimento di nuove competenze -->
+            <Border DockPanel.Dock="Bottom" Style="{StaticResource BorderBlock}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Style="{StaticResource HeaderCenteredBold}" Text="Aggiungi una nuova competenza" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10">
+                        <ComboBox ItemsSource="{Binding CompetenzeDisponibiliDaAggiungere}" 
+                      SelectedItem="{Binding CompetenzaDisponibileSelezionata}"
+                      MinWidth="170">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding TipologiaCompetenza.Titolo}"/>
+                                        <TextBlock Text=" - "/>
+                                        <TextBlock Text="{Binding Titolo}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Command="{Binding AggiungiCompetenzaCommand}" HorizontalAlignment="Right" Margin="10,0">
+                            <Image Source="/GeCo.Infrastructure;component/Images/Add-icon.png"></Image>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Pannell in fila -->
+            <StackPanel>
+                <!-- Lato sinistro contenente le informazioni sul dipendente (nome, cognome,...) -->
+                <Border Style="{StaticResource BorderBlock}" VerticalAlignment="Top">
+                    <UniformGrid  MinHeight="200" VerticalAlignment="Top" 
+                        Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
+                        <TextBlock Text="Matricola" Style="{StaticResource FieldNameGrid}"/>
+                        <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Nome" Style="{StaticResource FieldNameGrid}"/>
+                        <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Nome, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Cognome" Style="{StaticResource FieldNameGrid}"/>
+                        <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Data Nascita" Style="{StaticResource FieldNameGrid}"/>
+                        <DatePicker Height="25" Margin="0,0,10,0" SelectedDate="{Binding Path=DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
+                    </UniformGrid>
+                </Border>
+
+                <!-- Combobox che visualizza i macrogruppi -->
+                <Border Style="{StaticResource BorderBlock}">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderCenteredBold}"/>
+                        <ComboBox HorizontalAlignment="left" MinWidth="185" Margin="10"
+                              SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}" Name="ddlMacrogruppo" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DockPanel>
 
 
-        <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
-        <UniformGrid Grid.Row="1" 
-                     Margin="0" Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
-            <TextBlock Text="Matricola" Style="{StaticResource FieldNameGrid}"/>
-            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Nome" Style="{StaticResource FieldNameGrid}"/>
-            <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Nome, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Cognome" Style="{StaticResource FieldNameGrid}"/>
-            <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Data Nascita" Style="{StaticResource FieldNameGrid}"/>
-            <DatePicker Height="25" Margin="0,0,10,0" SelectedDate="{Binding Path=DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
-        </UniformGrid>
-
-        <!-- RadioButtonList che visualizza le tipologie di competenze -->
-        <ListView Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
-        </ListView>
-
-        <!-- Button Salvataggio, Eliminazione -->
-        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Salva" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding SalvaCommand}" d:LayoutOverrides="GridBox" />
-            <Button Content="Elimina" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Command="{Binding DeleteCommand}" d:LayoutOverrides="GridBox" />
-            <!--<Button x:Name="btnCercaFigura" Content="Cerca Figura" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" Command="{Binding ConfrontaCommand}"/>-->
-        </StackPanel>
-
-
-        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" MinWidth="400">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -111,7 +130,7 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </ListView.GroupStyle>
-            
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -121,29 +140,29 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="3" BorderBrush="Green">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-                        <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0" 
+                            <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}"/>
+
+                            <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0" 
                                            Height="30" Width="50"
                                            Style="{StaticResource NumericUpDownImageStyle}">
-                            <bot:NumericUpDown.Value>
-                                <Binding Path="LivelloConoscenzaId" Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <conv:LivelloConoscenzaValidator/>
-                                    </Binding.ValidationRules>
-                                    <Binding.Converter>
-                                        <conv:LivelloConoscenzaConverter/>
-                                    </Binding.Converter>
-                                </Binding>
-                            </bot:NumericUpDown.Value>
-                        </bot:NumericUpDown>
-                        <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">
+                                <bot:NumericUpDown.Value>
+                                    <Binding Path="LivelloConoscenzaId" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <conv:LivelloConoscenzaValidator/>
+                                        </Binding.ValidationRules>
+                                        <Binding.Converter>
+                                            <conv:LivelloConoscenzaConverter/>
+                                        </Binding.Converter>
+                                    </Binding>
+                                </bot:NumericUpDown.Value>
+                            </bot:NumericUpDown>
+                            <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">
                             <TextBox.Text>
                                 <Binding Path="LivelloConoscenzaId">
                                     <Binding.ValidationRules>
@@ -155,22 +174,17 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>-->
-                    </Grid>
+                        </Grid>
 
 
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
 
-            
+
+
         </ListView>
 
-        
-        
-        
-        
-        
         <!--<bot:NumericUpDown Maximum="4" Minimum="0"  Grid.Row="1" IsEnabled="True" Style="{StaticResource NumericUpDownImageStyle}" Height="30" Width="50" />-->
-    </Grid>
+    </DockPanel>
 </UserControl>

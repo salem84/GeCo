@@ -5,6 +5,13 @@
 
     <Style x:Key="HeaderBold" TargetType="TextBlock">
         <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+    </Style>
+
+    <Style x:Key="HeaderCenteredBold" TargetType="TextBlock" BasedOn="{StaticResource HeaderBold}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     
     <Style x:Key="FieldNameGrid" TargetType="TextBlock">
@@ -33,6 +40,13 @@
     </Style>
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker" BasedOn="{StaticResource DefaultFindControl}">
-
     </Style>
+    
+    <Style x:Key="BorderBlock" TargetType="Border">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    
 </ResourceDictionary>
