@@ -31,7 +31,7 @@
             	<ColumnDefinition Width="0.25*"/>
             	<ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding CercaCommand}" x:Name="btnSave" Grid.Column="0" Margin="10">
+            <Button Command="{Binding CercaCommand}" Grid.Column="0" Margin="10" Style="{StaticResource FlatButton}">
                 <Image Source="/GeCo.Infrastructure;component/Images/search.png"/>
             </Button>
             <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1">
