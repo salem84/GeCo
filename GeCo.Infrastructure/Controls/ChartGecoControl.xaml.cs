@@ -101,19 +101,37 @@ namespace GeCo.Infrastructure.Controls
         {
             Chart chart1 = new Chart();
 
-            ChartArea chartArea1 = new ChartArea();
-            chartArea1.Area3DStyle.Enable3D = true;
-            chartArea1.Area3DStyle.Inclination = 50;
-
-            // Add Chart Area to the Chart
-            chart1.ChartAreas.Add(chartArea1);
+            //Se ho impostato una palette di colori
             if (PaletteCustomColors != null)
             {
                 chart1.PaletteCustomColors = PaletteCustomColors.ToArray();
                 chart1.Palette = ChartColorPalette.None;
             }
+            //chart1.BorderSkin.SkinStyle = BorderSkinStyle.Sunken;
 
-            // Create a data series
+            
+            //Titolo
+            /*Title title1 = new Title();
+            title1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold);
+            title1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+            title1.Name = "Title1";
+            title1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            title1.ShadowOffset = 3;
+            title1.Text = "Grafico Punteggi Totali";
+            chart1.Titles.Add(title1);*/
+
+            ChartArea chartArea1 = new ChartArea();
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.Area3DStyle.Inclination = 50;
+
+            /*chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(165)))), ((int)(((byte)(191)))), ((int)(((byte)(228)))));
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));*/
+
+            chart1.ChartAreas.Add(chartArea1);
+            
+            // serie dati 
             Series series1 = new Series();
 
             series1.Points.DataBindXY(Labels,Values);
@@ -122,6 +140,9 @@ namespace GeCo.Infrastructure.Controls
             series1.Label = "#VALY %";
             series1.ChartType = SeriesChartType.Pie;
             series1["PieLabelStyle"] = "Inside";
+            series1.BorderColor = System.Drawing.Color.Black;
+            series1.BorderWidth = 1;
+            series1.BorderDashStyle = ChartDashStyle.Solid;
 
             Legend legend1 = new Legend();
             legend1.Alignment = System.Drawing.StringAlignment.Center;

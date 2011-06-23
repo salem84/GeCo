@@ -256,15 +256,15 @@ namespace GeCo.ModuleDipendenti.ViewModels
                     var valori = new List<double>();
                     var colors = new List<System.Drawing.Color>();
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrDiscrezionali, cifreDecimali));
-                    colors.Add(Tipologiche.ColoriPalette.HR_DISCREZIONALI);
+                    colors.Add(ColoriPalette.HR_DISCREZIONALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioHrComportamentali, cifreDecimali));
-                    colors.Add(Tipologiche.ColoriPalette.HR_COMPORTAMENTALI);
+                    colors.Add(ColoriPalette.HR_COMPORTAMENTALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioComportamentali, cifreDecimali));
-                    colors.Add(Tipologiche.ColoriPalette.COMPORTAMENTALI);
+                    colors.Add(ColoriPalette.COMPORTAMENTALI);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnStrategic, cifreDecimali));
-                    colors.Add(Tipologiche.ColoriPalette.TECN_STRATEGIC);
+                    colors.Add(ColoriPalette.TECN_STRATEGIC);
                     valori.Add(Math.Round(RisultatoSelezionato.PunteggioTecnCompetitiveAdv, cifreDecimali));
-                    colors.Add(Tipologiche.ColoriPalette.TECN_COMPETITIVE);
+                    colors.Add(ColoriPalette.TECN_COMPETITIVE);
 
                     PaletteColors = colors;
                     ValoriGrafico = valori;

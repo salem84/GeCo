@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundWorker\BackgroundWorkerHelper.cs" />
+    <Compile Include="ColoriPalette.cs" />
     <Compile Include="Controls\AdornedControl\AdornedControl.cs" />
     <Compile Include="Controls\AdornedControl\AdornerPlacement.cs" />
     <Compile Include="Controls\AdornedControl\FrameworkElementAdorner.cs" />
