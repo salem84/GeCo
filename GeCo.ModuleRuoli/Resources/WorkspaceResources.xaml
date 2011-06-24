@@ -51,4 +51,8 @@
         <vw:ConfrontoRuoloMasterView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ConfrontoRuoloDetailsVM}">
+        <vw:ConfrontoRuoloDetailsView />
+    </DataTemplate>
+
 </ResourceDictionary>

@@ -15,7 +15,7 @@ using GeCo.Infrastructure;
 
 namespace GeCo.BLL.Excel
 {
-    public class ExcelModule
+    public class ExcelCreator
     {
         #region RELATION ID
         
@@ -713,15 +713,15 @@ namespace GeCo.BLL.Excel
 
             Cell cell74 = new Cell() { CellReference = "A7", StyleIndex = (UInt32Value)56U, DataType = CellValues.SharedString };
             CellValue cellValue16 = new CellValue();
-            cellValue16.Text = "40";
+            cellValue16.Text = "40"; //PUNTEGGIO RILEVATO
             cell74.Append(cellValue16);
 
-            Cell cell75 = new Cell() { CellReference = "B7", StyleIndex = (UInt32Value)57U };
+            Cell cell75 = new Cell() { CellReference = "B7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula2 = new CellFormula();
-            cellFormula2.Text = "(\'HR Discrezionali\'!H2*Summary!C6)/\'HR Discrezionali\'!H1";
+            cellFormula2.Text = "(\'HR Discrezionali\'!H2*Summary!B6)/\'HR Discrezionali\'!H1";
             cell75.Append(cellFormula2);
 
-            Cell cell76 = new Cell() { CellReference = "C7", StyleIndex = (UInt32Value)57U };
+            Cell cell76 = new Cell() { CellReference = "C7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula2b = new CellFormula();
             cellFormula2b.Text = "(\'HR Comportamentali\'!H2*Summary!C6)/\'HR Comportamentali\'!H1";
             cell76.Append(cellFormula2b);
@@ -743,7 +743,7 @@ namespace GeCo.BLL.Excel
 
             Cell cell80 = new Cell() { CellReference = "G7", StyleIndex = (UInt32Value)24U };
             CellFormula cellFormula6 = new CellFormula();
-            cellFormula6.Text = "SUM(C7:F7)";
+            cellFormula6.Text = "SUM(B7:F7)";
             cell80.Append(cellFormula6);
 
 

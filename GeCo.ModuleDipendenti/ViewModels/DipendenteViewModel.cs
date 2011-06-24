@@ -292,7 +292,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         public void AvviaConfronto()
         {
             //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
-            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoDipendenteMasterVM>();
+            var confrontoMaster = IoC.Get<ConfrontoDipendenteMasterVM>();
             confrontoMaster.Dipendente = Dipendente;
             confrontoMaster.AddToShell();
         }

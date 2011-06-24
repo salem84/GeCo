@@ -22,6 +22,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         #region PROPRIETA'
 
         protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_RICERCA; } }
 
         public string RicercaTitolo { get; set; }
         
@@ -52,7 +53,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         #endregion //PROPRIETA'
 
-        public ICommand CercaCommand { get; set; }
+        public ICommand RicercaCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
 
         private IRuoliServices _services;
@@ -63,7 +64,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
             _services = services;
 
-            CercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaTitolo));
+            RicercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaTitolo));
 
             DoubleClickCommand = new RelayCommand(VisualizzaDettaglioRuolo);
         }

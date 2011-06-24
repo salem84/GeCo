@@ -21,7 +21,7 @@ namespace GeCo.ModuleRuoli.ViewModels
     {
         //Group Anagrafica
         public ICommand NuovoRuoloCommand { get; private set; }
-        public ICommand CercaRuoliCommand { get; private set; }
+        public ICommand RicercaRuoliCommand { get; private set; }
 
         //Group Analisi
         public ICommand VisualizzaConfrontoMasterCommand { get; private set; }
@@ -41,7 +41,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         private void InitializeCommands()
         {
             //Group Anagrafica
-            CercaRuoliCommand = new RelayCommand(() => CreaTabRicercaRuoli());
+            RicercaRuoliCommand = new RelayCommand(() => CreaTabRicercaRuoli());
             NuovoRuoloCommand = new RelayCommand(() => CreaTabNuovoRuolo());
 
             //Group Analisi
@@ -147,7 +147,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         private bool CanVisualizzaConfrontoDetails()
         {
             var activeWorkspace = IoC.GetActiveWorkspace<RuoliWorkspaceContainerVM, ConfrontoRuoloMasterVM>();
-            return activeWorkspace != null;
+            return activeWorkspace != null && activeWorkspace.RisultatoSelezionato != null;
         }
 
         #endregion

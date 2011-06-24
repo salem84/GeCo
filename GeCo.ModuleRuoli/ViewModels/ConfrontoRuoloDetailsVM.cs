@@ -26,6 +26,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         #region PROPRIETA'
 
         protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_CONFRONTO_DETAILS; } }
 
         /// <summary>
         /// Macrogruppo selezionato nella combobox (Tecniche, Comportamentali, HR)
@@ -124,6 +125,8 @@ namespace GeCo.ModuleRuoli.ViewModels
             } 
         }
 
+        public ParametriConfronto ParametriConfronto { get; private set; }
+
         #endregion //PROPRIETA'
 
 
@@ -133,6 +136,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         public ConfrontoRuoloDetailsVM(IExcelServices excelServices)
         {
             DisplayTabName = "Dettagli confronto";
+            ParametriConfronto = new ParametriConfronto();
             //StartBackgroundAutoProgress(CreaNuovoDipendente);
 
             _excelServices = excelServices;

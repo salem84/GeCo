@@ -21,7 +21,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
     {
         //Group Anagrafica
         public ICommand NuovoDipendenteCommand { get; private set; }
-        public ICommand CercaDipendenteCommand { get; private set; }
+        public ICommand RicercaDipendenteCommand { get; private set; }
 
         //Group Analisi
         public ICommand VisualizzaConfrontoMasterCommand { get; private set; }
@@ -42,7 +42,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private void InitializeCommands()
         {
             //Group Anagrafica
-            CercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
+            RicercaDipendenteCommand = new RelayCommand(CreaTabRicercaDipendenti);
             NuovoDipendenteCommand = new RelayCommand(CreaTabNuovoDipendente);
 
             //Group Analisi
@@ -149,7 +149,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         private bool CanVisualizzaConfrontoDetails()
         {
             var activeWorkspace = IoC.GetActiveWorkspace<DipendentiWorkspaceContainerVM, ConfrontoDipendenteMasterVM>();
-            return activeWorkspace != null;
+            return activeWorkspace != null && activeWorkspace.RisultatoSelezionato != null;
         }
 
         #endregion

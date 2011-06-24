@@ -19,6 +19,8 @@ namespace GeCo.Infrastructure.Workspace
     /// </summary>
     public abstract class WorkspaceContainer : Workspace
     {
+        public override string IdWorkspace { get { return ""; } }
+
         /// <summary>
         /// Returns the collection of available workspaces to display.
         /// A 'workspace' is a ViewModel that can request to be closed.

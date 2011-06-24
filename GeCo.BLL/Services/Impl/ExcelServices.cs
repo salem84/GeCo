@@ -11,7 +11,7 @@ namespace GeCo.BLL.Services
 
         public void EsportaExcel(string filepath, string nomeRuolo, List<ConfrontoConoscenzaCompetenza> confronti)
         {
-            ExcelModule excel = new ExcelModule();
+            ExcelCreator excel = new ExcelCreator();
             excel.NomeRuolo = nomeRuolo;
             excel.Dati = confronti;
             excel.PunteggiMassimi = new ParametriConfronto();

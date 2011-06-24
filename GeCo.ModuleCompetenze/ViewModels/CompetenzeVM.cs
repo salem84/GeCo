@@ -17,6 +17,7 @@ namespace GeCo.ModuleCompetenze.ViewModels
         #region PROPRIETA'
 
         protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_COMPETENZE; } }
 
         public override string DisplayTabName
         {

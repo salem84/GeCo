@@ -3,82 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4" 
              xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"  
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
-    
+
     <UserControl.Resources>
-        <Style TargetType="{x:Type Image}" x:Key="BoolToImage_Style">
-            <Setter Property="Width" Value="16"/>
-            <Setter Property="Height" Value="16"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Idoneo}" Value="False">
-                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/cross.png"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Idoneo}" Value="True">
-                    <Setter Property="Source" Value="/GeCo.Infrastructure;component/Images/16_em_check.png"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/BoolToImageStyle.xaml" />
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Vertical" Grid.Row="0">
-            <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
-            <UniformGrid Rows="1" Columns="2" DataContext="{Binding Ruolo}" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Ruolo: " FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Titolo}"/>    
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Descrizione: " FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Descrizione}"/>
-                </StackPanel>
-            </UniformGrid>
-            
-            
-        </StackPanel>
-
-
-        <ListView ItemsSource="{Binding Risultati}" Grid.Row="1">
-            <ListView.View>
-                <GridView AllowsColumnReorder="true">
-                    <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Dipendente" Width="120"/>
-                    <GridViewColumn Header="Idoneo" Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Image Style="{StaticResource BoolToImage_Style}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioTotale, StringFormat='{}{0:0.0}'}" Header="Totale" Width="50"/>
-                    <!--<GridViewColumn DisplayMemberBinding="{Binding PunteggioSbarramento, StringFormat='{}{0:0.0}'}" Header="P. Sbarramento" Width="100" />-->
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrDiscrezionali, StringFormat='{}{0:0.0}'}" Header="HR Discrezionali" Width="120" />
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrComportamentali, StringFormat='{}{0:0.0}'}" Header="HR Comportamentali" Width="120" />
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioComportamentali, StringFormat='{}{0:0.0}'}" Header="Comportamentale" Width="120" />
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnStrategic, StringFormat='{}{0:0.0}'}" Header="Strategic Support" Width="120" />
-                    <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnCompetitiveAdv, StringFormat='{}{0:0.0}'}" Header="Competitive Advantage" Width="120" />
-
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-        <controls:ChartGecoControl
+    <controls:AdornedControl IsAdornerVisible="{Binding GraficoVisibile}">
+        <controls:AdornedControl.AdornerContent>
+            <controls:ChartGecoControl
                         Values="{Binding ValoriGrafico}"
                         Labels="{Binding LabelsGrafico}"
-                        Width="400" Height="400" Panel.ZIndex="10"
-                        d:DesignWidth="10"
-                        Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}}"
-            />
+                        PaletteCustomColors="{Binding PaletteColors}"
+                        Width="400" Height="400"
+                        Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}, Mode=TwoWay}"
+                        />
+        </controls:AdornedControl.AdornerContent>
 
-    </Grid>
-    
-    
+        <Grid IsEnabled="{Binding ControlliAbilitati}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
+                <UniformGrid Rows="1" Columns="2" DataContext="{Binding Ruolo}" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ruolo: " FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Titolo}"/>    
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Descrizione: " FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Descrizione}"/>
+                    </StackPanel>
+                </UniformGrid>
+            </StackPanel>
+
+
+            <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true">
+                        <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Dipendente" Width="120"/>
+                        <GridViewColumn Header="Idoneo" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image Style="{StaticResource BoolToImage_Style}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioTotale, StringFormat='{}{0:0.0}'}" Header="Totale" Width="50"/>
+                        <!--<GridViewColumn DisplayMemberBinding="{Binding PunteggioSbarramento, StringFormat='{}{0:0.0}'}" Header="P. Sbarramento" Width="100" />-->
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrDiscrezionali, StringFormat='{}{0:0.0}'}" Header="HR Discrezionali" Width="120" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrComportamentali, StringFormat='{}{0:0.0}'}" Header="HR Comportamentali" Width="120" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioComportamentali, StringFormat='{}{0:0.0}'}" Header="Comportamentale" Width="120" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnStrategic, StringFormat='{}{0:0.0}'}" Header="Strategic Support" Width="120" />
+                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnCompetitiveAdv, StringFormat='{}{0:0.0}'}" Header="Competitive Advantage" Width="120" />
+
+                    </GridView>
+                </ListView.View>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <cmd:EventToCommand Command="{Binding DoubleClickCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ListView>
+
+        
+        </Grid>
+
+    </controls:AdornedControl>
 </UserControl>

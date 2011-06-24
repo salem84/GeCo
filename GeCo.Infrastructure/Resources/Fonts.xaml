@@ -66,11 +66,13 @@
     <Style x:Key="PunteggioAttesoBox" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="{StaticResource PunteggioAttesoColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsReadOnly" Value="True" />
     </Style>
 
     <Style x:Key="PunteggioOsservatoBox" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="{StaticResource PunteggioOsservatoColor}"/>
         <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="IsReadOnly" Value="True" />
     </Style>
     
     

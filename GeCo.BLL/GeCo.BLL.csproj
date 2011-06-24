@@ -83,7 +83,7 @@
     <Compile Include="Dati\DipendentiDefault.cs" />
     <Compile Include="Dati\FigureDefault.cs" />
     <Compile Include="Dati\InitializeDB.cs" />
-    <Compile Include="Excel\ExcelModule.cs" />
+    <Compile Include="Excel\ExcelCreator.cs" />
     <Compile Include="Excel\ExcelHelper.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="ParametriConfronto.cs" />

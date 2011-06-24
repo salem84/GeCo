@@ -158,29 +158,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             _ricercaServices = ricercaServices;
 
             DoubleClickCommand = new RelayCommand(VisualizzaConfrontoDetails);
-            ParametriConfronto = new ParametriConfronto();
-
-           // _dipendentiServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
-            //_ricercaServices = ServiceLocator.Current.GetInstance<IRicercaServices>();
-
-
-            /*//Sta arrivando un oggetto con solo l'ID
-            if (dipendente.Conoscenze.Count == 0) non mi arriva mai
-            {
-                //dipendente deve avere tutte le conoscenze caricate
-                using (PavimentalDb context = new PavimentalDb())
-                {
-                    context.Anagrafica.Include(a => a.Conoscenze.Select(c => c.Competenza))
-                        .Include(a => a.Conoscenze.Select(c => c.LivelloConoscenza))
-                        .Include(a => a.Conoscenze.Select(c => c.Competenza.TipologiaCompetenza));
-                    Dipendente = context.Anagrafica.Find(dipendente.Id);
-                }
-            }*/
-
-            //LoadParametri();
-
-
-            
+            ParametriConfronto = new ParametriConfronto();           
                         
         }
 

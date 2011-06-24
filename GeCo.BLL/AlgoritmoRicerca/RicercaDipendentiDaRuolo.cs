@@ -10,23 +10,12 @@ using GeCo.Infrastructure;
 
 namespace GeCo.BLL.AlgoritmoRicerca
 {
+
+    /// <summary>
+    /// UTILIZZATO DA MODULE_RUOLO
+    /// </summary>
     public class RicercaDipendentiDaRuolo : IAlgoritmoRicerca
     {
-
-        /*#region PUNTEGGI MASSIMI E SOGLIE
-        
-        //Mi prendo i punteggi massimi da configurazione DB
-        static int PMAX_HrDiscrezionali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_DISCREZIONALI);
-        static int PMAX_HrComportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_HR_COMPORTAMENTALI);
-        static int PMAX_Comportamentali = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_COMPORTAMENTALI);
-        static int PMAX_TecnStrategicSupport = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_STRATEGIC);
-        static int PMAX_TecnCompetitiveAdv = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PMAX_TECN_COMPETITIVE);
-        static int PERC_SogliaFoundational = ParamsHelper.GetParamValueInt(Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL);
-
-
-        #endregion*/
-
-
         ParametriConfronto _parametriConfronto;
         IRepository<Dipendente> _dipendentiRepos;
 
@@ -37,7 +26,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
         }
 
         
-        private List<RisultatoRicerca> Cerca(Ruolo figura)
+        private List<RisultatoRicerca> Cerca(Ruolo ruolo)
         {
             List<RisultatoRicerca> risultati = new List<RisultatoRicerca>();
 
@@ -60,8 +49,8 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
                 //Devo lavorare su un sottoinsieme delle conoscenze del dipendente
                 List<ConoscenzaCompetenza> competenzeDaConfrontare = new List<ConoscenzaCompetenza>();
-                //Mi scorro tutte le competenze possedute dal dipendente
-                foreach (var competenza in dipendente.Conoscenze)
+                //Mi scorro tutte le competenze possedute dal ruolo
+                foreach (var competenza in ruolo.Conoscenze)
                 {
                     //Se è una delle competenze che servono per il confronto
                     if (dipendente.Conoscenze.Contains(competenza, c => c.CompetenzaId))
@@ -76,7 +65,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 Punteggi po = Common.CalcolaPunteggi(competenzeDaConfrontare);
 
                 //Calcolo punteggio atteso
-                Punteggi pa = Common.CalcolaPunteggi(figura.Conoscenze);
+                Punteggi pa = Common.CalcolaPunteggi(dipendente.Conoscenze);
 
                 //Tutte le percentuali vengono calcolate automaticamente
                 risultato.PunteggioOsservato = po;

@@ -23,7 +23,8 @@ namespace GeCo.ModuleRuoli.ViewModels
     {
         #region PROPRIETA'
 
-        protected override string containerName { get { return Names.MODULE_NAME; } }        
+        protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_RUOLO; } }
 
         private string _macroGruppoSelected;
         public string MacroGruppoSelected
@@ -329,7 +330,7 @@ namespace GeCo.ModuleRuoli.ViewModels
         public void AvviaConfronto()
         {
             //RisultatiFiguraPerDipendenteViewModel visualizza = new RisultatiFiguraPerDipendenteViewModel(dipendente);
-            var confrontoMaster = ServiceLocator.Current.GetInstance<ConfrontoRuoloMasterVM>();
+            var confrontoMaster = IoC.Get<ConfrontoRuoloMasterVM>();
             confrontoMaster.Ruolo = Ruolo;
             confrontoMaster.AddToShell();
         }

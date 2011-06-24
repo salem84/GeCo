@@ -2,23 +2,36 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:GeCo.Infrastructure.Controls;assembly=GeCo.Infrastructure"
              xmlns:conv="clr-namespace:GeCo.Converters"
              xml:lang="it-IT"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" >
-    
-    <Grid>
-    	<Grid.RowDefinitions>
-    		<RowDefinition Height="160*"/>
-            <RowDefinition Height="140*" />
-        </Grid.RowDefinitions>
-    	<Grid.ColumnDefinitions>
-    		<ColumnDefinition Width="250"/>
-    		<ColumnDefinition Width="*"/>
-    	</Grid.ColumnDefinitions>
-        
-        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Column="1" Grid.RowSpan="2">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
+            <!-- Maschera per visualizzare i pesi-->
+            <controls:BarControl Grid.ColumnSpan="2" Height="70" DataContext="{Binding ParametriConfronto}" Margin="0,0,0,20" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                           Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="left" Width="200" 
+                          SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}"/>
+            </StackPanel>
+        </StackPanel>
+
+
+        <ListView ItemsSource="{Binding ConoscenzePerTipologia}">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -39,9 +52,11 @@
                                             <Expander.Header>
                                                 <DockPanel>
                                                     <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                                    <TextBlock Text="   (Punteggio Atteso / Punteggio Osservato)"/>
-                                                    <!--<TextBlock Grid.Column="2" FontWeight="Bold" Text="Punteggio Osservato"/>
-                                                    <TextBlock Grid.Column="3" FontWeight="Bold" Text=""/>-->
+                                                    <TextBlock Margin="5,0,0,0" Text="("/>
+                                                    <TextBlock Text="Punteggio Atteso" Style="{StaticResource PunteggioAttesoBlock}"/>
+                                                    <TextBlock Text=" / "/>
+                                                    <TextBlock Text="Punteggio Osservato" Style="{StaticResource PunteggioOsservatoBlock}"/>
+                                                    <TextBlock Text=")"/>
                                                 </DockPanel>
                                             </Expander.Header>
                                             <Expander.Content>
@@ -70,18 +85,15 @@
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}"/>
+
+                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}" Style="{StaticResource LV_NomeCompetenza}"/>
                         <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Path=LivelliConoscenzaValori2}"/>-->
 
                         <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" IsReadOnly="True"/>
-                            
-                        
-
+                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" Style="{StaticResource PunteggioAttesoBox}"/>
 
                         <TextBox Grid.Column="2" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" IsReadOnly="True"/>
+                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" Style="{StaticResource PunteggioOsservatoBox}"/>
                             
                         
                     </Grid>
@@ -95,17 +107,6 @@
             
         </ListView>
 
-        <!-- Parte sotto alla listview principale che permette l'inserimento di nuove competenze -->
-        <!-- Lato sinistro alto contenente le informazioni sul dipendente (nome, cognome,...) -->
-        <UniformGrid Margin="0" Rows="3" Columns="2" DataContext="{Binding Path=Dipendente}"></UniformGrid>
-        
-        <!-- RadioButtonList che visualizza le tipologie di competenze -->
-        <ListView Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}">
-        </ListView>
-
-        <!-- Button Salvataggio, Eliminazione -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="125,112,125,27"></StackPanel>
-        
-    </Grid>
+       
+    </DockPanel>
 </UserControl>

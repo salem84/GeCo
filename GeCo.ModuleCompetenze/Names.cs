@@ -8,5 +8,7 @@ namespace GeCo.ModuleCompetenze
     public class Names
     {
         public static readonly string MODULE_NAME = "ModuleCompetenze";
+
+        public static readonly string VIEW_COMPETENZE = "CompetenzeView";
     }
 }

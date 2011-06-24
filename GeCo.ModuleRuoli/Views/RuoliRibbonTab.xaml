@@ -10,17 +10,16 @@
     <ribbon:RibbonGroup Header="Modifica">
         <ribbon:RibbonButton Label="Nuovo" Command="{Binding Path=NuovoRuoloCommand}" 
             LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-resource-group-icon.png"/>
-
-        <ribbon:RibbonButton Label="Cerca" Command="{Binding Path=CercaRuoliCommand}" 
+        <ribbon:RibbonButton Label="Ricerca" Command="{Binding Path=RicercaRuoliCommand}" 
                              LargeImageSource="/GeCo.Infrastructure;component/Images\search.png"/>
     </ribbon:RibbonGroup>
 
     <ribbon:RibbonGroup Header="Analisi">
         <ribbon:RibbonButton Label="Confronta" Command="{Binding Path=VisualizzaConfrontoMasterCommand}"
-            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+            LargeImageSource="/GeCo.Infrastructure;component/Images\impronte32.png"/>
 
         <ribbon:RibbonButton Label="Dettagli Confronto" Command="{Binding Path=VisualizzaConfrontoDetailsCommand}" 
-            LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-contact-new-icon.png"/>
+            LargeImageSource="/GeCo.Infrastructure;component/Images\Windows-View-Detail-icon.png"/>
 
         <ribbon:RibbonButton Label="Grafico" Command="{Binding Path=GraficoCommand}" 
             LargeImageSource="/GeCo.Infrastructure;component/Images\Actions-office-chart-pie-icon.png"/>
