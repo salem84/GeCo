@@ -48,5 +48,38 @@
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+
+    <!-- utilizzato nella maschera di dettaglio -->
+    <SolidColorBrush x:Key="PunteggioAttesoColor" Color="Red"/>
+    <SolidColorBrush x:Key="PunteggioOsservatoColor" Color="Blue"/>
     
+    <Style x:Key="PunteggioAttesoBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource PunteggioAttesoColor}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="PunteggioOsservatoBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource PunteggioOsservatoColor}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="PunteggioAttesoBox" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{StaticResource PunteggioAttesoColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style x:Key="PunteggioOsservatoBox" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{StaticResource PunteggioOsservatoColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+    
+    
+    <!-- utilizzato nelle listview -->
+    <Style x:Key="LV_NomeCompetenza" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+    </Style>
+    
+
 </ResourceDictionary>

@@ -139,14 +139,14 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="3" BorderBrush="Green">
+                    <Border>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}"/>
+                            <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}" Style="{StaticResource LV_NomeCompetenza}"/>
 
                             <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0" 
                                            Height="30" Width="50"
@@ -162,18 +162,7 @@
                                     </Binding>
                                 </bot:NumericUpDown.Value>
                             </bot:NumericUpDown>
-                            <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center">
-                            <TextBox.Text>
-                                <Binding Path="LivelloConoscenzaId">
-                                    <Binding.ValidationRules>
-                                        <conv:LivelloConoscenzaValidator/>
-                                    </Binding.ValidationRules>
-                                    <Binding.Converter>
-                                        <conv:LivelloConoscenzaConverter/>
-                                    </Binding.Converter>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>-->
+                            
                         </Grid>
 
 

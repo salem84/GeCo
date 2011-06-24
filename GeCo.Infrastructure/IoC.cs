@@ -22,7 +22,7 @@ namespace GeCo.Infrastructure
         /// <summary>
         /// Mi restituisce l'istanza del workspace attivo se è di tipo TWorkspace, altrimenti ritorna null
         /// </summary>
-        /// <typeparam name="TWorkspaceContainer">WorkspaceContainer</typeparam>
+        /// <typeparam name="TWorkspaceContainer">WorkspaceContainer class</typeparam>
         /// <typeparam name="TWorkspace">Workspace</typeparam>
         /// <returns></returns>
         public static TWorkspace GetActiveWorkspace<TWorkspaceContainer, TWorkspace>() 
@@ -35,7 +35,11 @@ namespace GeCo.Infrastructure
             return activeWorkspace;
         }
 
-
+        /// <summary>
+        /// Mi restituisce il workspace attivo, senza effettuare cast specifici
+        /// </summary>
+        /// <typeparam name="TWorkspaceContainer">WorkspaceContainer class</typeparam>
+        /// <returns></returns>
         public static Workspace.Workspace GetActiveWorkspace<TWorkspaceContainer>()
             where TWorkspaceContainer : Workspace.WorkspaceContainer
         {

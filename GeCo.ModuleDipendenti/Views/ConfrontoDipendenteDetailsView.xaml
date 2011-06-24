@@ -19,28 +19,31 @@
     </UserControl.Resources>
 
 
-    <Grid>
-    	<Grid.RowDefinitions>
+    <DockPanel>
+    	<!--<Grid.RowDefinitions>
             <RowDefinition Height="90"/>
-    		<RowDefinition Height="30"/>
+    		<RowDefinition Height="25"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
     	<Grid.ColumnDefinitions>
     		<ColumnDefinition Width="250"/>
     		<ColumnDefinition Width="*"/>
-    	</Grid.ColumnDefinitions>
+    	</Grid.ColumnDefinitions>-->
 
-        <!-- Maschera per visualizzare i pesi-->
-        <controls:BarControl Grid.ColumnSpan="2" Height="70" Margin="10,10,10,10" DataContext="{Binding ParametriConfronto}" />
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
+            <!-- Maschera per visualizzare i pesi-->
+            <controls:BarControl Grid.ColumnSpan="2" Height="70" DataContext="{Binding ParametriConfronto}" Margin="0,0,0,20" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"
-                   Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="left" Width="200" 
-                  SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                           Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="left" Width="200" 
+                          SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}"/>
+            </StackPanel>
+        </StackPanel>
 
 
-
-        <ListView ItemsSource="{Binding ConoscenzePerTipologia}" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,20,0,0" >
+        <ListView ItemsSource="{Binding ConoscenzePerTipologia}">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -61,7 +64,11 @@
                                             <Expander.Header>
                                                 <DockPanel>
                                                     <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                                    <TextBlock Text="   (Punteggio Atteso / Punteggio Osservato)"/>
+                                                    <TextBlock Margin="5,0,0,0" Text="("/>
+                                                    <TextBlock Text="Punteggio Atteso" Style="{StaticResource PunteggioAttesoBlock}"/>
+                                                    <TextBlock Text=" / "/>
+                                                    <TextBlock Text="Punteggio Osservato" Style="{StaticResource PunteggioOsservatoBlock}"/>
+                                                    <TextBlock Text=")"/>
                                                     <!--<TextBlock Grid.Column="2" FontWeight="Bold" Text="Punteggio Osservato"/>
                                                     <TextBlock Grid.Column="3" FontWeight="Bold" Text=""/>-->
                                                 </DockPanel>
@@ -92,15 +99,16 @@
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}"/>
-                        <!--<ComboBox Grid.Column="1" ItemsSource="{Binding Path=LivelliConoscenzaValori2}"/>-->
 
+                        <TextBlock Grid.Column="0" Width="250" Text="{Binding Path=Competenza.Titolo}" Style="{StaticResource LV_NomeCompetenza}"/>
+                        
                         <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" IsReadOnly="True"/>
+                                 Text="{Binding Path=LivelloConoscenzaAtteso.Valore}" IsReadOnly="True"
+                                 Style="{StaticResource PunteggioAttesoBox}"/>
                             
                         <TextBox Grid.Column="2" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
-                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" IsReadOnly="True"/>
+                                 Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" IsReadOnly="True"
+                                 Style="{StaticResource PunteggioOsservatoBox}"/>
                             
                         
                     </Grid>
@@ -113,5 +121,5 @@
         </ListView>
 
         
-    </Grid>
+    </DockPanel>
 </UserControl>
