@@ -252,12 +252,11 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         private void ShowGrafico(bool visible)
         {
-            if (GraficoVisibile == false)
+            if (visible == true)
             {
                 if (RisultatoSelezionato != null)
                 {
                     int cifreDecimali = 1;
-
                     LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
 
                     var valori = new List<double>();

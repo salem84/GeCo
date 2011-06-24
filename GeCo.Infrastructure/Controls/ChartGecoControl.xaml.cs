@@ -140,7 +140,7 @@ namespace GeCo.Infrastructure.Controls
             series1.Label = "#VALY %";
             series1.ChartType = SeriesChartType.Pie;
             series1["PieLabelStyle"] = "Inside";
-            series1.BorderColor = System.Drawing.Color.Black;
+            series1.BorderColor = System.Drawing.Color.Goldenrod;
             series1.BorderWidth = 1;
             series1.BorderDashStyle = ChartDashStyle.Solid;
 
