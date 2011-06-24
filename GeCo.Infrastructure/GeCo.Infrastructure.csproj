@@ -86,6 +86,7 @@
     <Compile Include="Controls\ChartGecoControl.xaml.cs">
       <DependentUpon>ChartGecoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DictionaryItemConverter.cs" />
     <Compile Include="DialogOLD\Bubble.cs" />
     <Compile Include="DialogOLD\CursorPlus.cs" />
     <Compile Include="DialogOLD\Dialog.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="ServicesUI\Impl\DialogService.cs" />
     <Compile Include="ServicesUI\IDialogService.cs" />
     <Compile Include="Tipologiche.cs" />
+    <Compile Include="Workspace\HelpWorkspace.cs" />
     <Compile Include="Workspace\WorkspacesContainer.cs" />
     <Compile Include="Workspace\Workspace.cs" />
   </ItemGroup>

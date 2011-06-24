@@ -21,6 +21,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
     public class ConfrontoDipendenteMasterVM : Workspace
     {
         protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_CONFRONTO_MASTER; } }
 
         private IEnumerable<RisultatoRicerca> _risultati;
         public IEnumerable<RisultatoRicerca> Risultati

@@ -2,6 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:l="clr-namespace:GeCo.Infrastructure;assembly=GeCo.Infrastructure">
 
+    <l:HelpPanel x:Key="RicercaDipendenteView">
+        <l:HelpPanel.Titolo>Titolo1</l:HelpPanel.Titolo>
+        <l:HelpPanel.Testo>testooooooo</l:HelpPanel.Testo>
+    </l:HelpPanel>
+    
     <l:HelpPanel x:Key="DipendenteView">
         <l:HelpPanel.Titolo>Titolo1</l:HelpPanel.Titolo>
         <l:HelpPanel.Testo>testooooooo</l:HelpPanel.Testo>

@@ -32,6 +32,5 @@ namespace GeCo.ModuleDipendenti.ViewModels
                 this.AggiungiPannello(evento.Workspace);
             }   
         }
-        
     }
 }

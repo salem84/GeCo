@@ -23,6 +23,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         #region PROPRIETA'
 
         protected override string containerName { get { return Names.MODULE_NAME; } }
+        public override string IdWorkspace { get { return Names.VIEW_RICERCA; } }
 
         public string RicercaMatricola { get; set; }
         public string RicercaNome { get; set; }

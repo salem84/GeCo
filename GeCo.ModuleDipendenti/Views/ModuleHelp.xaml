@@ -3,15 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:converter="clr-namespace:GeCo.Converters"
+             xmlns:converters="clr-namespace:GeCo.Converters;assembly=GeCo.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <!--<UserControl.Resources>
-        <converter:HelpConverter x:Key="helpConverter"/>
-    </UserControl.Resources>-->
-    <DockPanel>
-        <TextBlock DockPanel.Dock="Top" Text="{Binding Titolo}"/>
-        <TextBlock>Testo</TextBlock>
-    </DockPanel>
+    
+    <UserControl.Resources>
+        <converters:DictionaryItemConverter x:Key="dictionaryItemConverter"/>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical">
+        <DockPanel Visibility="{Binding VisibilityViews, Converter={StaticResource dictionaryItemConverter}, ConverterParameter=RicercaDipendenteView}">
+            <TextBlock DockPanel.Dock="Top" Text="Titolo RicercaDipendenteView"/>
+            <TextBlock Text="Testo RicercaDipendenteView"/>
+        </DockPanel>
+        <DockPanel Visibility="{Binding VisibilityViews, Converter={StaticResource dictionaryItemConverter}, ConverterParameter=DipendenteView}">
+            <TextBlock DockPanel.Dock="Top" Text="Titolo DipendenteView"/>
+            <TextBlock Text="Testo dipendenteview"/>
+        </DockPanel>
+    </StackPanel>
+    
 </UserControl>

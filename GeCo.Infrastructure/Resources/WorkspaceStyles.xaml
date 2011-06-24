@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+                    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4" 
                     >
 
    
@@ -31,8 +33,15 @@
           Height="{Binding RelativeSource=
                 {RelativeSource FindAncestor,
                 AncestorType={x:Type Border}},
-                Path=ActualHeight}" 
-          />
+                Path=ActualHeight}">
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cmd:EventToCommand Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type HeaderedContentControl}}, Path=DataContext.SelectionChanged}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+        </TabControl>
     </DataTemplate>
     
 </ResourceDictionary>
