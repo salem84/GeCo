@@ -97,9 +97,19 @@
 			</Grid>
 
 			<!-- Workspace Region-->
-			<ContentControl x:Name="WorkspaceRegion" Grid.Column="1" prism:RegionManager.RegionName="WorkspaceRegion" />
+            <ContentControl x:Name="WorkspaceRegion" Grid.Column="1" prism:RegionManager.RegionName="WorkspaceRegion" />
 
-		</Grid>
+            
+            <Border x:Name="LoadingMessage"
+                    Grid.Column="1" BorderBrush="Gray" BorderThickness="5" 
+                    Margin="100" Background="#FFEEEEEE">
+                <TextBlock Text="Caricamento moduli e creazione Database in corso..." 
+                               FontStyle="Italic"
+                               FontSize="20"
+                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+
+        </Grid>
 
 
 	</Grid>

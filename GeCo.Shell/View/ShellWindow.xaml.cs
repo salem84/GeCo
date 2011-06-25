@@ -58,5 +58,10 @@ namespace GeCo.Shell.Views
         {
             this.Close();
         }
+
+        internal void LoadCompleted()
+        {
+            LoadingMessage.Visibility = Visibility.Collapsed;
+        }
     }
 }

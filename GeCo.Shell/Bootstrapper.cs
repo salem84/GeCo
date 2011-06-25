@@ -68,6 +68,11 @@ namespace GeCo.Shell
         {
             base.Run(runWithDefaultConfiguration);
 
+            //Nascondo il messaggio di caricamento
+            ShellWindow shell = (ShellWindow)this.Shell;
+            shell.LoadCompleted();
+
+            //Time bomb
             bool expired = TimeBomb();
             if (expired)
                 throw new Exception("tm");
