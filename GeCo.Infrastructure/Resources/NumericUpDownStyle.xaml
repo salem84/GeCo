@@ -19,7 +19,9 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch" Margin="2" Grid.RowSpan="2" VerticalAlignment="Stretch">
+                        <Border BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource AncestorType=bot:NumericUpDown}}" 
+                                BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=bot:NumericUpDown}}" 
+                                HorizontalAlignment="Stretch" Margin="2" Grid.RowSpan="2" VerticalAlignment="Stretch">
                             <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Border>
                         <RepeatButton Grid.Column="1" Command="bot:NumericUpDown.IncreaseCommand" Grid.Row="0">

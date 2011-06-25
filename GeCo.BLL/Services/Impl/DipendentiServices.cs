@@ -39,7 +39,7 @@ namespace GeCo.BLL.Services
             {
                 //e salvo solo quelle diverse da 0
                 //if (c.LivelloConoscenza.Titolo != Tipologiche.Livello.INSUFFICIENTE)
-                if (c.LivelloConoscenzaId == idLivelloInsuff)
+                if (c.LivelloConoscenzaId != idLivelloInsuff)
                 {
                     ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
 

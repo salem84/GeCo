@@ -19,17 +19,18 @@ namespace GeCo.DAL
         public DbSet<Parametro> Parametri { get; set; }
         
 
+        //I Proxy devono essere abilitati in questo modo vengono caricati automaticamente le entità correlate
         public PavimentalContext()
             : base()
         {
-            Configuration.ProxyCreationEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         //Ricontrollare, non funziona bene
         public PavimentalContext(string nameConn)
             : base(nameConn)
         {
-            Configuration.ProxyCreationEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

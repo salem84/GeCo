@@ -86,6 +86,7 @@
     <Compile Include="Controls\ChartGecoControl.xaml.cs">
       <DependentUpon>ChartGecoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CompetenzaToColor.cs" />
     <Compile Include="Converters\DictionaryItemConverter.cs" />
     <Compile Include="Converters\DoubleConverter.cs" />
     <Compile Include="DialogOLD\Bubble.cs" />

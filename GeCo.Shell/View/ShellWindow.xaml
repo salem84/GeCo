@@ -6,7 +6,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		Title="Ge.Co. Pavimental S.p.A. V2"
 		x:Name="RibbonWindow"
-		Width="900" Height="500">
+		Width="900" Height="600">
 
 	<!-- Window Resources -->
 	<ribbon:RibbonWindow.Resources>
@@ -103,7 +103,7 @@
             <Border x:Name="LoadingMessage"
                     Grid.Column="1" BorderBrush="Gray" BorderThickness="5" 
                     Margin="100" Background="#FFEEEEEE">
-                <TextBlock Text="Caricamento moduli e creazione Database in corso..." 
+                <TextBlock Text="Caricamento moduli e configurazione Database in corso..." 
                                FontStyle="Italic"
                                FontSize="20"
                                VerticalAlignment="Center" HorizontalAlignment="Center"/>

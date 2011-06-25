@@ -28,7 +28,7 @@ namespace GeCo.BLL.Services
             foreach (var c in r.Conoscenze)
             {
                 //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenzaId == idLivelloInsuff)
+                if (c.LivelloConoscenzaId != idLivelloInsuff)
                 {
                     ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
 

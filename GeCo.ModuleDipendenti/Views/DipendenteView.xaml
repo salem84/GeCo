@@ -49,7 +49,7 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10">
                         <ComboBox ItemsSource="{Binding CompetenzeDisponibiliDaAggiungere}" 
                       SelectedItem="{Binding CompetenzaDisponibileSelezionata}"
-                      MinWidth="170">
+                      Width="170">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -116,7 +116,9 @@
                                         <Expander IsExpanded="True" BorderBrush="#FFA4B97F" BorderThickness="0,0,0,1">
                                             <Expander.Header>
                                                 <DockPanel>
-                                                    <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Name}"
+                                                               
+                                                               />
                                                 </DockPanel>
                                             </Expander.Header>
                                             <Expander.Content>
@@ -149,8 +151,15 @@
                             <TextBlock Grid.Column="0" Text="{Binding Path=Competenza.Titolo}" Style="{StaticResource LV_NomeCompetenza}"/>
 
                             <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0" 
-                                           Height="30" Width="50"
-                                           Style="{StaticResource NumericUpDownImageStyle}">
+                                               Height="30" Width="50" 
+                                               BorderThickness="2"
+                                               Style="{StaticResource NumericUpDownImageStyle}">
+                                <bot:NumericUpDown.BorderBrush>
+                                    <MultiBinding Converter="{StaticResource competenzaToColor}">
+                                        <Binding Path="Competenza.Titolo" />
+                                        <Binding Path="Competenza.TipologiaCompetenza.MacroGruppo"/>
+                                    </MultiBinding>
+                                </bot:NumericUpDown.BorderBrush>
                                 <bot:NumericUpDown.Value>
                                     <Binding Path="LivelloConoscenzaId" Mode="TwoWay">
                                         <Binding.ValidationRules>
