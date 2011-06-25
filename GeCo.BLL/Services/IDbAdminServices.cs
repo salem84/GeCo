@@ -5,11 +5,14 @@ using System.Text;
 
 namespace GeCo.BLL.Services
 {
-    public interface IDbAdmin
+    public interface IDbAdminServices
     {
         void VerificaDb();
-        void CreaDb();
-        void EliminaDb();
+        //void CreaDb();
+        //void EliminaDb();
         void InizializzaDb();
+
+        //string GetDataDirectory();
+        //void SetupDataDirectory();
     }
 }

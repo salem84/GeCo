@@ -7,12 +7,13 @@ using System.Data;
 
 namespace GeCo.DAL
 {
-    public interface IDbContext : IDisposable
+    public interface IDbContextAdapter : IDisposable
     {
+        Database Database { get; }
+        
         DbSet<T> CreateDbSet<T>() where T : class;
         void SaveChanges();
         void ChangeObjectState<T>(T entity, EntityState entityState) where T : class;
-        void CreateDb();
-        void DeleteDb();
+
     }
 }

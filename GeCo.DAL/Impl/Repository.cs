@@ -14,9 +14,9 @@ namespace GeCo.DAL
     public class BaseRepository<T> : IRepository<T> where T : class
     {
         DbSet<T> _dbSet;
-        IDbContext _dbContext;
+        IDbContextAdapter _dbContext;
 
-        public BaseRepository(IDbContext dbContext)
+        public BaseRepository(IDbContextAdapter dbContext)
         {
             _dbContext = dbContext;
             _dbSet = dbContext.CreateDbSet<T>();

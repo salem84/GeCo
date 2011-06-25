@@ -72,7 +72,7 @@
     <Compile Include="Impl\EFRepositoryExtension.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IDbContext.cs" />
+    <Compile Include="IDbContextAdapter.cs" />
     <Compile Include="IEFRepositoryExtension.cs">
       <SubType>Code</SubType>
     </Compile>

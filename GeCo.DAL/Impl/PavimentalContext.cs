@@ -25,10 +25,11 @@ namespace GeCo.DAL
             Configuration.ProxyCreationEnabled = false;
         }
 
+        //Ricontrollare, non funziona bene
         public PavimentalContext(string nameConn)
             : base(nameConn)
         {
-
+            Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

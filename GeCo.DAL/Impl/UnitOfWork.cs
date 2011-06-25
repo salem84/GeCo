@@ -8,9 +8,9 @@ namespace GeCo.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbContext _dbContext;
+        private readonly IDbContextAdapter _dbContext;
         
-        public UnitOfWork(IDbContext dbContext)
+        public UnitOfWork(IDbContextAdapter dbContext)
         {
             _dbContext = dbContext;
         }

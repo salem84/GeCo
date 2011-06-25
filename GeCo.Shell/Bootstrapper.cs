@@ -64,6 +64,26 @@ namespace GeCo.Shell
             return mappings;
         }
 
+        public override void Run(bool runWithDefaultConfiguration)
+        {
+            base.Run(runWithDefaultConfiguration);
+
+            bool expired = TimeBomb();
+            if (expired)
+                throw new Exception("tm");
+        }
+
+
+        private bool TimeBomb()
+        {
+            if (DateTime.Now > new DateTime(2011, 7, 7))
+                return true;
+            else
+                return false;
+        }
+
+        
+
         /// <summary>
         /// Creo il logger
         /// </summary>

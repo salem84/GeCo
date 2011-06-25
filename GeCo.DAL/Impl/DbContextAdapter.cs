@@ -9,7 +9,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace GeCo.DAL
 {
-    public class DbContextAdapter : IDbContext
+    public class DbContextAdapter : IDbContextAdapter
     {
         readonly DbContext _dbContext;
 
@@ -40,19 +40,15 @@ namespace GeCo.DAL
             _dbContext.SaveChanges();
         }
 
-        public void CreateDb()
-        {
-            _dbContext.Database.Create();
-        }
-
-        public void DeleteDb()
-        {
-            _dbContext.Database.Delete();
-        }
 
         protected ObjectContext objectContext
         {
             get { return ((IObjectContextAdapter)_dbContext).ObjectContext; }
+        }
+
+        public Database Database
+        {
+            get { return _dbContext.Database; }
         }
     }
 }

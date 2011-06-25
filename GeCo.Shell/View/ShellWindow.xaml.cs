@@ -15,6 +15,7 @@ using Microsoft.Windows.Controls.Ribbon;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using GeCo.BLL.Services;
+using GeCo.Infrastructure;
 
 namespace GeCo.Shell.Views
 {
@@ -36,15 +37,11 @@ namespace GeCo.Shell.Views
             MessageBoxImage images = MessageBoxImage.Warning;
             if (MessageBox.Show(message, title,buttons, images) == MessageBoxResult.Yes)
             {
-                var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-                container.RegisterType<IDbAdmin, DbAdmin>();
-                var dbAdmin = container.Resolve<IDbAdmin>();
+                var dbAdmin = ServiceLocator.Current.GetInstance<IDbAdminServices>();
                 dbAdmin.InizializzaDb();
 
-
-
-                container.RegisterType<IDipendentiServices, DipendentiServices>();
-                var dipServices = container.Resolve<IDipendentiServices>();
+                var dipServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();
+                //var dipServices = IoC.Get<IDipendentiServices>();
                 var d = dipServices.CaricaDipendente(8);
             }
 

@@ -50,12 +50,13 @@ namespace GeCo.DAL
             _builder.Configurations.Add<T>(config);
             return this;
         }
+
         public IEFRepositoryExtension WithContextLifetime(LifetimeManager lifetimeManager)
         {
             Container.AddNewExtension<StaticFactoryExtension>();
             //Container.RegisterType<IStaticFactoryConfiguration,StaticFactoryExtension>();
             Container.Configure<IStaticFactoryConfiguration>()
-                .RegisterFactory<IDbContext>(x => ContextResolver(x, lifetimeManager, _connection));
+                .RegisterFactory<IDbContextAdapter>(x => ContextResolver(x, lifetimeManager, _connection));
             return this;
         }
 
@@ -69,11 +70,15 @@ namespace GeCo.DAL
                 //DbModelBuilder builder = c.Resolve<DbModelBuilder>("ModelBuilder"); 
                 //DbModel model = builder.Build(s);
                 //DbContext newDbContext = new DbContext(s, model.Compile(), true);
-                DbContext newDbContext = new PavimentalContext(s.ConnectionString);
+                //DbContext newDbContext = new PavimentalContext(s.ConnectionString);
+                DbContext newDbContext = new PavimentalContext();
+                
+
                 context = new DbContextAdapter(newDbContext);
                 l.SetValue(context);
             }
             return context;
         };
+
     }
 }

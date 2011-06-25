@@ -62,6 +62,7 @@
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
@@ -91,9 +92,9 @@
     <Compile Include="Services\ICompetenzeServices.cs" />
     <Compile Include="Services\IExcelServices.cs" />
     <Compile Include="Services\Impl\CompetenzeServices.cs" />
-    <Compile Include="Services\Impl\DbAdmin.cs" />
+    <Compile Include="Services\Impl\DbAdminServices.cs" />
     <Compile Include="Services\Impl\DipendentiServices.cs" />
-    <Compile Include="Services\IDbAdmin.cs" />
+    <Compile Include="Services\IDbAdminServices.cs" />
     <Compile Include="Services\IDipendentiServices.cs" />
     <Compile Include="Services\Impl\ExcelServices.cs" />
     <Compile Include="Services\Impl\RicercaServices.cs" />
