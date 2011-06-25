@@ -9,49 +9,11 @@
 	x:Name="UserControl"
 	d:DesignWidth="800" d:DesignHeight="200">
 	<UserControl.Resources>
-
-        <converters:DoubleConverter x:Key="doubleConverter"/>
-
-        <Style x:Key="GenericText" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <!--<Setter Property="FontSize" Value="{Binding Path=ActualWidth,
-                RelativeSource={RelativeSource Self},
-                Converter={StaticResource doubleConverter}, 
-                ConverterParameter=0.116}"/>-->
-            <Setter Property="Margin" Value="2"/>
-        </Style>
-
-        <Style x:Key="TextPrimoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
-            <!--<Setter Property="FontSize" Value="20"/>-->
-        </Style>
-
-        <Style x:Key="TextSecondoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
-            <!--<Setter Property="FontSize" Value="14"/>-->
-        </Style>
-
-        <Style x:Key="TextTerzoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
-            <!--<Setter Property="FontSize" Value="12"/>-->
-        </Style>
-
-        <Style x:Key="BorderContainer" TargetType="Border">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-
-        <SolidColorBrush x:Key="Linea" Color="#FF873331"/>
-        <SolidColorBrush x:Key="Hr" Color="#FF77933C"/>
-        <SolidColorBrush x:Key="HrDiscrezionali" Color="#FFC3D69B"/>
-        <SolidColorBrush x:Key="HrComportamentali" Color="#FFACD654"/>
-
-        <SolidColorBrush x:Key="Comportamentali" Color="#FFBC312D"/>
-        <SolidColorBrush x:Key="Tecniche" Color="#FFDE524E"/>
-
-        <SolidColorBrush x:Key="TecnicheStrategic" Color="#FFF5817F"/>
-        <SolidColorBrush x:Key="TecnicheCompetitive" Color="#FFE6B9B8"/>
-            
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
 
 
@@ -69,42 +31,42 @@
 			<ColumnDefinition Width="18*"/>
 		</Grid.ColumnDefinitions>
 
-        <Border Background="{StaticResource Hr}" Grid.ColumnSpan="2" Style="{StaticResource BorderContainer}" >
+        <Border Background="{StaticResource HrColor}" Grid.ColumnSpan="2" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_HrTotali, StringFormat='Hr ({0} punti)'}" Style="{StaticResource TextPrimoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{StaticResource Linea}" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource BorderContainer}" >
+        <Border Background="{StaticResource LineaColor}" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_LineaTotali, StringFormat='Linea ({0} punti)'}" Style="{StaticResource TextPrimoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{StaticResource HrDiscrezionali}" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
+        <Border Background="{StaticResource HrDiscrezionaliColor}" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_HrDiscrezionali, StringFormat='Discrezionali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{StaticResource HrComportamentali}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
+        <Border Background="{StaticResource HrComportamentaliColor}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_HrComportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{DynamicResource Comportamentali}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
+        <Border Background="{DynamicResource ComportamentaliColor}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{StaticResource Tecniche}" Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="1" Style="{StaticResource BorderContainer}" >
+        <Border Background="{StaticResource TecnicheColor}" Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="1" Style="{StaticResource BorderContainer}" >
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_TecnicTotali, StringFormat='Tecniche ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{StaticResource TecnicheStrategic}" Grid.Column="3" Grid.Row="2" Style="{StaticResource BorderContainer}">
+        <Border Background="{StaticResource TecnicheStrategicColor}" Grid.Column="3" Grid.Row="2" Style="{StaticResource BorderContainer}">
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='Strategic ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
             </Viewbox>
         </Border>
-        <Border Background="{DynamicResource TecnicheCompetitive}" Grid.Column="4" Grid.Row="2" Style="{StaticResource BorderContainer}">
+        <Border Background="{DynamicResource TecnicheCompetitiveColor}" Grid.Column="4" Grid.Row="2" Style="{StaticResource BorderContainer}">
             <Viewbox>
                 <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='Competitive ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
             </Viewbox>

@@ -86,5 +86,48 @@
 
 
     <converters:CompetenzaToColor x:Key="competenzaToColor" />
-    
+
+    <!-- colori utilizzati nel bar control e nelle listview -->
+    <SolidColorBrush x:Key="LineaColor" Color="#FF873331"/>
+    <SolidColorBrush x:Key="HrColor" Color="#FF77933C"/>
+    <SolidColorBrush x:Key="HrDiscrezionaliColor" Color="#FFC3D69B"/>
+    <SolidColorBrush x:Key="HrComportamentaliColor" Color="#FFACD654"/>
+
+    <SolidColorBrush x:Key="ComportamentaliColor" Color="#FFBC312D"/>
+    <SolidColorBrush x:Key="TecnicheColor" Color="#FFDE524E"/>
+
+    <SolidColorBrush x:Key="TecnicheStrategicColor" Color="#FFF5817F"/>
+    <SolidColorBrush x:Key="TecnicheCompetitiveColor" Color="#FFE6B9B8"/>
+
+    <!-- utilizzato dal barcontrol -->
+    <converters:DoubleConverter x:Key="doubleConverter"/>
+
+    <Style x:Key="GenericText" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <!--<Setter Property="FontSize" Value="{Binding Path=ActualWidth,
+                RelativeSource={RelativeSource Self},
+                Converter={StaticResource doubleConverter}, 
+                ConverterParameter=0.116}"/>-->
+        <Setter Property="Margin" Value="2"/>
+    </Style>
+
+    <Style x:Key="TextPrimoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
+        <!--<Setter Property="FontSize" Value="20"/>-->
+    </Style>
+
+    <Style x:Key="TextSecondoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
+        <!--<Setter Property="FontSize" Value="14"/>-->
+    </Style>
+
+    <Style x:Key="TextTerzoLivello" TargetType="TextBlock" BasedOn="{StaticResource GenericText}">
+        <!--<Setter Property="FontSize" Value="12"/>-->
+    </Style>
+
+    <Style x:Key="BorderContainer" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
 </ResourceDictionary>
