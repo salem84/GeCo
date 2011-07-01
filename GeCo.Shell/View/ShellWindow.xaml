@@ -52,7 +52,10 @@
 					<ribbon:RibbonButton x:Name="btnInizializza"
 										 LargeImageSource="/GeCo.Infrastructure;component/Images\remove-from-database-icon.png"
 										 Label="Resetta DB" Click="btnInizializza_Click" />
-				</ribbon:RibbonGroup>
+
+                    <ContentControl x:Name="SettingsRegion" Grid.Row="0" prism:RegionManager.RegionName="SettingsRegion" />
+                    
+                </ribbon:RibbonGroup>
 				<ribbon:RibbonGroup>
 					<ribbon:RibbonButton Label="About..."
 										 LargeImageSource="/GeCo.Infrastructure;component/Images\Sign-Info-icon.png"

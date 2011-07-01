@@ -6,15 +6,16 @@ using Microsoft.Practices.ServiceLocation;
 using GeCo.Infrastructure;
 using GeCo.DAL;
 using System.IO;
+using GeCo.Model;
 
 namespace GeCo.BLL.Services
 {
-    public class DbAdminServices : IDbAdminServices
+    public class AdminServices : IAdminServices
     {
 
         private IDbContextAdapter dbContext;
 
-        public DbAdminServices(IDbContextAdapter dbContext)
+        public AdminServices(IDbContextAdapter dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -50,6 +51,33 @@ namespace GeCo.BLL.Services
             dbContext.Database.Delete();
             dbContext.Database.Create();
             InitializeDB.InitalizeAll();
+        }
+
+        public IList<Parametro> GetParametri()
+        {
+            var reposParametri = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
+
+            return reposParametri.GetAll().ToList();
+        }
+
+        public bool SalvaParametro(Parametro parametro)
+        {
+            try
+            {
+                var reposParametri = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
+                var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+                reposParametri.Attach(parametro);
+
+                uow.Commit();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
     }
 }

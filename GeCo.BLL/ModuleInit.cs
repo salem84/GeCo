@@ -30,7 +30,7 @@ namespace GeCo.BLL
             this.container.RegisterType<ICompetenzeServices, CompetenzeServices>();
             this.container.RegisterType<IRicercaServices, RicercaServices>();
             this.container.RegisterType<IExcelServices, ExcelServices>();
-            this.container.RegisterType<IDbAdminServices, DbAdminServices>();
+            this.container.RegisterType<IAdminServices, AdminServices>();
 
             this.container.RegisterType<IAlgoritmoRicerca, RicercaDipendentiDaRuolo>("RicercaDipendenteDaRuolo");
             this.container.RegisterType<IAlgoritmoRicerca, RicercaRuoliDaDipendente>("RicercaRuoloDaDipendente");
@@ -49,7 +49,7 @@ namespace GeCo.BLL
                 .WithContextLifetime(new ContainerControlledLifetimeManager());
 
             //Non ho chiamato IoC perchè altrimenti avrei dovuto aggiungere come reference anche MVVMLight
-            var dbAdminService = ServiceLocator.Current.GetInstance<IDbAdminServices>();
+            var dbAdminService = ServiceLocator.Current.GetInstance<IAdminServices>();
             dbAdminService.VerificaDb();
         }
 

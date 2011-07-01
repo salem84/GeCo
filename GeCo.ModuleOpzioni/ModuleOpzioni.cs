@@ -6,29 +6,29 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.Regions;
-using GeCo.ModuleCompetenze.Views;
-using GeCo.ModuleCompetenze.ViewModels;
+using GeCo.ModuleOpzioni.Views;
+using GeCo.ModuleOpzioni.ViewModels;
 using GeCo.BLL.Services;
 using GeCo.Infrastructure;
 using GeCo.Model;
 
-namespace GeCo.ModuleCompetenze
+namespace GeCo.ModuleOpzioni
 {
-    public class ModuleCompetenze : IModule
+    public class ModuleOpzioni : IModule
     {
 
         public void Initialize()
         {
             var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
-            regionManager.RegisterViewWithRegion("TaskButtonRegion", typeof(CompetenzeTaskButton));
+            regionManager.RegisterViewWithRegion("TaskButtonRegion", typeof(OpzioniTaskButton));
 
             var container = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            container.RegisterType<Object, CompetenzeView>("CompetenzeView");
-            container.RegisterType<Object, CompetenzeVM>("CompetenzeVM");
+            container.RegisterType<Object, OpzioniView>("OpzioniView");
+            container.RegisterType<Object, OpzioniVM>("OpzioniVM");
             
 
-            //Registro i servizi
-            //container.RegisterType<IDipendentiServices, DipendentiServices>("Services");
+            
+            
         }
     }
 }

@@ -37,7 +37,7 @@ namespace GeCo.Shell.Views
             MessageBoxImage images = MessageBoxImage.Warning;
             if (MessageBox.Show(message, title,buttons, images) == MessageBoxResult.Yes)
             {
-                var dbAdmin = ServiceLocator.Current.GetInstance<IDbAdminServices>();
+                var dbAdmin = ServiceLocator.Current.GetInstance<IAdminServices>();
                 dbAdmin.InizializzaDb();
 
                 var dipServices = ServiceLocator.Current.GetInstance<IDipendentiServices>();

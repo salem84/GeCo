@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="GeCo.ModuleOpzioni.Views.OpzioniView"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  mc:Ignorable="d" 
+	  d:DesignHeight="300" d:DesignWidth="600"
+	>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="70*"/>
+			<ColumnDefinition Width="250"/>
+		</Grid.ColumnDefinitions>
+
+		
+		
+			
+
+		<DataGrid ItemsSource="{Binding ParametriLista}" SelectedItem="{Binding ParametroSelezionato}" 
+				CanUserDeleteRows="False" CanUserAddRows="False"  AutoGenerateColumns="False">
+				
+
+			<DataGrid.Columns>
+				<DataGridTextColumn Binding="{Binding Nome}" Header="Parametro" Width="5*" IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Valore}" Header="Valore" Width="5*"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		
+
+		<!-- Pannello laterale con i dettagli -->
+		<DockPanel Grid.Column="1">
+			<ToolBarTray DockPanel.Dock="Top">
+				<ToolBar>
+					
+					<Button Command="{Binding SalvaCommand}">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/GeCo.Infrastructure;component/Images/Save-icon.png" Margin="0,0,5,0"/>
+							<AccessText Text="Salva" VerticalAlignment="Center"/>
+						</StackPanel>
+					</Button>
+
+					<Button Command="{Binding SalvaTuttoCommand}">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="/GeCo.Infrastructure;component/Images/Save-icon.png" Margin="0,0,5,0"/>
+							<AccessText Text="Salva Tutto" VerticalAlignment="Center"/>
+						</StackPanel>
+					</Button>
+				</ToolBar>
+			</ToolBarTray>
+
+			<!-- Dettagli -->
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Text="Parametro: " Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderBold}"  Margin="10"/>
+				<TextBox Text="{Binding Path=ParametroSelezionato.Nome, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
+					 ValidatesOnDataErrors=true, NotifyOnValidationError=true}" IsReadOnly="True"
+				 MaxLength="100"  HorizontalAlignment="Stretch" Grid.Column="1" Margin="10"/>
+
+				<TextBlock Text="Valore: " Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderBold}" Margin="10"/>
+				<TextBox Text="{Binding Path=ParametroSelezionato.Valore, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, 
+					 ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
+				 MaxLength="100"  HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Margin="10"/>
+
+			</Grid>
+
+		</DockPanel>
+	</Grid>
+</UserControl>
