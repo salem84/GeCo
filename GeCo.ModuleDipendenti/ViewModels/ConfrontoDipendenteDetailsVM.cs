@@ -264,7 +264,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
             //Osservato dovrebbe essere un Dipendente
             var dipendente = Osservato as Dipendente;
 
-            string titolo = string.Format("Confronto tra Dipendente # {0} e Ruolo {1}", dipendente.Matricola, ruolo.Titolo);
+            string titolo = string.Format("Confronto tra Dipendente #{0} e Ruolo {1}", dipendente.Matricola, ruolo.Titolo);
             _excelServices.EsportaExcel(filename, titolo, ConfrontoSoggetti.Conoscenze);
         }
 

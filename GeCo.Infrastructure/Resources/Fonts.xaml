@@ -96,6 +96,7 @@
     <SolidColorBrush x:Key="ComportamentaliColor" Color="#FFBC312D"/>
     <SolidColorBrush x:Key="TecnicheColor" Color="#FFDE524E"/>
 
+    <SolidColorBrush x:Key="TecnicheFoundationalColor" Color="Gray"/>
     <SolidColorBrush x:Key="TecnicheStrategicColor" Color="#FFF5817F"/>
     <SolidColorBrush x:Key="TecnicheCompetitiveColor" Color="#FFE6B9B8"/>
 

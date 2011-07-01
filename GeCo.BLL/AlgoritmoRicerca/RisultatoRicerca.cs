@@ -54,7 +54,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
             get { return PunteggioOsservato.TecnFoundational >= PunteggioSbarramento; }
         }
 
-        #region PERCENTUALI HR - COMPORTAMENTALI - TECNICHE STRATEGIC - TECNICHE COMPETITIVE
+        #region PERCENTUALI HR - COMPORTAMENTALI - TECNICHE STRATEGIC - TECNICHE COMPETITIVE - TECNICHE FOUNDATIONAL
         
         public float PunteggioHrDiscrezionali
         {
@@ -131,6 +131,19 @@ namespace GeCo.BLL.AlgoritmoRicerca
         public float PunteggioTotale
         {
             get { return PunteggioHrDiscrezionali + PunteggioHrComportamentali + PunteggioComportamentali + PunteggioTecnStrategic + PunteggioTecnCompetitiveAdv; }
+        }
+
+
+        //Il punteggio per le Tecniche Foundational non rientrano nel totale
+        public float PunteggioTecnFoundational
+        {
+            get
+            {
+                if (PunteggioAtteso.TecnFoundational != 0)
+                    return (float)PunteggioOsservato.TecnFoundational / PunteggioAtteso.TecnFoundational;
+
+                return 0;
+            }
         }
 
         #endregion //PERCENTUALI

@@ -134,6 +134,20 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
+        private string _titoloGrafico;
+        public string TitoloGrafico
+        {
+            get { return _titoloGrafico; }
+            set
+            {
+                if (_titoloGrafico != value)
+                {
+                    _titoloGrafico = value;
+                    RaisePropertyChanged("TitoloGrafico");
+                }
+            }
+        }
+
         #endregion
 
         private ICompetenzeServices _livelliConoscenzaServices;
@@ -257,7 +271,15 @@ namespace GeCo.ModuleRuoli.ViewModels
                 if (RisultatoSelezionato != null)
                 {
                     int cifreDecimali = 1;
-                    LabelsGrafico = new List<string>(new string[] { "HrDiscrezionali", "HrComportamentali", "Comportamentali", "TecnicStrategic", "TecnicCompetitiveAdvantage" });
+                    LabelsGrafico = new List<string>(
+                        new string[] { 
+                            "HR Discrezionali", 
+                            "HR Comportamentali", 
+                            "Comportamentali", 
+                            "Tecniche Strategic Support", 
+                            "Tecniche Competitive Advantage" });
+
+                    TitoloGrafico = string.Format("Confronto tra Ruolo {1} e Dipendente #{0}", Ruolo.Titolo, RisultatoSelezionato.Nome);
 
                     var valori = new List<double>();
                     var colors = new List<System.Drawing.Color>();

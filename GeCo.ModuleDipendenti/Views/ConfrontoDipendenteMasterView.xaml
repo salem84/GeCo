@@ -28,7 +28,8 @@
                         Values="{Binding ValoriGrafico}"
                         Labels="{Binding LabelsGrafico}"
                         PaletteCustomColors="{Binding PaletteColors}"
-                        Width="400" Height="400"
+                        Titolo="{Binding TitoloGrafico}"
+                        Width="500" Height="400"
                         Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}, Mode=TwoWay}"
                         />
         </controls:AdornedControl.AdornerContent>
@@ -124,6 +125,19 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
+                        <!-- Tecniche Foundational -->
+                        <GridViewColumn Width="160">
+                            <GridViewColumnHeader Background="{StaticResource TecnicheFoundationalColor}" Content="Tecniche Foundational"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource TecnicheFoundationalColor}">
+                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
 
                         <!-- Tecnic Strategic Support -->
                         <GridViewColumn Width="160">

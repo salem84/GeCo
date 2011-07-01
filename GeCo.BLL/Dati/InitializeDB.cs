@@ -23,20 +23,20 @@ namespace GeCo.BLL
             InitializeDB.InsertAltro();
             
             //Key Roles Strategic Support
-            FigureDefault.SalvaResponsabileUfficioTecnico();
-            FigureDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
-            FigureDefault.SalvaResponsabileControlliLaboratorio();
-            FigureDefault.SalvaCostController();
-            FigureDefault.SalvaContabilizzatoreSenior();
+            RuoliDefault.SalvaResponsabileUfficioTecnico();
+            RuoliDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
+            RuoliDefault.SalvaResponsabileControlliLaboratorio();
+            RuoliDefault.SalvaCostController();
+            RuoliDefault.SalvaContabilizzatoreSenior();
 
             //Key Roles Competitive Advantage
-            FigureDefault.SalvaResponsabileUfficioAcquisti();
-            FigureDefault.SalvaDirettoreCantiereManutenzione();
-            FigureDefault.SalvaDirettoreCantiereInfrastrutture();
-            FigureDefault.SalvaCapoCantiereManutenzione();
-            FigureDefault.SalvaCapoCantiereInfrastrutture();
-            FigureDefault.SalvaBuyerSeniorSede();
-            FigureDefault.SalvaBuyerSeniorCantiere();
+            RuoliDefault.SalvaResponsabileUfficioAcquisti();
+            RuoliDefault.SalvaDirettoreCantiereManutenzione();
+            RuoliDefault.SalvaDirettoreCantiereInfrastrutture();
+            RuoliDefault.SalvaCapoCantiereManutenzione();
+            RuoliDefault.SalvaCapoCantiereInfrastrutture();
+            RuoliDefault.SalvaBuyerSeniorSede();
+            RuoliDefault.SalvaBuyerSeniorCantiere();
 
             DipendentiDefault.SalvaDipendente1();
         }

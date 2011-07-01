@@ -82,7 +82,7 @@
     <Compile Include="ConfrontoConoscenzaCompetenza.cs" />
     <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
-    <Compile Include="Dati\FigureDefault.cs" />
+    <Compile Include="Dati\RuoliDefault.cs" />
     <Compile Include="Dati\InitializeDB.cs" />
     <Compile Include="Excel\ExcelCreator.cs" />
     <Compile Include="Excel\ExcelHelper.cs" />

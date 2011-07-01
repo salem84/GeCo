@@ -23,6 +23,22 @@ namespace GeCo.Infrastructure.Controls
     {
 
 
+        public string Titolo
+        {
+            get { return (string)GetValue(TitoloProperty); }
+            set { SetValue(TitoloProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Titolo.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitoloProperty =
+            DependencyProperty.Register("Titolo", 
+            typeof(string), 
+            typeof(ChartGecoControl), 
+            new UIPropertyMetadata(null));
+               
+
+
+
         public List<string> Legends
         {
             get { return (List<string>)GetValue(LegendsProperty); }
@@ -111,14 +127,14 @@ namespace GeCo.Infrastructure.Controls
 
             
             //Titolo
-            /*Title title1 = new Title();
-            title1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold);
+            Title title1 = new Title();
+            title1.Font = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular);
             title1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
             title1.Name = "Title1";
             title1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             title1.ShadowOffset = 3;
-            title1.Text = "Grafico Punteggi Totali";
-            chart1.Titles.Add(title1);*/
+            title1.Text = Titolo;
+            chart1.Titles.Add(title1);
 
             ChartArea chartArea1 = new ChartArea();
             chartArea1.Area3DStyle.Enable3D = true;
@@ -137,7 +153,7 @@ namespace GeCo.Infrastructure.Controls
             series1.Points.DataBindXY(Labels,Values);
             series1.IsValueShownAsLabel = false;
             //series1.Label = "Y = #VALY\nX = #VALX";
-            series1.Label = "#VALY %";
+            series1.Label = "#VALY";
             series1.ChartType = SeriesChartType.Pie;
             series1["PieLabelStyle"] = "Inside";
             series1.BorderColor = System.Drawing.Color.Goldenrod;
@@ -183,7 +199,7 @@ namespace GeCo.Infrastructure.Controls
             //chart1.Location = new System.Drawing.Point(16, 48);
 
             // Set Chart control size
-            //chart1.Size = new System.Drawing.Size(360, 260);
+            chart1.Size = new System.Drawing.Size(400, 300);
             windowsFormsHost1.Child = chart1;
         }
 

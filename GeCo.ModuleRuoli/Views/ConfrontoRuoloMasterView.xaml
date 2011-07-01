@@ -25,7 +25,8 @@
                         Values="{Binding ValoriGrafico}"
                         Labels="{Binding LabelsGrafico}"
                         PaletteCustomColors="{Binding PaletteColors}"
-                        Width="400" Height="400"
+                        Titolo="{Binding TitoloGrafico}"
+                        Width="500" Height="400"
                         Visibility="{Binding GraficoVisibile, Converter={StaticResource BoolToVisConverter}, Mode=TwoWay}"
                         />
         </controls:AdornedControl.AdornerContent>
@@ -65,13 +66,78 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding PunteggioTotale, StringFormat='{}{0:0.0}'}" Header="Totale" Width="50"/>
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding PunteggioSbarramento, StringFormat='{}{0:0.0}'}" Header="P. Sbarramento" Width="100" />-->
-                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrDiscrezionali, StringFormat='{}{0:0.0}'}" Header="HR Discrezionali" Width="120" />
-                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioHrComportamentali, StringFormat='{}{0:0.0}'}" Header="HR Comportamentali" Width="120" />
-                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioComportamentali, StringFormat='{}{0:0.0}'}" Header="Comportamentale" Width="120" />
-                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnStrategic, StringFormat='{}{0:0.0}'}" Header="Strategic Support" Width="120" />
-                        <GridViewColumn DisplayMemberBinding="{Binding PunteggioTecnCompetitiveAdv, StringFormat='{}{0:0.0}'}" Header="Competitive Advantage" Width="120" />
+                        <!-- Hr Discrezionali -->
+                        <GridViewColumn Width="120" >
+                            <GridViewColumnHeader Background="{StaticResource HrDiscrezionaliColor}" Content="HR Discrezionali"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource HrDiscrezionaliColor}">
+                                        <TextBlock Text="{Binding PunteggioHrDiscrezionali, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
+                        <!-- Hr Comportamentali -->
+                        <GridViewColumn Width="120">
+                            <GridViewColumnHeader Background="{StaticResource HrComportamentaliColor}" Content="HR Comportamentali"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource HrComportamentaliColor}">
+                                        <TextBlock Text="{Binding PunteggioHrComportamentali, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Comportamentali -->
+                        <GridViewColumn Width="120">
+                            <GridViewColumnHeader Background="{StaticResource ComportamentaliColor}" Content="Comportamentale"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource ComportamentaliColor}">
+                                        <TextBlock Text="{Binding PunteggioComportamentali, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Tecniche Foundational -->
+                        <GridViewColumn Width="160">
+                            <GridViewColumnHeader Background="{StaticResource TecnicheFoundationalColor}" Content="Tecniche Foundational"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource TecnicheFoundationalColor}">
+                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <!-- Tecnic Strategic Support -->
+                        <GridViewColumn Width="160">
+                            <GridViewColumnHeader Background="{StaticResource TecnicheStrategicColor}" Content="Tecniche Strategic Support"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource TecnicheStrategicColor}">
+                                        <TextBlock Text="{Binding PunteggioTecnStrategic, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!-- Tecnic Competitive Advantage -->
+                        <GridViewColumn Width="160">
+                            <GridViewColumnHeader Background="{StaticResource TecnicheCompetitiveColor}" Content="Tecniche Competitive Advantage"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="-6" Background="{StaticResource TecnicheCompetitiveColor}">
+                                        <TextBlock Text="{Binding PunteggioTecnCompetitiveAdv, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
 
