@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.ModuleCompetenze", "Ge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeCo.ModuleOpzioni", "GeCo.ModuleOpzioni\GeCo.ModuleOpzioni.csproj", "{05EBFB82-85C2-438B-8513-694DEE2D44F8}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GeCo.Setup", "GeCo.Setup\GeCo.Setup.vdproj", "{F35895D0-AE51-431E-AD6B-F5B174848F8F}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GeCo.vsmdi
@@ -156,6 +158,12 @@ Global
 		{05EBFB82-85C2-438B-8513-694DEE2D44F8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{05EBFB82-85C2-438B-8513-694DEE2D44F8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{05EBFB82-85C2-438B-8513-694DEE2D44F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Debug|Any CPU.ActiveCfg = Debug
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Debug|x86.ActiveCfg = Debug
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Release|Any CPU.ActiveCfg = Release
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Release|Mixed Platforms.ActiveCfg = Release
+		{F35895D0-AE51-431E-AD6B-F5B174848F8F}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
