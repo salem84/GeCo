@@ -304,6 +304,10 @@ namespace GeCo.ModuleDipendenti.ViewModels
             var service = ServiceLocator.Current.GetInstance<IDipendentiServices>();
             service.EliminaDipendente(Dipendente.Id);
 
+            //Faccio come se sto inserendo il dipendente per la prima volta (modalità new)
+            Dipendente = new Dipendente();
+            EditMode = false;
+
             Stato = "Cancellato";
         }
 

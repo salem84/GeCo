@@ -20,6 +20,67 @@ namespace GeCo.BLL.Services
         /// <param name="dipendente"></param>
         public Dipendente SalvaDipendente(Dipendente d)
         {
+            if (d.Id == 0)
+                return CreaDipendente(d);
+            else
+                return AggiornaDipendente(d);
+        }
+
+
+        private Dipendente AggiornaDipendente(Dipendente d)
+        {
+            var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
+
+            var reposDipendente = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
+            var reposConoscenze = ServiceLocator.Current.GetInstance<IRepository<ConoscenzaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            Dipendente dipendente = reposDipendente.Single(dip => dip.Id == d.Id);
+
+            dipendente.Matricola = d.Matricola;
+            dipendente.Cognome = d.Cognome;
+            dipendente.Nome = d.Nome;
+            dipendente.DataNascita = d.DataNascita;
+
+            for (int i = 0; i < d.Conoscenze.Count; i++ )
+            {
+                ConoscenzaCompetenza c = d.Conoscenze.ToList()[i];
+
+                //e salvo solo quelle diverse da 0
+                if (c.LivelloConoscenzaId != idLivelloInsuff)
+                {
+                    ConoscenzaCompetenza conoscenza;
+                    conoscenza = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                    if (conoscenza == null)
+                    {
+                        conoscenza = new ConoscenzaCompetenza();
+                        conoscenza.CompetenzaId = c.CompetenzaId;
+                        dipendente.Conoscenze.Add(conoscenza);
+                    }
+
+                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+                }
+                else
+                {
+                    //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
+                    var conosc = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                    if (conosc != null)
+                    {
+                        dipendente.Conoscenze.Remove(conosc);
+                        var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
+                        reposConoscenze.Delete(cc);
+                    }
+                }
+            }
+
+            uow.Commit();
+
+            return dipendente;
+        }
+
+        private Dipendente CreaDipendente(Dipendente d)
+        {
             var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
 
@@ -51,12 +112,7 @@ namespace GeCo.BLL.Services
 
             var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
-
-            if (d.Id != 0)
-            {
-                repos.Delete(d);
-            }        
-
+            
             repos.Add(dipendente);
             uow.Commit();
 
@@ -65,11 +121,11 @@ namespace GeCo.BLL.Services
 
         public void EliminaDipendente(int id)
         {
-            Dipendente dipToRemove = new Dipendente() { Id = id };
             var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-            repos.Attach(dipToRemove);
+            //repos.Attach(dipToRemove);
+            Dipendente dipToRemove = repos.Single(d => d.Id == id);
             repos.Delete(dipToRemove);
 
             uow.Commit();

@@ -15,6 +15,14 @@ namespace GeCo.BLL.Services
     {
         public Ruolo SalvaRuolo(Ruolo r)
         {
+            if (r.Id == 0)
+                return CreaRuolo(r);
+            else
+                return AggiornaRuolo(r);
+        }
+
+        private Ruolo CreaRuolo(Ruolo r)
+        {
             var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
 
@@ -41,12 +49,62 @@ namespace GeCo.BLL.Services
             var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-            if (r.Id != 0)
+            
+            repos.Add(ruolo);
+            uow.Commit();
+
+            return ruolo;
+        }
+
+
+        private Ruolo AggiornaRuolo(Ruolo r)
+        {
+            var reposLivelloConoscenza = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            var reposRuoli = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
+            var reposConoscenze = ServiceLocator.Current.GetInstance<IRepository<ConoscenzaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+
+            int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
+
+            Ruolo ruolo = new Ruolo();
+            ruolo.Titolo = r.Titolo;
+            ruolo.Descrizione = r.Descrizione;
+
+            ruolo.Conoscenze = new List<ConoscenzaCompetenza>();
+
+            //Mi scorro tutte le conoscenze
+            for (int i = 0; i < r.Conoscenze.Count; i++)
             {
-                repos.Delete(r);
+                ConoscenzaCompetenza c = r.Conoscenze.ToList()[i];
+
+                //e salvo solo quelle diverse da 0
+                if (c.LivelloConoscenzaId != idLivelloInsuff)
+                {
+                    ConoscenzaCompetenza conoscenza;
+                    conoscenza = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                    if (conoscenza == null)
+                    {
+                        conoscenza = new ConoscenzaCompetenza();
+                        conoscenza.CompetenzaId = c.CompetenzaId;
+                        ruolo.Conoscenze.Add(conoscenza);
+                    }
+
+                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+                }
+                else
+                {
+                    //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
+                    var conosc = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                    if (conosc != null)
+                    {
+                        ruolo.Conoscenze.Remove(conosc);
+                        var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
+                        reposConoscenze.Delete(cc);
+                    }
+                }
             }
 
-            repos.Add(ruolo);
+            reposRuoli.Add(ruolo);
             uow.Commit();
 
             return ruolo;
@@ -54,11 +112,11 @@ namespace GeCo.BLL.Services
 
         public void EliminaRuolo(int id)
         {
-            Ruolo ruoloToRemove = new Ruolo() { Id = id };
             var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-            repos.Attach(ruoloToRemove);
+            //repos.Attach(ruoloToRemove);
+            Ruolo ruoloToRemove = repos.Single(r => r.Id == id);
             repos.Delete(ruoloToRemove);
 
             uow.Commit();

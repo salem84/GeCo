@@ -318,6 +318,9 @@ namespace GeCo.ModuleRuoli.ViewModels
             var service = ServiceLocator.Current.GetInstance<IRuoliServices>();
             service.EliminaRuolo(Ruolo.Id);
 
+            Ruolo = new Ruolo();
+            EditMode = false;
+
             Stato = "Cancellato";
         }
 
