@@ -37,7 +37,7 @@
             </Viewbox>
         </Border>
         <Border Background="{StaticResource LineaColor}" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource BorderContainer}" >
-            <Viewbox>
+            <Viewbox OpacityMask="{DynamicResource LineaColor}">
                 <TextBlock Text="{Binding PMAX_LineaTotali, StringFormat='Linea ({0} punti)'}" Style="{StaticResource TextPrimoLivello}"/>
             </Viewbox>
         </Border>
@@ -48,26 +48,31 @@
         </Border>
         <Border Background="{StaticResource HrComportamentaliColor}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
             <Viewbox>
-                <TextBlock Text="{Binding PMAX_HrComportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
+                <TextBlock Width="{Binding ElementName=comportamentali, Path=ActualWidth}"
+                           Text="{Binding PMAX_HrComportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
         <Border Background="{DynamicResource ComportamentaliColor}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource BorderContainer}" >
-            <Viewbox>
-                <TextBlock Text="{Binding PMAX_Comportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
+            <Viewbox OpacityMask="{DynamicResource ComportamentaliColor}">
+                <TextBlock x:Name="comportamentali"
+                    Text="{Binding PMAX_Comportamentali, StringFormat='Comportamentali ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
             </Viewbox>
         </Border>
         <Border Background="{StaticResource TecnicheColor}" Grid.ColumnSpan="2" Grid.Column="3" Grid.Row="1" Style="{StaticResource BorderContainer}" >
-            <Viewbox>
-                <TextBlock Text="{Binding PMAX_TecnicTotali, StringFormat='Tecniche ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
+            <Viewbox OpacityMask="{DynamicResource TecnicheColor}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding PMAX_TecnicTotali, StringFormat='Tecniche ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
+                    <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Found. {0:P1}'}" Style="{StaticResource TextSecondoLivello}"/>
+                </StackPanel>
             </Viewbox>
         </Border>
         <Border Background="{StaticResource TecnicheStrategicColor}" Grid.Column="3" Grid.Row="2" Style="{StaticResource BorderContainer}">
-            <Viewbox>
+            <Viewbox OpacityMask="{DynamicResource TecnicheStrategicColor}">
                 <TextBlock Text="{Binding PMAX_TecnStrategicSupport, StringFormat='Strategic ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
             </Viewbox>
         </Border>
         <Border Background="{DynamicResource TecnicheCompetitiveColor}" Grid.Column="4" Grid.Row="2" Style="{StaticResource BorderContainer}">
-            <Viewbox>
+            <Viewbox OpacityMask="{DynamicResource TecnicheCompetitiveColor}">
                 <TextBlock Text="{Binding PMAX_TecnCompetitiveAdv, StringFormat='Competitive ({0} punti)'}" Style="{StaticResource TextTerzoLivello}"/>
             </Viewbox>
         </Border>

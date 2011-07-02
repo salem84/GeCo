@@ -132,7 +132,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid Margin="-6" Background="{StaticResource TecnicheFoundationalColor}">
-                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:P}'}" Margin="6"/>
                                     </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

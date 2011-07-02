@@ -14,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/BoolToImageStyle.xaml" />
                 <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/Fonts.xaml" />
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/ListView.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         </ResourceDictionary>
@@ -52,7 +53,8 @@
             </StackPanel>
 
 
-            <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}">
+            <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}"
+                      ItemContainerStyle="{StaticResource ItemContainerStretch}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="true">
                         <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Dipendente" Width="120"/>
@@ -108,7 +110,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid Margin="-6" Background="{StaticResource TecnicheFoundationalColor}">
-                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:0.0}'}" Margin="6"/>
+                                        <TextBlock Text="{Binding PunteggioTecnFoundational, StringFormat='{}{0:P}'}" Margin="6"/>
                                     </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

@@ -88,17 +88,17 @@
     <converters:CompetenzaToColor x:Key="competenzaToColor" />
 
     <!-- colori utilizzati nel bar control e nelle listview -->
-    <SolidColorBrush x:Key="LineaColor" Color="#FF873331"/>
+    <SolidColorBrush x:Key="LineaColor" Color="#FF606060"/>
     <SolidColorBrush x:Key="HrColor" Color="#FF77933C"/>
     <SolidColorBrush x:Key="HrDiscrezionaliColor" Color="#FFC3D69B"/>
     <SolidColorBrush x:Key="HrComportamentaliColor" Color="#FFACD654"/>
 
-    <SolidColorBrush x:Key="ComportamentaliColor" Color="#FFBC312D"/>
-    <SolidColorBrush x:Key="TecnicheColor" Color="#FFDE524E"/>
+    <SolidColorBrush x:Key="ComportamentaliColor" Color="#FF757575"/>
+    <SolidColorBrush x:Key="TecnicheColor" Color="#FF909090"/>
 
-    <SolidColorBrush x:Key="TecnicheFoundationalColor" Color="Gray"/>
-    <SolidColorBrush x:Key="TecnicheStrategicColor" Color="#FFF5817F"/>
-    <SolidColorBrush x:Key="TecnicheCompetitiveColor" Color="#FFE6B9B8"/>
+    <SolidColorBrush x:Key="TecnicheFoundationalColor" Color="#FF909090"/>
+    <SolidColorBrush x:Key="TecnicheStrategicColor" Color="#FFB0B0B0"/>
+    <SolidColorBrush x:Key="TecnicheCompetitiveColor" Color="#FFD0D0D0"/>
 
     <!-- utilizzato dal barcontrol -->
     <converters:DoubleConverter x:Key="doubleConverter"/>
