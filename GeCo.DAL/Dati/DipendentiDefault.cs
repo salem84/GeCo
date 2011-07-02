@@ -5,12 +5,18 @@ using System.Text;
 using GeCo.Model;
 using GeCo.Infrastructure;
 using GeCo.DAL;
-using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.BLL.Dati
+namespace GeCo.DAL.Dati
 {
     public class DipendentiDefault
     {
+        private IDbContextAdapter dbContext;
+
+        public DipendentiDefault(IDbContextAdapter context)
+        {
+            dbContext = context;
+        }
+
         class D
         {
             public string t { get; set; }
@@ -18,13 +24,19 @@ namespace GeCo.BLL.Dati
             public string mg { get; set; }
         }
 
-        private static Dipendente SalvaDipendente(D[] lista, string cognome, string nome)
+        private Dipendente SalvaDipendente(D[] lista, string matricola, string cognome, string nome)
         {
-            var reposDipendenti = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
+            /*var reposDipendenti = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
 
             var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+
+            var reposDipendenti = new BaseRepository<Dipendente>(dbContext);
+
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
             List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
 
@@ -38,6 +50,7 @@ namespace GeCo.BLL.Dati
 
             var dipendente = new Dipendente()
             {
+                Matricola = matricola,
                 Cognome = cognome,
                 Nome = nome,
                 Conoscenze = conoscenze
@@ -57,7 +70,7 @@ namespace GeCo.BLL.Dati
 
 
         //Punteggi osservati dal foglio Responsabile Ufficio Tecnico
-        public static Dipendente SalvaDipendente1()
+        public Dipendente SalvaDipendente1()
         {
             var lista = new[] 
             {
@@ -148,7 +161,7 @@ namespace GeCo.BLL.Dati
                 #endregion
             };
 
-            return SalvaDipendente(lista, "Dipendente Osservato 1", "o1");
+            return SalvaDipendente(lista, "122", "Dipendente Osservato 1", "o1");
             
         }
     }

@@ -141,7 +141,9 @@ namespace GeCo.BLL.Services
         {
             var repos = ServiceLocator.Current.GetInstance<IRepository<Dipendente>>();
             var lista = repos.AsQueryable().AsExpandable().Where(where).ToList();
-            return lista;
+            //var lista = repos.GetAll().Where(where.Compile());
+            
+            return lista.ToList();
         }
 
 

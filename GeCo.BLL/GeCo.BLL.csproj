@@ -80,10 +80,6 @@
     <Compile Include="AlgoritmoRicerca\RicercaRuoliDaDipendente.cs" />
     <Compile Include="AlgoritmoRicerca\RisultatoRicerca.cs" />
     <Compile Include="ConfrontoConoscenzaCompetenza.cs" />
-    <Compile Include="Dati\CompetenzeDefault.cs" />
-    <Compile Include="Dati\DipendentiDefault.cs" />
-    <Compile Include="Dati\RuoliDefault.cs" />
-    <Compile Include="Dati\InitializeDB.cs" />
     <Compile Include="Excel\ExcelCreator.cs" />
     <Compile Include="Excel\ExcelHelper.cs" />
     <Compile Include="ModuleInit.cs" />

@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq.Expressions;
 using GeCo.Infrastructure;
 using System.Data.Objects;
+using LinqKit;
 
 namespace GeCo.DAL
 {
@@ -27,14 +28,15 @@ namespace GeCo.DAL
             return _dbSet;
         }
 
-        public IEnumerable<T> GetAll()
+        public IList<T> GetAll()
         {
             return _dbSet.ToList();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> where)
+        public IList<T> Find(Expression<Func<T, bool>> where)
         {
-            return _dbSet.Where(where);
+            return _dbSet.Where(where).ToList();
+            //return _dbSet.AsQueryable().AsExpandable().Where(where).ToList();
         }
 
         public T Single(Expression<Func<T, bool>> where)

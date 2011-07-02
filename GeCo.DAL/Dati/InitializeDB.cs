@@ -5,43 +5,50 @@ using System.Text;
 using GeCo.Model;
 using GeCo.Infrastructure;
 using GeCo.DAL;
-using GeCo.BLL.Dati;
-using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.BLL
+namespace GeCo.DAL.Dati
 {
     public class InitializeDB
     {
-        public static void InitalizeAll()
+        private IDbContextAdapter dbContext;
+
+        public InitializeDB(IDbContextAdapter context)
         {
-            InitializeDB.InsertParametriDefault();
-            InitializeDB.InsertTipologieCompetenze();
-            InitializeDB.InsertCompetenzeTecniche();
-            InitializeDB.InsertCompetenzeComportamentali();
-            InitializeDB.InsertCompetenzeHrDiscrezionali();
-            InitializeDB.InsertCompetenzeHrComportamentali();
-            InitializeDB.InsertAltro();
-            
-            //Key Roles Strategic Support
-            RuoliDefault.SalvaResponsabileUfficioTecnico();
-            RuoliDefault.SalvaResponsabileImpiantiMobiliMacchineImpianti();
-            RuoliDefault.SalvaResponsabileControlliLaboratorio();
-            RuoliDefault.SalvaCostController();
-            RuoliDefault.SalvaContabilizzatoreSenior();
-
-            //Key Roles Competitive Advantage
-            RuoliDefault.SalvaResponsabileUfficioAcquisti();
-            RuoliDefault.SalvaDirettoreCantiereManutenzione();
-            RuoliDefault.SalvaDirettoreCantiereInfrastrutture();
-            RuoliDefault.SalvaCapoCantiereManutenzione();
-            RuoliDefault.SalvaCapoCantiereInfrastrutture();
-            RuoliDefault.SalvaBuyerSeniorSede();
-            RuoliDefault.SalvaBuyerSeniorCantiere();
-
-            DipendentiDefault.SalvaDipendente1();
+            dbContext = context;
         }
 
-        private static void InsertParametriDefault()
+        public void InitalizeAll()
+        {
+            InsertParametriDefault();
+            InsertTipologieCompetenze();
+            InsertCompetenzeTecniche();
+            InsertCompetenzeComportamentali();
+            InsertCompetenzeHrDiscrezionali();
+            InsertCompetenzeHrComportamentali();
+            InsertAltro();
+            
+            //Key Roles Strategic Support
+            var ruoliInit = new RuoliDefault(dbContext);
+            ruoliInit.SalvaResponsabileUfficioTecnico();
+            ruoliInit.SalvaResponsabileImpiantiMobiliMacchineImpianti();
+            ruoliInit.SalvaResponsabileControlliLaboratorio();
+            ruoliInit.SalvaCostController();
+            ruoliInit.SalvaContabilizzatoreSenior();
+
+            //Key Roles Competitive Advantage
+            ruoliInit.SalvaResponsabileUfficioAcquisti();
+            ruoliInit.SalvaDirettoreCantiereManutenzione();
+            ruoliInit.SalvaDirettoreCantiereInfrastrutture();
+            ruoliInit.SalvaCapoCantiereManutenzione();
+            ruoliInit.SalvaCapoCantiereInfrastrutture();
+            ruoliInit.SalvaBuyerSeniorSede();
+            ruoliInit.SalvaBuyerSeniorCantiere();
+
+            var dipendentiInit = new DipendentiDefault(dbContext);
+            dipendentiInit.SalvaDipendente1();
+        }
+
+        private void InsertParametriDefault()
         {
             var lista = new[]
                 {
@@ -53,8 +60,10 @@ namespace GeCo.BLL
                     new { n=Tipologiche.Parametro.PERCENTUALE_SOGLIA_FOUNDATIONAL, v=70},
                 };
 
-            var repos = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            //var repos = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
+            //var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var repos = new BaseRepository<Parametro>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
 
             foreach (var elemento in lista)
@@ -71,7 +80,7 @@ namespace GeCo.BLL
         }
 
 
-        public static void InsertTipologieCompetenze()
+        public void InsertTipologieCompetenze()
         {
             var lista = new[]
                 {
@@ -96,9 +105,10 @@ namespace GeCo.BLL
                     new { t=Tipologiche.TipologiaCompetenza.HR_C_REALIZZATIVE, m=Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE}
                 };
 
-            var repos = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
-
+            /*var repos = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var repos = new BaseRepository<TipologiaCompetenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
 
             foreach (var elemento in lista)
@@ -114,7 +124,7 @@ namespace GeCo.BLL
 
         }
 
-        public static void InsertCompetenzeTecniche()
+        public void InsertCompetenzeTecniche()
         {
             var lista = new[] 
             {
@@ -177,9 +187,12 @@ namespace GeCo.BLL
 
             };
 
-            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
             foreach (var elemento in lista)
             {
@@ -196,7 +209,7 @@ namespace GeCo.BLL
 
         }
 
-        public static void InsertCompetenzeComportamentali()
+        public void InsertCompetenzeComportamentali()
         {
 
             var lista = new[] 
@@ -224,9 +237,12 @@ namespace GeCo.BLL
             };
 
 
-            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
             foreach (var elemento in lista)
             {
@@ -242,7 +258,7 @@ namespace GeCo.BLL
             uow.Commit();
         }
 
-        public static void InsertCompetenzeHrDiscrezionali()
+        public void InsertCompetenzeHrDiscrezionali()
         {
 
             var lista = new[] 
@@ -251,9 +267,12 @@ namespace GeCo.BLL
                 new { t="Considerazioni Gestionali", d="", p=1, tipo=Tipologiche.TipologiaCompetenza.HR_DISCREZIONALI}                
             };
 
-            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
             foreach (var elemento in lista)
             {
@@ -269,7 +288,7 @@ namespace GeCo.BLL
             uow.Commit();
         }
 
-        public static void InsertCompetenzeHrComportamentali()
+        public void InsertCompetenzeHrComportamentali()
         {
 
             var lista = new[] 
@@ -297,9 +316,12 @@ namespace GeCo.BLL
             };
 
 
-            var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
+            /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
             foreach (var elemento in lista)
             {
@@ -317,11 +339,14 @@ namespace GeCo.BLL
 
 
 
-        public static void InsertAltro()
+        public void InsertAltro()
         {
             //var reposAree = ServiceLocator.Current.GetInstance<IRepository<Area>>();
-            var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            /*var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+
+            var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
 
 
             //reposAree.Add(new Area() { Nome = "Area1" });

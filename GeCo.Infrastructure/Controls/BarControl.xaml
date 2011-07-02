@@ -24,8 +24,8 @@
 			<RowDefinition Height="30*"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="20*"/>
-			<ColumnDefinition Width="30*"/>
+			<ColumnDefinition Width="25*"/>
+			<ColumnDefinition Width="25*"/>
 			<ColumnDefinition Width="20*"/>
 			<ColumnDefinition Width="12*"/>
 			<ColumnDefinition Width="18*"/>
@@ -62,7 +62,7 @@
             <Viewbox OpacityMask="{DynamicResource TecnicheColor}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding PMAX_TecnicTotali, StringFormat='Tecniche ({0} punti)'}" Style="{StaticResource TextSecondoLivello}"/>
-                    <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat='Soglia Found. {0:P1}'}" Style="{StaticResource TextSecondoLivello}"/>
+                    <TextBlock Text="{Binding PERC_SogliaFoundational, StringFormat=' - Soglia Found. {0}%'}" Style="{StaticResource TextSecondoLivello}"/>
                 </StackPanel>
             </Viewbox>
         </Border>

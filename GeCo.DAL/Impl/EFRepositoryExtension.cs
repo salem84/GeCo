@@ -21,13 +21,12 @@ namespace GeCo.DAL
         {
             Container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
             Container.RegisterType<IUnitOfWork, UnitOfWork>();
-            //Container.RegisterType<IGlobalUnitOfWork, GlobalUnitOfWork>();
-            //Container.RegisterType(typeof(IGlobalRepository<>), typeof(GlobalBaseRepository<>));
         }
 
         public IEFRepositoryExtension WithConnection(string connectionString)
         {
             _connection = new SqlConnection(connectionString);
+            
             return this;
         }
 
@@ -72,8 +71,12 @@ namespace GeCo.DAL
                 //DbContext newDbContext = new DbContext(s, model.Compile(), true);
                 //DbContext newDbContext = new PavimentalContext(s.ConnectionString);
                 DbContext newDbContext = new PavimentalContext();
+                //Se il db non esiste o non è valido, viene ricreato e inizializzato
+                var res = newDbContext.Database.CompatibleWithModel(false);
                 
-
+                //Ricreo il contesto altrimenti mi da errori perchè utilizzo quello precedente non valido,
+                //creato con un db non compatibile o non esistente
+                newDbContext = new PavimentalContext();
                 context = new DbContextAdapter(newDbContext);
                 l.SetValue(context);
             }

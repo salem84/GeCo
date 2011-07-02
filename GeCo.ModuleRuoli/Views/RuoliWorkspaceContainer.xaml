@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/WorkspaceStyles.xaml" />
                 <ResourceDictionary Source="../Resources/WorkspaceResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

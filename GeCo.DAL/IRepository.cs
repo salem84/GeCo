@@ -14,8 +14,8 @@ namespace GeCo.DAL
         IQueryable<T> Query(bool includeChildren);*/
 
         IQueryable<T> AsQueryable();
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> where);
+        IList<T> GetAll();
+        IList<T> Find(Expression<Func<T, bool>> where);
         T Single(Expression<Func<T, bool>> where);
         T SingleOrDefault(Expression<Func<T, bool>> where);
         T First(Expression<Func<T, bool>> where);

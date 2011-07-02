@@ -5,12 +5,18 @@ using System.Text;
 using GeCo.Model;
 using GeCo.DAL;
 using GeCo.Infrastructure;
-using Microsoft.Practices.ServiceLocation;
 
-namespace GeCo.BLL.Dati
+namespace GeCo.DAL.Dati
 {
     public class RuoliDefault
     {
+        private IDbContextAdapter dbContext;
+
+        public RuoliDefault(IDbContextAdapter context)
+        {
+            dbContext = context;
+        }
+
         class R
         {
             public string t { get; set; }
@@ -18,13 +24,19 @@ namespace GeCo.BLL.Dati
             public string mg { get; set; }
         }
 
-        private static Ruolo SalvaRuolo(R[] lista, string nome, string keyRole)
+        private Ruolo SalvaRuolo(R[] lista, string nome, string keyRole)
         {
-            var reposRuoli = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
+            /*var reposRuoli = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
 
             var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
-            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
+            var reposRuoli = new BaseRepository<Ruolo>(dbContext);
+
+            var reposComp = new BaseRepository<Competenza>(dbContext);
+            var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
+            var uow = new UnitOfWork(dbContext);
+
 
             List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
 
@@ -57,7 +69,7 @@ namespace GeCo.BLL.Dati
 
         #region KEY ROLES STRATEGIC SUPPORT
         
-        public static Ruolo SalvaResponsabileUfficioTecnico()
+        public Ruolo SalvaResponsabileUfficioTecnico()
         {
             var lista = new[] 
             {
@@ -151,7 +163,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaResponsabileImpiantiMobiliMacchineImpianti()
+        public Ruolo SalvaResponsabileImpiantiMobiliMacchineImpianti()
         {
             var lista = new[] 
             {
@@ -237,7 +249,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaResponsabileControlliLaboratorio()
+        public Ruolo SalvaResponsabileControlliLaboratorio()
         {
             var lista = new[] 
             {
@@ -323,7 +335,7 @@ namespace GeCo.BLL.Dati
             return SalvaRuolo(lista, "Responsabile controlli laboratorio", "Strategic Support");
         }
 
-        public static Ruolo SalvaCostController()
+        public Ruolo SalvaCostController()
         {
             var lista = new[] 
             {
@@ -414,7 +426,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaContabilizzatoreSenior()
+        public Ruolo SalvaContabilizzatoreSenior()
         {
             var lista = new[] 
             {
@@ -503,7 +515,7 @@ namespace GeCo.BLL.Dati
 
         #region KEY ROLES COMPETITIVE ADVANTAGE
 
-        public static Ruolo SalvaResponsabileUfficioAcquisti()
+        public Ruolo SalvaResponsabileUfficioAcquisti()
         {
             var lista = new[] 
             {
@@ -587,7 +599,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaDirettoreCantiereManutenzione()
+        public Ruolo SalvaDirettoreCantiereManutenzione()
         {
             var lista = new[] 
             {
@@ -700,7 +712,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaDirettoreCantiereInfrastrutture()
+        public Ruolo SalvaDirettoreCantiereInfrastrutture()
         {
             var lista = new[] 
             {
@@ -799,7 +811,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaCapoCantiereManutenzione()
+        public Ruolo SalvaCapoCantiereManutenzione()
         {
             var lista = new[] 
             {
@@ -912,7 +924,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaCapoCantiereInfrastrutture()
+        public Ruolo SalvaCapoCantiereInfrastrutture()
         {
             var lista = new[] 
             {
@@ -1010,7 +1022,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaBuyerSeniorSede()
+        public Ruolo SalvaBuyerSeniorSede()
         {
             var lista = new[] 
             {
@@ -1095,7 +1107,7 @@ namespace GeCo.BLL.Dati
 
         }
 
-        public static Ruolo SalvaBuyerSeniorCantiere()
+        public Ruolo SalvaBuyerSeniorCantiere()
         {
             var lista = new[] 
             {

@@ -17,8 +17,9 @@ namespace GeCo.DAL
         public DbSet<TipologiaCompetenza> TipologieCompetenze { get; set; }
         public DbSet<ConoscenzaCompetenza> ConoscenzaCompetenze { get; set; }
         public DbSet<Parametro> Parametri { get; set; }
-        
 
+
+       
         //I Proxy devono essere abilitati in questo modo vengono caricati automaticamente le entità correlate
         public PavimentalContext()
             : base()
@@ -35,6 +36,9 @@ namespace GeCo.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Cancello il db se il modello cambia
+            Database.SetInitializer(new PavimentalInitializer());
+
            /* modelBuilder.Entity<Anagrafica>()
                 .Map(m => m.ToTable("Anagrafica"));*/
 

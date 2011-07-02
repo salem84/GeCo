@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GeCo.BLL.Dati
+namespace GeCo.DAL.Dati
 {
     public class CompetenzeDefault
     {

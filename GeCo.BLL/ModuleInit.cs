@@ -43,10 +43,17 @@ namespace GeCo.BLL
             var cnxString = ConfigurationManager.ConnectionStrings["PavimentalContext"].ConnectionString;
             //var cnxString = "PavimentalContext";
 
+            //Mi serve un container di questo tipo per fare il reset del db
+            DisposableLifetimeManager lifetimeManagerDbContext = new DisposableLifetimeManager();
+            container.RegisterInstance("LifetimeManagerDBContext", lifetimeManagerDbContext, new ContainerControlledLifetimeManager());
+
             container.AddNewExtension<EFRepositoryExtension>();
             container.Configure<IEFRepositoryExtension>()
-                .WithConnection(cnxString)
-                .WithContextLifetime(new ContainerControlledLifetimeManager());
+                //.WithConnection(cnxString)
+                .WithContextLifetime(lifetimeManagerDbContext);
+                //.WithSeedMethod(InitializeDB.InitalizeAll);
+
+            
 
             //Non ho chiamato IoC perchè altrimenti avrei dovuto aggiungere come reference anche MVVMLight
             var dbAdminService = ServiceLocator.Current.GetInstance<IAdminServices>();
