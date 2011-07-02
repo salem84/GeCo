@@ -5,11 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:FsTaskButton;assembly=FsTaskButton"
              mc:Ignorable="d">
-        <controls:TaskButton
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/TaskButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <controls:TaskButton
                     Command="{Binding ShowModuleView}" 
                     IsChecked="{Binding IsChecked}"
-                    MinWidth="150" 
-                    Foreground="Red"
+                    MinWidth="150"
                     Image="/GeCo.Infrastructure;component/Images/Edit-icon.png" 
                     Text="Competenze" 
                     Margin="5,2,5,2" 

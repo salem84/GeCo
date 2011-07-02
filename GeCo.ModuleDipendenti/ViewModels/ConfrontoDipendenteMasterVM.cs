@@ -254,7 +254,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
                             "Tecniche Strategic Support", 
                             "Tecniche Competitive Advantage" });
 
-                    TitoloGrafico = string.Format("Confronto tra Dipendente #{0} e Ruolo {1}", Dipendente.Matricola, RisultatoSelezionato.Nome);
+                    TitoloGrafico = string.Format("Confronto tra Dipendente #{0} e Ruolo '{1}'", Dipendente.Matricola, RisultatoSelezionato.Nome);
                     
                     var valori = new List<double>();
                     var colors = new List<System.Drawing.Color>();

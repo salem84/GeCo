@@ -146,7 +146,14 @@
 
                         <bot:NumericUpDown Grid.Column="1" HorizontalAlignment="Right" Maximum="4" Minimum="0" 
                                            Height="30" Width="50"
+                                           BorderThickness="2"
                                            Style="{StaticResource NumericUpDownImageStyle}">
+                            <bot:NumericUpDown.BorderBrush>
+                                <MultiBinding Converter="{StaticResource competenzaToColor}">
+                                    <Binding Path="Competenza.Titolo" />
+                                    <Binding Path="Competenza.TipologiaCompetenza.MacroGruppo"/>
+                                </MultiBinding>
+                            </bot:NumericUpDown.BorderBrush>
                             <bot:NumericUpDown.Value>
                                 <Binding Path="LivelloConoscenzaId" Mode="TwoWay">
                                     <Binding.ValidationRules>

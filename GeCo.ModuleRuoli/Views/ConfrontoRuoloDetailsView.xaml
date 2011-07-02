@@ -20,7 +20,7 @@
     <DockPanel>
         <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
             <!-- Maschera per visualizzare i pesi-->
-            <controls:BarControl Grid.ColumnSpan="2" Height="70" DataContext="{Binding ParametriConfronto}" Margin="0,0,0,20" />
+            <controls:BarControl Grid.ColumnSpan="2" Height="70" DataContext="{Binding ParametriConfronto}" Margin="40,0,40,10" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-7-120940361
+8-695048794
 
 32697428591
-25-1478107313
-Controls\BarControl.xaml;Controls\ChartGecoControl.xaml;Resources\BoolToImageStyle.xaml;Resources\ListView.xaml;Resources\Fonts.xaml;Resources\NumericUpDownStyle.xaml;Resources\WorkspaceStyles.xaml;
+26318128857
+Controls\BarControl.xaml;Controls\ChartGecoControl.xaml;Resources\BoolToImageStyle.xaml;Resources\ListView.xaml;Resources\Fonts.xaml;Resources\NumericUpDownStyle.xaml;Resources\TaskButtonStyle.xaml;Resources\WorkspaceStyles.xaml;
 
 True
 

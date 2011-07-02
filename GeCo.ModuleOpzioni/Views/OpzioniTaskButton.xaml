@@ -4,8 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:FsTaskButton;assembly=FsTaskButton"
+             xmlns:FsTools_Converters="clr-namespace:FsTools.Converters;assembly=FsTaskButton" 
              mc:Ignorable="d">
-        <controls:TaskButton
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GeCo.Infrastructure;component/Resources/TaskButtonStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+       
+		<controls:TaskButton
                     Command="{Binding ShowModuleView}" 
                     IsChecked="{Binding IsChecked}"
                     MinWidth="150" 
@@ -13,6 +22,6 @@
                     Image="/GeCo.Infrastructure;component/Images/Gear-icon.png" 
                     Text="Opzioni" 
                     Margin="5,2,5,2" 
-                    Background="{Binding Path=Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                    Background="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
        
 </UserControl>
