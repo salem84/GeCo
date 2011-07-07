@@ -2699,12 +2699,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_E49310C4D3E4416780DF6D4C07F15647"
             "Folder" = "8:_2F2AF78C959D4F0ABF92FC375846592D"
             "WorkingFolder" = "8:_57D28CCB40DB43C0929BB2B420B325DF"
-            "Icon" = "8:_290D44C80B47454BBFA138BAF39ADA1B"
+            "Icon" = "8:_E49310C4D3E4416780DF6D4C07F15647"
             "Feature" = "8:"
             }
         }

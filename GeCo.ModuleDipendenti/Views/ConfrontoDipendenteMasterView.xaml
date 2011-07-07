@@ -66,7 +66,7 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="true">
                         <!-- Nome -->
-                        <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Ruolo" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Ruolo" Width="300"/>
                         
                         <!-- Idoneo -->
                         <GridViewColumn Header="Idoneo" Width="60">
@@ -152,7 +152,7 @@
                         </GridViewColumn>
 
                         <!-- Tecnic Competitive Advantage -->
-                        <GridViewColumn Width="160">
+                        <GridViewColumn Width="180">
                             <GridViewColumnHeader Background="{StaticResource TecnicheCompetitiveColor}" Content="Tecniche Competitive Advantage"/>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

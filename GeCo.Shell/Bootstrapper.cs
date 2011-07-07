@@ -73,7 +73,7 @@ namespace GeCo.Shell
             shell.LoadCompleted();
 
             //Time bomb
-            bool expired = TimeBomb();
+            bool expired = false;// TimeBomb();
             if (expired)
                 throw new Exception("tm");
         }

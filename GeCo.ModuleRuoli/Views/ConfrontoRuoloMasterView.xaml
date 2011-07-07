@@ -130,7 +130,7 @@
                         </GridViewColumn>
 
                         <!-- Tecnic Competitive Advantage -->
-                        <GridViewColumn Width="160">
+                        <GridViewColumn Width="180">
                             <GridViewColumnHeader Background="{StaticResource TecnicheCompetitiveColor}" Content="Tecniche Competitive Advantage"/>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

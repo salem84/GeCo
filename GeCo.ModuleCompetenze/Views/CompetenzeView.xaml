@@ -30,13 +30,13 @@
 				
 
 			<DataGrid.Columns>
-				<DataGridTextColumn Binding="{Binding Titolo}" Header="Titolo" Width="5*"/>
-				<DataGridTextColumn Binding="{Binding Descrizione}" Header="Descrizione" Width="5*"/>
+				<DataGridTextColumn Binding="{Binding Titolo}" Header="Titolo" Width="6*"/>
+				<DataGridTextColumn Binding="{Binding Descrizione}" Header="Descrizione" Width="6*"/>
                     
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding MacroGruppi}" SelectedValueBinding="{Binding TipologiaCompetenzaId}"-->
-                <DataGridTextColumn  Binding="{Binding TipologiaCompetenza.Titolo}" Header="Tipologia" Width="5*" IsReadOnly="True"/>
+                <DataGridTextColumn  Binding="{Binding TipologiaCompetenza.Titolo}" Header="Tipologia" Width="4*" IsReadOnly="True"/>
 
-                    <DataGridTextColumn Binding="{Binding TipologiaCompetenza.MacroGruppo}" Header="MacroGruppo" Width="5*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding TipologiaCompetenza.MacroGruppo}" Header="MacroGruppo" Width="4*" IsReadOnly="True"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		
