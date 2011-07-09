@@ -262,12 +262,16 @@ namespace GeCo.BLL.Excel
                 cell.CellReference = colonna + rowIndex;
                 cell.StyleIndex = (UInt32Value)11U;
 
-                if (i == valoreAtteso - 1)
+                //Salto il caso in cui il valore è 0
+                if (valoreAtteso != 0)
                 {
-                    cell.DataType = CellValues.SharedString;
-                    CellValue cellValue = new CellValue();
-                    cellValue.Text = "1";
-                    cell.Append(cellValue);
+                    if (i == valoreAtteso - 1)
+                    {
+                        cell.DataType = CellValues.SharedString;
+                        CellValue cellValue = new CellValue();
+                        cellValue.Text = "1";
+                        cell.Append(cellValue);
+                    }
                 }
 
                 row6.Append(cell);
@@ -283,12 +287,16 @@ namespace GeCo.BLL.Excel
                 cell.CellReference = colonna + rowIndex;
                 cell.StyleIndex = (UInt32Value)11U;
 
-                if (i == valoreOsservato - 1)
+                //Salto il caso in cui il valore è 0
+                if (valoreOsservato != 0)
                 {
-                    cell.DataType = CellValues.SharedString;
-                    CellValue cellValue = new CellValue();
-                    cellValue.Text = "1";
-                    cell.Append(cellValue);
+                    if (i == valoreOsservato - 1)
+                    {
+                        cell.DataType = CellValues.SharedString;
+                        CellValue cellValue = new CellValue();
+                        cellValue.Text = "1";
+                        cell.Append(cellValue);
+                    }
                 }
 
 
@@ -718,27 +726,27 @@ namespace GeCo.BLL.Excel
 
             Cell cell75 = new Cell() { CellReference = "B7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula2 = new CellFormula();
-            cellFormula2.Text = "(\'HR Discrezionali\'!H2*Summary!B6)/\'HR Discrezionali\'!H1";
+            cellFormula2.Text = "IF(\'HR Discrezionali\'!H1<>0,(\'HR Discrezionali\'!H2*Summary!B6)/\'HR Discrezionali\'!H1,0)";
             cell75.Append(cellFormula2);
 
             Cell cell76 = new Cell() { CellReference = "C7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula2b = new CellFormula();
-            cellFormula2b.Text = "(\'HR Comportamentali\'!H2*Summary!C6)/\'HR Comportamentali\'!H1";
+            cellFormula2b.Text = "IF(\'HR Comportamentali\'!H1<>0,(\'HR Comportamentali\'!H2*Summary!C6)/\'HR Comportamentali\'!H1,0)";
             cell76.Append(cellFormula2b);
 
             Cell cell77 = new Cell() { CellReference = "D7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula3 = new CellFormula();
-            cellFormula3.Text = "(\'Competenze Comportamentali\'!H2*Summary!D6)/\'Competenze Comportamentali\'!H1";
+            cellFormula3.Text = "IF(\'Competenze Comportamentali\'!H1<>0,(\'Competenze Comportamentali\'!H2*Summary!D6)/\'Competenze Comportamentali\'!H1,0)";
             cell77.Append(cellFormula3);
 
             Cell cell78 = new Cell() { CellReference = "E7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula4 = new CellFormula();
-            cellFormula4.Text = string.Format("(\'Conoscenze Tecniche\'!C{0}*Summary!E6)/\'Conoscenze Tecniche\'!C{1}", rowAttesoStrategic + 1, rowAttesoStrategic);
+            cellFormula4.Text = string.Format("IF(\'Conoscenze Tecniche\'!C{1},(\'Conoscenze Tecniche\'!C{0}*Summary!E6)/\'Conoscenze Tecniche\'!C{1},0)", rowAttesoStrategic + 1, rowAttesoStrategic);
             cell78.Append(cellFormula4);
 
             Cell cell79 = new Cell() { CellReference = "F7", StyleIndex = (UInt32Value)58U };
             CellFormula cellFormula5 = new CellFormula();
-            cellFormula5.Text = string.Format("(\'Conoscenze Tecniche\'!C{0}*Summary!F6)/\'Conoscenze Tecniche\'!C{1}", rowAttesoCompetitive + 1, rowAttesoCompetitive);
+            cellFormula5.Text = string.Format("IF(\'Conoscenze Tecniche\'!C{1},(\'Conoscenze Tecniche\'!C{0}*Summary!F6)/\'Conoscenze Tecniche\'!C{1},0)", rowAttesoCompetitive + 1, rowAttesoCompetitive);
             cell79.Append(cellFormula5);
 
             Cell cell80 = new Cell() { CellReference = "G7", StyleIndex = (UInt32Value)24U };
@@ -2131,7 +2139,7 @@ namespace GeCo.BLL.Excel
 
             #endregion
 
-            var tecniche = Dati.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO);
+            var tecniche = Dati.Where(c => c.Competenza.TipologiaCompetenza.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO).ToList();
 
             #region BLOCCO FOUNDATIONAL
 
@@ -2197,7 +2205,12 @@ namespace GeCo.BLL.Excel
             List<UInt32> righePunteggiAttesi = new List<UInt32>();
             List<UInt32> righePunteggiOsservati = new List<UInt32>();
 
-            var altreTecniche = tecniche.Where(t => t.Competenza.TipologiaCompetenza.Titolo != "Foundational");
+            //FIX per quando non ci sono competenze di un determinato gruppo
+            FixGruppoCompetenzaNullo(tecniche, Tipologiche.TipologiaCompetenza.T_STRATEGIC_SUPPORT);
+            FixGruppoCompetenzaNullo(tecniche, Tipologiche.TipologiaCompetenza.T_COMPETITIVE_ADVANTAGE);
+
+
+            var altreTecniche = tecniche.Where(t => t.Competenza.TipologiaCompetenza.Titolo != Tipologiche.TipologiaCompetenza.T_FOUNDATIONAL);
 
             var gruppi = from c in altreTecniche
                          group c by c.Competenza.TipologiaCompetenza.Titolo into g
@@ -2298,6 +2311,41 @@ namespace GeCo.BLL.Excel
 
             worksheetPart.Worksheet = worksheet1;
 
+        }
+
+        /// <summary>
+        /// UTILIZZATO SOLO PER LE TECNICHE
+        /// </summary>
+        /// <param name="tecniche"></param>
+        /// <param name="gruppoTipologia"></param>
+        private static void FixGruppoCompetenzaNullo(List<ConfrontoConoscenzaCompetenza> tecniche, string gruppoTipologia)
+        {
+            int count = tecniche.Count(t => t.Competenza.TipologiaCompetenza.Titolo == gruppoTipologia);
+            if (count == 0)
+            {
+                ConfrontoConoscenzaCompetenza c = new ConfrontoConoscenzaCompetenza
+                {
+                    Competenza = new Model.Competenza
+                    {
+                        Titolo = "Assenti",
+                        TipologiaCompetenza = new Model.TipologiaCompetenza
+                        {
+                            Titolo = gruppoTipologia,
+                            MacroGruppo = Tipologiche.Macrogruppi.MG_TECNICO
+                        }
+                    },
+                    LivelloConoscenzaAtteso = new Model.LivelloConoscenza
+                    {
+                        Valore = 0
+                    },
+                    LivelloConoscenzaOsservato = new Model.LivelloConoscenza
+                    {
+                        Valore = 4
+                    }
+                };
+
+                tecniche.Add(c);
+            }
         }
 
         #endregion
