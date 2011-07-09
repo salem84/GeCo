@@ -259,8 +259,8 @@ namespace GeCo.ModuleRuoli.ViewModels
             ConfrontoRuoloDetailsVM confrontoDetailsVM = ServiceLocator.Current.GetInstance<ConfrontoRuoloDetailsVM>();
 
             Dipendente dipendenteSelezionato = _dipendentiServices.CaricaDipendente(RisultatoSelezionato.Id);
-            confrontoDetailsVM.Atteso = dipendenteSelezionato;
-            confrontoDetailsVM.Osservato = Ruolo;
+            confrontoDetailsVM.Atteso = Ruolo;
+            confrontoDetailsVM.Osservato = dipendenteSelezionato;
             confrontoDetailsVM.AddToShell();
         }
 

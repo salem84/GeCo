@@ -79,13 +79,13 @@ namespace GeCo.Shell
         }
 
 
-        private bool TimeBomb()
+        /*private bool TimeBomb()
         {
             if (DateTime.Now > new DateTime(2011, 7, 7))
                 return true;
             else
                 return false;
-        }
+        }*/
 
         
 

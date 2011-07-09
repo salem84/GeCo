@@ -469,7 +469,7 @@ namespace GeCo.BLL.Excel
 
             Cell cell530 = new Cell() { CellReference = "E" + riga, StyleIndex = (UInt32Value)47U, DataType = CellValues.String };
             CellFormula cellFormula92 = new CellFormula();
-            cellFormula92.Text = string.Format("IF(C{0}>C{0},\"Idoneo\",\"Non Idoneo\")", riga - 3, riga - 1);
+            cellFormula92.Text = string.Format("IF(C{0}>C{1},\"Idoneo\",\"Non Idoneo\")", riga - 2, riga - 1);
             cell530.Append(cellFormula92);
 
 

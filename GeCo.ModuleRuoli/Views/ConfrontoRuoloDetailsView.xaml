@@ -22,12 +22,27 @@
             <!-- Maschera per visualizzare i pesi-->
             <controls:BarControl Grid.ColumnSpan="2" Height="70" DataContext="{Binding ParametriConfronto}" Margin="40,0,40,10" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"
-                           Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="left" Width="200" 
+            <DockPanel >
+                <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Atteso: " Style="{StaticResource PunteggioAttesoBlock}"/>
+                        <TextBlock Text="{Binding Path=Atteso.Titolo}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Osservato: " Style="{StaticResource PunteggioOsservatoBlock}"/>
+                        <TextBlock Text="{Binding Path=Osservato.Matricola, StringFormat='#{0} - '}"/>
+                        <TextBlock Text="{Binding Path=Osservato.Cognome}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Path=Osservato.Nome}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="Selezionare un macrogruppo: " Style="{StaticResource HeaderBold}"/>
+                    <ComboBox Width="200" 
                           SelectedItem="{Binding Path=MacroGruppoSelected}" ItemsSource="{Binding Path=MacroGruppi}"/>
-            </StackPanel>
+                </StackPanel>
+            </DockPanel>
         </StackPanel>
 
 
@@ -94,19 +109,19 @@
 
                         <TextBox Grid.Column="2" HorizontalAlignment="Stretch" Width="25" MaxLength="1" TextAlignment="Center"
                                  Text="{Binding Path=LivelloConoscenzaOsservato.Valore}" Style="{StaticResource PunteggioOsservatoBox}"/>
-                            
-                        
+
+
                     </Grid>
-                    
-                        
-                    
+
+
+
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
 
-            
+
+
         </ListView>
 
-       
+
     </DockPanel>
 </UserControl>

@@ -226,10 +226,10 @@ namespace GeCo.ModuleRuoli.ViewModels
             string filename = dialogService.GetSaveFileDialog("Salva Report Excel", "Cartella di lavoro di Excel (*.xlsx) | .xlsx");
 
             //Atteso dovrebbe essere un Dipendente
-            var dipendente = Atteso as Dipendente;
+            var ruolo = Atteso as Ruolo;
             
             //Osservato dovrebbe essere un Ruolo
-            var ruolo = Osservato as Ruolo;
+            var dipendente = Osservato as Dipendente;
 
             string titolo = string.Format("Confronto tra Ruolo {0} e Dipendente #{1}", ruolo.Titolo, dipendente.Matricola);
             _excelServices.EsportaExcel(filename, titolo, ConfrontoSoggetti.Conoscenze);

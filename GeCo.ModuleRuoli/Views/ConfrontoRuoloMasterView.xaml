@@ -57,7 +57,7 @@
                       ItemContainerStyle="{StaticResource ItemContainerStretch}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="true">
-                        <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Dipendente" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Nome}" Header="Dipendente" Width="300"/>
                         <GridViewColumn Header="Idoneo" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

@@ -50,13 +50,13 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 //Devo lavorare su un sottoinsieme delle conoscenze del dipendente
                 List<ConoscenzaCompetenza> competenzeDaConfrontare = new List<ConoscenzaCompetenza>();
                 //Mi scorro tutte le competenze possedute dal ruolo
-                foreach (var competenza in ruolo.Conoscenze)
+                foreach (var conoscenzaDip in dipendente.Conoscenze)
                 {
                     //Se è una delle competenze che servono per il confronto
-                    if (dipendente.Conoscenze.Contains(competenza, c => c.CompetenzaId))
+                    if (ruolo.Conoscenze.Contains(conoscenzaDip, c => c.CompetenzaId))
                     {
                         //l'aggiungo alla lista su cui calcolerò il Punteggio Osservato
-                        competenzeDaConfrontare.Add(competenza);
+                        competenzeDaConfrontare.Add(conoscenzaDip);
                     }
                     //Se non è presente è come se avessi inserito la competenza con valore 0
                 }
@@ -65,7 +65,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 Punteggi po = Common.CalcolaPunteggi(competenzeDaConfrontare);
 
                 //Calcolo punteggio atteso
-                Punteggi pa = Common.CalcolaPunteggi(dipendente.Conoscenze);
+                Punteggi pa = Common.CalcolaPunteggi(ruolo.Conoscenze);
 
                 //Tutte le percentuali vengono calcolate automaticamente
                 risultato.PunteggioOsservato = po;
