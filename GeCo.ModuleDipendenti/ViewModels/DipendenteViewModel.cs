@@ -134,10 +134,24 @@ namespace GeCo.ModuleDipendenti.ViewModels
         }
 
 
+        private List<Ruolo> _tuttiRuoli;
+        public List<Ruolo> TuttiRuoli
+        {
+            get 
+            {
+                if (_tuttiRuoli == null)
+                {
+                    var repos = ServiceLocator.Current.GetInstance<IRuoliServices>();
+                    _tuttiRuoli = repos.GetRuoli().ToList();
+                }
+                return _tuttiRuoli; 
+            }
+        }
+        
+
         /// <summary>
         /// Lista dei macrogruppi
         /// </summary>
-        //TODO questa lista dovrebbe essere letta da DB
         public List<string> MacroGruppi 
         { 
             get 

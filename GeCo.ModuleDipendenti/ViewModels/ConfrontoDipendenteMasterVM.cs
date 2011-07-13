@@ -157,8 +157,23 @@ namespace GeCo.ModuleDipendenti.ViewModels
         }
         
         
-        
         #endregion
+
+
+        private bool _filtroRuoliDipendenti;
+        public bool FiltroRuoliDipendenti
+        {
+            get { return _filtroRuoliDipendenti; }
+            set
+            {
+                if (_filtroRuoliDipendenti != value)
+                {
+                    _filtroRuoliDipendenti = value;
+                    AvviaAnalisi();
+                    RaisePropertyChanged("FiltroRuoliDipendenti");
+                }
+            }
+        }
 
 
         private ICompetenzeServices _competenzeServices;
@@ -214,7 +229,7 @@ namespace GeCo.ModuleDipendenti.ViewModels
         {
             
             //Gli passo la funzione per fare l'aggiornamento del progressivo
-            var tempRes = _ricercaServices.CercaRuoloDaDipendente(Dipendente);
+            var tempRes = _ricercaServices.CercaRuoloDaDipendente(Dipendente, FiltroRuoliDipendenti);
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
             Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);

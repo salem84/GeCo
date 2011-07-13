@@ -41,24 +41,30 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical" Grid.Row="0">
                 <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
-                <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Matricola: " Style="{StaticResource HeaderBold}"/>
-                        <TextBlock Text="{Binding Matricola}"/>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,20,0">
+                        <CheckBox IsChecked="{Binding FiltroRuoliDipendenti}" >Filtra dipendenti ruoli minori</CheckBox>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Nome: " Style="{StaticResource HeaderBold}"/>
-                        <TextBlock Text="{Binding Nome}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Cognome: " Style="{StaticResource HeaderBold}"/>
-                        <TextBlock Text="{Binding Cognome}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Data di Nascita: " Style="{StaticResource HeaderBold}"/>
-                        <TextBlock Text="{Binding DataNascita, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                    </StackPanel>
-                </UniformGrid>
+                
+                    <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Matricola: " Style="{StaticResource HeaderBold}"/>
+                            <TextBlock Text="{Binding Matricola}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Nome: " Style="{StaticResource HeaderBold}"/>
+                            <TextBlock Text="{Binding Nome}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Cognome: " Style="{StaticResource HeaderBold}"/>
+                            <TextBlock Text="{Binding Cognome}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Data di Nascita: " Style="{StaticResource HeaderBold}"/>
+                            <TextBlock Text="{Binding DataNascita, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </DockPanel>
             </StackPanel>
 
             <ListView ItemsSource="{Binding Risultati}" Grid.Row="1" SelectedItem="{Binding RisultatoSelezionato}"

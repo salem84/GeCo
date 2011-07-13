@@ -148,6 +148,23 @@ namespace GeCo.ModuleRuoli.ViewModels
             }
         }
 
+
+        private bool _filtroRuoliDipendenti;
+        public bool FiltroRuoliDipendenti
+        {
+            get { return _filtroRuoliDipendenti; }
+            set
+            {
+                if (_filtroRuoliDipendenti != value)
+                {
+                    _filtroRuoliDipendenti = value;
+                    AvviaAnalisi();
+                    RaisePropertyChanged("FiltroRuoliDipendenti");
+                }
+            }
+        }
+        
+
         #endregion
 
         private ICompetenzeServices _livelliConoscenzaServices;
@@ -230,20 +247,16 @@ namespace GeCo.ModuleRuoli.ViewModels
 
         protected void AvviaAlgoritmoBackground()
         {
-            /*RicercaAnagraficaDaFigura algoritmo = new RicercaAnagraficaDaFigura();
-            var tempRes = algoritmo.Cerca(Figura);
-
-            //Rielaboro i dati (ordino e nascondo le percentuali)
-            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenBy(r => r.PercentualeTotale);*/
-
             //Gli passo la funzione per fare l'aggiornamento del progressivo
-            var tempRes = _ricercaServices.CercaDipendenteDaRuolo(Ruolo);
+            var tempRes = _ricercaServices.CercaDipendenteDaRuolo(Ruolo, FiltroRuoliDipendenti);
 
             //Rielaboro i dati (ordino e nascondo le percentuali)
-            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);
+            Risultati = tempRes.OrderByDescending(r => r.Idoneo).ThenByDescending(r => r.PunteggioTotale);            
 
             ControlliAbilitati = true;
         }
+
+        
 
         protected void AggiornaProgress()
         {

@@ -133,6 +133,13 @@ namespace GeCo.BLL.Services
             return result;
         }
 
+        public IList<Ruolo> GetRuoli()
+        {
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
+            var lista = repos.AsQueryable().AsExpandable().ToList();
+            return lista;
+        }
+
         public IList<Ruolo> GetRuoli(Expression<Func<Ruolo, bool>> where)
         {
             var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();

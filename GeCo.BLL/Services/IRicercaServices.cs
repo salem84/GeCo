@@ -9,7 +9,7 @@ namespace GeCo.BLL.Services
 {
     public interface IRicercaServices
     {
-        List<RisultatoRicerca> CercaRuoloDaDipendente(Dipendente dipendente);
-        List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo);
+        List<RisultatoRicerca> CercaRuoloDaDipendente(Dipendente dipendente, bool filtraRuoliNonValidi);
+        List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo, bool filtraRuoliNonValidi);
     }
 }

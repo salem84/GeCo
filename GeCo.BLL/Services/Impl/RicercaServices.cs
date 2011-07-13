@@ -16,18 +16,18 @@ namespace GeCo.BLL.Services
             _container = container;
         }
 
-        public List<RisultatoRicerca> CercaRuoloDaDipendente(Dipendente dipendente)
+        public List<RisultatoRicerca> CercaRuoloDaDipendente(Dipendente dipendente, bool filtraRuoliNonValidi)
         {
             var algoritmo = _container.Resolve<IAlgoritmoRicerca>("RicercaRuoloDaDipendente");
-            var result = algoritmo.Cerca(dipendente);
+            var result = algoritmo.Cerca(dipendente, filtraRuoliNonValidi);
 
             return result;
         }
 
-        public List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo)
+        public List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo, bool filtraRuoliNonValidi)
         {
             var algoritmo = _container.Resolve<IAlgoritmoRicerca>("RicercaDipendenteDaRuolo");
-            var result = algoritmo.Cerca(ruolo);
+            var result = algoritmo.Cerca(ruolo, filtraRuoliNonValidi);
 
             return result;
         }

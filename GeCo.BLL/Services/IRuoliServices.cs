@@ -12,7 +12,8 @@ namespace GeCo.BLL.Services
         Ruolo SalvaRuolo(Ruolo ruolo);
         void EliminaRuolo(int id);
         Ruolo CaricaRuolo(int id);
-
+        
+        IList<Ruolo> GetRuoli();
         IList<Ruolo> GetRuoli(Expression<Func<Ruolo, bool>> where);
 
         void SalvaArea(Area area);

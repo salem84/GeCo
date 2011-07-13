@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgoritmoRicerca\Common.cs" />
+    <Compile Include="AlgoritmoRicerca\Filtri.cs" />
     <Compile Include="AlgoritmoRicerca\IAlgoritmoRicerca.cs" />
     <Compile Include="AlgoritmoRicerca\Punteggi.cs" />
     <Compile Include="AlgoritmoRicerca\RicercaDipendentiDaRuolo.cs" />

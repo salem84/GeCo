@@ -8,6 +8,6 @@ namespace GeCo.BLL.AlgoritmoRicerca
 {
     public interface IAlgoritmoRicerca
     {
-        List<RisultatoRicerca> Cerca(Anagrafica anagrafica);
+        List<RisultatoRicerca> Cerca(Anagrafica anagrafica, bool filtraRuoliNonValidi);
     }
 }

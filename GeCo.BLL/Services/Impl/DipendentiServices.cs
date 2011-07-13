@@ -42,6 +42,7 @@ namespace GeCo.BLL.Services
             dipendente.Cognome = d.Cognome;
             dipendente.Nome = d.Nome;
             dipendente.DataNascita = d.DataNascita;
+            dipendente.RuoloInAziendaId = d.RuoloInAziendaId;
 
             for (int i = 0; i < d.Conoscenze.Count; i++ )
             {
@@ -92,6 +93,7 @@ namespace GeCo.BLL.Services
             dipendente.Cognome = d.Cognome;
             dipendente.Nome = d.Nome;
             dipendente.DataNascita = d.DataNascita;
+            dipendente.RuoloInAziendaId = d.RuoloInAziendaId;
             
             dipendente.Conoscenze = new List<ConoscenzaCompetenza>();
 

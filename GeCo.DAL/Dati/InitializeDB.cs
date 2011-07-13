@@ -46,6 +46,9 @@ namespace GeCo.DAL.Dati
 
             var dipendentiInit = new DipendentiDefault(dbContext);
             dipendentiInit.SalvaDipendente1();
+            dipendentiInit.SalvaDipendente2();
+            dipendentiInit.SalvaDipendente3();
+            dipendentiInit.SalvaDipendente4();
         }
 
         private void InsertParametriDefault()

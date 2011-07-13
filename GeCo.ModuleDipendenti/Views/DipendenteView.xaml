@@ -72,7 +72,7 @@
                 <!-- Lato sinistro contenente le informazioni sul dipendente (nome, cognome,...) -->
                 <Border Style="{StaticResource BorderBlock}" VerticalAlignment="Top">
                     <UniformGrid  MinHeight="200" VerticalAlignment="Top" 
-                        Rows="4" Columns="2" DataContext="{Binding Path=Dipendente}">
+                    Rows="5" Columns="2" DataContext="{Binding Path=Dipendente}">
                         <TextBlock Text="Matricola" Style="{StaticResource FieldNameGrid}"/>
                         <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Height="25" Text="{Binding Path=Matricola, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Nome" Style="{StaticResource FieldNameGrid}"/>
@@ -81,7 +81,9 @@
                         <TextBox TextWrapping="Wrap" Height="25" Margin="0,0,10,0" Text="{Binding Path=Cognome, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Data Nascita" Style="{StaticResource FieldNameGrid}"/>
                         <DatePicker Height="25" Margin="0,0,10,0" SelectedDate="{Binding Path=DataNascita, UpdateSourceTrigger=PropertyChanged}"/>
-                    </UniformGrid>
+                        <TextBlock Text="Ruolo" Style="{StaticResource FieldNameGrid}"/>
+                        <ComboBox Height="25" Margin="0,0,10,0" ItemsSource="{Binding DataContext.TuttiRuoli, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DisplayMemberPath="Titolo" SelectedItem="{Binding Dipendente, Path=RuoloInAzienda, Mode=TwoWay}"/>
+                    </UniformGrid>                    
                 </Border>
 
                 <!-- Combobox che visualizza i macrogruppi -->
