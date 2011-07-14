@@ -42,7 +42,7 @@
                 <controls:BarControl Height="70" Margin="50,10,50,10" DataContext="{Binding ParametriConfronto}" />
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,20,0">
-                        <CheckBox IsChecked="{Binding FiltroRuoliDipendenti}" >Filtra dipendenti ruoli minori</CheckBox>
+                        <CheckBox IsChecked="{Binding FiltroRuoliDipendenti}" >Filtra dipendenti ruoli maggiori</CheckBox>
                     </StackPanel>
                     <UniformGrid Rows="1" Columns="2" DataContext="{Binding Ruolo}" >
                         <StackPanel Orientation="Horizontal">

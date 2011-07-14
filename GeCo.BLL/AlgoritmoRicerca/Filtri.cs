@@ -22,17 +22,31 @@ namespace GeCo.BLL.AlgoritmoRicerca
         ///  
         /// Se sto cercando un Direttore (ruoloDiRiferimento), dovrò
         ///  * scartare tutti
+        ///  
+        /// Utilizzato da MOD_RUOLI
         /// </summary>
         /// <param name="ruoloA"></param>
         /// <param name="ruoloB"></param>
-        public static bool ScartaB_MaggioriDi_A(Ruolo ruoloA, Ruolo ruoloB)
+        public static bool ValidaA_MinoriUgualiDi_B(Ruolo ruoloA, Ruolo ruoloB)
         {
             var filiali = GetFiliali();
 
             foreach (var filiale in filiali)
             {
+                bool? res = null;
+                
                 //se mi torna null vuol dire che non sono della stessa filiale, e vado avanti con gli altri controlli
-                bool? res = FiltraPerFiliale(ruoloA, ruoloB, filiale);
+                if (filiale.ContainsKey(ruoloA.Titolo) && filiale.ContainsKey(ruoloB.Titolo))
+                {
+                    int vA = filiale[ruoloA.Titolo];
+                    int vB = filiale[ruoloB.Titolo];
+
+                    if (vA <= vB)
+                        res = true;
+                    else
+                        res = false;
+                }
+                                
                 if (res.HasValue)
                     return res.Value;
 
@@ -41,6 +55,41 @@ namespace GeCo.BLL.AlgoritmoRicerca
 
             return true;
         }
+
+        public static bool ValidaA_MaggioriUgualiDi_B(Ruolo ruoloA, Ruolo ruoloB)
+        {
+            return ValidaA_MinoriUgualiDi_B(ruoloB, ruoloA);
+        }
+
+        /// Utilizzato da MOD_DIPENDENTI (quando cerco un posto per l'assistente, non è valido il ruolo Capo)
+        /*public static bool ScartaB_MinoriDi_A(Ruolo ruoloA, Ruolo ruoloB)
+        {
+            var filiali = GetFiliali();
+
+            foreach (var filiale in filiali)
+            {
+                bool? res = null;
+
+                //se mi torna null vuol dire che non sono della stessa filiale, e vado avanti con gli altri controlli
+                if (filiale.ContainsKey(ruoloA.Titolo) && filiale.ContainsKey(ruoloB.Titolo))
+                {
+                    int vA = filiale[ruoloA.Titolo];
+                    int vB = filiale[ruoloB.Titolo];
+
+                    if (vB < vA)
+                        res = false;
+                    else
+                        res = true;
+                }
+
+                if (res.HasValue)
+                    return res.Value;
+
+            }
+
+
+            return true;
+        }*/
 
         private static Dictionary<string, int>[] GetFiliali()
         {
@@ -61,20 +110,6 @@ namespace GeCo.BLL.AlgoritmoRicerca
             return filiali;
         }
 
-        private static bool? FiltraPerFiliale(Ruolo ruoloDiRiferimento, Ruolo ruoloInEsame, Dictionary<string, int> filiale)
-        {
-            //Controllo che appartengano alla stessa filiale
-            if (filiale.ContainsKey(ruoloDiRiferimento.Titolo) && filiale.ContainsKey(ruoloInEsame.Titolo))
-            {
-                int vRif = filiale[ruoloDiRiferimento.Titolo];
-                int vEsame = filiale[ruoloInEsame.Titolo];
-
-                if (vEsame > vRif)
-                    return false;
-                else
-                    return true;
-            }
-            return null;
-        }
+        
     }
 }

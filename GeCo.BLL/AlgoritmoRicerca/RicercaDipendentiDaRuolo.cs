@@ -38,12 +38,10 @@ namespace GeCo.BLL.AlgoritmoRicerca
             {
                 bool valido = true;
 
-                //Ho trovato ruolo CAPO (riferimento), devo scartare i DIRETTORI
+                //Sto cercando ruolo CAPO, devo scartare i dipendenti che sono già DIRETTORI
                 if (filtraRuoliNonValidi)
                 {
-                    valido = Filtri.ScartaB_MaggioriDi_A(
-                    ruoloA:ruolo, 
-                    ruoloB:dipendente.RuoloInAzienda);
+                    valido = Filtri.ValidaA_MinoriUgualiDi_B(dipendente.RuoloInAzienda, ruolo);
                 }
 
                 if (valido)

@@ -12,12 +12,8 @@ namespace GeCo.Model
         public string Titolo { get; set; }
         public string Descrizione { get; set; }
         public Area Area { get; set; }
-        
-        //public int IndiceTotale
-        //{
-        //    get { return this.Conoscenze.Sum(c => c.Indice); }
-        //}
-        //public ICollection<Anagrafica> Dipendenti { get; set; }
+
+        //public virtual ICollection<Dipendente> Dipendenti { get; set; }
 
         public Ruolo()
         {

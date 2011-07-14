@@ -48,7 +48,7 @@ namespace GeCo.BLL.AlgoritmoRicerca
                 {
                     //Il dipendente è un CAPO, devo prendere i DIRETTORI
                     //--> sto analizzando un direttore, devo scartare i ruoli minori
-                    valido = Filtri.ScartaB_MaggioriDi_A(dipendente.RuoloInAzienda, ruolo);
+                    valido = Filtri.ValidaA_MinoriUgualiDi_B(dipendente.RuoloInAzienda, ruolo);
                 }
 
                 if (valido)

@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Controls;
 using Microsoft.Practices.ServiceLocation;
 using GeCo.BLL.Services;
+using GeCo.Model;
 
 namespace GeCo.Converters
 {
@@ -66,6 +67,28 @@ namespace GeCo.Converters
             {
                 return new ValidationResult(true, null);
             }
+        }
+    }
+
+
+    public class RuoloConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var id = System.Convert.ToInt32(value);
+            var ruoliService = ServiceLocator.Current.GetInstance<IRuoliServices>();
+            var ruolo = ruoliService.GetRuoli(r => r.Id == id).Single();
+
+            return ruolo;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var ruolo = value as Ruolo;
+            if (ruolo != null)
+                return ruolo.Id;
+            else
+                return -1;
         }
     }
 }

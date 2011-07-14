@@ -45,25 +45,21 @@
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,20,0">
                         <CheckBox IsChecked="{Binding FiltroRuoliDipendenti}" >Filtra dipendenti ruoli minori</CheckBox>
                     </StackPanel>
-                
-                    <UniformGrid Rows="1" Columns="4" DataContext="{Binding Dipendente}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Matricola: " Style="{StaticResource HeaderBold}"/>
-                            <TextBlock Text="{Binding Matricola}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Nome: " Style="{StaticResource HeaderBold}"/>
-                            <TextBlock Text="{Binding Nome}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Cognome: " Style="{StaticResource HeaderBold}"/>
-                            <TextBlock Text="{Binding Cognome}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Data di Nascita: " Style="{StaticResource HeaderBold}"/>
-                            <TextBlock Text="{Binding DataNascita, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                        </StackPanel>
-                    </UniformGrid>
+
+                    <StackPanel Orientation="Horizontal" DataContext="{Binding Dipendente}">
+                        <TextBlock Text="Dipendente: " Style="{StaticResource HeaderBold}"/>
+                        <TextBlock Text="{Binding Matricola, StringFormat='#{0} : '}"/>
+                        <TextBlock Text="{Binding Cognome}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Nome}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding DataNascita, StringFormat=' ({}{0:dd/MM/yyyy}) '}"/>
+                        <TextBlock Margin="40,0,5,0"/>
+                        <TextBlock Text="Ruolo: " Style="{StaticResource HeaderBold}"/>
+                        <TextBlock Text="{Binding RuoloInAzienda.Titolo}"/>
+                    </StackPanel>
+
+                    
                 </DockPanel>
             </StackPanel>
 

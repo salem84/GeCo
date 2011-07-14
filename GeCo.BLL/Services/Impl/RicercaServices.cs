@@ -16,6 +16,7 @@ namespace GeCo.BLL.Services
             _container = container;
         }
 
+        // MOD_DIPENDENTI
         public List<RisultatoRicerca> CercaRuoloDaDipendente(Dipendente dipendente, bool filtraRuoliNonValidi)
         {
             var algoritmo = _container.Resolve<IAlgoritmoRicerca>("RicercaRuoloDaDipendente");
@@ -24,6 +25,7 @@ namespace GeCo.BLL.Services
             return result;
         }
 
+        // MOD_RUOLI
         public List<RisultatoRicerca> CercaDipendenteDaRuolo(Ruolo ruolo, bool filtraRuoliNonValidi)
         {
             var algoritmo = _container.Resolve<IAlgoritmoRicerca>("RicercaDipendenteDaRuolo");
