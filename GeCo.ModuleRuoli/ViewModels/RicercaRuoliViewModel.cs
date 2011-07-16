@@ -64,7 +64,7 @@ namespace GeCo.ModuleRuoli.ViewModels
 
             _services = services;
 
-            RicercaCommand = new RelayCommand(Cerca,() => !string.IsNullOrEmpty(RicercaTitolo));
+            RicercaCommand = new RelayCommand(Cerca);
 
             DoubleClickCommand = new RelayCommand(VisualizzaDettaglioRuolo);
         }

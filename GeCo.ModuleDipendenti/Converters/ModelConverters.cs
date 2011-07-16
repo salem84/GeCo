@@ -75,11 +75,22 @@ namespace GeCo.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null)
+                return null;
+
+            if (!(value is int))
+                return null;           
+            
             var id = System.Convert.ToInt32(value);
+            if (id == 0)
+                return null;
+
             var ruoliService = ServiceLocator.Current.GetInstance<IRuoliServices>();
             var ruolo = ruoliService.GetRuoli(r => r.Id == id).Single();
 
             return ruolo;
+            
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
