@@ -63,6 +63,7 @@ namespace GeCo.DAL.Dati
             {
                 context.Dipendenti.Add(dipendente);
                 //uow.Commit();
+                context.SaveChanges();
             }
 
             return dipendente;

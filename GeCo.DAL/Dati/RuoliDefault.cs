@@ -61,6 +61,7 @@ namespace GeCo.DAL.Dati
             {
                 context.Ruoli.Add(ruolo);
                 //uow.Commit();
+                context.SaveChanges();
             }
 
             return ruolo;
