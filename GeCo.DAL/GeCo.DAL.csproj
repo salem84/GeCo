@@ -71,7 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dati\CompetenzeDefault.cs" />
     <Compile Include="Dati\DipendentiDefault.cs" />
     <Compile Include="Dati\InitializeDB.cs" />
     <Compile Include="Dati\RuoliDefault.cs" />

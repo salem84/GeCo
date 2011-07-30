@@ -10,11 +10,11 @@ namespace GeCo.DAL.Dati
 {
     public class DipendentiDefault
     {
-        private IDbContextAdapter dbContext;
+        private PavimentalContext context;
 
-        public DipendentiDefault(IDbContextAdapter context)
+        public DipendentiDefault(PavimentalContext context)
         {
-            dbContext = context;
+            this.context = context;
         }
 
         class D
@@ -32,19 +32,19 @@ namespace GeCo.DAL.Dati
             var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
 
-            var reposDipendenti = new BaseRepository<Dipendente>(dbContext);
-            var reposRuoli = new BaseRepository<Ruolo>(dbContext);
-            var reposComp = new BaseRepository<Competenza>(dbContext);
-            var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            /*var reposDipendenti = new BaseRepository<Dipendente>(context);
+            var reposRuoli = new BaseRepository<Ruolo>(context);
+            var reposComp = new BaseRepository<Competenza>(context);
+            var reposLivelli = new BaseRepository<LivelloConoscenza>(context);
+            var uow = new UnitOfWork(context);*/
 
             List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
 
             foreach (var elemento in lista)
             {
                 ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
-                conoscenza.Competenza = reposComp.Single(c => c.Titolo == elemento.t && c.TipologiaCompetenza.MacroGruppo == elemento.mg);
-                conoscenza.LivelloConoscenza = reposLivelli.Single(lc => lc.Titolo == elemento.v);
+                conoscenza.Competenza = context.Competenze.Single(c => c.Titolo == elemento.t && c.TipologiaCompetenza.MacroGruppo == elemento.mg);
+                conoscenza.LivelloConoscenza = context.LivelliConoscenza.Single(lc => lc.Titolo == elemento.v);
                 conoscenze.Add(conoscenza);
             }
 
@@ -56,13 +56,13 @@ namespace GeCo.DAL.Dati
                 Conoscenze = conoscenze
             };
 
-            dipendente.RuoloInAziendaId = reposRuoli.Single(r => r.Titolo == ruolo).Id;
+            dipendente.RuoloInAziendaId = context.Ruoli.Single(r => r.Titolo == ruolo).Id;
 
 
-            if (reposDipendenti.SingleOrDefault(d => d.Cognome == dipendente.Cognome) == null)
+            if (context.Dipendenti.SingleOrDefault(d => d.Cognome == dipendente.Cognome) == null)
             {
-                reposDipendenti.Add(dipendente);
-                uow.Commit();
+                context.Dipendenti.Add(dipendente);
+                //uow.Commit();
             }
 
             return dipendente;

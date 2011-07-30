@@ -10,11 +10,11 @@ namespace GeCo.DAL.Dati
 {
     public class InitializeDB
     {
-        private IDbContextAdapter dbContext;
+        private PavimentalContext context;
 
-        public InitializeDB(IDbContextAdapter context)
+        public InitializeDB(PavimentalContext context)
         {
-            dbContext = context;
+            this.context = context;
         }
 
         public void InitalizeAll()
@@ -28,7 +28,7 @@ namespace GeCo.DAL.Dati
             InsertAltro();
             
             //Key Roles Strategic Support
-            var ruoliInit = new RuoliDefault(dbContext);
+            var ruoliInit = new RuoliDefault(context);
             ruoliInit.SalvaResponsabileUfficioTecnico();
             ruoliInit.SalvaResponsabileImpiantiMobiliMacchineImpianti();
             ruoliInit.SalvaResponsabileControlliLaboratorio();
@@ -44,7 +44,7 @@ namespace GeCo.DAL.Dati
             ruoliInit.SalvaBuyerSeniorSede();
             ruoliInit.SalvaBuyerSeniorCantiere();
 
-            var dipendentiInit = new DipendentiDefault(dbContext);
+            var dipendentiInit = new DipendentiDefault(context);
             dipendentiInit.SalvaDipendente1();
             dipendentiInit.SalvaDipendente2();
             dipendentiInit.SalvaDipendente3();
@@ -65,20 +65,17 @@ namespace GeCo.DAL.Dati
 
             //var repos = ServiceLocator.Current.GetInstance<IRepository<Parametro>>();
             //var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
-            var repos = new BaseRepository<Parametro>(dbContext);
-            var uow = new UnitOfWork(dbContext);
-
 
             foreach (var elemento in lista)
             {
-                repos.Add(new Parametro()
+                context.Parametri.Add(new Parametro()
                 {
                     Nome = elemento.n,
                     Valore = elemento.v.ToString()
                 });
             }
 
-            uow.Commit();
+            context.SaveChanges();
 
         }
 
@@ -110,20 +107,20 @@ namespace GeCo.DAL.Dati
 
             /*var repos = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var repos = new BaseRepository<TipologiaCompetenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            //var repos = new BaseRepository<TipologiaCompetenza>(dbContext);
+            //var uow = new UnitOfWork(dbContext);
 
 
             foreach (var elemento in lista)
             {
-                repos.Add(new TipologiaCompetenza()
+                context.TipologieCompetenze.Add(new TipologiaCompetenza()
                 {
                     Titolo = elemento.t,
                     MacroGruppo = elemento.m
                 });
             }
 
-            uow.Commit();
+            context.SaveChanges();
 
         }
 
@@ -193,23 +190,22 @@ namespace GeCo.DAL.Dati
             /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var reposComp = new BaseRepository<Competenza>(dbContext);
-            var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            //var reposComp = new BaseRepository<Competenza>(dbContext);
+            //var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
+            //var uow = new UnitOfWork(dbContext);
 
             foreach (var elemento in lista)
             {
-                reposComp.Add(new Competenza()
+                context.Competenze.Add(new Competenza()
                 {
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO)
+                    TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_TECNICO)
                 });
             }
 
-            uow.Commit();
-
+            context.SaveChanges();
         }
 
         public void InsertCompetenzeComportamentali()
@@ -243,22 +239,22 @@ namespace GeCo.DAL.Dati
             /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var reposComp = new BaseRepository<Competenza>(dbContext);
+            /*var reposComp = new BaseRepository<Competenza>(dbContext);
             var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            var uow = new UnitOfWork(dbContext);*/
 
             foreach (var elemento in lista)
             {
-                reposComp.Add(new Competenza()
+                context.Competenze.Add(new Competenza()
                 {
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_COMPORTAMENTALE)
+                    TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_COMPORTAMENTALE)
                 });
             }
 
-            uow.Commit();
+            context.SaveChanges();
         }
 
         public void InsertCompetenzeHrDiscrezionali()
@@ -273,22 +269,22 @@ namespace GeCo.DAL.Dati
             /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var reposComp = new BaseRepository<Competenza>(dbContext);
+            /*var reposComp = new BaseRepository<Competenza>(dbContext);
             var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            var uow = new UnitOfWork(dbContext);*/
 
             foreach (var elemento in lista)
             {
-                reposComp.Add(new Competenza()
+                context.Competenze.Add(new Competenza()
                 {
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE)
+                    TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_DISCREZIONALE)
                 });
             }
 
-            uow.Commit();
+            context.SaveChanges();
         }
 
         public void InsertCompetenzeHrComportamentali()
@@ -322,22 +318,22 @@ namespace GeCo.DAL.Dati
             /*var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposTipologie = ServiceLocator.Current.GetInstance<IRepository<TipologiaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var reposComp = new BaseRepository<Competenza>(dbContext);
+            /*var reposComp = new BaseRepository<Competenza>(dbContext);
             var reposTipologie = new BaseRepository<TipologiaCompetenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            var uow = new UnitOfWork(dbContext);*/
 
             foreach (var elemento in lista)
             {
-                reposComp.Add(new Competenza()
+                context.Competenze.Add(new Competenza()
                 {
                     Titolo = elemento.t,
                     Descrizione = elemento.d,
                     Peso = elemento.p,
-                    TipologiaCompetenza = reposTipologie.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE)
+                    TipologiaCompetenza = context.TipologieCompetenze.Single(t => t.Titolo == elemento.tipo && t.MacroGruppo == Tipologiche.Macrogruppi.MG_HR_COMPORTAMENTALE)
                 });
             }
 
-            uow.Commit();
+            context.SaveChanges();
         }
 
 
@@ -348,11 +344,13 @@ namespace GeCo.DAL.Dati
             /*var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
 
-            var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            //var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
+            //var uow = new UnitOfWork(dbContext);
 
 
             //reposAree.Add(new Area() { Nome = "Area1" });
+
+            var reposLivelli = context.LivelliConoscenza;
 
             reposLivelli.Add(new LivelloConoscenza()
             {
@@ -381,7 +379,7 @@ namespace GeCo.DAL.Dati
             });
 
 
-            uow.Commit();
+            context.SaveChanges();
 
         }
 

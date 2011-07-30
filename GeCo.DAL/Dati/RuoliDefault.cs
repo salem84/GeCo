@@ -10,11 +10,11 @@ namespace GeCo.DAL.Dati
 {
     public class RuoliDefault
     {
-        private IDbContextAdapter dbContext;
+        private PavimentalContext context;
 
-        public RuoliDefault(IDbContextAdapter context)
+        public RuoliDefault(PavimentalContext context)
         {
-            dbContext = context;
+            this.context = context;
         }
 
         class R
@@ -31,11 +31,11 @@ namespace GeCo.DAL.Dati
             var reposComp = ServiceLocator.Current.GetInstance<IRepository<Competenza>>();
             var reposLivelli = ServiceLocator.Current.GetInstance<IRepository<LivelloConoscenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();*/
-            var reposRuoli = new BaseRepository<Ruolo>(dbContext);
+            /*var reposRuoli = new BaseRepository<Ruolo>(dbContext);
 
             var reposComp = new BaseRepository<Competenza>(dbContext);
             var reposLivelli = new BaseRepository<LivelloConoscenza>(dbContext);
-            var uow = new UnitOfWork(dbContext);
+            var uow = new UnitOfWork(dbContext);*/
 
 
             List<ConoscenzaCompetenza> conoscenze = new List<ConoscenzaCompetenza>();
@@ -43,8 +43,8 @@ namespace GeCo.DAL.Dati
             foreach (var elemento in lista)
             {
                 ConoscenzaCompetenza conoscenza = new ConoscenzaCompetenza();
-                conoscenza.Competenza = reposComp.Single(c => c.Titolo == elemento.t && c.TipologiaCompetenza.MacroGruppo == elemento.mg);
-                conoscenza.LivelloConoscenza = reposLivelli.Single(lc => lc.Titolo == elemento.v);
+                conoscenza.Competenza = context.Competenze.Single(c => c.Titolo == elemento.t && c.TipologiaCompetenza.MacroGruppo == elemento.mg);
+                conoscenza.LivelloConoscenza = context.LivelliConoscenza.Single(lc => lc.Titolo == elemento.v);
                 conoscenze.Add(conoscenza);
             }
 
@@ -57,10 +57,10 @@ namespace GeCo.DAL.Dati
 
 
 
-            if (reposRuoli.SingleOrDefault(f => f.Titolo == ruolo.Titolo) == null)
+            if (context.Ruoli.SingleOrDefault(f => f.Titolo == ruolo.Titolo) == null)
             {
-                reposRuoli.Add(ruolo);
-                uow.Commit();
+                context.Ruoli.Add(ruolo);
+                //uow.Commit();
             }
 
             return ruolo;

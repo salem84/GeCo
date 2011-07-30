@@ -37,13 +37,8 @@ namespace GeCo.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //Cancello il db se il modello cambia
-            Database.SetInitializer(new PavimentalInitializer());
+            //Database.SetInitializer(new PavimentalInitializer());
 
-           /* modelBuilder.Entity<Anagrafica>()
-                .Map(m => m.ToTable("Anagrafica"));*/
-
-            /*modelBuilder.Entity<Area>()
-                .Map(m => m.ToTable("Area"));*/
             modelBuilder.ComplexType<Area>();
 
             modelBuilder.Entity<Competenza>()
@@ -51,12 +46,16 @@ namespace GeCo.DAL
 
             modelBuilder.Entity<ConoscenzaCompetenza>()
                 .Map(m => m.ToTable("ConoscenzeCompetenza"));
-                //.HasRequired(m => m.Dotato).WithRequiredPrincipal().WillCascadeOnDelete();
-            
+            //.HasRequired(m => m.Dotato).WithRequiredPrincipal().WillCascadeOnDelete();
+
 
             /*modelBuilder.Entity<Ruolo>()
                 .Map(m =>m.ToTable("Ruoli"));*/
-            
+            modelBuilder.Entity<Anagrafica>()
+               .Map(m => m.ToTable("Anagrafica"))
+               .Map<Dipendente>(m => m.Requires("Tipo").HasValue("DIP"))
+               .Map<Ruolo>(m => m.Requires("Tipo").HasValue("ROLE"));
+
 
             modelBuilder.Entity<LivelloConoscenza>()
                 .Map(m => m.ToTable("LivelliConoscenza"));
@@ -64,7 +63,7 @@ namespace GeCo.DAL
 
             modelBuilder.Entity<TipologiaCompetenza>()
                 .Map(m => m.ToTable("TipologieCompetenza"));
-            
+
 
             modelBuilder.Entity<Parametro>()
                 .HasKey(m => m.Nome)

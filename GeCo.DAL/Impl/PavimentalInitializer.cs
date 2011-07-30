@@ -14,7 +14,7 @@ namespace GeCo.DAL
             base.Seed(context);
             
             DbContextAdapter adapter = new DbContextAdapter(context);
-            InitializeDB initializer = new InitializeDB(adapter);
+            InitializeDB initializer = new InitializeDB(context);
             initializer.InitalizeAll();
             
         }
