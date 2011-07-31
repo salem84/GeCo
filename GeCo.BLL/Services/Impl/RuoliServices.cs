@@ -148,6 +148,13 @@ namespace GeCo.BLL.Services
             return lista;
         }
 
+        public Ruolo GetRuolo(int id)
+        {
+            var repos = ServiceLocator.Current.GetInstance<IRepository<Ruolo>>();
+            var ruolo = repos.SingleOrDefault(r => r.Id == id);
+            return ruolo;
+        }
+
         public void SalvaArea(Area area)
         {
             var reposArea = ServiceLocator.Current.GetInstance<IRepository<Area>>();

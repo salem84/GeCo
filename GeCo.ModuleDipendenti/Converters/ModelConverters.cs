@@ -71,7 +71,7 @@ namespace GeCo.Converters
     }
 
 
-    public class RuoloConverter : IValueConverter
+    /*public class RuoloConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -86,7 +86,8 @@ namespace GeCo.Converters
                 return null;
 
             var ruoliService = ServiceLocator.Current.GetInstance<IRuoliServices>();
-            var ruolo = ruoliService.GetRuoli(r => r.Id == id).Single();
+            //var ruolo = ruoliService.GetRuoli(r => r.Id == id).Single();
+            var ruolo = ruoliService.GetRuolo(id);
 
             return ruolo;
             
@@ -101,5 +102,5 @@ namespace GeCo.Converters
             else
                 return -1;
         }
-    }
+    }*/
 }

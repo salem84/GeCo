@@ -15,7 +15,7 @@ namespace GeCo.Model
         public string Matricola { get; set; }
 
         public virtual Ruolo RuoloInAzienda { get; set; }
-        public int RuoloInAziendaId { get; set; }
+        public int? RuoloInAziendaId { get; set; }
 
         public Dipendente()
         {

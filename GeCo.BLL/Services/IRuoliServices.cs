@@ -16,6 +16,9 @@ namespace GeCo.BLL.Services
         IList<Ruolo> GetRuoli();
         IList<Ruolo> GetRuoli(Expression<Func<Ruolo, bool>> where);
 
+        //Utilizzato nel converter, evita di fare il lazy loading
+        Ruolo GetRuolo(int id);
+
         void SalvaArea(Area area);
     }
 }
