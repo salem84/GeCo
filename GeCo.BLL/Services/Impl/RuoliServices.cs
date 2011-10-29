@@ -66,48 +66,55 @@ namespace GeCo.BLL.Services
 
             int idLivelloInsuff = reposLivelloConoscenza.Single(lc => lc.Titolo == Tipologiche.Livello.INSUFFICIENTE).Id;
 
-            Ruolo ruolo = new Ruolo();
-            ruolo.Titolo = r.Titolo;
-            ruolo.Descrizione = r.Descrizione;
-
-            ruolo.Conoscenze = new List<ConoscenzaCompetenza>();
-
-            //Mi scorro tutte le conoscenze
-            for (int i = 0; i < r.Conoscenze.Count; i++)
+            Ruolo ruolo = reposRuoli.SingleOrDefault(ru => ru.Id == r.Id);
+            if (ruolo != null)
             {
-                ConoscenzaCompetenza c = r.Conoscenze.ToList()[i];
+                ruolo.Titolo = r.Titolo;
+                ruolo.Descrizione = r.Descrizione;
 
-                //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenzaId != idLivelloInsuff)
+                //ruolo.Conoscenze = new List<ConoscenzaCompetenza>();
+                //Mi scorro tutte le conoscenze
+                for (int i = 0; i < r.Conoscenze.Count; i++)
                 {
-                    ConoscenzaCompetenza conoscenza;
-                    conoscenza = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
-                    if (conoscenza == null)
-                    {
-                        conoscenza = new ConoscenzaCompetenza();
-                        conoscenza.CompetenzaId = c.CompetenzaId;
-                        ruolo.Conoscenze.Add(conoscenza);
-                    }
+                    ConoscenzaCompetenza c = r.Conoscenze.ToList()[i];
 
-                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
-                }
-                else
-                {
-                    //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
-                    var conosc = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
-                    if (conosc != null)
+                    //e salvo solo quelle diverse da 0
+                    if (c.LivelloConoscenzaId != idLivelloInsuff)
                     {
-                        ruolo.Conoscenze.Remove(conosc);
-                        var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
-                        reposConoscenze.Delete(cc);
+                        ConoscenzaCompetenza conoscenza;
+                        conoscenza = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                        if (conoscenza == null)
+                        {
+                            conoscenza = new ConoscenzaCompetenza();
+                            conoscenza.CompetenzaId = c.CompetenzaId;
+                            ruolo.Conoscenze.Add(conoscenza);
+                        }
+
+                        conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+                    }
+                    else
+                    {
+                        //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
+                        var conosc = ruolo.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                        if (conosc != null)
+                        {
+                            ruolo.Conoscenze.Remove(conosc);
+                            var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
+                            reposConoscenze.Delete(cc);
+                        }
                     }
                 }
+
+                
+                uow.Commit();
+
+                return ruolo;
             }
-
-            reposRuoli.Add(ruolo);
-            uow.Commit();
-
-            return ruolo;
+            else
+            {
+                //non l'ho trovato sul DB, id sbagliato? ne creo uno nuovo
+                return CreaRuolo(r);
+            }
         }
 
         public void EliminaRuolo(int id)

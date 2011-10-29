@@ -52,7 +52,7 @@ namespace GeCo.Converters
             /*Regex _isNumber = new Regex(@"^\d+$");
             Match m = _isNumber.Match(value.ToString());
             return m.Success;*/
-            string input = value as string;
+            string input = value.ToString();
             string[] validi = { "0", "1", "2", "3", "4" };
             if (string.IsNullOrEmpty(input))
             {

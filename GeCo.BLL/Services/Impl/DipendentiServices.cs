@@ -36,48 +36,55 @@ namespace GeCo.BLL.Services
             var reposConoscenze = ServiceLocator.Current.GetInstance<IRepository<ConoscenzaCompetenza>>();
             var uow = ServiceLocator.Current.GetInstance<IUnitOfWork>();
 
-            Dipendente dipendente = reposDipendente.Single(dip => dip.Id == d.Id);
+            Dipendente dipendente = reposDipendente.SingleOrDefault(dip => dip.Id == d.Id);
 
-            dipendente.Matricola = d.Matricola;
-            dipendente.Cognome = d.Cognome;
-            dipendente.Nome = d.Nome;
-            dipendente.DataNascita = d.DataNascita;
-            dipendente.RuoloInAziendaId = d.RuoloInAziendaId;
-
-            for (int i = 0; i < d.Conoscenze.Count; i++ )
+            if (dipendente != null)
             {
-                ConoscenzaCompetenza c = d.Conoscenze.ToList()[i];
+                dipendente.Matricola = d.Matricola;
+                dipendente.Cognome = d.Cognome;
+                dipendente.Nome = d.Nome;
+                dipendente.DataNascita = d.DataNascita;
+                dipendente.RuoloInAziendaId = d.RuoloInAziendaId;
 
-                //e salvo solo quelle diverse da 0
-                if (c.LivelloConoscenzaId != idLivelloInsuff)
+                for (int i = 0; i < d.Conoscenze.Count; i++)
                 {
-                    ConoscenzaCompetenza conoscenza;
-                    conoscenza = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
-                    if (conoscenza == null)
-                    {
-                        conoscenza = new ConoscenzaCompetenza();
-                        conoscenza.CompetenzaId = c.CompetenzaId;
-                        dipendente.Conoscenze.Add(conoscenza);
-                    }
+                    ConoscenzaCompetenza c = d.Conoscenze.ToList()[i];
 
-                    conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
-                }
-                else
-                {
-                    //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
-                    var conosc = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
-                    if (conosc != null)
+                    //e salvo solo quelle diverse da 0
+                    if (c.LivelloConoscenzaId != idLivelloInsuff)
                     {
-                        dipendente.Conoscenze.Remove(conosc);
-                        var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
-                        reposConoscenze.Delete(cc);
+                        ConoscenzaCompetenza conoscenza;
+                        conoscenza = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                        if (conoscenza == null)
+                        {
+                            conoscenza = new ConoscenzaCompetenza();
+                            conoscenza.CompetenzaId = c.CompetenzaId;
+                            dipendente.Conoscenze.Add(conoscenza);
+                        }
+
+                        conoscenza.LivelloConoscenzaId = c.LivelloConoscenzaId;
+                    }
+                    else
+                    {
+                        //E' una di quelle che erano presenti in precedenza e sono state settate a 0 per essere cancellate
+                        var conosc = dipendente.Conoscenze.SingleOrDefault(con => con.CompetenzaId == c.CompetenzaId);
+                        if (conosc != null)
+                        {
+                            dipendente.Conoscenze.Remove(conosc);
+                            var cc = reposConoscenze.Single(con => con.Id == conosc.Id);
+                            reposConoscenze.Delete(cc);
+                        }
                     }
                 }
+
+                uow.Commit();
+
+                return dipendente;
             }
-
-            uow.Commit();
-
-            return dipendente;
+            else
+            {
+                return CreaDipendente(d);
+            }
         }
 
         private Dipendente CreaDipendente(Dipendente d)
