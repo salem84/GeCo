@@ -1572,7 +1572,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GeCo.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GeCo.BLL, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_32D39DD983A36533E9BF86B9895DD225"
@@ -1634,7 +1634,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GeCo.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GeCo.Infrastructure, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_4337D26BB541BCD1C32CDB6B9BBEA9E0"
@@ -1858,7 +1858,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GeCo.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GeCo.Model, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_6468E0B651258381067FDE9A230D58A0"
@@ -2328,7 +2328,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GeCo.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GeCo.DAL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_DC652D2DC6DB013B9A001B184B28F427"
@@ -2578,7 +2578,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GeCo"
         "ProductCode" = "8:{26544042-1452-4A5F-B770-A7E536EDD1FE}"
-        "PackageCode" = "8:{8CAFAD43-7893-4E4A-BC94-6C5270540D16}"
+        "PackageCode" = "8:{ADF0F7CC-7AEE-49A8-97CA-999BEBD0DD13}"
         "UpgradeCode" = "8:{FFAA3932-22DF-4FD3-9F44-CF2E3EB8B57B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
