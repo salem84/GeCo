@@ -86,6 +86,12 @@ namespace GeCo.ModuleDipendenti.ViewModels
             Expression<Func<Dipendente, bool>> exprCognome = a => a.Cognome.Contains(RicercaCognome);
             Expression<Func<Dipendente, bool>> exprData = a => a.DataNascita == RicercaDataNascita;
 
+            if (RicercaMatricola == "*")
+            {
+                Risultati = _services.GetDipendenti(complete).OrderBy(d => d.Cognome).ThenBy(d => d.Nome).ToList();
+                return;
+            }
+
             if (!string.IsNullOrEmpty(RicercaMatricola))
             {
                 complete = complete.And(exprMatricola);
